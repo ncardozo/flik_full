@@ -4,26 +4,17 @@
 \section{Introduction}
 \label{sec:problem}
 
-\section{Reinforcement Learning}
-
-% Section: Explanation of RL
-% common bugs in RL programs.
 Before starting with the problem let us understand a how \ac{RL} works and why it is  
 important to properly develop in nowadays.
-\ac{RL} algorithms were introduced by~\citet{sutton98}, the idea behind these 
-algorithms is to learn the optimal policy (a set of actions) through the interaction 
-with the environment. \ac{RL} uses an agent that learns the value function for a given policy 
+The idea of \ac{RL} algorithms~\cite{sutton18} is to learn the optimal policy for an agent (a set of actions to execute) gathered from the interaction of the agent with the environment. \ac{RL} uses an agent that learns the value function for a given policy 
 through interaction with the environment to predict an optimal solution and based on the value 
 function, it continuously develops and learns the optimal policy. One of the most common algorithms
-in \ac{RL} is Q-learning~\cite{8836506}, which uses an off-policy control that separates the deferral 
+in \ac{RL} is Q-learning~\cite{beakcheol19}, which uses an off-policy control that separates the deferral 
 policy from the learning policy and updates the action selection using the Bellman optimal equations
 and the e-greed policy. As with normal \ac{RL} algorithms, Q-learning involves an agent, a set of states
 $S_j$ and a set of actions $A$. By performing an action $a\in A$ at state $s \in S$, the agent 
 transitions from $s$ to a new state $s' \in S$, which will give a $reward$ $r$ to the agent. 
-The goal of the agent is to maximize its 
-total reward. The following \fref{lst:qlearning} 
-of code is the usual pseudo algorithm for 
-Q-learning off policy algorithms~\cite{Sutton1998}.
+The goal of the agent is to maximize its total reward. The following \fref{lst:qlearning} of code is the usual pseudo algorithm for  Q-learning off policy algorithms~\cite{sutton18}.
 
 \begin{algorithm}
 \caption{Q-Learning Algorithm}\label{lst:qlearning}
@@ -52,11 +43,11 @@ Q-learning off policy algorithms~\cite{Sutton1998}.
 \end{algorithmic}
 \end{algorithm}
 
-\ac{RL} programs have a wide range of applications, \citet{8836506} presents a comparison table with some 
-\ac{RL} applications. Nevertheless, some of the most them could be: from control of industrial process~\cite{8169685} (improving 
+\ac{RL} programs have a wide range of applications, \citet{beakcheol19} presents a comparison table with some 
+\ac{RL} applications. Nevertheless, some of the most them could be: from control of industrial process~\cite{kiumarsi18} (improving 
 the performance of the on-line learning control system or optimizing temperature control and power consumption),
-to computer networking~\cite{AlRawi2013ApplicationOR} (improving adaptability of Wireless Sensor Networks to changing situations and eliminating 
-the need for system redesign) and robotics~\cite{zhang2015visionbaseddeepreinforcementlearning} (by providing frameworks and toolkits for designing sophisticated 
+to computer networking~\cite{alrawi13} (improving adaptability of Wireless Sensor Networks to changing situations and eliminating 
+the need for system redesign) and robotics~\cite{zhang15} (by providing frameworks and toolkits for designing sophisticated 
 behavioral aspects). 
 
 When developing \ac{RL} programs, issues arise in the application logic like wrong value for the

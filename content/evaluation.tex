@@ -4,7 +4,7 @@
 \section{Evaluation}
 \label{sec:evaluation}
 
-To evaluate and validate \ac{Flik} as a framework to support the development 
+To evaluate and validate \flik as a framework to support the development 
 of \ac{RL} programs, and in consequence to help increase their quality, 
 an initial empirical evaluation was done. The evaluation consists of three different test scenarios 
 from real-world problems that arise in the development of \ac{RL} programs, and the evaluation aimed
@@ -15,7 +15,7 @@ learning parameters, aiming to determine the specific values to start with
 to achieve the most optimal convergence for the program. In each of the programs a bug 
 is added ensuring strange application behavior, but ensuring the application to run, 
 therefore, the expected output does not match the real output of the programs. The intention of 
-the evaluation scenarios is to if \ac{Flik} can actually improve the performance and developement of \ac{RL}
+the evaluation scenarios is to if \flik can actually improve the performance and development of \ac{RL}
 programs.
 
 The empirical evaluation is performed with a group of students from the \ac{RL} course at Universidad de 
@@ -44,10 +44,10 @@ obstacles and incorrect exit states (which give a reward of $-1$ when used to ex
 This example introduces a bug for the $\epsilon$ parameter, presenting an error in the probability which
 defines which action is taken next. This will introduce a wrong behavior for the \ac{RL} 
 agent because $\epsilon$ will be so small that only in the first iteration the action will be taken randomly 
-and in the follow interations the probability will be so small to take another action that the agent will not explore
+and in the follow iterations the probability will be so small to take another action that the agent will not explore
 other action policies. This is very bad specially for training purposes as we are supposed to have a very big 
 probability to choose other actions and explore the grid. The idea in this task is that the developers
-use \ac{Flik} to navigate through the code and find out why is the agent not learning properly. And eventually,
+use \flik to navigate through the code and find out why is the agent not learning properly. And eventually,
 developers should come out with the solution of increasing the value of $\epsilon$. 
 
 \section{Exercise 2: Rooms}
@@ -91,7 +91,7 @@ aspects of previous learning. Changing the equation in this way will disrupt thi
 $(1-\alpha)$ scales the difference between the new estimate and the old estimate. This makes the new 
 information less influential as $\alpha$ gets larger, while the old value gets rescaled by $\alpha$, 
 which does not align with the expected behavior of a Q-learning update. The idea in this task is that 
-the developers use \ac{Flik} to navigate through the code and find out the reason for the agent is not 
+the developers use \flik to navigate through the code and find out the reason for the agent is not 
 learning properly, and why is this happening; comming out to a solution adjusting the value to update the 
 Q-Learning equation.
 
@@ -108,27 +108,30 @@ steer\_left, steer\_right. The following is the visual interface of this environ
     \label{fig:cars-code-example}
 \end{figure}
 
-This is the largest task for the developers to analyze with \ac{Flik} and see why the agent was not learning
+This is the largest task for the developers to analyze with \flik and see why the agent was not learning
 correctly, with respect to the expected. The bug introduced in this application is in the reward function,
 not motivating the agent to drive at the speed limit. The policy learned by the agent emerges as stopping 
-or go very slow, which is not the expected behavior. Through exploration using \ac{Flik}, developers are 
+or go very slow, which is not the expected behavior. Through exploration using \flik, developers are 
 expected to observe the behavior of the reward and update it so that the agent can learn to drive appropriately.
 as expected.
 
-% Add way of evaluation, explanation about the survey, questions.
-\section{Evaluation setup}
+%% Add way of evaluation, explanation about the survey, questions.
+\subsection{Evaluation setup}
 \label{sec:evaluation}
-We invited 27 graduate students from Universidad de los Andes that attend the empirical evaluation session. 
-The students had the previous three tasks to complete, and it was going according to time. The first 
-15 minutes were explanation of the tool and an example of the usage (shown in \fref{sec:eval-guide}).
-Then the students had 15 minutes to finish the first task, 15 minutes to finish the second task, and 
-20 minutes to finish the third task. The students were asked to fill a survey in a google 
-form, which was divided in three main sections: general knowledge questions, task questions, and feedback.
+
+For the user evaluation we had a session with 27 developers (\ie graduate students). 
+The developers were asked to complete the three tasks (\ie gridworld, rooms, cars) described previously. The full evaluation session used a time-slot of 1h30 split as follows 
+\begin{enumerate*}[label=(\arabic*)]
+\item the first 15 minutes were explanation of the tool and an example of the usage (shown in \fref{sec:eval-guide}).
+\item 50 minutes to complete the tasks, 15 minutes to finish the first task, 15 minutes to finish the second task, and  20 minutes to finish the third task. 
+\item The students were asked to fill an evaluation survey 
+\end{enumerate*}
+The evaluation survey, defined as a google form, is divided in three sections: general knowledge questions, task questions, and feedback.
 The general knowledge questions were about the experience of the student using Python, debuggers and 
 terminal. The task questions were about the bug encountered in each of the tasks, and the solution 
 to the problem. The feedback for the debugger usability was about the use of the debugger for the tasks, 
 and additional feedback they could provide. The survey was anonymized, the questions were inspired by the 
-back in time debugger for JavaScript\cite{delorean23}, and the responses are available 
+back in time debugger for JavaScript~\cite{leger23}, and the responses are available 
 at \url{https://uniandes-my.sharepoint.com/:x:/g/personal/la_rodriguez_uniandes_edu_co/ESDy89Q-PgVBpYHEZ_CDh_IBhjhS35VFqNrlEjVw_ShY1w?e=lm319K}.
 The survey had 23 multiple choice questions in which 5 meant completely agreed, and 1 meant completely disagreed.
 One of the questions was a yes or no answer, to identify if the students wanted to use the tool in the future,

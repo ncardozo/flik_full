@@ -21,11 +21,11 @@
 
 % Title footnote mark
 % eg: \tnotemark[1]
-\tnotemark[1] 
+%\tnotemark[1] 
 
 % Title footnote 1.
 % eg: \tnotetext[1]{Title footnote text}
-\tnotetext[1]{} 
+%\tnotetext[1]{} 
 
 % First author
 %
@@ -41,16 +41,16 @@
 %       linkedin=<linkedin id>,
 %       gplus=<gplus id>]
 
-\author[1]{Laura {Rodriguez}}
+\author[1]{Laura {Rodriguez}}[orcid=0009-0000-9715-0475]
 \ead{la.rodriguez@uniandes.edu.co}
 
-\author[2]{{Ivana} {Dusparic}}
-\ead{ivana.dusparic@tcd.ie}
-
-\author[1]{Mario {Linares-V\'asquez}}
+\author[1]{Mario {Linares-V\'asquez}}[orcid=0000-0003-0161-2888]
 \ead{m.linarev@uniandes.edu.co}
 
-\author[1]{{Nicol\'as} {Cardozo}}
+\author[2]{{Ivana} {Dusparic}}[orcid=0000-0003-0621-5400]
+\ead{ivana.dusparic@tcd.ie}
+
+\author[1]{{Nicol\'as} {Cardozo}}[orcid=0000-0002-1094-9952]
 \ead{n.cardozo@uniandes.edu.co}
 \cormark[1]
 
@@ -74,23 +74,23 @@
 % Here goes the abstract
 \begin{abstract}
 %Why
-\textbf{Purpose:} \ac{RL}-based programs' quality often falls short of software 
-engineering industry standards. This maybe due to the complexity of \ac{RL} algorithms or their 
-black-box nature, which isolates them from the rest of the system. There is a need to close the quality 
-gap, as the accumulated technical debt for \ac{RL}-based programs continues to grow.
+\textbf{Purpose:} \ac{RL}-based programs' have a high-level of complexity due to the size and 
+conditions of the environment, and agents' interaction with it. Developers face challenges  
+understanding the behavior of \ac{RL} agents and identifying bugs, and their cause, within the 
+program execution. This problem is particularly challenging for bugs in which the program runs 
+without errors, but the execution does not present an appropriate agent behavior.
 %What
-\textbf{Method:} To achieve this goal, the use of analysis tools may provide a 
-first-hand view of problematic regions of the code base, and suggest possible improvements. This 
-paper, presents \ac{VAR}, a tool to Visualize an Abstract Representation of programs, as a first step in 
-the quality analysis of \ac{RL} programs.
-%How
-\ac{VAR} provides a Voronoi representation of programs that visualizes areas where code 
-smells are present. Furthermore, the tool can be used to detect divergence between different program 
-implementations to a solution, or similarities across programs from multiple applications. Such 
-information might be useful to identify performance leaks, or to create 
-abstractions common to multiple solutions.
-\textbf{Results:} We evaluate \ac{VAR}, on a corpus of 97 \ac{RL}-based programs divided into six benchmarks covering application of tabular Q-learning and Deep Q-learning. 
-\textbf{Conclusion:} \ac{VAR}  effectively identifies code smells, highlights implementation differences within application domains, detects faulty or underperforming variants, and uncovers cross-domain similarities, suggesting a standardized specification for \ac{RL} programs. 
+\textbf{Method:} To address this problem, we propose \flik, a back-in-time debugger for \ac{RL} 
+programs. \flik is a console-based debugger that allows developers to interact with 
+the program during execution, inspect the internal state of the agent, and modify 
+its behavior in real-time. Changes to the agent generate alternative execution paths. Based on such 
+execution path, developers can more easily identify bugs in their programs.
+\textbf{Results:} We evaluate the usability and usefulness of \flik in identifying and helping to solve 
+bugs by means of a user evaluation in which 27 developers interacted and solve bugs in three 
+different \ac{RL}  programs. Our results show a positive response to \flik, highlighting that the 
+debugger is useful in identifying the kinds of bugs that commonly arise in \ac{RL} programs. 
+\textbf{Conclusion:} 
+
 \end{abstract}
 
 % Use if graphical abstract is present
