@@ -7,48 +7,70 @@
 This section presents the analysis of the results of the survey presented in \fref{sec:evaluation}. 
 This results are presented according to three sections of the survey: General knowledge (\fref{sec:general-knowledge}),
 Task Effectiveness (\fref{sec:tasks-results}) and usability (\fref{sec:usability}). Additionally, a 
-discussion section is added analyzing the results form the survey. All additional data, not mentioned 
-on this section, is given in Appendix A.2.
+discussion section is added analyzing the results form the survey. All data obtained from the evaluation is available at our online appendix.\footnote{\url{tbd}} 
 
-\section{General Knowledge Results}
+%%
+\subsection{General Knowledge Results}
 \label{sec:general-knowledge}
+
 Most of the participants were very experienced on the use of python as it
-can be seen in (\fref{fig:general-know} (a)), most of the people had a high level of expertise (over 5)
+can be seen in (\fref{fig:python-experience}), most of the people had a high level of expertise (over 5)
 as they used Python very often in their work and university. 
-Most of the people were very familiarized using \ac{RL} algorithms (\fref{fig:general-know} (b)), as they were 
+Most of the people were very familiarized using \ac{RL} algorithms (\fref{fig:rl-experience}), as they were 
 taking a course on the topic. This is very important information, as the bugs required familiarity with \ac{RL} and python 
 knowledge to be identified. Furthermore, the students were very familiarized with 
 the terminal, this means it would be easy for them to interact with the tool, as the commands 
-and the interface require experience using the console (\fref{fig:general-know} (c)). Nevertheless, 
+and the interface require experience using the terminal (\fref{fig:terminal-experience}). Nevertheless, 
 average the 
 students weren't familiarized with debuggers, and they only used them very rarely, or used 
 Visual Studio Code interface simple features, like breakpoint function. This lead to 
 misunderstandings and probably difficulties in making the tasks, as the tool is based on
-previous debugger (\fref{fig:general-know} (d)). Also, this made the learning curve of the tool 
+previous debugger (\fref{fig:debugging-experience}). Also, this made the learning curve of the tool 
 steeper than with a person with previous debugger experience.
 
 Note that in the figures in \fref{fig:general-know} the y-axis represents the number of people 
 that answered the question with that score, and the x-axis represents score, which could have a 
 possible value of 5 being completely agreed, and 1 being completely disagreed.
 
-\begin{figure}
+\begin{figure}[hptb]
     \centering
-    \subfloat[]{\includegraphics[width=0.25\textwidth]{figures/experience-python.png}} 
-    \subfloat[]{\includegraphics[width=0.25\textwidth]{figures/experience-rl.png}} \\
-    \subfloat[]{\includegraphics[width=0.25\textwidth]{figures/experience-terminal.png}}
-    \subfloat[]{\includegraphics[width=0.25\textwidth]{figures/experience-debuggers.png}}
-    \caption{(a) Python Experience (b) RL Experience (c) Terminal Experience (d) Debuggers Experience}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/experience-python}
+        \caption{Experience using python}
+        \label{fig:python-experience}
+    \end{subfigure}
+    ~ 
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/experience-rl}
+        \caption{Experience in \ac{RL}}
+        \label{fig:rl-experience}
+    \end{subfigure}
+    ~ 
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/experience-terminal}
+        \caption{Experience using the terminal}
+        \label{fig:terminal-experience}
+    \end{subfigure}
+    ~ 
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/experience-debuggers}
+        \caption{Experience in debugging}
+        \label{fig:debugging-experience}
+    \end{subfigure}
+    \caption{Experience reported by users in the four main dimensions of the tools used in the evaluation}
     \label{fig:general-know}
 \end{figure}
 
 
-
-\section{Tasks Results}
+%%
+\subsection{Tasks Results}
 \label{sec:tasks-results}
-As there can be seen in the tables \fref{tab:grid-results}, \fref{tab:rooms-results} and 
-\fref{tab:cars-results}, most of the people made it through the first task (\fref{fig:task1}),
-they thought it was an easy task to solve. This task besides being easy, took them a lot of 
-time to complete because this was the task in which they were getting familiarized with the 
+
+Taking the results reported from the three tasks, most of the developers completed the first task successfully (\fref{fig:task1}). Participants reported the task was easy to solve. Even though the task was reported to be easy, it took participants a long time to complete, because this was the task in which they were getting familiarized with the 
 tool. The second task was harder than the first one, most of the people took longer to finish the 
 task (\fref{fig:task2}), and most of the people had trouble finding the problem to the program. 
 This was meant to be as task 2, wasn't meant to be completely wrong, it was just taking huge 
@@ -68,16 +90,35 @@ that answered the question with that score, and the x-axis represents score, whi
 possible value of 5 being completely agreed, and 1 being completely disagreed. Except for the 
 last question, in which 5 was taking a lot of time, and 1 was taking very little time.
 
-\begin{figure}
+\begin{figure}[hptb]
     \centering
-    \subfloat[]{\includegraphics[width=0.32\textwidth]{figures/task1.png}} 
-    \subfloat[]{\includegraphics[width=0.32\textwidth]{figures/task2.png}} 
-    \subfloat[]{\includegraphics[width=0.32\textwidth]{figures/task3.png}}
-    \caption{(a) GridWrold (b) Rooms (c) Driving Assistant}
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/task1}
+        \caption{Gridworld task}
+        \label{fig:task1}
+    \end{subfigure}
+    ~ 
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/task2}
+        \caption{Rooms task}
+        \label{fig:task2}
+    \end{subfigure}
+    ~ 
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/task3}
+        \caption{Cars task}
+        \label{fig:task3}
+    \end{subfigure}
+    \caption{Results of the tasks to solve}
     \label{fig:general-know}
 \end{figure}
 
-\section{Debugger Usability Results}
+
+%%
+\subsection{Debugger Usability Results}
 \label{sec:usability}
 
 Regarding the debugger usability (\fref{tab:general1-debuggers} and \fref{tab:general2-debuggers}), it can 
@@ -94,78 +135,26 @@ that answered the question with that score, and the x-axis represents score, whi
 possible value of 5 being completely agreed, and 1 being completely disagreed.
 
 \begin{table}[H]
-\centering
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c }
-% \multicolumn{6}{c}{\cellcolor[HTML]{FFFFFF}{\color[HTML]{383838} \textbf{Task 2: Rooms Experiment.}}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 \\
-{\color[HTML]{383838} \textbf{}}  & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I have found too much \\ inconsistency in this system\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I think most people would learn \\ to use the system quickly\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I found the system quite \\ awkward to use\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I have felt very safe \\ using the system\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I would need to learn a lot \\ of things before I could handle the system\end{tabular}}} \\
-{\color[HTML]{383838} \textbf{5}} & {\color[HTML]{383838} 1}                                                                                                      & {\color[HTML]{383838} 7}                                                                                                             & {\color[HTML]{383838} 4}                                                                                           & {\color[HTML]{383838} 7}                                                                                          & {\color[HTML]{383838} 8.0}                                                                                                                        \\
-{\color[HTML]{383838} \textbf{4}} & {\color[HTML]{383838} 2}                                                                                                      & {\color[HTML]{383838} 6}                                                                                                             & {\color[HTML]{383838} 7}                                                                                           & {\color[HTML]{383838} 8}                                                                                          & {\color[HTML]{383838} 6.0}                                                                                                                        \\
-{\color[HTML]{383838} \textbf{3}} & {\color[HTML]{383838} 4}                                                                                                      & {\color[HTML]{383838} 6}                                                                                                             & {\color[HTML]{383838} 9}                                                                                           & {\color[HTML]{383838} 7}                                                                                          & {\color[HTML]{383838} 4.0}                                                                                                                        \\
-{\color[HTML]{383838} \textbf{2}} & {\color[HTML]{383838} 7}                                                                                                      & {\color[HTML]{383838} 6}                                                                                                             & {\color[HTML]{383838} 4}                                                                                           & {\color[HTML]{383838} 4}                                                                                          & {\color[HTML]{383838} 0.0}                                                                                                                        \\
-{\color[HTML]{383838} \textbf{1}} & {\color[HTML]{383838} 13}                                                                                                     & {\color[HTML]{383838} 2}                                                                                                             & {\color[HTML]{383838} 3}                                                                                           & {\color[HTML]{383838} 1}                                                                                          & {\color[HTML]{383838} 9.0}                                                                                                                       
-\end{tabular}%
-}
-\caption{General Results Part 1}
-\label{tab:general1-debuggers}
+  \centering
+  \caption{General Results Part 1}
+  \input{tables/usability1}
+  \label{tab:general1-debuggers}
 \end{table}
 
 \begin{table}[H]
-\centering
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c 
->{\columncolor[HTML]{FFFFFF}}c }
-% \multicolumn{6}{c}{\cellcolor[HTML]{FFFFFF}{\color[HTML]{383838} \textbf{Task 2: Rooms Experiment.}}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      \\
-{\color[HTML]{383838} \textbf{}}  & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I think I would like to use this \\ system frequently\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I find this system \\ unnecessarily complex\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I think the system \\ is easy to use\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I think I would need technical \\ support to use the system\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I find the various functions of the \\ system quite well integrated\end{tabular}}} \\
-{\color[HTML]{383838} \textbf{5}} & {\color[HTML]{383838} 7}                                                                                                      & {\color[HTML]{383838} 2}                                                                                            & {\color[HTML]{383838} 5.0}                                                                                   & {\color[HTML]{383838} 9}                                                                                                            & {\color[HTML]{383838} 6}                                                                                                                    \\
-{\color[HTML]{383838} \textbf{4}} & {\color[HTML]{383838} 5}                                                                                                      & {\color[HTML]{383838} 7}                                                                                            & {\color[HTML]{383838} 5.0}                                                                                   & {\color[HTML]{383838} 8}                                                                                                            & {\color[HTML]{383838} 13}                                                                                                                   \\
-{\color[HTML]{383838} \textbf{3}} & {\color[HTML]{383838} 7}                                                                                                      & {\color[HTML]{383838} 7}                                                                                            & {\color[HTML]{383838} 11.0}                                                                                  & {\color[HTML]{383838} 4}                                                                                                            & {\color[HTML]{383838} 5}                                                                                                                    \\
-{\color[HTML]{383838} \textbf{2}} & {\color[HTML]{383838} 7}                                                                                                      & {\color[HTML]{383838} 6}                                                                                            & {\color[HTML]{383838} 6.0}                                                                                   & {\color[HTML]{383838} 3}                                                                                                            & {\color[HTML]{383838} 2}                                                                                                                    \\
-{\color[HTML]{383838} \textbf{1}} & {\color[HTML]{383838} 1}                                                                                                      & {\color[HTML]{383838} 5}                                                                                            & {\color[HTML]{383838} 0.0}                                                                                   & {\color[HTML]{383838} 3}                                                                                                            & {\color[HTML]{383838} 1}                                                                                                                   
-\end{tabular}%
-}
-\caption{General Results Part 2}
-\label{tab:general2-debuggers}
+  \centering
+  \caption{General Results Part 2}
+  \input{tables/usability2}
+  \label{tab:general2-debuggers}
 \end{table}
 
 % \begin{table}[]
 % \centering
-% \resizebox{\columnwidth}{!}{%
-% \begin{tabular}{
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c 
-% >{\columncolor[HTML]{FFFFFF}}c }
-% \multicolumn{11}{c}{\cellcolor[HTML]{FFFFFF}{\color[HTML]{383838} \textbf{Debugger Usability.}}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \\
-% {\color[HTML]{383838} \textbf{}}  & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I think I would like to use this \\ system frequently\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I find this system \\ unnecessarily complex\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I think the system \\ is easy to use\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I think I would need technical \\ support to use the system\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I find the various functions of the \\ system quite well integrated\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I have found too much \\ inconsistency in this system\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I think most people would learn \\ to use the system quickly\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I found the system quite \\ awkward to use\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I have felt very safe \\ using the system\end{tabular}}} & {\color[HTML]{383838} \textbf{\begin{tabular}[c]{@{}c@{}}I would need to learn a lot \\ of things before I could handle the system\end{tabular}}} \\
-% {\color[HTML]{383838} \textbf{5}} & {\color[HTML]{383838} 7}                                                                                                      & {\color[HTML]{383838} 2}                                                                                            & {\color[HTML]{383838} 5.0}                                                                                   & {\color[HTML]{383838} 9}                                                                                                            & {\color[HTML]{383838} 6}                                                                                                                    & {\color[HTML]{383838} 1}                                                                                                      & {\color[HTML]{383838} 7}                                                                                                             & {\color[HTML]{383838} 4}                                                                                           & {\color[HTML]{383838} 7}                                                                                          & {\color[HTML]{383838} 8.0}                                                                                                                        \\
-% {\color[HTML]{383838} \textbf{2}} & {\color[HTML]{383838} 7}                                                                                                      & {\color[HTML]{383838} 6}                                                                                            & {\color[HTML]{383838} 6.0}                                                                                   & {\color[HTML]{383838} 3}                                                                                                            & {\color[HTML]{383838} 2}                                                                                                                    & {\color[HTML]{383838} 7}                                                                                                      & {\color[HTML]{383838} 6}                                                                                                             & {\color[HTML]{383838} 4}                                                                                           & {\color[HTML]{383838} 4}                                                                                          & {\color[HTML]{383838} 0.0}                                                                                                                        \\
-% {\color[HTML]{383838} \textbf{3}} & {\color[HTML]{383838} 7}                                                                                                      & {\color[HTML]{383838} 7}                                                                                            & {\color[HTML]{383838} 11.0}                                                                                  & {\color[HTML]{383838} 4}                                                                                                            & {\color[HTML]{383838} 5}                                                                                                                    & {\color[HTML]{383838} 4}                                                                                                      & {\color[HTML]{383838} 6}                                                                                                             & {\color[HTML]{383838} 9}                                                                                           & {\color[HTML]{383838} 7}                                                                                          & {\color[HTML]{383838} 4.0}                                                                                                                        \\
-% {\color[HTML]{383838} \textbf{4}} & {\color[HTML]{383838} 5}                                                                                                      & {\color[HTML]{383838} 7}                                                                                            & {\color[HTML]{383838} 5.0}                                                                                   & {\color[HTML]{383838} 8}                                                                                                            & {\color[HTML]{383838} 13}                                                                                                                   & {\color[HTML]{383838} 2}                                                                                                      & {\color[HTML]{383838} 6}                                                                                                             & {\color[HTML]{383838} 7}                                                                                           & {\color[HTML]{383838} 8}                                                                                          & {\color[HTML]{383838} 6.0}                                                                                                                        \\
-% {\color[HTML]{383838} \textbf{1}} & {\color[HTML]{383838} 1}                                                                                                      & {\color[HTML]{383838} 5}                                                                                            & {\color[HTML]{383838} 0.0}                                                                                   & {\color[HTML]{383838} 3}                                                                                                            & {\color[HTML]{383838} 1}                                                                                                                    & {\color[HTML]{383838} 13}                                                                                                     & {\color[HTML]{383838} 2}                                                                                                             & {\color[HTML]{383838} 3}                                                                                           & {\color[HTML]{383838} 1}                                                                                          & {\color[HTML]{383838} 9.0}                                                                                                                       
-% \end{tabular}%
-% }
+% \input{tables/usability3}
 % \end{table}
 
-\section{Discussion}
+%%
+\subsection{Discussion}
 \label{sec:discussion}
 
 In general, the results of the survey were very positive, most of the people thought that 
@@ -184,6 +173,7 @@ took less time to find the last bug, as they already had practice with the tool,
 knew how to use it and how to interact with the program. Nevertheless, it was expected that 
 the users felt the task harder than the previous one. It was also surprising that for this last task 
 they found more bugs than the initially expected one.
+
 
 \endinput
 
