@@ -1,0 +1,8 @@
+*.synctex(busy)
+*.log
+*.aux
+*.gz
+*.out
+main.pdf
+/submission_files
+cas-sc-template.pdf

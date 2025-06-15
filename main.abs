@@ -1,0 +1,17 @@
+{Purpose:} \ac{RL}-based programs' quality often falls short of software
+engineering industry standards. This maybe due to the complexity of \ac{RL} algorithms or their
+black-box nature, which isolates them from the rest of the system. There is a need to close the quality
+gap, as the accumulated technical debt for \ac{RL}-based programs continues to grow.
+%What
+\textbf{Method:} To achieve this goal, the use of analysis tools may provide a
+first-hand view of problematic regions of the code base, and suggest possible improvements. This
+paper, presents \ac{VAR}, a tool to Visualize an Abstract Representation of programs, as a first step in
+the quality analysis of \ac{RL} programs.
+%How
+\ac{VAR} provides a Voronoi representation of programs that visualizes areas where code
+smells are present. Furthermore, the tool can be used to detect divergence between different program
+implementations to a solution, or similarities across programs from multiple applications. Such
+information might be useful to identify performance leaks, or to create
+abstractions common to multiple solutions.
+\textbf{Results:} We evaluate \ac{VAR}, on a corpus of 97 \ac{RL}-based programs divided into six benchmarks covering application of tabular Q-learning and Deep Q-learning.
+\textbf{Conclusion:} \ac{VAR}  effectively identifies code smells, highlights implementation differences within application domains, detects faulty or underperforming variants, and uncovers cross-domain similarities, suggesting a standardized specification for \ac{RL} programs.
