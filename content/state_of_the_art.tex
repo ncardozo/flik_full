@@ -89,14 +89,14 @@ physical target manipulation.
 DeloreanJs~\cite{leger23} is a back-in-time debugger for JavaScript programs. The value of 
 back-in-time debuggers is the possibility to rewinding execution to a specific point, allowing the 
 possibility for developers to, for instance, test different variable values within the same execution 
-context to better understand errors or explore hypothetical scenarios in the program's execution 
-evolution. DeloreanJs has three main features: the ability to navigate through an execution history, 
-modify values of a variable, and resume execution from a timepoint (a specific execution point in the 
-past)~\cite{leger23}. DeloreanJS extends continuations with static analysis functionalities to capture 
-the current program state, and store the (history of) variable's values. 
-There are several other debuggers for Javascript, must of them based on the use of breakpoints, in 
-which variables cannot be modified to resume current execution with the new values, similar to the 
-behavior offered in \ac{GDB}.
+context, to better understand errors or explore hypothetical scenarios in the program's execution 
+evolution~\cite{hofer06,lienhard09}. DeloreanJs has three main features: the ability to navigate 
+through an execution history, modify values of a variable, and resume execution from a timepoint (a 
+specific execution point in the past)~\cite{leger23}. DeloreanJS extends continuations with static 
+analysis functionalities to capture the current program state, and store the (history of) variable's 
+values. There are several other debuggers for Javascript, must of them based on the use of 
+breakpoints, in which variables cannot be modified to resume current execution with the new values, 
+similar to the behavior offered in \ac{GDB}.
 
 We note the functionality to go back in time, observe the program's state at a previous moment and 
 execute a new timeline with the new values, offered by DeloreanJS, and in general back-in-time 
@@ -194,40 +194,42 @@ including training graphs, variable distributions, and model structure visualiza
 TensorBoard does not allow developers to interact with the model during execution, which is 
 essential for debugging \ac{RL}.
 
-Another implementation for debugging \ac{RL} programs is \ac{Vizarel} ~\cite{deshpande2020interactivevisualizationdebuggingrl}.
+Another implementation for debugging \ac{RL} programs is \ac{Vizarel} ~\cite{deshpande20}.
 \ac{Vizarel} implements an interactive visualization tool for debugging and interpreting \ac{RL} 
 programs. The system offers different views that encapsulate the spatial and temporal dimensions 
-of agent policies. The tool consists of a set of "viewport" modules, each of which is an abstract 
-entity that can be backed by different specs, conditioned on the underlying data~\cite{deshpande2020interactivevisualizationdebuggingrl}. This tool 
-is useful to understand the behavior of the agent, however, it does not allow the user to interact with the 
-variables during execution, which leads to spend time in the training process without knowing if
-the agent is learning correctly or not.
+of agent policies. The tool consists of a set of \emph{viewport modules}, each of which is an 
+abstract entity that can be backed by different specs, conditioned on the underlying 
+data~\cite{deshpande20}. This tool is useful to understand the behavior of an agent. However, it 
+does not allow the user to interact with the variables during execution, which leads to a longer training 
+process, having to wait until the end of the training run to know whether the agent is learning correctly 
+or not.
 
-~\citet{Rajan_2023} present a tool called \ac{MDP} Playground. This platform is intended to help developers and researchers to understand
-\ac{RL} agents better on toy complex environments, and to create unit tests characteristics of agents 
-on toy examples of \ac{MDP}s. Basically the problem that they identified was that \ac{RL} programs 
-are fragile and hard to debug, and with deep \ac{RL} research growing, the complexity of the 
-dynamics has increased and researchers have not paid enough attention to the state distribution and 
-reward distribution which \ac{RL} policies work and that has made \ac{RL} programs hard to debug 
-and fragile~\cite{Rajan_2023}. The idea with this is to open the box in terms to understand the behavior of the agent 
-while using toy examples, based on the OpenGym library. This work is not scalable, and it is not 
-suitable for real-world applications, but it is a good starting point to understand the behavior of 
-\ac{RL} agents. While the \ac{MDP} Playground is not a debugger, it can help to debug the program by understanding the 
-behavior of the agent in a controlled environment.
+\citet{rajan23} present a tool called \ac{MDP} Playground. This platform is intended to help 
+developers and researchers to understand \ac{RL} agents better on toy complex environments, and 
+to create unit tests characterizing agents' behavior  on toy \ac{MDP} examples, based on the 
+OpenGym library. The problem addressed by \ac{MDP} Playground is the fragility of \ac{RL} 
+programs, specially with the growth of deep \ac{RL} research growing. The complexity of the 
+dynamics of \ac{RL} programs increases, leading to difficulties in identifying states' or rewards' 
+distribution; if the agent's policy is not as expected, debugging \ac{RL} programs becomes 
+hard~\cite{rajan23}. The idea with \ac{MDP} Playground is to open the programs, making their 
+internal state available, to understand the behavior of the agent. Based only on toy examples, 
+\ac{MDP} Playground is not scalable, nor it is suitable for real-world applications, but a 
+proof-of-concept good to understand the behavior of \ac{RL} agents. While the \ac{MDP} Playground 
+is not a debugger, it can help to debug the program by understanding the behavior of the agent in a 
+controlled environment.
 
-Finally, another recent work to debug \ac{RL} programs by ~\citet{Steinmetz2021DebuggingAP},
-which tries to gain trust in \ac{AI} programs using systematic testing. Erroneous program behavior
-(called bugs) becomes bad policy behavior, for example, not reaching the 
-goal, or not learning the correct policy. They propose a systematic testing approach to find these 
-bugs in which they address how to confirm a bug is found and how potential bugs can be found, 
-using the Framework Fuzzing~\cite{Steinmetz2021DebuggingAP}.
+Finally, another recent work to debug \ac{RL} programs, sets as its purpose to gain trust in \ac{AI} 
+programs using systematic testing~\cite{steinmetz21}. Erroneous program behavior (\ie bugs) lead to 
+a bad agent policy, for example, not reaching the goal, or not learning the correct policy. The purpose 
+of the work is to provide a systematic testing approach to find bugs. As part of the process, the tool 
+offers a methodology to find potential bugs, or confirm a bug exists, using the Framework Fuzzing.
 
-While the approaches presented are very interesting to debug \ac{RL} programs, there is still
-a gap in the current literature, which is addressed as the focus of this work. The idea 
-of this work is to see how 
-a debugger that allows the user to navigate through the execution history, modify the values of 
-variables, and resume the execution from a specific point in time, performs into creating
-better \ac{RL} programs.
+While the approaches presented are interesting to help understand \ac{RL} programs, none of them 
+are actual debuggers, leaving a gap in the current literature, which is addressed as the main focus of 
+our work. Our work proposes a debugger that allows the user to navigate through the execution 
+history, modify the values of variables, and resume the execution from a specific point in time, 
+performs into creating better \ac{RL} programs.
+
 
 \endinput
 
