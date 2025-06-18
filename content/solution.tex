@@ -1,37 +1,38 @@
 % $Id: solution.tex 
 % !TEX root = ../main.tex
 
-\section{Flik: A Life's Debugger}
+\section{Flik: A Bugs Life Debugger}
 \label{sec:solution}
 
-As mentioned in Chapter 1, the black box problem of \ac{RL} programs is 
-not new, and it is something 
-that can be addressed using a debugger. However, currently, there is no 
-debugger capable of working with RL programs. The reason for this is that 
-most of the debuggers are postmortem, or they don't allow you to go back in 
-time. Also, most of the debuggers don't allow you to modify variables, and in 
-order to improve and debug \ac{RL} programs we should be able to perform 
-specifically the following features:
+The black box behavior of \ac{ML} and \ac{RL} agents posit a problem to understand agents and 
+their behavior, specially if unexpected behavior is observed. We posit debuggers as an appropriate 
+tool to understand agents' behavior. Moreover, we posit debuggers with the possibility to modify 
+programs' state and continue execution using new execution paths are even more appropriate and 
+suitable to understand \ac{RL} agents, given their intrinsic nature of continuous interaction with the 
+environment. However, currently, there is no debugger for \ac{RL} programs with the desired 
+features. The reason for this is that most of the debuggers are postmortem, or do not allow developers
+to go back in time to replay and analyze the program state. Additionally, most of the debuggers do not 
+allow developers to modify variables. In order to contribute to the development of \ac{RL} programs, 
+debugging tools should exhibit the following features:
 
-\begin{itemize}
-    \item Stepping back: due to the execution cycle of an \ac{RL} program we 
-    want to have a functionality that will allow us to step back and change 
-    the value of a variable. This will allow us to check if the problem is a 
-    not well design hyperparameter, or it will let us interact directly with 
-    the code without stopping the execution and losing the state of the program 
-    and the time training. 
-    \item Modifying variables: just as we said before, we would want to have a 
-    tool that will let us modify the variables during execution time. Which means
-    that the tool must not kill the program, but keep working with the state, 
-    and variables.
-\end{itemize}
+\begin{description}
+    \item[Stepping back:] Due to the execution loop of \ac{RL} programs we 
+    want to have a functionality that will allow us to step back the execution to observe the change 
+    in state between iterations of the loop. This will let developers interacting directly with the program, 
+    without having to stop the execution,  lose the program state, or the training data already 
+    accumulated. Such feature will help in identifying the root cause of erroneous agent behavior, 
+    whether that is an error in the program's design for particular interactions, or an ill-defined 
+    hyperparameter. 
+    \item [Modifying variables:] While stepping back into the program's execution, we would want to be 
+    able to modify variables' values during the execution. Such feature would help to test out the 
+    behavior of an agent with different state-values, or hyperparameters, without having to 
+    continuously stop and retrain the agent, which can be very costly and time-consuming. 
+\end{description}
 
-This features aim to tackle the problem of interaction with the program, as it allows 
-to inspect in a deeper way the state of the program in terms of variables, and it provides
-a functionality of interacting with the execution of the program going forward and backwards.
-Additionally, we also aim to provide a visual interface that will aim to manage the 
-complexity of \ac{RL} programs, making an easier way for the user to understand 
-the program behavior, and interact with it.
+These features aim at tackling the problem of interaction with the program, as it allows 
+to inspect the behavior of a program with respect to different variable values. Additionally, 
+developers may interact with the program execution by going forward and backward, observing the 
+effects of specific interactions between the agent and the environment.
 
 Therefore, the proposed solution in this work is the creation of a back-in-time debugger with the 
 functionalities mentioned above, as they provide more value to debug \ac{RL} agents. This 
@@ -52,22 +53,22 @@ Thus, this solution proposes a framework that enables developers to
 analyze RL programs, evaluate their behavior, and observe the evolution 
 of different variables over time.
 
-In this chapter, we present the design and implementation of the debugger tool: \ac{Flik}.
+In this chapter, we present the design and implementation of the debugger tool: \flik.
 The debugger is a key component of the proposed framework, as it allows 
 developers to interact with the RL program during execution, inspect the 
 internal state of the agent, and modify its behavior in real-time.
 
-\ac{Flik} is a console-based debugger, constructed over \ac{PDB} debugger. \ac{Flik} adds features 
+\flik is a console-based debugger, constructed over \ac{PDB} debugger. \flik adds features 
 such as colored syntax highlighting, tracking of variable states, and capturing stdout output 
-from executed lines. The following are the three major features \ac{Flik} has:
+from executed lines. The following are the three major features \flik has:
 \begin{itemize}
-    \item \ac{Flik} saves the state in each step, it saves the local and global variables, 
+    \item \flik saves the state in each step, it saves the local and global variables, 
     in a history variable. Additionally, other metadata like the information of the line 
     being executed is saved. This allows us to work later on the stepping back feature. 
-    \item Additionally, \ac{Flik} knows how to restore a previous state of a program, as 
+    \item Additionally, \flik knows how to restore a previous state of a program, as 
     in the previous feature saves every information needed from the stack and the variables 
     to restore the state based on the history. 
-    \item Finally, \ac{Flik} performs the stepping back feature, it is created as a custom 
+    \item Finally, \flik performs the stepping back feature, it is created as a custom 
     \ac{PDB} command, and it has the same format as any other command. This takes the state
     saved in the specific line of code you want to step back, and it restores the state according
     to that information. 
@@ -86,7 +87,7 @@ The state is saved in a list that stores snapshots of the frame's state (line an
 at each step, which allows stepping back into the state we want to restore. The exec function can execute 
 in a list that stores snapshots of the frame's state (line and locals) at each stepcode in a 
 specified frame's context by passing $f\_globals$ and $f\_locals$ as parameters. This allows 
-\ac{Flik} to simulate running a specific line in the context of a previous frame, maintaining 
+\flik to simulate running a specific line in the context of a previous frame, maintaining 
 both local and global variable references, essentially restoring the saved execution state.
 
 This all done by extending the PDB class and adding custom commands to support stepping back
@@ -95,7 +96,7 @@ displays the code, variables, and execution point, and allows the user (to use t
 functions) to pause, step forward, step back, continue or restart the program, as well as to 
 modify and inspect variables. 
 
-\fref{fig:debuggerf} presents the general interface of \ac{Flik}. In 
+\fref{fig:debuggerf} presents the general interface of \flik. In 
 the upper frame we have the running execution, in this case the print 
 for the array to be sorted. The middle frame shows the source code that is being 
 debugged. The lower frame shows the variables used in the 
@@ -110,7 +111,7 @@ send the corresponding commands to the debugger.
 \end{figure}
 
 % Add example of use step by step. Explain the videos.
-Now, let's use an example to further understand how \ac{Flik} works. Let's work with 
+Now, let's use an example to further understand how \flik works. Let's work with 
 the usual gridworld example of \ac{RL} programs. The environment is a grid of 
 $10 \times 10$ and the agent can move in four directions: up, down, left, and right.
 There are two kind of rewards that the agent can get, a positive reward of 1 when 
@@ -122,7 +123,7 @@ This will mean that only the first action taken by the agent will be random and 
 with a major probability it will keep only choosing the same action. We can think about 
 the worst case scenario, in which the agent will move right and then in the next step it 
 will move left, and it will keep doing this for a long time, with a low probability of 
-choosing another action. We can use \ac{Flik} to debug this problem, we can go step by step
+choosing another action. We can use \flik to debug this problem, we can go step by step
 inspecting the variables and the actions taken and we can identify specifically that for 
 the first state in each episode the agent is taking the same action. We can then go back and
 reproduce this problem as many times as we want, and we can change the value of $\epsilon$
