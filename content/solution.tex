@@ -32,88 +32,82 @@ debugging tools should exhibit the following features:
 These features aim at tackling the problem of interaction with the program, as it allows 
 to inspect the behavior of a program with respect to different variable values. Additionally, 
 developers may interact with the program execution by going forward and backward, observing the 
-effects of specific interactions between the agent and the environment.
+effects of specific interactions between the agent and the environment. The capacity to explore the 
+execution (backward and forward) would allow for the evaluation of the behavior and quality of 
+\ac{RL} programs, helping to improve the development of these programs.
 
-Therefore, the proposed solution in this work is the creation of a back-in-time debugger with the 
-functionalities mentioned above, as they provide more value to debug \ac{RL} agents. This 
-is not a traditional debugger; rather, it allows for an understanding of the 
-internal state of the agent, the decisions it makes, and the rewards it 
-receives. In other words, it helps the developer to understand the execution context of the
-agent in terms of variables, values, environment, states and the rewards. Additionally, with 
-our debugger, developers can interact with the program at run time, modifying the values 
-of the variables and continue the program's execution.
+With these features in mind, we present \flik: \textsc{A bugs life}, a back-in-time debugger with the 
+possibility to step back in the execution, change values for different variables, and resume execution 
+on different execution paths. \flik is not a traditional debugger; it is valuable to debug \ac{RL} 
+programs, allowing to evaluate the internal state of the agent, the decisions it makes, and the rewards 
+it receives, through the observation of its variables over time. Using the debugger, developers can 
+better understand the execution context of \ac{RL} agents in terms of variables, values, environment, 
+states and the rewards. 
 
-Moreover, we aim to provide a deeper understanding of the behavior of 
-RL programs and to identify errors that arise during the learning process. 
-This would allow for the evaluation of the construction and quality of 
-software developed for RL and help formulate strategies to improve the 
-development of these programs.
-
-Thus, this solution proposes a framework that enables developers to 
-analyze RL programs, evaluate their behavior, and observe the evolution 
-of different variables over time.
-
-In this chapter, we present the design and implementation of the debugger tool: \flik.
-The debugger is a key component of the proposed framework, as it allows 
-developers to interact with the RL program during execution, inspect the 
-internal state of the agent, and modify its behavior in real-time.
-
-\flik is a console-based debugger, constructed over \ac{PDB} debugger. \flik adds features 
-such as colored syntax highlighting, tracking of variable states, and capturing stdout output 
-from executed lines. The following are the three major features \flik has:
+\flik is a console-based debugger, constructed over the \ac{PDB} debugger. \flik adds features 
+such as colored syntax highlighting, tracking of variables' state, and capturing stdout output 
+from executed lines of code. The following are the three major features of \flik:
 \begin{itemize}
-    \item \flik saves the state in each step, it saves the local and global variables, 
-    in a history variable. Additionally, other metadata like the information of the line 
-    being executed is saved. This allows us to work later on the stepping back feature. 
-    \item Additionally, \flik knows how to restore a previous state of a program, as 
-    in the previous feature saves every information needed from the stack and the variables 
-    to restore the state based on the history. 
-    \item Finally, \flik performs the stepping back feature, it is created as a custom 
-    \ac{PDB} command, and it has the same format as any other command. This takes the state
-    saved in the specific line of code you want to step back, and it restores the state according
-    to that information. 
+    \item Stores the state in each execution step (\ie action taken by the agent). \flik saves the local 
+    and global variables, in a history variable. Additionally, other metadata like the information of the 
+    line being executed is saved. This allows us to later step back into specific states in the stored 
+    history, and their corresponding location in the code. 
+    \item Restores a previous program states as, from the previously stored information, from the 
+    stack and heap variables to precisely restore the program's state and its execution context, in 
+    order to re-create an alternative execution path. 
+    \item Finally, connecting the previous two features, is the action of stepping back. This feature is 
+    created as a custom \ac{PDB} command, using the same syntax and form of the native \ac{PDB} 
+    commands. The stepping back command takes the state saved at a specific point in the history, 
+    and restores the state according to the information at that point --that is, program's state, stack 
+    information, and code line. 
 \end{itemize}
 
 In Python, the internal state of a program during execution is primarily encapsulated in 
 stack frames. Each stack frame contains information about the execution state of a function 
-call, including the current line number, local and global variables, and other metadata:
+call, including the current line number, local and global variables, and other metadata, as follows:
 \begin{itemize}
-    \item $f\_lineno$: The current line number being executed.
-    \item $f\_locals$: A dictionary of local variables within the frame.
-    \item $f\_globals$: A dictionary of global variables accessible within the frame.
-    \item $f\_code$: A code object representing the function's bytecode and source code metadata.
+    \item \scode{f_lineno}: The current line number being executed.
+    \item \scode{f_locals}: A dictionary of local variables within the frame.
+    \item \scode{f_globals}: A dictionary of global variables accessible within the frame.
+    \item \scode{f_code}: A code object representing the function's bytecode and source code metadata.
 \end{itemize}
-The state is saved in a list that stores snapshots of the frame's state (line and variables) 
-at each step, which allows stepping back into the state we want to restore. The exec function can execute 
-in a list that stores snapshots of the frame's state (line and locals) at each stepcode in a 
-specified frame's context by passing $f\_globals$ and $f\_locals$ as parameters. This allows 
-\flik to simulate running a specific line in the context of a previous frame, maintaining 
+
+The state is saved in a list that stores snapshots of the frame's state (line and variables) at each 
+execution step, which allows stepping back into any state we would want to restore. We use the  
+\scode{exec} function that receives the stored \scode{f_globals} and \scode{f_locals} variables as 
+parameters. \scode{exec} then executes a list of stored state snapshots (line number 
+and local variables) at each step in a specified frame's context (given by the function parameters). 
+This allows \flik to simulate running a specific line in the context of a previous frame, maintaining 
 both local and global variable references, essentially restoring the saved execution state.
 
-This all done by extending the PDB class and adding custom commands to support stepping back
-and a custom interface which allows the user to interact with the debugger. The interface 
+This all done by extending the \ac{PDB} class and adding custom commands to support stepping 
+back and a custom interface which allows the user to interact with the debugger. The interface 
 displays the code, variables, and execution point, and allows the user (to use the \ac{PDB} 
 functions) to pause, step forward, step back, continue or restart the program, as well as to 
 modify and inspect variables. 
 
-\fref{fig:debuggerf} presents the general interface of \flik. In 
-the upper frame we have the running execution, in this case the print 
-for the array to be sorted. The middle frame shows the source code that is being 
-debugged. The lower frame shows the variables used in the 
-program so far. Finally, in the bottom of the interface we have the interactive console in which the user can 
-send the corresponding commands to the debugger.
+\fref{fig:debuggerf} shows the general interface of \flik on simple \scode{bubble_sort} function. From 
+the top, the first frame (in the blue rectangle Execution frame) we have the running execution, in this 
+case the print for the array to be sorted in Line 18 in the second frame. The second frame (in the 
+purple rectangle Source code frame) shows the source code that is being debugged. The third frame 
+(in the red rectangle Variables frame) shows the variables used in the program so far. Finally, in the 
+bottom of the interface we have the interactive console in which developers can send commands to 
+\flik to effectively debug the program.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{figures/flik_interface.png}
+    \includegraphics[width=0.9\textwidth]{figures/flik_interface.png}
     \caption{Debugger tool}
     \label{fig:debuggerf}
 \end{figure}
 
 % Add example of use step by step. Explain the videos.
-Now, let's use an example to further understand how \flik works. Let's work with 
-the usual gridworld example of \ac{RL} programs. The environment is a grid of 
-$10 \times 10$ and the agent can move in four directions: up, down, left, and right.
+We now use a running example to present the features, commands and inner work of \flik. Four 
+our running example we use the gridworld \ac{RL} benchmark. The environment consists of a 
+$10 \times 10$ grid, shown in \fref{fig:gridworld}. The agent can move in four directions: up, down, 
+left, and right at every gridworld cell. However, the movement is not successful in bordering cells 
+or cells adjacent to walls (\ie gray-out cells), as it collides with the walls and bounces back to the 
+starting position.
 There are two kind of rewards that the agent can get, a positive reward of 1 when 
 the agent gets to the goal, and a negative reward of -1 when the agent goes to the 
 trap. The agent starts in the blue box shown \fref{fig:gridworld}. Now, in the following
