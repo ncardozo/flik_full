@@ -221,7 +221,6 @@
   breaklines,
   numberblanklines=false,
   numberstyle=\tiny\color{gray}, 
-  keywordstyle=\ttfamily\bfseries\color{magenta},
   commentstyle=\color{gray},
   numbersep=0pt,
   escapechar=`,  
@@ -234,22 +233,25 @@
   abovecaptionskip=-0pt}
 
 % python listings
-\lstdefinestyle{Java}
- {language=Java,
+\lstdefinestyle{py}
+ {language=Python,
   showstringspaces=false,
   tabsize=2,
   style=floating,
   belowskip=-0\baselineskip,
   aboveskip=-0\baselineskip,
-  morekeywords={new}
+  morekeywords={new},
+  keywordstyle=\ttfamily\bfseries,
+  keywords=[1]{breakpoint,n,p,pp,s,c,step_back,back_to,variables,sticky,args,setvar,unt,b,w,u,d,help,q},
+  keywordstyle=[1]\ttfamily\bfseries\color{blue},
 }
 
 %context traits environment    
- \lstnewenvironment{java}[1][]
- {\lstset{style=Java,#1}}{}  
+ \lstnewenvironment{python}[1][]
+ {\lstset{style=py,#1}}{}  
 
  % Context Traits in line source-code
-\newcommand{\scode}[1]{\lstinline[style=java]{#1}}
+\newcommand{\spy}[1]{\lstinline[style=py]{#1}}
 
 
 %%Boxes
