@@ -1,48 +1,50 @@
 % $Id: evaluation.tex 
-% !TEX root = main.tex
+% !TEX root = ../main.tex
 
 \section{Empirical Study}
 \label{sec:evaluation}
 
-The purpose of the study was to assess the user experience and usefulness of \flik, when used to detect and locate bugs in  \ac{RL} programs. In particular, the participants were provided with three different RL programs that implement three real-world problems:  (i) GridWorld, (ii) Rooms, and (iii) Cars (Driving assistant). A fault was manually injected in each program, and the task assigned to the participants was to improve the functional quality of the three programs. Note that the injected bugs did not lead the program to exceptions or crashes, i.e., each program ran and there was no evident buggy behavior. The injected bugs made the programs to generate outputs that do not match the expected outputs. Concerning the participants, master students from the Reinforcement Learning course at Universidad de los Andes were recruited.  The participants were provided with a evaluation  \fref{sec:eval-guide}, that describes the purpose of the tool, the task and steps, instructions on how to run and 
-use the tool, documentation of the tool, and an small example. The real-world problems implemented for the study are described as follows:
+This section presents the empirical study for \flik. The purpose of the empirical study assessing the 
+user experience and usefulness of \flik, when used to identify and locate bugs in  \ac{RL} programs. 
+In particular, the participants were provided with three different \ac{RL} programs that implement three 
+\ac{RL} problems. The problems were chosen according to their familiarity and an increasing 
+environment complexity. 
+\begin{enumerate*}[label=(\arabic*)]
+\item GridWorld, is a standard benchmark for \ac{RL} based on episodic learning.
+\item Rooms, is common \ac{RL} problem used as an example of the complexity of environments and 
+the possibility por agents to abstract their knowledge in hierarchical learning~\cite{pateria21} 
+structures. \item Finally, Driving assistant is a more recent \ac{RL} environment, uncommon to most 
+developers, used to learn different tasks for autonomous driving in a continuous environment. 
+\end{enumerate*}
 
+A fault was manually injected in each program, and the task assigned to the participants was to improve the functional quality of the three programs. Note that the injected bugs did not lead the program to exceptions or crashes, i.e., each program ran and there was no evident buggy behavior. The injected bugs made the programs to generate outputs that do not match the expected outputs. Concerning the participants, master students from the Reinforcement Learning course at Universidad de los Andes were recruited.  The participants were provided with a evaluation  \fref{sec:eval-guide}, that describes the purpose of the tool, the task and steps, instructions on how to run and 
+use the tool, documentation of the tool, and an small example. The real-world problems implemented for the study are described in the following:
 
-
-%To evaluate and validate \flik as a framework to support the development of \ac{RL} programs, and in consequence to help increase their quality, an initial empirical evaluation was conducted. The evaluation consists of three different test scenarios  from real-world problems that arise in the development of \ac{RL} programs, and the evaluation aimed
-
-%The purpose of the evaluation is to observe three scenarios: gridwrold, rooms and cars that cover from  the creation of an \ac{RL} program from scratch to the process of optimizing learning parameters, aiming to determine the specific values to start with to achieve the most optimal convergence for the program. In each of the programs a bug is added ensuring strange application behavior, but ensuring the application to run, therefore, the expected output does not match the real output of the programs. The intention of the evaluation scenarios is to if \flik can actually improve the performance and development of \ac{RL} %programs.
-
-%The empirical evaluation is performed with a group of students from the \ac{RL} course at Universidad de  los Andes. We attached the evaluation guide given to the students in \fref{sec:eval-guide}, in which  is described the purpose of the tool, the description of the activity with the steps on how to run and  use the tool, a small documentation of the tool, and an small example.
-
-%\subsection{Exercise 1: GridWorld}
-%\label{sec:grid-eval}
-\vspace{0.3cm}
-\textbf{GridWorld}. This environment consists of a $n \times n$ ($10\times 10$ in our example) rectangular  board/grid, in which each tile $(i,j)$ represents a specific state of the board. Tiles in the board may be  walls, which agents cannot cross. Additionally, there are special exit  tiles that give a positive or negative reward to agents, as shown in \fref{fig:gridworld}. All tile types are unknown to the agent that moves from a given starting point in the board, searching for the goal state (\ie exit states with positive reward of $1$). The agent moves from state to state, avoiding  obstacles and incorrect exit states (which give a reward of $-1$ when used to exit). 
+%%%%
+\paragraph{\textbf{GridWorld.}}
+This environment consists of a $n \times n$ ($10\times 10$ in our example) 
+rectangular  board/grid, in which each tile $(i,j)$ represents a specific state of the board. Tiles in the board may be  walls, which agents cannot cross. Additionally, there are special exit  tiles that give a positive or negative reward to agents, as shown in \fref{fig:gridworld}. All tile types are unknown to the agent that moves from a given starting point in the board, searching for the goal state (\ie exit states with positive reward of $1$). The agent moves from state to state, avoiding  obstacles and incorrect exit states (which give a reward of $-1$ when used to exit). 
 
 The program has a bug for the $\epsilon$ parameter, presenting an error in the probability which defines which action is taken next. This introduces a wrong behavior for the \ac{RL} 
 agent because $\epsilon$ will be so small that only in the first iteration the action will be taken randomly and in the follow iterations the probability will be so small to take another action that the agent will not explore other action policies. This is an undesired behavior specially for training purposes as an agent should have a large probability to choose other actions and explore the grid. The idea in this task is that the study participants use \flik to navigate through the code and find out why the agent is not learning properly. And eventually, the participants should come out with the solution of increasing the value of $\epsilon$. 
 
-\begin{figure}[h]
+\begin{figure}[hptb]
   \centering
   \includegraphics[width=0.5\columnwidth]{figures/gridworld.png}
   \caption{10x10 gridworld environment example}
   \label{fig:gridworld}
 \end{figure}
 
-
-
-%\subsection{Exercise 2: Rooms}
-%\label{sec:rooms-eval}
-
-\textbf{Rooms.} The four rooms maze environment consists of a $13\times 13$ board/grid divided in $4$ sections 
+%%%%
+\paragraph{\textbf{Rooms.}} 
+The four rooms maze environment consists of a $13\times 13$ board/grid divided in $4$ sections 
 (\ie rooms), with walls between them, and a door opening to go from one room to another, as shown 
 in \fref{fig:rooms}. The agent's objective in this environment is to exit through the upper-left room 
 (the green square) in the fewest possible steps. Reaching the exit state gives a reward of $1$, and no 
 other action give a reward to the agent. In each episode the agent starts from any valid position in the 
 grid, \eg the yellow square in the bottom-right room in the figure. 
 
-\begin{figure}[h]
+\begin{figure}[hptb]
   \centering
   \includegraphics[width=0.5\columnwidth]{figures/rooms.png}
   \caption{Rooms environment example with associated rewards in each state}
@@ -57,7 +59,7 @@ $
 Q(s, a) \leftarrow (1-\alpha) Q(s, a) + \alpha \left( r + \gamma \max_{a'} Q(s', a') \right)
 $
 
-\item Wrong equation to debug:
+\item Erroneous equation to debug:
 $
 Q(s, a) \leftarrow  \alpha Q(s, a) + (1-\alpha) \left( r + \gamma \max_{a'} Q(s', a') \right)
 $
@@ -75,7 +77,7 @@ $(1-\alpha)$ scales the difference between the new estimate and the old estimate
 
 %\subsection{Exercise 3: Driving Assistant}
 %\label{sec:cars-eval}
-\textbf{Cars (Driving Assistant)}. In this case the agent must learn to drive, on the correct lane, at the allowed speed, taking over slow traffic, and not crashing. The possible actions for the agent are: straight, slow\_down, speed\_up, steer\_left, steer\_right. Figure \ref{fig:cars-code-example} depicts the visual interface of this environment.
+\paragraph{\textbf{Cars (Driving Assistant).}} In this case the agent must learn to drive, on the correct lane, at the allowed speed, taking over slow traffic, and not crashing. The possible actions for the agent are: straight, slow\_down, speed\_up, steer\_left, steer\_right. Figure \ref{fig:cars-code-example} depicts the visual interface of this environment.
 
 \begin{figure}[h]
     \centering
