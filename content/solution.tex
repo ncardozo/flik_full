@@ -86,7 +86,7 @@ displays the code, variables, and execution point, and allows the user (to use t
 functions) to pause, step forward, step back, continue or restart the program, as well as to 
 modify and inspect variables. 
 
-\fref{fig:debuggerf} shows the general interface of \flik on simple \spy{bubble_sort} function. From 
+\fref{fig:debugger} shows the general interface of \flik on simple \spy{bubble_sort} function. From 
 the top, the first frame (in the blue rectangle Execution frame) we have the running execution, in this 
 case the print for the array to be sorted in Line 18 in the second frame. The second frame (in the 
 purple rectangle Source code frame) shows the source code that is being debugged. The third frame 
@@ -94,31 +94,30 @@ purple rectangle Source code frame) shows the source code that is being debugged
 bottom of the interface we have the interactive console in which developers can send commands to 
 \flik to effectively debug the program.
 
-\begin{figure}[h]
+\begin{figure}[hptb]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/flik_interface.png}
     \caption{Debugger tool}
-    \label{fig:debuggerf}
+    \label{fig:debugger}
 \end{figure}
 
-% Add example of use step by step. Explain the videos.
 We now use a running example to present the features, commands and inner work of \flik. Four 
-our running example we use the gridworld \ac{RL} benchmark. The environment consists of a 
+our running example we use the GridWorld \ac{RL} benchmark. The environment consists of a 
 $10 \times 10$ grid, shown in \fref{fig:gridworld}. The agent can move in four directions: up, down, 
-left, and right at every gridworld cell. However, the movement is not successful in bordering cells 
+left, and right at every GridWorld cell. However, the movement is not successful in bordering cells 
 or cells adjacent to walls (\ie gray-out cells), as it collides with the walls and bounces back to the 
 starting position.
 The agent's reward is defined obtaining a reward of 1 when the agent gets to the goal state, and a 
 reward of -1 when the agent visits trap states, terminating the execution in both cases. The agent 
 starts in a fixed position, the top left corner of the grid (the blue state in \fref{fig:gridworld}). 
 
-For the purpose of the running example, we will use the implementation of the gridworld agent shown 
-in \fref{lst:gridworld-learner}, explaining the \flik commands used to detect a bug in the code. 
-Running the program we pay special attention to the \spy{run} function, which we can access using 
-the \spy{n} command until we reach it. Alternatively, it is possible to move directly to a specific 
-execution point, by setting breakpoints in the program. For example, when executing the program we 
-can use the \spy{c} command to execute until the \spy{breakpoint} in \fref{ln:breakpoint} is reached. 
-Once in the function, we use the \spy{n} command to step through the function. 
+For the purpose of the running example, we will use the Q-learning implementation of the GridWorld 
+agent as shown in \fref{lst:gridworld-learner}, explaining the \flik commands used to detect a bug in 
+the code. Running the program we pay special attention to the \spy{run} function, which we can 
+access using the \spy{n} command until we reach it. Alternatively, it is possible to move directly to a 
+specific execution point, by setting breakpoints in the program. For example, when executing the 
+program we can use the \spy{c} command to execute until the \spy{breakpoint} in \fref{ln:breakpoint} 
+is reached. Once in the function, we use the \spy{n} command to step through the function. 
 At particular points in the execution (\eg \fref{ln:stop1}), we can observe variables' values by means 
 of the \spy{p} o \spy{pp} commands. In our example, we could use \spy{p self.gamma} to see the 
 value of the \spy{gamma} hyperparameter. 
@@ -134,8 +133,8 @@ not trained updating the values, the exploitation equals to random action choosi
 leading to erroneous agent behavior.
 
 \begin{python}[numbers=left,
-	caption={\flik running example of the gridworld environment},
-	label={lst:gridworld-learner}]
+	caption={\flik running example of the GridWorld environment},
+	label={lst:GridWorld-learner}]
 class Agent:
   def __init__(self, env, alpha=0.1, gamma=0.6, epsilon=0.1, episodes=10):
     #hyper parameters
@@ -177,7 +176,7 @@ backward in the program execution to \fref{ln:back1}. Then, we can effectively c
 \spy{epsilon} using the \spy{setvar self.epsilon=0.9} command. Once the change is made, if we 
 continue execution, after reaching \fref{ln:stop2}, we can print the value of \spy{action} (\spy{p action}), 
 to observe now different actions are taken, and the agent can train properly, observing changes for 
-values across the q-table. Video examples of the \flik execution within the gridworld example are available at \url{https://shorturl.at/rD343}.
+values across the q-table. Video examples of the \flik execution within the GridWorld example are available at \url{https://shorturl.at/rD343}.
 %\url{https://drive.google.com/file/d/1NyipuWsRr6ZrIbtlvU5qyooHS2aVsWXc/view?usp=sharing}.
 
 \fref{tab:flik-commands}, shows a summary of the commands implemented in \flik, where the 
