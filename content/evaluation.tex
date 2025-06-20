@@ -11,22 +11,37 @@ In particular, the participants were provided with three different \ac{RL} progr
 environment complexity. 
 \begin{enumerate*}[label=(\arabic*)]
 \item GridWorld, is a standard benchmark for \ac{RL} based on episodic learning.
-\item Rooms, is common \ac{RL} problem used as an example of the complexity of environments and 
-the possibility por agents to abstract their knowledge in hierarchical learning~\cite{pateria21} 
-structures. \item Finally, Driving assistant is a more recent \ac{RL} environment, uncommon to most 
-developers, used to learn different tasks for autonomous driving in a continuous environment. 
+\item Rooms, is a common \ac{RL} problem with a similar structure to GridWorld, but with a higher 
+complexity, used as an example of the possibility for agents to abstract their knowledge about the 
+environment in hierarchical learning~\cite{pateria21} structures. 
+\item Finally, Driving Assistant is a more recent \ac{RL} environment~\cite{cardozo18ml4pl,cardozo23}, 
+uncommon to most developers, used to learn different tasks for autonomous driving in a continuous 
+environment with more complex interaction between states, actions, and rewards. 
 \end{enumerate*}
 
-A fault was manually injected in each program, and the task assigned to the participants was to improve the functional quality of the three programs. Note that the injected bugs did not lead the program to exceptions or crashes, i.e., each program ran and there was no evident buggy behavior. The injected bugs made the programs to generate outputs that do not match the expected outputs. Concerning the participants, master students from the Reinforcement Learning course at Universidad de los Andes were recruited.  The participants were provided with a evaluation  \fref{sec:eval-guide}, that describes the purpose of the tool, the task and steps, instructions on how to run and 
-use the tool, documentation of the tool, and an small example. The real-world problems implemented for the study are described in the following:
+For the evaluation, a fault was manually injected in each program. The task assigned to the 
+participants is to improve the functional quality of the three programs by removing the fault. Note that 
+the injected bugs did not lead the program to exceptions or crashes, \ie each program run to 
+completion, with no evident bug or strange behavior. The injected bugs caused the programs to 
+produce outputs or agent behavior inconsistent with the expected outputs. 
+
+For the empirical study the participants recruited are master and Ph.D. students that have taken the 
+Reinforcement Learning course at Universidad de los Andes.  The participants are given a guide that 
+describes the purpose of the tool, the task and steps, instructions on how to run and 
+use \flik, documentation of the tool, and an small worked-out example. The problems implemented for 
+the study are described in the following:
 
 %%%%
 \paragraph{\textbf{GridWorld.}}
-This environment consists of a $n \times n$ ($10\times 10$ in our example) 
-rectangular  board/grid, in which each tile $(i,j)$ represents a specific state of the board. Tiles in the board may be  walls, which agents cannot cross. Additionally, there are special exit  tiles that give a positive or negative reward to agents, as shown in \fref{fig:gridworld}. All tile types are unknown to the agent that moves from a given starting point in the board, searching for the goal state (\ie exit states with positive reward of $1$). The agent moves from state to state, avoiding  obstacles and incorrect exit states (which give a reward of $-1$ when used to exit). 
-
-The program has a bug for the $\epsilon$ parameter, presenting an error in the probability which defines which action is taken next. This introduces a wrong behavior for the \ac{RL} 
-agent because $\epsilon$ will be so small that only in the first iteration the action will be taken randomly and in the follow iterations the probability will be so small to take another action that the agent will not explore other action policies. This is an undesired behavior specially for training purposes as an agent should have a large probability to choose other actions and explore the grid. The idea in this task is that the study participants use \flik to navigate through the code and find out why the agent is not learning properly. And eventually, the participants should come out with the solution of increasing the value of $\epsilon$. 
+In its original presentation, the GridWorld environment is a standard benchmark for Q-learning, 
+familiar to most \ac{RL} developers. For the study we use a larger GridWorld environment consisting 
+of a $n \times m$ rectangular  board/grid ($10\times 10$ in our implementation), in which each tile 
+$(i,j)$ represents a specific state of the board. Tiles in the board may be  walls, which agents cannot 
+cross, or have a special exit status for agents to exit the board and terminate the episode. Exit tiles 
+give a reward (positive of $1$ or negative of $-1$) to agents, as shown in \fref{fig:gridworld}. All tile 
+types are unknown to the agent. The agent moves from a fixed starting point in the board, the top left 
+corner at position $(0,0)$, searching for the goal state (\ie exit states with positive reward of $1$). The 
+agent moves from state to state, avoiding  obstacles and undesired exit states (with a reward of $-1$). 
 
 \begin{figure}[hptb]
   \centering
@@ -35,13 +50,27 @@ agent because $\epsilon$ will be so small that only in the first iteration the a
   \label{fig:gridworld}
 \end{figure}
 
+The implementation of GridWorld introduces a bug in the definition of the $\epsilon$ hyperparameter, 
+which leads to undesired behavior in the probability with which actions are taken by the agent, 
+promoting exploitation without learning. The undesired behavior is given as the $\epsilon$ value is too 
+small (\eg $0.1$) so that no or seldom exploration (taking a random action at each state) of the agent 
+is allowed for the first couple of iterations. Afterwards, suing the epsilon decay strategy, the agent will 
+consistently exploit the best action, which will be suboptimal if not wrong, to define its policy. This is 
+an undesired behavior specially for training purposes as an agent should have a large probability to 
+choose other actions and explore the grid. 
+
+The objective of this task is that the study participants use \flik to navigate through the code and find 
+out why the agent is not learning properly. Eventually, the participants should come out with the 
+solution of increasing the value of $\epsilon$. 
+
 %%%%
 \paragraph{\textbf{Rooms.}} 
-The four rooms maze environment consists of a $13\times 13$ board/grid divided in $4$ sections 
-(\ie rooms), with walls between them, and a door opening to go from one room to another, as shown 
-in \fref{fig:rooms}. The agent's objective in this environment is to exit through the upper-left room 
-(the green square) in the fewest possible steps. Reaching the exit state gives a reward of $1$, and no 
-other action give a reward to the agent. In each episode the agent starts from any valid position in the 
+The four rooms maze environment has a similar composition to GridWorld, consisting of a 
+$13\times 13$ board/grid divided in $4$ sections (\ie rooms), with walls between them, and a door 
+opening to go from one room to another, as shown in \fref{fig:rooms}. The agent's objective in this 
+environment is to exit through the upper-left room (the green square door in tile $(0,3)$) in the fewest 
+possible number of steps. Reaching the exit state gives a reward of $1$ to the agent, and no 
+other action gives a reward to the agent. In each episode the agent starts from any valid position in the 
 grid, \eg the yellow square in the bottom-right room in the figure. 
 
 \begin{figure}[hptb]
@@ -51,7 +80,8 @@ grid, \eg the yellow square in the bottom-right room in the figure.
   \label{fig:rooms}
 \end{figure}
 
-In the program, we introduced a bug in the learning rate $\alpha$, on the Q-learning equation, thus,  the original values for the learning rate alpha are exchanged like:
+In this program, we introduced a bug in the implementation of the Bellman equation, exchanging the  
+use of the the learning rate ($\alpha$) like:
 
 \begin{itemize}
 \item Original equation:
@@ -59,59 +89,99 @@ $
 Q(s, a) \leftarrow (1-\alpha) Q(s, a) + \alpha \left( r + \gamma \max_{a'} Q(s', a') \right)
 $
 
-\item Erroneous equation to debug:
+\item Erroneous equation implemented:
 $
 Q(s, a) \leftarrow  \alpha Q(s, a) + (1-\alpha) \left( r + \gamma \max_{a'} Q(s', a') \right)
 $
 \end{itemize}
 
-In the original equation,  $(1-\alpha) Q(s, a)$ is the current value and $\gamma \max_{a'} Q(s', a')$ 
-the maximum reward that can be obtained from state $s'$. This means that if the learning rate is very 
-small the current value will keep almost the same, turning a little bit towards the reward and the 
-maximum value given the action; this will make that the agent learn short steps towards the 
-optimal policy. In the Q-learning formula, the learning rate $\alpha$ defines how much the old estimate $Q(s,a)$ 
-is revised based on the new information. It ensures that over time, the algorithm balances past 
-knowledge with current learning, gradually incorporating new information while retaining important 
-aspects of previous learning. Changing the equation in this way will disrupt this balance. Specifically,
-$(1-\alpha)$ scales the difference between the new estimate and the old estimate. This makes the new information less influential as $\alpha$ gets larger, while the old value gets re-scaled by $\alpha$,  which does not align with the expected behavior of a Q-learning update. The idea in this task is that the participants use \flik to navigate through the code and find out the reason why the agent is not learning properly, afterwards we expected the participant to figure out a solution adjusting the proper value to update the Q-Learning equation.
+In the original equation, $(1-\alpha) Q(s, a)$ is the current value and $\gamma \max_{a'} Q(s', a')$ 
+is the maximum reward that can be obtained from state $s'$. This means that if the learning rate is 
+very small the calculation of the current value will give a larger importance to the previously observed 
+Q-values, leading to very little to no changes of the calculated Q-value. The effect of this behavior is 
+that the agent learns short steps towards the optimal policy. In the Q-learning formula, the learning rate 
+$\alpha$ defines how much old $Q(s,a)$ estimates are revised based on the new information. The 
+learning rate ensures that, over time, the algorithm balances past knowledge with current learning, 
+gradually incorporating new information while retaining important aspects of previous learning. 
+Changing the equation in this way will disrupt the algorithm's balancing of previous and new 
+knowledge. Specifically,$(1-\alpha)$ scales the difference between the new estimate and the old 
+estimate. This makes the new information less influential as $\alpha$ gets larger, while the old value 
+gets re-scaled by $\alpha$,  which does not align with the expected behavior of a Q-learning update. 
 
-%\subsection{Exercise 3: Driving Assistant}
-%\label{sec:cars-eval}
-\paragraph{\textbf{Cars (Driving Assistant).}} In this case the agent must learn to drive, on the correct lane, at the allowed speed, taking over slow traffic, and not crashing. The possible actions for the agent are: straight, slow\_down, speed\_up, steer\_left, steer\_right. Figure \ref{fig:cars-code-example} depicts the visual interface of this environment.
+The objective of this task is that the participants use \flik to navigate through the code and find out 
+the reason why the agent is not learning properly, afterwards we expected the participant to figure out
+ a solution adjusting the proper value to update the Q-learning equation.
 
-\begin{figure}[h]
+%%%%%%%
+\paragraph{\textbf{Driving Assistant.}} 
+The Driving Assistant environment focuses on an agent that must learn to drive, in a two lane road, by 
+a given set of road rules. In this case, the agent is expected to learn to drive on the correct lane 
+(determined by the reward), at the allowed speed, taking over slow traffic, and not crashing. 
+The state of the environment is defines as a three tuple determined by the current speed of the vehicle, 
+the current lane, and the proximity to the vehicle in front. To move in the environment, the agent has 
+the following five possible actions to execute at every time-step: \spy{straight}, 
+\spy{slow_down}, \spy{speed_up}, \spy{steer_left}, \spy{steer_right}. Finally, the agent receives  
+negative rewards for the undesired behavior, $-800$ for crashing or coming to a full stop, $-600$ for 
+driving too fast (over the $60Km/h$ speed limit), $-600$ for driving too slow (under $50Km/h$), 
+$-500$ for driving on the wrong lane (the driving lane is the right lane of the road in our example). 
+Additionally, the agent receives a reward of $50$ whenever there is no car in front.
+
+Unlike the previous environment, study participants have not interacted with similar environments, 
+not being a grid-based environment like GridWorld. Additionally, this environment is not episodic, as 
+the vehicles can continuously drive. Nonetheless, the execution finishes and is immediately restarted 
+upon a crash. \fref{fig:cars-code-example} shows the visual interface of this environment, where the 
+agent's vehicle corresponds to the blue rectangle on top, and driving traffic is represented by red 
+rectangles appearing either at the right lane (the driving lane at bottom of the interface), or the left lane 
+(top of the interface).
+
+\begin{figure}[hptb]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/cars_example.png}
     \caption{Cars code example}
     \label{fig:cars-code-example}
 \end{figure}
 
-This is the largest task for the participants to analyze with \flik. % and see why the agent was not learningcorrectly, with respect to the expected. 
-The bug introduced in this application is in the reward function, not motivating the agent to drive at the speed limit. The policy learned by the agent emerges as stopping or go very slow, which is not the expected behavior. Through exploration using \flik, developers are expected to observe the behavior of the reward and update it so that the agent can learn to drive appropriately.
-as expected.
+The bug introduced in this application is in the reward function, not motivating the agent to drive at 
+the speed limit. The policy learned by the agent emerges as going very slowly or stopping altogether 
+to avoid crashes, which is not the expected behavior. 
 
-%% Add way of evaluation, explanation about the survey, questions.
-%\subsection{Evaluation setup}
-%\label{sec:evaluation}
+The objective of this task is that participants explore the program using \flik and observe the behavior 
+of the reward and update it so that the agent can learn to drive appropriately as expected.
+This is the largest task for the participants to analyze with \flik. 
 
-For the user evaluation we had a session with 27 developers (\ie graduate students). 
-The developers were asked to complete the three tasks (\ie gridworld, rooms, cars) described previously. The full evaluation session used a time-slot of 1h30 split as follows 
-\begin{enumerate}[label=(\arabic*)]
-\item During the first 15 minutes the tool and a usage example were presented to the participants; (shown in \fref{sec:eval-guide}).
-\item 50 minutes to complete the tasks; 15 minutes to finish the first task, 15 minutes to finish the second task, and  20 minutes to finish the third task. 
-\item At the end of the session, the students were asked to fill an evaluation survey 
+%%%%%%
+\paragraph{\textbf{Study conditions.}}
+For the empirical study we had a session with 27 participants (\ie graduate students). 
+The participants were asked to complete the three tasks (\ie GridWorld, Rooms, Driving Assistant) 
+described previously. The full evaluation session used a time-slot of 1h30 split as follows: 
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item During the first 20 minutes there the participants received a tutorial introduction to \flik and its 
+  usage through a first example (long division) described in the evaluation guide.
+  \item The following 50 minutes were used complete the three tasks, split into three blocks. 15 minutes 
+  to finish the first task, 15 minutes to finish the second task, and  20 minutes to finish the third task. 
+  \item At the end of the session, the participants were asked to fill an evaluation survey, for the 
+  remaining 20 minutes. 
 \end{enumerate}
 
-The evaluation survey, defined as a google form, is divided in three sections: general knowledge questions, task questions, and usability.
-The general knowledge questions were about the participants' experience  using Python, debuggers and  terminal. The task questions were about the bug encountered in each of the tasks, and how the the bug was fixed (if fixed). The usability  questions were regarding the participants experience with the debugger usability, and additional feedback they could provide for improving \flik. The survey was anonymized, and the questions were inspired by the 
-back in time debugger for JavaScript study~\cite{leger23}, and the responses are available 
+The evaluation survey, defined as a google form, is divided in three sections: 
+\begin{enumerate*}[label=(\arabic*)]
+\item general knowledge questions, 
+\item task questions, and 
+\item usability of the tool questions.
+\end{enumerate*}
+The general knowledge questions are concerned with the participants' development experience 
+(\ie using Python, debuggers and the terminal) to characterize participants. The task questions are 
+concerned with the bug identified in each of the tasks, and the actions taken to fix it (if fixed). The 
+usability questions are concerned with the participants' experience with the debugger, and additional 
+feedback they could provide for improving \flik. The survey was anonymized. All the questions of the 
+survey are inspired by similar empirical studies for debuggers, as for example the DeloreanJS 
+back-in-time debugger for JavaScript~\cite{leger23}. All responses are available 
 at \url{https://shorturl.at/DhN56}. 
 
-The survey had 23 multiple choice questions with a 5-points Likert scale,  in which 5 meant completely agreed, and 1 meant completely disagreed. One of the questions was a yes or no answer, to identify if the students wanted to use the tool in the future. Finally, there were 10 open-answer questions , to dive deeper into feedback for the tool, and the tasks' complexity.
-
-
-%Finally, there are two examples of the tool being used. In the first  example, the tool is used to debug a simple program, this was used to introduced to the students  the simple commands they could use like stepping (forward and backwards), modifying, or inspecting variables. In the second example, the tool is used to debug a \ac{RL} program, specially the gridworld example. The link to find this videos is: \url{https://shorturl.at/rD343} 
-
+The survey consists of 23 multiple choice questions with a 5-points Likert scale, in which 5 means 
+completely agree, and 1 means completely disagree. One of the questions was a yes or no question, 
+to identify if the participants were willing to use the tool in the future. Finally, there are 10 open-answer 
+questions, to dive deeper into feedback for the tool, and the tasks' complexity.
 
 
 \endinput
