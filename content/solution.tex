@@ -86,7 +86,7 @@ displays the code, variables, and execution point, and allows the user (to use t
 functions) to pause, step forward, step back, continue or restart the program, as well as to 
 modify and inspect variables. 
 
-\fref{fig:debugger} shows the general interface of \flik on simple \spy{bubble_sort} function. From 
+\fref{fig:debugger} shows \flik's interface on a simple example of the \spy{bubble_sort} function. From 
 the top, the first frame (in the blue rectangle Execution frame) we have the running execution, in this 
 case the print for the array to be sorted in Line 18 in the second frame. The second frame (in the 
 purple rectangle Source code frame) shows the source code that is being debugged. The third frame 
@@ -134,10 +134,10 @@ leading to erroneous agent behavior.
 
 \begin{python}[numbers=left,
 	caption={\flik running example of the GridWorld environment},
-	label={lst:GridWorld-learner}]
+	label={lst:gridworld-learner}]
 class Agent:
   def __init__(self, env, alpha=0.1, gamma=0.6, epsilon=0.1, episodes=10):
-    #hyper parameters
+    #hyperparameters
     self.alpha = alpha
     self.gamma = gamma
     self.epsilon = epsilon
@@ -176,12 +176,14 @@ backward in the program execution to \fref{ln:back1}. Then, we can effectively c
 \spy{epsilon} using the \spy{setvar self.epsilon=0.9} command. Once the change is made, if we 
 continue execution, after reaching \fref{ln:stop2}, we can print the value of \spy{action} (\spy{p action}), 
 to observe now different actions are taken, and the agent can train properly, observing changes for 
-values across the q-table. Video examples of the \flik execution within the GridWorld example are available at \url{https://shorturl.at/rD343}.
-%\url{https://drive.google.com/file/d/1NyipuWsRr6ZrIbtlvU5qyooHS2aVsWXc/view?usp=sharing}.
+values across the q-table. Video examples of the \flik execution within the GridWorld example are 
+available at \url{https://shorturl.at/rD343}.
 
 \fref{tab:flik-commands}, shows a summary of the commands implemented in \flik, where the 
 first six commands in the first block are specific to \flik, and the following 12 commands in the second 
-block are provided with \ac{PDB}.
+block are provided with \ac{PDB}. Note from the implementation that, variable evaluation (\spy{p}) and 
+variable value updates (\spy{setvar}) can alternatively be executed directly without using the 
+corresponding commands.
 
 \begin{table}
   \centering
@@ -193,3 +195,4 @@ block are provided with \ac{PDB}.
 
 \endinput
 
+video \url{https://drive.google.com/file/d/1NyipuWsRr6ZrIbtlvU5qyooHS2aVsWXc/view?usp=sharing}.
