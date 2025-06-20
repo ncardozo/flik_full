@@ -2,25 +2,25 @@
 \begin{tabular}{c| p{14.1cm}}
 \textbf{Command}               & \multicolumn{1}{c}{\textbf{Description}}  \\ 
 \toprule
-\spy{step_back} & Goes one step in time from the line you are\\
-\spy{back_to} & Goes to the line you wish \\
-\spy{variables} & Shows the local and global variables from the current execution \\
-\spy{sticky} & If you lose the pretty format of \flik you can go back by typing using this command \\
-\spy{args} & To see the values of the function running right now\\
-\spy{setvar} & It is a way in which you can modify a variable. Note that because of optimizations of python, and variables protection this will not work in some cases \\
+\spy{step_back} & Goes one step back in time. Moving to the previous line of code from the currently executing line\\
+\spy{back_to} & Moves to a program line (in the past) given as parameter, reverting the stack and the program's state according tot he recorded history (\ie loading a previous execution context) \\
+\spy{variables} & Shows the local and global variables from the current execution context \\
+\spy{args} & Shows the values of the function running right now\\
+\spy{setvar} & Modifies the value of a variable (given as parameter) for the current execution context. Note that due to some Python optimizations, and variables' protection this will not work for all variables, but does work for most user-defined variables \\
+\spy{sticky} & Returns the debugger mode to \flik if the debugger switches to \ac{PDB} \\
 \midrule
-\spy{p} & Evaluate and print the value of the expression given as parameter\\
-\spy{pp} & Pretty-print the value of an expression\\
-\spy{c} & Continue execution and only stop when a breakpoint is encountered\\
-\spy{n} & Continue execution until the next line in the current function is reached or it returns \\
-\spy{s} & Execute the current line and stop at the first possible occasion (either in a function that is called or in the current function) \\
-\spy{unt} & Continue execution until the line with a number greater than the current one is reached. With a line number argument, continue execution until a line with a number greater or equal to that is reached \\ 
-\spy{b} & With no arguments, list all breakpoints. With a line number argument, set a breakpoint at this line in the current file, or in a specific file if the \spy{filename:} prefix is used \\
-\spy{w} & Print a stack trace, with the most recent frame at the bottom. An arrow indicates the current frame, which determines the context of most commands \\
-\spy{u} & Move the current frame count (default one) levels up in the stack trace (to an older frame) \\
-\spy{d} & Move the current frame count (default one) levels down in the stack trace (to a newer frame) \\
-\spy{help} & See a list of available commands \\
-\spy{q} & Quit the debugger and exit \\
+\spy{p} & Evaluates and prints the value of the expression given as parameter\\
+\spy{pp} & Pretty-prints the value of an expression (after evaluating it) \\
+\spy{c} & Continues execution until it stops or it reaches a breakpoint \\
+\spy{n} & Continues execution until the next line in the current function, or returns \\
+\spy{s} & Executes the current line and stops at the first possible occasion (either in a function that is called or in the current function) \\
+\spy{unt} & Continues execution until the line with a greater number than that of the current line is reached. With a line number argument, continues execution until a line with a number greater or equal to the argument is reached \\ 
+\spy{b} & Lists all breakpoints when no argument is given. If a line number is given as argument, sets a breakpoint at the given line in the current file, or in a specific file if the \spy{filename:} prefix is used \\
+\spy{w} & Prints a stack trace, with the most recent frame at the bottom. An arrow indicates the current frame, which determines the context of most commands \\
+\spy{u} & Moves the current frame count one (by default) level up in the stack trace (to an older frame) \\
+\spy{d} & Move the current frame count one (by default) level down in the stack trace (to a newer frame) \\
+\spy{help} & Shows a list of available commands \\
+\spy{q} & Quits the debugger and exits \\
 \bottomrule
 \end{tabular}%
 %}
