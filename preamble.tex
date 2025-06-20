@@ -217,7 +217,7 @@
   aboveskip=0\baselineskip,
   belowskip=0\baselineskip,
   commentstyle=\scriptsize\itshape,
-%  prebreak=\mbox{$\hookleftarrow$},
+  keywordstyle=\ttfamily\bfseries,
   breaklines,
   numberblanklines=false,
   numberstyle=\tiny\color{gray}, 
@@ -240,10 +240,12 @@
   style=floating,
   belowskip=-0\baselineskip,
   aboveskip=-0\baselineskip,
-  morekeywords={new},
-  keywordstyle=\ttfamily\bfseries,
+  keywords=[2]{def, for, while, if, else, return, self},
+%  deletekeywords={len, max, range},
+  keywordstyle=[2]\ttfamily\bfseries,
   keywords=[1]{breakpoint,n,p,pp,s,c,step_back,back_to,variables,sticky,args,setvar,unt,b,w,u,d,help,q},
   keywordstyle=[1]\ttfamily\bfseries\color{blue},
+  deletekeywords={len,max,range},
 }
 
 %context traits environment    
