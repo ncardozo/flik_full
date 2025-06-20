@@ -66,16 +66,16 @@ In Python, the internal state of a program during execution is primarily encapsu
 stack frames. Each stack frame contains information about the execution state of a function 
 call, including the current line number, local and global variables, and other metadata, as follows:
 \begin{itemize}
-    \item \scode{f_lineno}: The current line number being executed.
-    \item \scode{f_locals}: A dictionary of local variables within the frame.
-    \item \scode{f_globals}: A dictionary of global variables accessible within the frame.
-    \item \scode{f_code}: A code object representing the function's bytecode and source code metadata.
+    \item \spy{f_lineno}: The current line number being executed.
+    \item \spy{f_locals}: A dictionary of local variables within the frame.
+    \item \spy{f_globals}: A dictionary of global variables accessible within the frame.
+    \item \spy{f_code}: A code object representing the function's bytecode and source code metadata.
 \end{itemize}
 
 The state is saved in a list that stores snapshots of the frame's state (line and variables) at each 
 execution step, which allows stepping back into any state we would want to restore. We use the  
-\scode{exec} function that receives the stored \scode{f_globals} and \scode{f_locals} variables as 
-parameters. \scode{exec} then executes a list of stored state snapshots (line number 
+\spy{exec} function that receives the stored \spy{f_globals} and \spy{f_locals} variables as 
+parameters. \spy{exec} then executes a list of stored state snapshots (line number 
 and local variables) at each step in a specified frame's context (given by the function parameters). 
 This allows \flik to simulate running a specific line in the context of a previous frame, maintaining 
 both local and global variable references, essentially restoring the saved execution state.
@@ -86,7 +86,7 @@ displays the code, variables, and execution point, and allows the user (to use t
 functions) to pause, step forward, step back, continue or restart the program, as well as to 
 modify and inspect variables. 
 
-\fref{fig:debuggerf} shows the general interface of \flik on simple \scode{bubble_sort} function. From 
+\fref{fig:debuggerf} shows the general interface of \flik on simple \spy{bubble_sort} function. From 
 the top, the first frame (in the blue rectangle Execution frame) we have the running execution, in this 
 case the print for the array to be sorted in Line 18 in the second frame. The second frame (in the 
 purple rectangle Source code frame) shows the source code that is being debugged. The third frame 
@@ -108,22 +108,88 @@ $10 \times 10$ grid, shown in \fref{fig:gridworld}. The agent can move in four d
 left, and right at every gridworld cell. However, the movement is not successful in bordering cells 
 or cells adjacent to walls (\ie gray-out cells), as it collides with the walls and bounces back to the 
 starting position.
-There are two kind of rewards that the agent can get, a positive reward of 1 when 
-the agent gets to the goal, and a negative reward of -1 when the agent goes to the 
-trap. The agent starts in the blue box shown \fref{fig:gridworld}. Now, in the following
-example let's say we define our program properly, but we define the $\epsilon$ value 
-so small that the agent will not explore the grid, and will not learn properly. 
-This will mean that only the first action taken by the agent will be random and after that
-with a major probability it will keep only choosing the same action. We can think about 
-the worst case scenario, in which the agent will move right and then in the next step it 
-will move left, and it will keep doing this for a long time, with a low probability of 
-choosing another action. We can use \flik to debug this problem, we can go step by step
-inspecting the variables and the actions taken and we can identify specifically that for 
-the first state in each episode the agent is taking the same action. We can then go back and
-reproduce this problem as many times as we want, and we can change the value of $\epsilon$
-to a higher value, so the agent can explore the grid properly. And finish the execution.
-This example is shown in the following video: \url{https://drive.google.com/file/d/1NyipuWsRr6ZrIbtlvU5qyooHS2aVsWXc/view?usp=sharing}.
+The agent's reward is defined obtaining a reward of 1 when the agent gets to the goal state, and a 
+reward of -1 when the agent visits trap states, terminating the execution in both cases. The agent 
+starts in a fixed position, the top left corner of the grid (the blue state in \fref{fig:gridworld}). 
 
+For the purpose of the running example, we will use the implementation of the gridworld agent shown 
+in \fref{lst:gridworld-learner}, explaining the \flik commands used to detect a bug in the code. 
+Running the program we pay special attention to the \spy{run} function, which we can access using 
+the \spy{n} command until we reach it. Alternatively, it is possible to move directly to a specific 
+execution point, by setting breakpoints in the program. For example, when executing the program we 
+can use the \spy{c} command to execute until the \spy{breakpoint} in \fref{ln:breakpoint} is reached. 
+Once in the function, we use the \spy{n} command to step through the function. 
+At particular points in the execution (\eg \fref{ln:stop1}), we can observe variables' values by means 
+of the \spy{p} o \spy{pp} commands. In our example, we could use \spy{p self.gamma} to see the 
+value of the \spy{gamma} hyperparameter. 
+
+After continuing the execution for a couple of episodes to let the agent train, we can use the 
+command \spy{variables}, in \fref{ln:stop2}, to observe the values of the different variables. Upon 
+inspection, we have the following observations. First, the historic value of the \spy{action} is $0$ 
+throughout the program execution. Second, all values in the \spy{qtable} are unchanged (all continue 
+as 0). Third, the value of the \spy{epsilon} hyperparameter is $0.1$. 
+Putting both values together, we note that the from the condition in \fref{ln:stop1}, the agent has a 
+high probability of tacking the else branch exploiting the known values. However, as the agent has 
+not trained updating the values, the exploitation equals to random action choosing, and therefore 
+leading to erroneous agent behavior.
+
+\begin{python}[numbers=left,
+	caption={\flik running example of the gridworld environment},
+	label={lst:gridworld-learner}]
+class Agent:
+  def __init__(self, env, alpha=0.1, gamma=0.6, epsilon=0.1, episodes=10):
+    #hyper parameters
+    self.alpha = alpha
+    self.gamma = gamma
+    self.epsilon = epsilon
+    self.environment = env
+    self.qtable = self.__initdic__() #initialize q-table
+    self.episodes = episodes
+    
+  def run(self, ui_input):
+      done = False
+      counter = 0
+      breakpoint()  ` \label{ln:breakpoint} `
+      for i in range(self.episodes):
+        done = False
+        while not done:
+          current_state = copy.deepcopy(self.environment.state) `\label{ln:back1}`
+          if random.uniform(0,1) < self.epsilon:   ` \label{ln:stop1} `
+            action = self.random_action(current_state)
+          else:
+            action = np.argmax(self.qtable[current_state])  
+          next_state, reward, done, info = self.step(action) ` \label{ln:stop2} `
+          old_value = self.qtable[current_state][action]
+          next_max = np.max(self.qtable[next_state])
+          new_value = (1-self.alpha)*old_value + self.alpha*(reward+self.gamma*next_max)
+          self.qtable[current_state][action] = new_value
+          counter += 1
+        if ui_input == 1:
+          actions, values = self.actions_values()
+          self.environment.plot_action(actions, values)
+        self.environment.reset()
+    return self.qtable
+\end{python}
+
+During the execution we can use \flik to confirm that the root cause of the problem is the \spy{epsilon} 
+hyperparameter. To do this, from \fref{ln:stop2} we can use the command \spy{back_to 18} to go 
+backward in the program execution to \fref{ln:back1}. Then, we can effectively change the value of 
+\spy{epsilon} using the \spy{setvar self.epsilon=0.9} command. Once the change is made, if we 
+continue execution, after reaching \fref{ln:stop2}, we can print the value of \spy{action} (\spy{p action}), 
+to observe now different actions are taken, and the agent can train properly, observing changes for 
+values across the q-table. An example of the execution of \flik in the gridworld example is available at: 
+\url{https://drive.google.com/file/d/1NyipuWsRr6ZrIbtlvU5qyooHS2aVsWXc/view?usp=sharing}.
+
+\fref{tab:flik-commands}, shows a summary of the commands implemented in \flik, where the 
+first six commands in the first block are specific to \flik, and the following 12 commands in the second 
+block are provided with \ac{PDB}.
+
+\begin{table}
+  \centering
+  \input{tables/flik-commands}
+  \caption{\flik commands description}
+  \label{tab:flik-commands}
+\end{table}
 
 
 \endinput
