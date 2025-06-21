@@ -7,14 +7,27 @@
 This section presents the analysis of the results of the empirical study presented in 
 \fref{sec:evaluation}. The results are presented according to three sections in the survey: General 
 knowledge (\fref{sec:general-knowledge}), Task Effectiveness (\fref{sec:tasks-results}) and Usability 
-(\fref{sec:usability}). Finally, a discussion section has the analysis of the results form the survey. All data obtained from the evaluation is available as part of the data and replication  package.
+(\fref{sec:usability}). Finally, a discussion section has the analysis of the results form the survey. All 
+data obtained from the evaluation is available as part of the data and replication package.
 
 
 %%
 \subsection{General Knowledge Results}
 \label{sec:general-knowledge}
 
-Most of the participants were very experienced with programming in Python as it can be seen in (\fref{fig:python-experience}). The experience level of 5 is selected as participants use Python very often in their work and university courses. Similarly, most participants are well familiarized with \ac{RL} (\fref{fig:rl-experience}), as they were taking a course on the topic. Note that locating the bugs in the programs required familiarity with \ac{RL} and Python knowledge. Furthermore, the participants reported being familiar  with using the terminal, and therefore, interacting with \flik, using the commands and the interface would neither pose a problem nor require a learning curve (\fref{fig:terminal-experience}). Nevertheless, in average, the participants were not familiarized with debuggers, and only used them  rarely, normally using Visual Studio Code interface's simple features, like graphical breakpoint functionality. This lead to misunderstandings and some difficulties in completing the tasks, as the  tool is based on command line interaction to stop and step through the code (\fref{fig:debugging-experience}). This characteristic from the participants caused a steeper learning curve to use the tool, than expected from participants with previous debugger experience.
+Most of the participants were very experienced with programming in Python as it can be seen in 
+(\fref{fig:python-experience}). The experience level of 5 is selected as participants use Python very 
+often in their work and university courses. Similarly, most participants are well familiarized with 
+\ac{RL} (\fref{fig:rl-experience}), as they were taking a course on the topic. Note that locating the 
+bugs in the programs required familiarity with \ac{RL} and Python knowledge. Furthermore, the 
+participants reported being familiar  with using the terminal, and therefore, interacting with \flik, using 
+the commands and the interface would neither pose a problem nor require a learning curve 
+(\fref{fig:terminal-experience}). Nevertheless, in average, the participants were not familiarized with 
+debuggers, and only used them  rarely, normally using Visual Studio Code interface's simple 
+features, like graphical breakpoint functionality. This leads to misunderstandings and some difficulties 
+in completing the tasks, as the  tool is based on command line interaction to stop and step through 
+the code (\fref{fig:debugging-experience}). This characteristic from the participants caused a steeper 
+learning curve to use the tool, than expected from participants with previous debugger experience.
 
 \begin{figure}[hptb]
     \centering
@@ -63,12 +76,27 @@ Taking the results reported from the three tasks, most of the participants compl
 was reported to be easy, it took participants a long time to complete, because this was the task in 
 which participants had to get familiarized with the tool. 
 
-The second task was harder than the first one, as participants were not familiar with the problem (\ie Rooms), and its complexity is higher (when compared to GridWorld). Most participants took 
-longer to finish task 2 (\fref{fig:task2}), and some struggled finding the root cause of the bug in the program.  Such result is expected, as the bug introduced in task 2, does not exhibit a completely wrong agent behavior, but a more subtle interaction with the environment and the obtained Q-values. Moreover, the fix required more than updating a value, but actually modifying the learning function. Such required change confused to some participants. 
+The second task was harder than the first one, as participants were not familiar with the problem 
+(\ie Rooms), and its complexity is higher (when compared to GridWorld). Most participants took 
+longer to finish task 2 (\fref{fig:task2}) and some struggled finding the root cause of the bug in the 
+program.  Such result is expected, as the bug introduced in task 2, does not exhibit a completely 
+wrong agent behavior, but a more subtle interaction with the environment and the obtained Q-values. 
+Moreover, the fix required more than updating a value, but actually modifying the learning function. 
+Such required change confused to some participants. 
 
-Finally, the third task (\fref{fig:task3}) was the hardest one, most participants had trouble finding the bug. The general comment about the task is that it was not easy to solve. Nevertheless, the participants managed to finish the task in less time than in the other tasks. 
+Finally, the third task (\fref{fig:task3}) was the hardest one, most participants had trouble finding the 
+bug. The general comment about the task is that it was not easy to solve. Nevertheless, the 
+participants managed to finish the task in less time than in the other tasks. 
 
-From the results it is expected that identifying and fixing the bug in the first task took longer than for other tasks, even though this is the easiest task, participants were still getting familiarized with the tool, and the learning curve for debugging the programs is steep. In the following tasks, while the nature of the introduced bugs is different, there is a learning curve  with using the tool. For the second task, given the nature of the bug and the fact that the bug was introduced in the Q-learning algorithm's logic, it was harder to identify. Hence, this task was harder to solve, even though it was completed by most participants. Finally, for the third task, the introduced bug had yet a different nature, in the  reward function. For this task the learning curve in using the tool was more developed, and it took participants less time than expected for this reason.
+From the results it is expected that identifying and fixing the bug in the first task took longer than for 
+other tasks, even though this is the easiest task, participants were still getting familiarized with the 
+tool, and the learning curve for debugging the programs is steep. In the following tasks, while the 
+nature of the introduced bugs is different, there is a learning curve  with using the tool. For the second 
+task, given the nature of the bug and the fact that the bug was introduced in the Q-learning algorithm's 
+logic, it was harder to identify. Hence, this task was harder to solve, even though it was completed by 
+most participants. Finally, for the third task, the introduced bug had yet a different nature, in the reward 
+function. For these task the learning curve in using the tool was more developed, and it took 
+participants less time than expected for this reason.
 
 
 \begin{figure}[hptb]
@@ -104,7 +132,7 @@ From the results it is expected that identifying and fixing the bug in the first
 
 The results for  the debugger's usability, shown in \fref{tab:general1-debuggers} and 
 \fref{tab:general2-debuggers}, exhibit a sense that the tool is useful. The comments, in general,  
-express that \flik would be useful, specially if given more time to study it, and gain practice with the 
+express that \flik would be useful, especially if given more time to study it, and gain practice with the 
 tool before using it in real tasks. The tool was easy to use, once familiarized with the commands and 
 their use. Additionally, there are several comments about providing a GUI or improving the current UI,
 to help understanding how the tool works, and how to navigate the code with it, as at it differs from 
@@ -131,7 +159,7 @@ more mainstream debuggers like the one available with Visual Studio Code and its
 
 In Tables \ref{tab:general1-debuggers} and \ref{tab:general2-debuggers} the scale represents the 
 Likert score option, expressing whether the participants completely agree ($5$) or completely disagree 
-($1$) with he question at hand. The values inside the tables correspond to the number of participants 
+($1$) with the question at hand. The values inside the tables correspond to the number of participants 
 that reported each given scale.
 
 %%
@@ -139,8 +167,8 @@ that reported each given scale.
 \label{sec:discussion}
 
 In general, the results of the empirical evaluation are very positive. Most of the participants have a 
-good impression of \flik, finding it to be useful, specially for the kind of challenges presented in 
-\ac{RL} programs. While participants found it hard to familiarize themselves with the tool, specially 
+good impression of \flik, finding it to be useful, especially for the kind of challenges presented in 
+\ac{RL} programs. While participants found it hard to familiarize themselves with the tool, especially 
 for the participants with little experience with debuggers, at the beginning at the evaluation session, 
 most of the participants found the tool easy to use (after some initial use). Additionally, participants 
 mentioned the tool be of use in general for the development of \ac{RL} programs in general, for example 
