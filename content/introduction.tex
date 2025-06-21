@@ -4,17 +4,20 @@
 \section{Introduction}
 \label{sec:problem}
 
-Before starting with the problem let us understand a how \ac{RL} works and why it is  
-important to properly develop in nowadays.
-The idea of \ac{RL} algorithms~\cite{sutton18} is to learn the optimal policy for an agent (a set of actions to execute) gathered from the interaction of the agent with the environment. \ac{RL} uses an agent that learns the value function for a given policy 
-through interaction with the environment to predict an optimal solution and based on the value 
-function, it continuously develops and learns the optimal policy. One of the most common algorithms
-in \ac{RL} is Q-learning~\cite{beakcheol19}, which uses an off-policy control that separates the deferral 
-policy from the learning policy and updates the action selection using the Bellman optimal equations
-and the e-greed policy. As with normal \ac{RL} algorithms, Q-learning involves an agent, a set of states
-$S_j$ and a set of actions $A$. By performing an action $a\in A$ at state $s \in S$, the agent 
-transitions from $s$ to a new state $s' \in S$, which will give a $reward$ $r$ to the agent. 
-The goal of the agent is to maximize its total reward. The following \fref{lst:qlearning} of code is the usual pseudo algorithm for  Q-learning off policy algorithms~\cite{sutton18}.
+\ac{RL}~\cite{sutton18} encompass a number of artificial intelligence techniques and algorithms in 
+which an agent learns a the behavior to reach a goal by specializing its interaction with the 
+environment in which it is deployed.
+\ac{RL} agents learn the state-action function for a given policy through interaction with the 
+environment to discover an optimal solution to reach a goal, through the optimal policy $\pi^*$ (a set 
+of actions to execute at each system state) gathered from the interaction of the agent with the 
+environment. One of the most common algorithms in \ac{RL} is Q-learning~\cite{beakcheol19}, which 
+uses an off-policy control that separates the deferral policy from the learning policy and updates the 
+action selection using the Bellman optimal equation, and the $\epsilon$-greed policy.  In the definition 
+of \ac{RL} algorithms, the environment is composed of a set of states $S$, the agent can actuate over 
+a set of actions $A$. By performing an action $a\in A$ at state $s \in S$, the agent transitions from $s$
+to a new state $s' \in S$. Additionally, associated to the execution if the action $a$ at state $s$, the 
+agent receives a reward $r$. The goal of the agent is to maximize its total reward. \fref{lst:qlearning} 
+presents the base (pseudo) algorithm for Q-learning~\cite{sutton18}.
 
 \begin{algorithm}
 \caption{Q-Learning Algorithm}\label{lst:qlearning}
@@ -22,7 +25,7 @@ The goal of the agent is to maximize its total reward. The following \fref{lst:q
 \Require An environment with states $S$, actions $A$, and reward function $R(s, a)$
 \Require A learning rate $\alpha \in [0, 1]$
 \Require A discount factor $\gamma \in [0, 1]$
-\Require Exploration strategy (e.g., $\epsilon$-greedy)
+\Require Exploration strategy (\eg $\epsilon$-greedy)
 \State Initialize Q-table $Q(s, a) \gets 0$ for all $s \in S$, $a \in A$
 \For{each episode}
     \State Initialize the starting state $s_0$
@@ -43,87 +46,109 @@ The goal of the agent is to maximize its total reward. The following \fref{lst:q
 \end{algorithmic}
 \end{algorithm}
 
-\ac{RL} programs have a wide range of applications, \citet{beakcheol19} presents a comparison table with some 
-\ac{RL} applications. Nevertheless, some of the most them could be: from control of industrial process~\cite{kiumarsi18} (improving 
-the performance of the on-line learning control system or optimizing temperature control and power consumption),
-to computer networking~\cite{alrawi13} (improving adaptability of Wireless Sensor Networks to changing situations and eliminating 
-the need for system redesign) and robotics~\cite{zhang15} (by providing frameworks and toolkits for designing sophisticated 
-behavioral aspects). 
+\ac{RL} has gained wide popularity in the last couple of years, finding applications in a wide range of 
+domains~\citet{beakcheol19}, particularly in control of industrial process~\cite{kiumarsi18} (improving 
+the performance of the on-line learning control system or optimizing temperature control and power 
+consumption), computer networks~\cite{alrawi13} (improving adaptability of Wireless Sensor Networks 
+to changing situations and eliminating the need for system redesign), and robotics~\cite{zhang15} (by 
+providing frameworks and toolkits for designing sophisticated behavioral aspects). 
 
-When developing \ac{RL} programs, issues arise in the application logic like wrong value for the
-learning rate or wrong definition of the rewards. This requires a call for the developer for stronger frameworks in which 
-the implementation (and implementation experience) could improve for \ac{RL} applications. One possible first step 
-is in the creation of tools to help developers understand and analyze their programs and their behavior.
+As in the development of other software products, the development of \ac{RL} programs, is prone to 
+the introduction of errors or strange behavior in the application logic, like incorrect state values, or 
+erroneous logic implementations. Moreover, with these types of programs there can also appear 
+errors in the definition of the learning hyperparameters, and incomplete or wrong definition of the 
+reward function. 
 
-\section{Problem}
-
-\ac{RL} programs (like \ac{ML} programs), 
-have a significant limitation: they function as a black box. 
-This means that it is impossible to know how the programs reached a decision. This poses 
-a problem in many fields, as it often becomes difficult to identify why a model 
-fails to converge or why it does not reach an optimal or expected solution as 
+Detecting erroneous behavior in \ac{RL} programs is a complicated task due to two main 
+reasons. First, like \ac{ML} programs, \ac{RL} are usually used as a black box. 
+This means that developers do not have access to the agent, or the way the programs make 
+decisions. This poses a problem in many fields, as it often becomes difficult to identify why a learning 
+model fails to converge, or why it does not reach an optimal or expected solution as 
 anticipated by the developer. In the case of \ac{RL}, this issue is particularly 
 pronounced because it is challenging to determine whether the agent is learning 
 correctly or if it is learning an inappropriate policy.
 
-Furthermore, \ac{RL} programs are notoriously difficult to debug due to the extensive 
-training periods they require, which demand substantial computational power. This 
+Second, \ac{RL} programs are notoriously cumbersome and difficult to debug due to the extensive 
+training time required by the agent, demanding substantial computational resources. This 
 complexity makes it incredibly challenging to locate errors, even when using a 
 debugger for standard programs. Traditional debugging tools are often inadequate 
 for tracing the issues in \ac{RL} due to the intricate and prolonged nature of the 
 training processes. 
-% This is because \ac{RL} programs have an added difficulty: they 
-% operate with a different execution cycle compared to traditional programs.
 
-In conventional software, the execution flow is typically linear and predictable, 
+In conventional software systems, the execution flow is typically linear and predictable, 
 allowing developers to trace and debug step-by-step with relative ease. However, 
 \ac{RL} programs involve a continuous loop of learning and adaptation, where an agent 
-interacts with an environment, receives feedback in the form of rewards or 
-penalties, and adjusts its actions accordingly. This cyclical nature makes the 
-process much more complex and less transparent.
+interacts with an environment, receives feedback, in the form of rewards, and adjusts its actions 
+accordingly. The cyclical nature of \ac{RL} programs, makes the 
+process of identifying errors much more complex and less transparent.
 
 In \ac{RL}, each decision and its subsequent outcome can affect future decisions, 
 creating a dynamic and interdependent series of events. This complexity is 
 compounded by the often stochastic nature of environments, where the same action 
-can lead to different results in different contexts or iterations. As a result, 
-understanding and debugging \ac{RL} programs require not only tracking individual 
+can lead to different results in different contexts or iterations, and the actions taken by and agent 
+are not solely dependent on the agents' state. As a result, 
+understanding and debugging \ac{RL} programs requires not only tracking individual 
 decisions but also understanding the long-term effects and patterns that emerge 
 over many iterations.
-
 Moreover, the need for substantial computational resources and extended training 
 periods adds to the challenge. The iterative process can take hours, days, or 
 even weeks, making it impractical to simply restart the training from scratch 
-each time an error is detected. The aforementioned problems and characteristics
-of the execution in \ac{RL} posits the need for advanced tools and methods 
-for visualizing the agent's behavior, monitoring its learning progress, and 
-pinpointing issues without having to re-run lengthy training sessions.
+each time an error is detected.
 
-Therefore, the distinct execution cycle of \ac{RL} programs introduces unique 
-challenges that demand specialized debugging and visualization tools to ensure 
-effective development and deployment. Addressing these challenges is crucial 
-for advancing the field of reinforcement learning and making its applications 
-more reliable and interpretable.
-
-Therefore, there is a pressing need for a tool that allows for the visualization 
-of an \ac{RL} agent's behavior and facilitates appropriate debugging of \ac{RL} the programs. 
+The aforementioned problems and characteristics of program execution in \ac{RL} posits the need 
+for advanced tools and methods for visualizing the agent's behavior, monitoring its learning 
+progress, and pinpointing issues without having to re-run lengthy training sessions.
+Addressing these challenges is crucial for advancing the state of \ac{RL} and increasing the quality 
+of its programs, making applications more reliable and interpretable.
+Therefore, there is a pressing need for a tool that allows the visualization 
+of a \ac{RL} agent's behavior and facilitates appropriate debugging of \ac{RL} the programs. 
 Such a tool would significantly enhance the transparency and interpretability 
 of \ac{RL} models, making it easier for developers to understand, refine, and correct 
 the learning process. This is a gap in the current literature, and addressing it 
 is the focus of this work.
 
-The structure of the paper is as follows: Chapter 2 an introduction to debuggers (\fref{sec:deb}),
-it also provides a comprehensive review of the state of the art in the field of back in 
-time debuggers in any programming language (\fref{sec:other}), in python (\fref{sec:py})
-and in \ac{RL} (\fref{sec:ai}). Chapter 3 presents the proposed solution, \flik, 
-a back in time debugger for \ac{RL} programs. Chapter 4 presents the evaluation of the tool,
-the three proposed exercises (\fref{sec:grid-eval}, \fref{sec:rooms-eval} and 
-\fref{sec:cars-eval}) and the evaluation setup (\fref{sec:evaluation}). Chapter 5 presents the 
-results of the evaluation and the feedback from the participants, divided in the 
+To address the aforementioned problems, this work develops a back-in-time debugger for the 
+identification of errors or undesired behavior of agents. The proposed debugger, \flik, is a 
+console-based debugger with features to 
+\begin{enumerate*}[label=(\arabic*)]
+\item record the history of the execution (both values and execution context) as it steps through the 
+code,
+\item go back to a previous execution point, reverting the state and execution context from the 
+recorded history, and 
+\item observe and change the state of the program to generate new execution traces from a particular 
+point in time.
+\end{enumerate*}
+Given these features, developers can analyze \ac{RL} programs while they execute, enabling the 
+experimentation of different state values or instruction sequences, without having to incur in long 
+train-test processes for each possible configuration. With \flik, developers can try a particular agent 
+configuration, go back in the execution, try another configuration and observe if the observed 
+behavior is more appropriate or as expected. Such capabilities are useful in pinpointing the root 
+cause of undesired behavior. 
+
+To validate the usefulness in detecting bugs, and the usability of the tool itself, we use an empirical 
+study in which 27 participants experienced in Python and knowledgeable in \ac{RL} evaluated \flik in 
+solving three different \ac{RL} programs. The programs, namely GridWorld, Rooms, and Driving 
+Assistant, all present different types of bugs that can appear in \ac{RL} systems, as previously 
+mentioned. Moreover, the programs to evaluate are chosen according to their complexity and 
+familiarity in the development of \ac{RL}, covering easier and familiar programs, to more complex and 
+unfamiliar programs, as to reduce possible evaluation bias or learning curve bias.
+Our results show that the participants posit \flik as a useful tool to debug and understand the behavior 
+of \ac{RL} agents more deeply. Additionally, while usable, the participants possible improvements in 
+\flik's interface to improve usability.
+
+The reminder of the paper is structured as follows. \fref{sec:state_of_the_art} presents the state of the 
+art with respect to general debugger definitions (\fref{sec:deb}), existing back-in-time debuggers and 
+their functioning, in different programming languages (\fref{sec:other}), the presentation of debuggers 
+and debugging capabilities for Python (\fref{sec:py}), and debuggers or debugger-like tools for \ac{RL} 
+programs (\fref{sec:ai}). \fref{sec:solution} presents the rationale and details in \flik design, as well as 
+a running example of its back-in-time debugging capabilities. \fref{sec:evaluation} presents the details 
+of the empirical study, and the three programs used in the evaluation (\ie GridWorld, Rooms, and 
+Driving Assistant). \fref{sec:results} presents the results of the evaluation and the feedback from the 
+participants, divided in the 
 three main parts of the survey: general results (\fref{sec:general-knowledge}), tasks 
 results (\fref{sec:tasks-results}) and usability results (\fref{sec:usability}). It also adds 
 a final part for the discussion of the results (\fref{sec:discussion}). 
-Finally, \fref{sec:conclusion} presents the conclusion 
-and avenues for future work.
+Finally, \fref{sec:conclusion} presents the conclusion and avenues of future work.
 
 
 \endinput
