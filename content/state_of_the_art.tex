@@ -27,8 +27,8 @@ There are several principles that guide the debugging process, these principles 
 book the Art of debugging with \ac{GDB}, \ac{DDD}, and Eclipse~\cite{matloff08}. The fundamental 
 principle that drives the essence of debugging is the \emph{Principle of Confirmation}: fixing a 
 program with bugs is a process of confirming that the things you believe to be true are actually true in 
-your code~\cite{matloff08}. This means that when you find that those assumptions are not true, you 
-have find the bug, and fix it.
+the code~\cite{matloff08}. This means that whenever the assumptions about the program behavior 
+are not true, developers must identify the bug(s) causing the problem, and fix it(them).
 
 A classic debugging technique is adding traces in your code in terms of printing the values of several 
 variables as the program is executed. However, this is not an efficient or scalable way to debug a 
@@ -40,7 +40,7 @@ operations offered by debuggers~\cite{matloff08} are:
 
 \begin{itemize}
     \item Stepping through code: where developers can run the program stepping at each of the 
-    instructions individually, or step for a number of instructions, stopping at a predefined program 
+    instructions individually, or step through a number of instructions, stopping at a predefined program 
     instruction or  \emph{breakpoint}. Additionally, it is possible to step into the execution of a particular 
     instruction, to observe its behavior in detail. 
     \item Inspecting variables: where developers can inspect the current values of variables in the 
@@ -55,8 +55,8 @@ In summary, a debugger is a tool that allows developers to inspect the state of 
 its execution, and possibly change its state. Driven by these operations, debuggers are essential 
 tools for software development, as they help developers to identify and fix bugs in their programs. 
 In this work, we want to understand \ac{RL} programs; to understand agents' behavior and 
-create higher quality code. Our solution proposes a debugger with all three aforementioned features
-to achieve such behavior.
+create higher quality code. Our solution proposes a debugger with all three features previously
+mentioned, to achieve the desired behavior.
 
 
 %%
@@ -82,7 +82,7 @@ crashes. \ac{GDB} consists of three major subsystems~\cite{stallman11}.
 \item The user interface subsystems, consists of several actual interfaces, plus their supporting code. 
 \item The symbol handling subsystem, consists of object file readers, debugging info interpreters, 
 symbol table management, source language expression parsing, and type and value printing. 
-\item The target system handling, consists of execution control, stack frame analysis, and 
+\item The target system handling consists of execution control, stack frame analysis, and 
 physical target manipulation.
 \end{enumerate*}
 
@@ -91,16 +91,16 @@ back-in-time debuggers is the possibility to rewinding execution to a specific p
 possibility for developers to, for instance, test different variable values within the same execution 
 context, to better understand errors or explore hypothetical scenarios in the program's execution 
 evolution~\cite{hofer06,lienhard09}. DeloreanJs has three main features: the ability to navigate 
-through an execution history, modify values of a variable, and resume execution from a timepoint (a 
-specific execution point in the past)~\cite{leger23}. DeloreanJS extends continuations with static 
-analysis functionalities to capture the current program state, and store the (history of) variable's 
+through an execution history, modify values of a variable, and resume execution from a timepoint (at 
+specific execution points in the past)~\cite{leger23}. DeloreanJS extends continuations with static 
+analysis functionalities to capture the current program state and store the (history of) variable's 
 values. There are several other debuggers for Javascript, must of them based on the use of 
 breakpoints, in which variables cannot be modified to resume current execution with the new values, 
 similar to the behavior offered in \ac{GDB}.
 
 We note the functionality to go back in time, observe the program's state at a previous moment and 
 execute a new timeline with the new values, offered by DeloreanJS, and in general back-in-time 
-debuggers, is desirable in the context of \ac{RL} programs. Therefore we use  back-in-time 
+debuggers, is desirable in the context of \ac{RL} programs. Therefore, we use  back-in-time 
 debuggers, and DeloreanJS, as a reference to create our debugger for \ac{RL} programs.
 
 
@@ -110,7 +110,7 @@ debuggers, and DeloreanJS, as a reference to create our debugger for \ac{RL} pro
 
 Given that  most \ac{RL} programs are written in Python, we pay special attention to existing 
 debuggers for Python. There are several Python debuggers available. We focus on those debuggers
-that have support for the features required to debug \ac{RL} programs, such as: the ability to navigate 
+that have support for the features required to debug \ac{RL} programs, such as the ability to navigate 
 through an execution history (like a time traveling debugger), and the ability to modify the values
 of variables and resume the execution from a specific point in time.
 
@@ -133,7 +133,7 @@ Similar to \ac{PDB}, PuDB also provides a post-mortem debugging feature that all
 debug a program after it has crashed. However, PuDB does not have the ability to navigate through 
 a program's execution history, modify values of variables, or resume execution from a specific point 
 in time. Nevertheless, the history navigation feature can be simulated placing breakpoints in the 
-code, and restarting the execution until the breakpoint is reached. The UI makes it possible to go 
+code and restarting the execution until the breakpoint is reached. The UI makes it possible to go 
 through the code and see the variables and the stack trace in a user-friendly fashoin.
 
 % PyTrace
@@ -142,13 +142,13 @@ variables and stack frames. It has a UI that allows developers to navigate throu
 see the variables and the stack trace, and it is very user-friendly. However, PyTrace is not 
 a full-featured debugger, as it does not allow you to change the values of variables, or do 
 any other operation available to debuggers. PyTrace works as a tool to understand the behavior of 
-a program, moving backward and fordward through a recorded execution (again in a single execution 
-path),  with different different graphs to see the state of your variables at a moment in time.
+a program, moving backward and forward through a recorded execution (again in a single execution 
+path),  with different  graphs to see the state of your variables at a moment in time.
 
 % RevPDB
 \ac{RevPDB}~\cite{revdeb} is a reverse debugger for Python programs, RevPDB is an extension of 
 \ac{PDB} built on top of the PyPy interpreter, allowing developers to go forward and backward in time. 
-However, RevPDB is not a full-featured debugger nor it has a user-friendly UI, as it is a proof of 
+However, RevPDB is not a full-featured debugger, nor it has a user-friendly UI, as it is a proof of 
 concept of the time traveling features, and it is not currently maintained.
 
 
@@ -156,7 +156,7 @@ concept of the time traveling features, and it is not currently maintained.
 \ac{UDB}~\cite{udb} is a proprietary debugger, developed by the Company Undo, for Python 
 programs that allows developers to navigate through time and inspect the state of the program at a 
 previous moment in time. \ac{UDB} works on the principle of first recording 
-a program while it is running normally, and then replaying the execution while allowing the 
+a program while it is running normally and then replaying the execution while allowing the 
 developer to navigate and inspect the program's state at different points in time. \ac{UDB} works at 
 the process level, rewinding and replaying the state of the entire process. Technically, 
 \ac{UDB} does allow new code paths to be executed at replay-time, but all execution replays are 
@@ -208,8 +208,8 @@ or not.
 developers and researchers to understand \ac{RL} agents better on toy complex environments, and 
 to create unit tests characterizing agents' behavior  on toy \ac{MDP} examples, based on the 
 OpenGym library. The problem addressed by \ac{MDP} Playground is the fragility of \ac{RL} 
-programs, specially with the growth of deep \ac{RL} research growing. The complexity of the 
-dynamics of \ac{RL} programs increases, leading to difficulties in identifying states' or rewards' 
+programs, especially with the growth of deep \ac{RL} research growing. The complexity of the 
+dynamics of \ac{RL} programs increases, leading to difficulties in identifying states or rewards 
 distribution; if the agent's policy is not as expected, debugging \ac{RL} programs becomes 
 hard~\cite{rajan23}. The idea with \ac{MDP} Playground is to open the programs, making their 
 internal state available, to understand the behavior of the agent. Based only on toy examples, 
