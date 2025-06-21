@@ -5,7 +5,7 @@
 \label{sec:solution}
 
 The black box behavior of \ac{ML} and \ac{RL} agents posit a problem to understand agents and 
-their behavior, specially if unexpected behavior is observed. We posit debuggers as an appropriate 
+their behavior, especially if unexpected behavior is observed. We posit debuggers as an appropriate 
 tool to understand agents' behavior. Moreover, we posit debuggers with the possibility to modify 
 programs' state and continue execution using new execution paths are even more appropriate and 
 suitable to understand \ac{RL} agents, given their intrinsic nature of continuous interaction with the 
@@ -16,7 +16,7 @@ allow developers to modify variables. In order to contribute to the development 
 debugging tools should exhibit the following features:
 
 \begin{description}
-    \item[Stepping back:] Due to the execution loop of \ac{RL} programs we 
+    \item[Stepping back:] Due to the execution loop of \ac{RL} programs, we 
     want to have a functionality that will allow us to step back the execution to observe the change 
     in state between iterations of the loop. This will let developers interacting directly with the program, 
     without having to stop the execution,  lose the program state, or the training data already 
@@ -52,12 +52,12 @@ from executed lines of code. The following are the three major features of \flik
     and global variables, in a history variable. Additionally, other metadata like the information of the 
     line being executed is saved. This allows us to later step back into specific states in the stored 
     history, and their corresponding location in the code. 
-    \item Restores a previous program states as, from the previously stored information, from the 
+    \item Restores a previous program state as, from the previously stored information, from the 
     stack and heap variables to precisely restore the program's state and its execution context, in 
     order to re-create an alternative execution path. 
     \item Finally, connecting the previous two features, is the action of stepping back. This feature is 
     created as a custom \ac{PDB} command, using the same syntax and form of the native \ac{PDB} 
-    commands. The stepping back command takes the state saved at a specific point in the history, 
+    commands. The stepping back command takes the state saved at a specific point in the history 
     and restores the state according to the information at that point --that is, program's state, stack 
     information, and code line. 
 \end{itemize}
@@ -113,10 +113,10 @@ starts in a fixed position, the top left corner of the grid (the blue state in \
 
 For the purpose of the running example, we will use the Q-learning implementation of the GridWorld 
 agent as shown in \fref{lst:gridworld-learner}, explaining the \flik commands used to detect a bug in 
-the code. Running the program we pay special attention to the \spy{run} function, which we can 
+the code. Running the program, we pay special attention to the \spy{run} function, which we can 
 access using the \spy{n} command until we reach it. Alternatively, it is possible to move directly to a 
 specific execution point, by setting breakpoints in the program. For example, when executing the 
-program we can use the \spy{c} command to execute until the \spy{breakpoint} in \fref{ln:breakpoint} 
+program, we can use the \spy{c} command to execute until the \spy{breakpoint} in \fref{ln:breakpoint} 
 is reached. Once in the function, we use the \spy{n} command to step through the function. 
 At particular points in the execution (\eg \fref{ln:stop1}), we can observe variables' values by means 
 of the \spy{p} o \spy{pp} commands. In our example, we could use \spy{p self.gamma} to see the 
@@ -129,7 +129,7 @@ throughout the program execution. Second, all values in the \spy{qtable} are unc
 as 0). Third, the value of the \spy{epsilon} hyperparameter is $0.1$. 
 Putting both values together, we note that the from the condition in \fref{ln:stop1}, the agent has a 
 high probability of tacking the else branch exploiting the known values. However, as the agent has 
-not trained updating the values, the exploitation equals to random action choosing, and therefore 
+not trained updating the values, the exploitation equals to random action choosing and therefore 
 leading to erroneous agent behavior.
 
 \begin{python}[numbers=left,
