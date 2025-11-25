@@ -2,15 +2,20 @@
 % !TEX root = main.tex
 
 \RequirePackage[final]{graphicx}
-\documentclass[a4paper,fleqn, draft]{cas-sc}
+\documentclass[a4paper,fleqn]{cas-sc}
 
-
-\input{preamble.tex}
-\input{acronyms.tex}
-
+%\pagenumbering{arabic}
+%\pagestyle{plain}
+\input{preamble}
+\input{acronyms}
+\input{review-definitions}
 
 \begin{document}
- 
+ \let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+
 % Short title
 \shorttitle{Flik}    
 
@@ -129,6 +134,9 @@ Empirical Study
 \input{content/evaluation}
 \input{content/results}
 \input{content/conclusion}
+
+
+\input{responses}
 
 %%
 % !TEX root = ../main.tex

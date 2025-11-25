@@ -1,0 +1,133 @@
+Reviewer 1: The paper presents Flik, a debugger for programs implementing reinforment learning algorithms. The authors argue that a standard debugger (for Python) with breakpoints is not adequate, nor is a postmortem one. Specifically, they argue that it is necessary to be able to return to a previous state and to allow the value of a variable to be modified to see its effects without having to restart the entire program execution.
+
+The ideas are interesting, and the tool has potential. The paper, however, suffers from some problems:
+
+* First, the presentation is quite poor. The paper contains a number of typos or odd sentences. The introduction is overly technical. Some ideas are repeated a lot, while other (relevant) ones are not mentioned at all. For example, it should be made clear from the beginning that Flik requires source programs and that it includes an instrumented interpreter to run programs, save states, recover a previous state, etc. (if this is the case).
+
+* Indeed, the paper doesn't clarify how Flik was implemented. At the beginning, I thought it was a tool for runtime monitoring, since the authors mention in several places the idea of observing and, if needed, modifying a program execution. However, judging by the commands in the interface of the debugger, I assume it actually includes an instrumented interpreter to simulate the actual execution of Python code, or it makes calls to a Python interpreter, or... In any case, it's essential to describe how Flik is implemented in the paper.
+
+* On the other hand, there's also little mention of the techniques used in the debugger. How exactly is the program state defined? What happens if there are I/O operations? Does it accept 100% of Python? And what if there are calls to libraries whose source code isn't available? The list of commands in Table 2 is the best description of the debugger, but it's not sufficient.
+
+* The experimental evaluation is interesting, but it doesn't say anything about the execution cost. If, as I mentioned earlier, Flik is defined as an instrumented interpreter, it is likely to have scalability issues, especially if it must save all the states of an execution (which can potentially be very long). It would be good to show execution times (e.g., of the complete execution of the program in Flik assuming there are no breakpoints) and compare it with a standard interpreter for the language. This way, the overhead introduced by the debugger could be analyzed.
+
+All in all, the paper has interesting ideas, but I think that it's not ready for publication without first addressing the issues raised above.
+
+Some minor or more technical comments follow:
+
+- Abstract: solve bugs -> solveD bugs; to updated -> to update
+
+- Introduction: as mentioned before, this section is too technical and low level for an introduction.
+
+- Page 1: a set of states S, the agent -> a set of states S AND the agent
+- Page 1: associated to the execution if the action -> associated to the execution OF the agent
+- Page 1: I'd remove "Jang et al." before [9]
+
+- Algorithm 1: where do you use R(s,a) ?
+- Algorithm 1: else branch, max_a is not well formatted
+
+- Page 2: mentioning that one disadvantage of debugging RL programs is that they're generally used as a black boxes made me think that Flik, in contrast, wouldn't need the source code. But I guess that's not the case. This argument is a bit confusing.
+- Page 2: and agent -> an agent
+
+- Page 3: RL the programs -> RL programs
+- Page 3: what do you mean by "solving" three different RL programs?
+- Page 3: the participants possible improvements -> the participants POINTED OUT possible improvements (?)
+- Page 3: program's execution, causes -> program's execution, WHICH causes
+- Page 3: focus in -> focus on
+- Page 3: There are severla principles that guide the debugging process, these principles -> There are severla principles that guide the debugging process. These principles...
+- Page 3: the things you believe to be -> the things one believes to be
+
+[English proofreading would be helpful to improve the presentation]
+[Please add page numbers and, if possible, line numbers in submitted papers]
+
+- Page 4: your code -> the code
+- Page 4, section 2.1: I missed some text about the use of logs in program debugging.
+- Page 4, section 2.2, second paragraph, an itemize would improve readability.
+- Page 4: must of them -> most of them
+
+- Page 5: time traveling debugger -> time travel debugger
+- Page 5: Python debuggers, the features -> Python debuggers AND the features
+
+- Page 6: What is the "Framework Fuzzing"? Explain and add some reference.
+- Page 6: a bugs life -> a bug's life
+- Page 6: I find the phrase "without having to stop the execution" confusing. Doesn't Flik stop execution when it reaches a breakpoint or advances step by step, etc?
+
+- Page 8: It would probably be best not to describe the GridWorld example twice. Also, Figure 2 is far from this point in the paper, which can be confusing.
+- Page 8: Since you mention debugger commands here, it would be nice to put a reference to Table 2.
+
+- Page 9: The purpose of the empirical study assesing -> The purpose of the empirical study IS assesing
+
+- Page 10: Just consider adding a bug? In practice, I guess, programs can contain several bugs that often interact with each other.
+
+- Page 11: the the
+
+- Page 16: at the beginning at the -> at the beginning OF the
+
+
+Reviewer 2: The paper present Flik, a back-in-time debugger for RL programs and agents, along with a user evaluation.
+
+## Overall conclusions
+While the motivation is appealing, the paper contains too many errors, imprecision, lack of information, and claims that are wrongly or not backed up by the results presented in the paper. The paper is not well written, and presents structure and layout problems.
+The authors should carefully consider the following points before submitting again. I do not wish to provide an extensive, detailed list of all problems as this does not appear to me to be the role of reviewers. Therefore, I provide a summary of points to address, with some examples from the paper and questions. I hope this can help the authors to rework and reframe the paper towards a better version.
+
+In particular, to critically review and rework their experiment, I suggest the authors consider literature on empirical experiments and design, such as:
+- Qualitative research and evaluation methods, M. Q. Patton
+- Quantitative, Qualitative and Mixed Methods Approaches, Creswell & Creswell,
+- Research Methods, Design and Analysis, Christensen, Jonson, Turner,
+- Experimentation in Software Engineering, Wohlin et al.
+
+## Nice motivation
+First, I want to highlight that the presented challenge and motivation **is convincing to me**. The authors stress efficiently the difficulty and the importance of debugging RL agents, although they argue that "conventional systems typically have a linear and predictable flow [...] allowing developers to trace and debug step-by-step with ease". This is false: first even in linear and predictable systems, debugging through step-by-step can be an enormous pain, and second there are many systems that you can label as "conventional" (eg, web sites/servers, drones, iot/embedded systems, etc.) that either are not linear/predictable by nature (because, eg, of concurrency) or by context (eg, websites/iot/drones' behavior strongly depend on what happens in the uncontrolled external world).
+
+## Section 2/state of the art has many problems.
+There is a structure problem: subsection "2.1 what is a debugger" is mostly about what are bugs and what is debugging and then half the section concerns debuggers.
+
+The debugging process is defined as "the activity that comes after testing" and seems to come from a paper. In both my experience and what I know from the literature, we debug to understand and therefore, that link with testing cannot be established like that without contextualizing.
+
+The authors then affirm that "fixing a program with bugs is a process of confirming that the things you believe to be true are actually true in the code". This seems not true because fixing a program is not actually that: you fix something because it was not working, then now it works. The authors actually refer to the debugging process, and their statement (apparently coming from a book) refers to a specific debugging strategy known as "hypothesis testing", that is described, eg, in papers from Thomas D. Latoza (along with **other** debugging strategies such as forward reasoning and backward reasoning). Hypothesis testing is also described in books for practitioners such as "Why Programs Fail" (Zeller, 2009) or "Effective debugging: 66 specific ways to debug software and systems" (Spinellis, 2016). The "debugging process" definition, extracted from a single book, is also too restrictive: debugging "as a process" is described in broader perspectives in practitionners books such as "The science of debugging" (Telles, Hsieh, 2001), "Debugging: The 9 indispensable rules for finding even the most elusive software and hardware problems" (Agans, 2003)"Why Programs Fail" (Zeller, 2009), "Effective debugging: 66 specific ways to debug software and systems" (Spinellis, 2016).
+
+Imprecision and inconsistencies go on in the rest of the section, too much that I cannot report every detail. Sec. 2.2 is titled "Debuggers for other programming languages", but mainly (very shortly) describes GDB and omniscient debuggers and I cannot see the "other languages" aspect. The authors also make general claims about back-in-time debuggers that seem off or wrong. In table 3, the authors confuse UI and GUI, and if all python debuggers allow for stepping then stepping as a criteria is not required in the table.
+
+It is necessary that the authors do an exhaustive and rigorous pass over this section, to improve structure, consistency, to eliminate factual errors, imprecision, challenge their claims and look for adequate literature.
+
+## Flik's design is not described nor explained
+This section also contains errors, such as "most of the debuggers are postmortem". Most mainstream (if not all) IDEs comes with an online debugger, so how can that "postmortem" generalization be true?
+
+The biggest problem is that the design of Flik and the rationale behind it are not presented. There is also no explicit and logical connection with the presented state of the art, or, perhaps, it mostly remain shallow and remote.
+
+The section first states that Flik should expose two features (stepping back and modifying variables) that are very common, ie, stepping back is expected from any omniscient debugger. Next, the authors presents three "main features" of Flik: storing program states and metadata, restoring program states and stepping back. These features are again standard in omniscient debuggers.
+
+Somewhere in the text pops another feature, that is live-modification of recorded execution paths, which is the only feature, as far as I know (but I don't know everything), that only exists in another debugger (namely DeloranJS). This feature should be more highlighted to distinguish Flik from others, as Flik just seems to be yet another omniscient debugger.
+
+Then some implementation details are briefly presented, not enough the grasp the originality of Flik or its potential.
+
+My feeling is that we actually learn too few about Flik, its design and its choices/rationale, and what are the important differences with, eg, deloreanJS.
+It just, as described, looks like yet another back in time debugger. Features are standard except one. The authors should stress much more what's the challenges there for RL programs, how did they approach these challenges and what are the design and implementation implications that emerged and how Flik solves these problems.
+
+## Empirical study: weak design, lack of data analysis
+As described, the empirical study presents many flaws and cannot be considered as acceptable or trustable for concluding from the results. This part is the one that requires the most work.
+
+### Experimental design
+The way the experiment is presented in the abstract is misleading and does not reflect the actual experiment. In the abstract, readers are left to believe that qualitative or quantitative measurements/analyses are conducted and conclude that Flik is useful, while in reality the experiments aims at collecting feedback and perceptions of users through a questionnaire. The experimental design, including the kind of experiment, is not clearly stated and not sufficiently explained. There is no research question stated, and the experimental choices for investigating that missing question are therefore not explained (aside from the tasks), in particular why this design (tasks + questionnaire) is adequate for this investigation.
+
+The "study conditions" does not specify how the task order was decided, nor if all participants undergo the same conditions (ie, the same task orders) and the possible threats to validity that are associated. For example, could the order of tasks influence the perception of participants collected in the questionnaire?
+
+The study conditions does not seem to consider any experimental variable, for example, tasks are time bounded, but in the questionnaire the authors seem to collect participants' perception about the time spent and their actual success at the tasks. Why are these information not considered as experimental variables, and measured? Why are the perceptions about time and success not contrasted with actual measures, to assess if the participants' perception are accurate, or if anything changes with the tasks? Especially, it seems that, given the time limits (ie, control of the time), that all participants use Flik, that the only actual different conditions are the tasks, and the one measurable and comparable output under that design is the success.
+
+The survey contains 23 questions, which might be a risk considering the large number of open questions (10) at the end of the questionnaire and participants may be too tired after more than 1h of work and 13 likert-scale questions to actually provide valuable answers. This risk is never mentioned, nor how it is compensated.
+
+It is unclear about the population that the participants represent. First they are claimed to be "very experienced" but later we learn they are master and PhD students but we do not know from where they were recruited nor the means used to recruit them. In the results their experience is presented as a self-reported measure that goes from "very experienced" to "no experience", which is insufficient to characterize the population. What "very experienced" means should be characterized in terms of years and in terms of context of practice, in addition to the self-reported measure. Such precision help in understanding what population is being evaluated and thus to contextualize the results. For instance, participants mostly report a lot of experience in using Python, but not in debugging in general. This could be explained (but it is not in the paper) by the fact that RL programmers are not "standard" programmers and may come from other backgrounds, and therefore have less habits to debug. But is that on purpose? Is that because the population was drawn from RL students and therefore exposes this bias? These questions should be explained and justified in the experimental design. In addition, such information are usually collected from a demographic survey, which it seems has not been done and is not present in the design.
+
+### Results and discussion
+The results section is short, and does not go into details in analyzing the perception of participants. It reports only few information, and the open questions are not presented nor analyzed. Observations and conclusion concern only likert-scaled questions. In my opinion, open questions yield a lot of qualitative information, and, despite the weaknesses of the design, could still provide valuable insights into the usefulness of Flik.
+
+The discussion section has the same weaknesses: very short, not reflecting on the results, not discussing similar experiments (if any), not building over results (the analysis of open questions could have been interesting to discuss).
+
+### Other critical concerns
+The paper does not have a threats to validity section, even though it is easy to identify numerous potential biases. Since the authors never discuss them, it is impossible to evaluate if the results are severely flawed or not.
+
+It is not mentioned if the authors obtained an ethical approval to conduct their experiment, what ethical standards they follow and if consent from participants has been collected.
+
+## Conclusion of the paper
+From the discussion, and implicitly in the conclusion, the authors conclude that Flik is/proved to be useful. I object that this conclusion cannot be drawn from the work presented in the paper, as it does not provide a solid experimental design, does not discuss threats to validity, and does not report enough empirical observations to arrive to that conclusion.
+
+Furthermore, the authors state as future work to optimize memory consumption. That's great, although 1) you never mentioned that aspect anywhere in the paper and it is the first time that it comes into consideration (why not in the design of Flik?) and 2) work on optimizing omniscient debuggers are numerous (eg, the work of G. Pothier), and it is not clear how you would tackle this problem under a novel perspective.

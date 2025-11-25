@@ -1,0 +1,349 @@
+% $Id: responses.tex 
+% !TEX root = main.tex
+
+\newpage
+
+\appendix
+
+\clearpage
+
+\subsection{Response Letter}
+
+
+As required by the reviewing process, we are submitting this response letter along with a revised 
+version of our paper entitled \textsl{Flik: A Back-in-time Debugger for Reinforcement Learning Programs}. For convenience, the letter is formatted as an appendix of the paper.
+
+We would like to thank our anonymous reviewers for their efforts in reviewing our submission and 
+for their useful and detailed suggestions to improve it. We have considered all remarks carefully, and 
+addressed them to the best of our possibilities.
+
+There are \thetotalremarks~ different remarks for this iteration of the paper. Each remark 
+is followed by our response and an explicit status indication:
+
+\begin{itemize}[nosep,label=--] 
+	\item \revtotal{solved} \statussolved 
+	\item \revtotal{future} \statusfuture
+	\item \revtotal{incorrect} \statusincorrect \footnote{We clarify the question made by the reviewer} 
+	\item \revtotal{disagree} \statusdisagree\footnote{We ask the reviewer to reconsider the remark in the light of arguments and clarifications we provide in the response.} 
+	\item \revtotal{unsolved} \statusunsolved  \footnote{We could not accommodate the remark in the text due to blocking constraints.} 
+	\item \revtotal{unspecific} \statusunspecific\footnote{We answered the remark to our best interpretation. We are unsure about what the reviewer meant.} 	
+\end{itemize}
+
+The remarks with specific changes in the paper have a reference to the location in the paper 
+where the solution is found. These solutions are marked with the 
+\includegraphics[width=0.03\textwidth]{./figures/fix.pdf} icon in the paper margin for easy 
+identification. Additionally, in the margin we point to the specific remark(s) the modification 
+is addressing.
+
+
+%%
+\subsection{Review \#1}
+
+\begin{remark} \label{rem:unique}
+The first general comment regards the customization of the approach to RL programs. Indeed, 
+apart from the natural modules that an RL solution has, i.e., environment, agent and learning 
+algorithm, I think that the approach can be applied to any other program. I invite the authors 
+to explain why VAR Check would particularly benefit RL programs rather than other types of 
+programs. The authors should also motivate why a new technique should be introduced for 
+analyzing RL programs, rather than using an existing visualization technique (of the kinds 
+the authors mention in the related work).
+\end{remark}
+\begin{solved}
+The core idea behind \ac{VAR} is that it is a general-purpose tool designed to work for 
+all types of programs, including RL and non-RL systems. However, what makes its 
+application to RL programs particularly novel and innovative is the absence of existing 
+quality analysis tools aimed at RL-based systems. \ac{RL}
+programs often have unique characteristics, such as the interplay between the environment, 
+agent, and learning algorithm, which can lead to distinct quality issues like modularity 
+and responsibility violations. The lack of tools to address these specific 
+challenges highlights the need for analysis tools for \ac{RL}. In particular, \ac{VAR} addresses the need through a visual representation focused on the identification of code smells (as pointed out in the literature), and the association of similarities between implementations and across application domains. These clarifications were added in the introduction of the paper (\fref{sec:intro} \fref[vario]{par:unique}) and reinforced in the related work (\fref{sec:related}, \fref[vario]{par:unique2}). 
+\end{solved}
+
+\begin{remark}
+The introduction is overly technical.
+\end{remark}
+
+\begin{remark}
+Some ideas are repeated a lot, while other (relevant) ones are not mentioned at all. For example, it should be made clear from the beginning that Flik requires source programs and that it includes an instrumented interpreter to run programs, save states, recover a previous state, etc. (if this is the case).
+\end{remark}
+
+\begin{remark}
+the paper doesn't clarify how Flik was implemented. At the beginning, I thought it was a tool for runtime monitoring, since the authors mention in several places the idea of observing and, if needed, modifying a program execution. However, judging by the commands in the interface of the debugger, I assume it actually includes an instrumented interpreter to simulate the actual execution of Python code, or it makes calls to a Python interpreter, or... In any case, it's essential to describe how Flik is implemented in the paper.
+\end{remark}
+
+\begin{remark} 
+- Page 2: mentioning that one disadvantage of debugging RL programs is that they're generally used as a black boxes made me think that Flik, in contrast, wouldn't need the source code. But I guess that's not the case. This argument is a bit confusing.
+\end{remark}
+
+\begin{remark}
+section 2.1: I missed some text about the use of logs in program debugging.
+\end{remark}
+
+\begin{remark} 
+there's also little mention of the techniques used in the debugger.
+How exactly is the program state defined?
+\end{remark}
+
+\begin{remark}
+What happens if there are I/O operations?
+\end{remark}
+
+\begin{remark}
+Does it accept 100\% of Python? 
+\end{remark}
+
+\begin{remark}
+what if there are calls to libraries whose source code isn't available?
+\end{remark}
+
+\begin{remark}
+The experimental evaluation is interesting, but it doesn't say anything about the execution cost. If, as I mentioned earlier, Flik is defined as an instrumented interpreter, it is likely to have scalability issues, especially if it must save all the states of an execution (which can potentially be very long). It would be good to show execution times (e.g., of the complete execution of the program in Flik assuming there are no breakpoints) and compare it with a standard interpreter for the language. This way, the overhead introduced by the debugger could be analyzed.
+\end{remark}
+
+
+%%%%
+\subsubsection{ MINOR COMMENTS}
+\begin{remark}
+solve bugs -> solveD bugs
+\end{remark}
+\begin{solved}
+Updated as suggested by the reviewer
+\end{solved}
+
+\begin{remark}
+to updated -> to update
+\end{remark}
+
+\begin{remark}
+a set of states S, the agent -> a set of states S AND the agent
+\end{remark}
+
+\begin{remark} 
+associated to the execution if the action -> associated to the execution OF the agent
+\end{remark}
+
+\begin{remark}
+I'd remove "Jang et al." before [9]
+\end{remark}
+
+\begin{remark}
+- Algorithm 1: where do you use R(s,a) ?
+\end{remark}
+
+\begin{remark}
+- Algorithm 1: else branch, $max_a$ is not well formatted
+\end{remark}
+
+\begin{remark}
+and agent -> an agent
+\end{remark}
+
+\begin{remark}
+RL the programs -> RL programs
+\end{remark}
+
+\begin{remark}
+what do you mean by "solving" three different RL programs?
+\end{remark}
+
+\begin{remark}
+the participants possible improvements -> the participants POINTED OUT possible improvements (?)
+\end{remark}
+
+\begin{remark}
+program's execution, causes -> program's execution, WHICH causes
+\end{remark}
+
+\begin{remark}
+focus in -> focus on
+\end{remark}
+
+\begin{remark}
+There are severla principles that guide the debugging process, these principles -> There are severl principles that guide the debugging process. These principles...
+\end{remark}
+
+\begin{remark}
+the things you believe to be -> the things one believes to be
+\end{remark}
+
+\begin{remark}
+your code -> the code
+\end{remark}
+
+\begin{remark}
+section 2.2, second paragraph, an itemize would improve readability.
+\end{remark}
+
+\begin{remark}
+must of them -> most of them
+\end{remark}
+
+\begin{remark}
+time traveling debugger -> time travel debugger
+\end{remark}
+
+\begin{remark}
+Python debuggers, the features -> Python debuggers AND the features
+\end{remark}
+
+\begin{remark}
+What is the "Framework Fuzzing"? Explain and add some reference.
+\end{remark}
+
+\begin{remark}
+a bugs life -> a bug's life
+\end{remark}
+
+\begin{remark}
+I find the phrase "without having to stop the execution" confusing. Doesn't Flik stop execution when it reaches a breakpoint or advances step by step, etc?
+\end{remark}
+
+\begin{remark}
+It would probably be best not to describe the GridWorld example twice. Also, Figure 2 is far from this point in the paper, which can be confusing.
+\end{remark}
+
+\begin{remark}
+Page 8. Since you mention debugger commands here, it would be nice to put a reference to Table 2.
+\end{remark}
+
+\begin{remark}
+The purpose of the empirical study assesing -> The purpose of the empirical study IS assesing
+\end{remark}
+
+\begin{remark}
+Just consider adding a bug? In practice, I guess, programs can contain several bugs that often interact with each other.
+\end{remark}
+
+\begin{remark}
+the the
+\end{remark}
+
+\begin{remark}
+at the beginning at the -> at the beginning OF the
+\end{remark}
+
+
+
+
+%%
+\subsection{Review \#2}
+
+\begin{remark}
+I suggest the authors consider literature on empirical experiments and design, such as:
+- Qualitative research and evaluation methods, M. Q. Patton
+- Quantitative, Qualitative and Mixed Methods Approaches, Creswell \& Creswell,
+- Research Methods, Design and Analysis, Christensen, Jonson, Turner,
+- Experimentation in Software Engineering, Wohlin et al.
+\end{remark}
+
+\begin{remark} 
+The authors stress efficiently the difficulty and the importance of debugging RL agents, although they argue that "conventional systems typically have a linear and predictable flow [...] allowing developers to trace and debug step-by-step with ease". This is false: first even in linear and predictable systems, debugging through step-by-step can be an enormous pain, and second there are many systems that you can label as "conventional" (eg, web sites/servers, drones, iot/embedded systems, etc.) that either are not linear/predictable by nature (because, eg, of concurrency) or by context (eg, websites/iot/drones' behavior strongly depend on what happens in the uncontrolled external world).
+\end{remark}
+
+\begin{remark}
+There is a structure problem: subsection "2.1 what is a debugger" is mostly about what are bugs and what is debugging and then half the section concerns debuggers.
+\end{remark}
+
+\begin{remark}
+The debugging process is defined as "the activity that comes after testing" and seems to come from a paper. In both my experience and what I know from the literature, we debug to understand and therefore, that link with testing cannot be established like that without contextualizing.
+\end{remark}
+
+\begin{remark} 
+The authors actually refer to the debugging process, and their statement (apparently coming from a book) refers to a specific debugging strategy known as "hypothesis testing", that is described, eg, in papers from Thomas D. Latoza (along with **other** debugging strategies such as forward reasoning and backward reasoning). Hypothesis testing is also described in books for practitioners such as "Why Programs Fail" (Zeller, 2009) or "Effective debugging: 66 specific ways to debug software and systems" (Spinellis, 2016). The "debugging process" definition, extracted from a single book, is also too restrictive: debugging "as a process" is described in broader perspectives in practitionners books such as "The science of debugging" (Telles, Hsieh, 2001), "Debugging: The 9 indispensable rules for finding even the most elusive software and hardware problems" (Agans, 2003)"Why Programs Fail" (Zeller, 2009), "Effective debugging: 66 specific ways to debug software and systems" (Spinellis, 2016).
+\end{remark}
+
+\begin{remark}
+"Debuggers for other programming languages", but mainly (very shortly) describes GDB and omniscient debuggers and I cannot see the "other languages" aspect.
+\end{remark}
+
+\begin{remark}
+The authors also make general claims about back-in-time debuggers that seem off or wrong.
+\end{remark}
+
+\begin{remark} 
+In table 3, the authors confuse UI and GUI, and if all python debuggers allow for stepping then stepping as a criteria is not required in the table.
+\end{remark}
+
+\begin{remark}
+"most of the debuggers are postmortem". Most mainstream (if not all) IDEs comes with an online debugger, so how can that "postmortem" generalization be true?
+\end{remark}
+
+\begin{remark}
+The biggest problem is that the design of Flik and the rationale behind it are not presented. There is also no explicit and logical connection with the presented state of the art, or, perhaps, it mostly remain shallow and remote.
+\end{remark}
+
+\begin{remark} 
+Flik should expose two features (stepping back and modifying variables) that are very common, ie, stepping back is expected from any omniscient debugger. Next, the authors presents three "main features" of Flik: storing program states and metadata, restoring program states and stepping back. These features are again standard in omniscient debuggers.
+\end{remark}
+
+\begin{remark}
+Somewhere in the text pops another feature, that is live-modification of recorded execution paths, which is the only feature, as far as I know (but I don't know everything), that only exists in another debugger (namely DeloranJS). This feature should be more highlighted to distinguish Flik from others, as Flik just seems to be yet another omniscient debugger.
+\end{remark}
+
+\begin{remark}
+Then some implementation details are briefly presented, not enough the grasp the originality of Flik or its potential.
+\end{remark}
+
+\begin{remark} 
+My feeling is that we actually learn too few about Flik, its design and its choices/rationale, and what are the important differences with, eg, deloreanJS.
+It just, as described, looks like yet another back in time debugger. Features are standard except one. The authors should stress much more what's the challenges there for RL programs, how did they approach these challenges and what are the design and implementation implications that emerged and how Flik solves these problems.
+\end{remark}
+
+\begin{remark}
+The experimental design, including the kind of experiment, is not clearly stated and not sufficiently explained.
+\end{remark}
+
+\begin{remark}
+There is no research question stated, and the experimental choices for investigating that missing question are therefore not explained (aside from the tasks), in particular why this design (tasks + questionnaire) is adequate for this investigation.
+\end{remark}
+
+\begin{remark} 
+The "study conditions" does not specify how the task order was decided, nor if all participants undergo the same conditions (ie, the same task orders) and the possible threats to validity that are associated. For example, could the order of tasks influence the perception of participants collected in the questionnaire?
+\end{remark}
+
+\begin{remark}
+The study conditions does not seem to consider any experimental variable, for example, tasks are time bounded, but in the questionnaire the authors seem to collect participants' perception about the time spent and their actual success at the tasks. Why are these information not considered as experimental variables, and measured?
+\end{remark}
+
+\begin{remark}
+Why are the perceptions about time and success not contrasted with actual measures, to assess if the participants' perception are accurate, or if anything changes with the tasks? Especially, it seems that, given the time limits (ie, control of the time), that all participants use Flik, that the only actual different conditions are the tasks, and the one measurable and comparable output under that design is the success.
+\end{remark}
+
+\begin{remark} 
+The survey contains 23 questions, which might be a risk considering the large number of open questions (10) at the end of the questionnaire and participants may be too tired after more than 1h of work and 13 likert-scale questions to actually provide valuable answers. This risk is never mentioned, nor how it is compensated.
+\end{remark}
+
+\begin{remark}
+It is unclear about the population that the participants represent. First they are claimed to be "very experienced" but later we learn they are master and PhD students but we do not know from where they were recruited nor the means used to recruit them. In the results their experience is presented as a self-reported measure that goes from "very experienced" to "no experience", which is insufficient to characterize the population. What "very experienced" means should be characterized in terms of years and in terms of context of practice, in addition to the self-reported measure. Such precision help in understanding what population is being evaluated and thus to contextualize the results.
+\end{remark}
+
+\begin{remark}
+participants mostly report a lot of experience in using Python, but not in debugging in general. This could be explained (but it is not in the paper) by the fact that RL programmers are not "standard" programmers and may come from other backgrounds, and therefore have less habits to debug. But is that on purpose? Is that because the population was drawn from RL students and therefore exposes this bias? These questions should be explained and justified in the experimental design. In addition, such information are usually collected from a demographic survey, which it seems has not been done and is not present in the design.
+\end{remark}
+
+\begin{remark} 
+The results section is short, and does not go into details in analyzing the perception of participants. It reports only few information, and the open questions are not presented nor analyzed. Observations and conclusion concern only likert-scaled questions. In my opinion, open questions yield a lot of qualitative information, and, despite the weaknesses of the design, could still provide valuable insights into the usefulness of Flik.
+\end{remark}
+
+\begin{remark}
+The discussion section has the same weaknesses: very short, not reflecting on the results, not discussing similar experiments (if any), not building over results (the analysis of open questions could have been interesting to discuss).
+\end{remark}
+
+\begin{remark}
+The paper does not have a threats to validity section, even though it is easy to identify numerous potential biases. Since the authors never discuss them, it is impossible to evaluate if the results are severely flawed or not.
+\end{remark}
+
+\begin{remark}
+It is not mentioned if the authors obtained an ethical approval to conduct their experiment, what ethical standards they follow and if consent from participants has been collected.
+\end{remark}
+
+\begin{remark}
+From the discussion, and implicitly in the conclusion, the authors conclude that Flik is/proved to be useful. I object that this conclusion cannot be drawn from the work presented in the paper, as it does not provide a solid experimental design, does not discuss threats to validity, and does not report enough empirical observations to arrive to that conclusion.
+\end{remark}
+
+\begin{remark}
+the authors state as future work to optimize memory consumption. That's great, although 1) you never mentioned that aspect anywhere in the paper and it is the first time that it comes into consideration (why not in the design of Flik?) and 2) work on optimizing omniscient debuggers are numerous (eg, the work of G. Pothier), and it is not clear how you would tackle this problem under a novel perspective.
+\end{remark}
+
+
+\endinput
