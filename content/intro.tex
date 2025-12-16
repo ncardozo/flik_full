@@ -2,60 +2,20 @@
 % !TEX root = ../main.tex
 
 \section{Introduction}
-\label{sec:problem}
+\label{sec:intro}
 
-\ac{RL}~\cite{sutton18} encompasses different artificial intelligence techniques and algorithms in 
-which an agent learns the behavior to reach a goal by specializing its interaction with the 
-environment in which it is deployed.
-\ac{RL} agents learn the state-action function for a given policy through interaction with the 
-environment to discover an optimal solution to reach a goal, through the optimal policy $\pi^*$ (a set 
-of actions to execute at each system state) gathered from the interaction of the agent with the 
-environment. One of the most common algorithms in \ac{RL} is Q-learning~\cite{beakcheol19}, which 
-uses an off-policy control that separates the deferral policy from the learning policy and updates the 
-action selection using the Bellman optimal equation, and the $\epsilon$-greed policy.  In the definition 
-of \ac{RL} algorithms, the environment is composed of a set of states $S$, the agent can actuate over 
-a set of actions $A$. By performing an action $a\in A$ at state $s \in S$, the agent transitions from $s$
-to a new state $s' \in S$. Additionally, associated to the execution if the action $a$ at state $s$, the 
-agent receives a reward $r$. The goal of the agent is to maximize its total reward. \fref{lst:qlearning} 
-presents the base (pseudo) algorithm for Q-learning~\cite{sutton18}.
+The behavior of \ac{RL}~\cite{sutton18} agents emerges through the interaction of the agents with 
+their deployment environment. In such interaction, agents execute actions sequences moving 
+between environment states, collecting information about how pertinent are the actions to the 
+agents objective, in the form of a scalar reward function. From interactions, agents learn a 
+state-action function defining the optimal agent policy; the actions to take at each state in order to 
+reach the agent's goal.
 
-\begin{algorithm}
-\caption{Q-Learning Algorithm}\label{lst:qlearning}
-\begin{algorithmic}
-\Require An environment with states $S$, actions $A$, and reward function $R(s, a)$
-\Require A learning rate $\alpha \in [0, 1]$
-\Require A discount factor $\gamma \in [0, 1]$
-\Require Exploration strategy (\eg $\epsilon$-greedy)
-\State Initialize Q-table $Q(s, a) \gets 0$ for all $s \in S$, $a \in A$
-\For{each episode}
-    \State Initialize the starting state $s_0$
-    \For{each time step in the episode}
-        \If{exploration step}
-            \State Choose an action $a$ using the exploration strategy (e.g., $\epsilon$-greedy)
-        \Else
-            \State Choose an action $a$ based on the current Q-values: $a = \arg\max\_a Q(s, a)$
-        \EndIf
-        \State Take action $a$, observe reward $r$ and next state $s'$
-        \State Update Q-value: 
-        \[
-        Q(s, a) \gets Q(s, a) + \alpha \left( r + \gamma \max_{a'} Q(s', a')\right)
-        \]
-        \State Set $s \gets s'$
-    \EndFor
-\EndFor
-\end{algorithmic}
-\end{algorithm}
-
-\ac{RL} has gained wide popularity in the last couple of years, finding applications in a wide range of 
-domains~\citet{beakcheol19}, particularly in control of industrial process~\cite{kiumarsi18} (improving 
-the performance of the on-line learning control system or optimizing temperature control and power 
-consumption), computer networks~\cite{alrawi13} (improving adaptability of Wireless Sensor Networks 
-to changing situations and eliminating the need for system redesign), and robotics~\cite{zhang15} (by 
-providing frameworks and toolkits for designing sophisticated behavioral aspects). 
-
-As in the development of other software products, the development of \ac{RL} programs, is prone to 
-the introduction of errors or strange behavior in the application logic, like incorrect state values, or 
-erroneous logic implementations. Moreover, with these types of programs there can also appear 
+%why
+\ac{RL} agents are commonly built based on the Q-learning algorithm~\cite{beakcheol19} (or 
+\ac{DQN}~\cite{fan20} for continuous environments). As in the software development, the 
+development of \ac{RL} programs, is prone to errors or unexpected behavior in the application 
+logic, like incorrect state values, or erroneous logic implementations. Moreover, with these types of programs there can also appear 
 errors in the definition of the learning hyperparameters, and incomplete or wrong definition of the 
 reward function. 
 
