@@ -17,20 +17,20 @@ A software bug is defined as erroneous behavior observed during a program's exec
 program to crash or produce incorrect results. Bugs are common in software development, and can 
 be caused by many factors, such as incorrect program logic, incorrect syntax used, or incorrect data. 
 Bugs can be difficult to identify and fix, especially in large and complex programs. In this work we 
-focus in run-time errors, in which programs compile, but present an abnormal behavior caused by 
+focus on run-time errors, in which programs compile, but present an abnormal behavior caused by 
 incorrect program logic. Debugging is the process of finding and reducing the number of 
 bugs or defects in a program~\cite{hindriks12}. In practical terms, debugging is defined as the 
 activity that comes after testing, when developers identify an (execution/behavioral) error and modify
 the program to fix the bug~\cite{mccauley08}. 
 
-There are several principles that guide the debugging process, these principles are explained in the 
+There are several principles that guide the debugging process. These principles are explained in the 
 book the Art of debugging with \ac{GDB}, \ac{DDD}, and Eclipse~\cite{matloff08}. The fundamental 
 principle that drives the essence of debugging is the \emph{Principle of Confirmation}: fixing a 
-program with bugs is a process of confirming that the things you believe to be true are actually true in 
+program with bugs is a process of confirming that the things one believes to be true are actually true in 
 the code~\cite{matloff08}. This means that whenever the assumptions about the program behavior 
 are not true, developers must identify the bug(s) causing the problem, and fix it(them).
 
-A classic debugging technique is adding traces in your code in terms of printing the values of several 
+A classic debugging technique is adding traces in the code in terms of printing the values of several 
 variables as the program is executed. However, this is not an efficient or scalable way to debug a 
 program, reason why debuggers exist. A debugger is a tool that allows developers to inspect the 
 state of a program while it is running, and to control its execution. Debuggers are essential tools for 
@@ -94,7 +94,7 @@ evolution~\cite{hofer06,lienhard09}. DeloreanJs has three main features: the abi
 through an execution history, modify values of a variable, and resume execution from a timepoint (at 
 specific execution points in the past)~\cite{leger23}. DeloreanJS extends continuations with static 
 analysis functionalities to capture the current program state and store the (history of) variable's 
-values. There are several other debuggers for Javascript, must of them based on the use of 
+values. There are several other debuggers for Javascript, most of them based on the use of 
 breakpoints, in which variables cannot be modified to resume current execution with the new values, 
 similar to the behavior offered in \ac{GDB}.
 
@@ -111,7 +111,7 @@ debuggers, and DeloreanJS, as a reference to create our debugger for \ac{RL} pro
 Given that  most \ac{RL} programs are written in Python, we pay special attention to existing 
 debuggers for Python. There are several Python debuggers available. We focus on those debuggers
 that have support for the features required to debug \ac{RL} programs, such as the ability to navigate 
-through an execution history (like a time traveling debugger), and the ability to modify the values
+through an execution history (like a time travel debugger), and the ability to modify the values
 of variables and resume the execution from a specific point in time.
 
 % PDB
@@ -162,7 +162,7 @@ the process level, rewinding and replaying the state of the entire process. Tech
 \ac{UDB} does allow new code paths to be executed at replay-time, but all execution replays are 
 isolated.
 
-\fref{tab:python-debuggers} shows a comparative summary of existing Python debuggers, the 
+\fref{tab:python-debuggers} shows a comparative summary of existing Python debuggers, and the 
 features they offer. 
 
 \begin{table}[hptb]
