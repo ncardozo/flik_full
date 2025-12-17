@@ -13,63 +13,51 @@ reach the agent's goal.
 
 %why
 \ac{RL} agents are commonly built based on the Q-learning algorithm~\cite{beakcheol19} (or 
-\ac{DQN}~\cite{fan20} for continuous environments). As in the software development, the 
-development of \ac{RL} programs, is prone to errors or unexpected behavior in the application 
-logic, like incorrect state values, or erroneous logic implementations. Moreover, with these types of programs there can also appear 
-errors in the definition of the learning hyperparameters, and incomplete or wrong definition of the 
-reward function. 
+\ac{DQN}~\cite{fan20} for continuous environments), driving the agent-environment interaction, 
+and ultimately solving the \ac{MDP} problem describing the learning process for agents as a 
+black-box. Common to software development processes, the development of \ac{RL} programs, is 
+prone to errors or unexpected behavior in the application logic like incorrect state values, or 
+erroneous logic implementations. Moreover, within \ac{RL} programs also appear errors in the 
+definition of the learning hyperparameters, and incomplete or wrong definition of the reward 
+function. 
 
-Detecting erroneous behavior in \ac{RL} programs is a complicated task due to two main 
-reasons. First, like \ac{ML} programs, \ac{RL} are usually used as a black box. 
-This means that developers do not have access to the agent, or the way the programs make 
-decisions. This poses a problem in many fields, as it often becomes difficult to identify why a learning 
-model fails to converge, or why it does not reach an optimal or expected solution as 
-anticipated by the developer. In the case of \ac{RL}, this issue is particularly 
-pronounced because it is challenging to determine whether the agent is learning 
-correctly or if it is learning an inappropriate policy.
-
+Detecting erroneous behavior in \ac{RL} programs is a complicated task due to two main reasons. 
+First, like \ac{ML} programs, \ac{RL} algorithms are usually used as a black box. This means that 
+developers do not have access to the internals of the agent, the environment, or the learning 
+algorithms. This poses a problem in many fields, as it often becomes difficult to identify why an 
+fails to converge, or why it does not reach an optimal or expected solution as anticipated by the 
+developer. In the case of \ac{RL}, this issue is particularly pronounced because it is challenging to 
+determine whether the agent is learning correctly or if it is learning an inappropriate policy.
 Second, \ac{RL} programs are notoriously cumbersome and difficult to debug due to the extensive 
 training time required by the agent, demanding substantial computational resources. This 
-complexity makes it incredibly challenging to locate errors, even when using a 
-debugger for standard programs. Traditional debugging tools are often inadequate 
-for tracing the issues in \ac{RL} due to the intricate and prolonged nature of the 
-training processes. 
+complexity makes it incredibly challenging to locate errors, even when using standard 
+debugging tools. 
 
-In conventional software systems, the execution flow is typically linear and predictable, 
-allowing developers to trace and debug step-by-step with relative ease. However, 
+Traditional debugging tools are often inadequate for tracing issues in \ac{RL} due to the intricate 
+and prolonged nature of the training processes. In conventional software systems, the execution flow 
+is typically linear, allowing developers to trace and debug step-by-step with relative ease. However, 
 \ac{RL} programs involve a continuous loop of learning and adaptation, where an agent 
-interacts with an environment, receives feedback, in the form of rewards, and adjusts its actions 
-accordingly. The cyclical nature of \ac{RL} programs, makes the 
-process of identifying errors much more complex and less transparent.
+interacts with an environment stochastically, receives feedback from the interaction (in the form of 
+scalar rewards), and adjusts its actions accordingly. The cyclical and stochastic nature of \ac{RL} 
+programs, makes the process of identifying errors much more complex and less transparent.
 
-In \ac{RL}, each decision and its subsequent outcome can affect future decisions, 
-creating a dynamic and interdependent series of events. This complexity is 
-compounded by the, often stochastic, nature of environments, where the same action 
-can lead to different results in different contexts or iterations, and the actions taken by and agent 
-are not solely dependent on the agents' state. As a result, 
-understanding and debugging \ac{RL} programs requires not only tracking individual 
-decisions but also understanding the long-term effects and patterns that emerge 
-over many iterations.
+As a result, understanding and debugging \ac{RL} programs requires tracking individual 
+decisions, and understanding the long-term effects and patterns that emerge over many iterations.
 Moreover, the need for substantial computational resources and extended training 
 periods adds to the challenge. The iterative process can take hours, days, or 
 even weeks, making it impractical to simply restart the training from scratch 
 each time an error is detected.
 
-The aforementioned problems and characteristics of program execution in \ac{RL} posits the need 
-for advanced tools and methods for visualizing the agent's behavior, monitoring its learning 
+The aforementioned problems and characteristics of program execution in \ac{RL} posit a need 
+for advanced tools and methods for analyzing \ac{RL} agents' behavior, monitoring its learning 
 progress, and pinpointing issues without having to re-run lengthy training sessions.
 Addressing these challenges is crucial for advancing the state of \ac{RL} and increasing the quality 
-of its programs, making applications more reliable and interpretable.
-Therefore, there is a pressing need for a tool that allows the visualization 
-of a \ac{RL} agent's behavior and facilitates appropriate debugging of \ac{RL} the programs. 
-Such a tool would significantly enhance the transparency and interpretability 
-of \ac{RL} models, making it easier for developers to understand, refine, and correct 
-the learning process. This is a gap in the current literature, and addressing it 
-is the focus of this work.
+of \ac{RL} agents, making \ac{RL}-based applications more reliable and interpretable. This is 
+currently a gap in the literature, which we address as the focus of this work.
 
 To address the aforementioned problems, this work develops a back-in-time debugger for the 
-identification of errors or undesired behavior of agents. The proposed debugger, \flik, is a 
-console-based debugger with features to 
+identification of errors or undesired behavior of \ac{RL} agents. The proposed debugger, \flik, is a 
+console-based debugger with features to: 
 \begin{enumerate*}[label=(\arabic*)]
 \item record the history of the execution (both values and execution context) as it steps through the 
 code,
@@ -85,29 +73,29 @@ configuration, go back in the execution, try another configuration and observe i
 behavior is more appropriate or as expected. Such capabilities are useful in pinpointing the root 
 cause of undesired behavior. 
 
-To validate the usefulness in detecting bugs, and the usability of the tool itself, we use an empirical 
-study in which 27 participants experienced in Python and knowledgeable in \ac{RL} evaluated \flik in 
-solving three different \ac{RL} programs. The programs, namely GridWorld, Rooms, and Driving 
-Assistant, all present different types of bugs that can appear in \ac{RL} systems, as previously 
-mentioned. Moreover, the programs to evaluate are chosen according to their complexity and 
-familiarity in the development of \ac{RL}, covering easier and familiar programs, to more complex and 
-unfamiliar programs, as to reduce possible evaluation bias or learning curve bias.
-Our results show that the participants posit \flik as a useful tool to debug and understand the behavior 
-of \ac{RL} agents more deeply. Additionally, while usable, the participants possible improvements in 
+To validate the usefulness in detecting bugs, and the usability of the tool itself, we conduct a user 
+study with a focused group of 27 participants, all having previous Python experience and having 
+taken a graduate course in \ac{RL}. The evaluation of \flik consists of three tasks representing 
+different types of errors that may arise when developing \ac{RL} programs. Each task concerns a 
+different \ac{RL} environment, increasing and complexity and less familiar to participants as the 
+tasks progress, as to reduce possible evaluation bias or learning curve bias. Each of the tasks use 
+a different environment, namely GridWorld, Rooms, and Driving Assistant. Our results show that 
+the participants posit \flik as a useful tool to debug and understand the behavior of \ac{RL} agents 
+more deeply. The participants note that, while usable, there are possible improvements in 
 \flik's interface to improve usability.
 
-The reminder of the paper is structured as follows. \fref{sec:state_of_the_art} presents the state of the 
-art with respect to general debugger definitions (\fref{sec:deb}), existing back-in-time debuggers and 
-their functioning, in different programming languages (\fref{sec:other}), the presentation of debuggers 
-and debugging capabilities for Python (\fref{sec:py}), and debuggers or debugger-like tools for \ac{RL} 
-programs (\fref{sec:ai}). \fref{sec:solution} presents the rationale and details in \flik design, as well as 
-a running example of its back-in-time debugging capabilities. \fref{sec:evaluation} presents the details 
-of the empirical study, and the three programs used in the evaluation (\ie GridWorld, Rooms, and 
-Driving Assistant). \fref{sec:results} presents the results of the evaluation and the feedback from the 
-participants, divided in the 
-three main parts of the survey: general results (\fref{sec:general-knowledge}), tasks 
-results (\fref{sec:tasks-results}) and usability results (\fref{sec:usability}). It also adds 
-a final part for the discussion of the results (\fref{sec:discussion}). 
+The reminder of the paper is structured as follows. \fref{sec:background} presents a description of 
+\ac{RL} and the Q-learning algorithm. \fref{sec:state_of_the_art} presents the state of the art with 
+respect to general debugger definitions (\fref{sec:deb}), existing back-in-time debuggers and their 
+functioning, in different programming languages (\fref{sec:other}), the presentation of debuggers 
+and debugging capabilities for Python (\fref{sec:py}), and debuggers or debugger-like tools for 
+\ac{RL} programs (\fref{sec:ai}). \fref{sec:solution} presents the rationale and details in \flik's design, 
+as well as a running example of its back-in-time debugging capabilities. \fref{sec:evaluation} presents 
+the details of the user study, and the three programs used for the evaluation (\ie GridWorld, Rooms, 
+and Driving Assistant). \fref{sec:results} presents the results of the evaluation and the feedback from 
+the participants, divided in the three main parts of the evaluation survey: general results 
+(\fref{sec:general-knowledge}), tasks results (\fref{sec:tasks-results}) and usability results 
+(\fref{sec:usability}). It also adds a final part for the discussion of the results (\fref{sec:discussion}). 
 Finally, \fref{sec:conclusion} presents the conclusion and avenues of future work.
 
 
