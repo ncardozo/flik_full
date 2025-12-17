@@ -39,7 +39,7 @@ is addressing.
 %%
 \subsection{Review \#1}
 
-\begin{remark} \label{rem:unique}
+\begin{remark} 
 The first general comment regards the customization of the approach to RL programs. Indeed, 
 apart from the natural modules that an RL solution has, i.e., environment, agent and learning 
 algorithm, I think that the approach can be applied to any other program. I invite the authors 
@@ -48,20 +48,14 @@ programs. The authors should also motivate why a new technique should be introdu
 analyzing RL programs, rather than using an existing visualization technique (of the kinds 
 the authors mention in the related work).
 \end{remark}
-\begin{solved}
-The core idea behind \ac{VAR} is that it is a general-purpose tool designed to work for 
-all types of programs, including RL and non-RL systems. However, what makes its 
-application to RL programs particularly novel and innovative is the absence of existing 
-quality analysis tools aimed at RL-based systems. \ac{RL}
-programs often have unique characteristics, such as the interplay between the environment, 
-agent, and learning algorithm, which can lead to distinct quality issues like modularity 
-and responsibility violations. The lack of tools to address these specific 
-challenges highlights the need for analysis tools for \ac{RL}. In particular, \ac{VAR} addresses the need through a visual representation focused on the identification of code smells (as pointed out in the literature), and the association of similarities between implementations and across application domains. These clarifications were added in the introduction of the paper (\fref{sec:intro} \fref[vario]{par:unique}) and reinforced in the related work (\fref{sec:related}, \fref[vario]{par:unique2}). 
-\end{solved}
 
-\begin{remark}
+
+\begin{remark} \label{rem:intro}
 The introduction is overly technical.
 \end{remark}
+\begin{solved}
+We rewrote the whole introduction to have a more abstract presentation of the motivation, and reduce its technicality (\fref[vario]{par:intro}). All the technical details have been moved to a new sections providing the background on \ac{RL} (\fref{sec:background} - \fref[vario]{par:background})  
+\end{solved}
 
 \begin{remark}
 Some ideas are repeated a lot, while other (relevant) ones are not mentioned at all. For example, it should be made clear from the beginning that Flik requires source programs and that it includes an instrumented interpreter to run programs, save states, recover a previous state, etc. (if this is the case).
