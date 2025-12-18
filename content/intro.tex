@@ -56,9 +56,10 @@ Addressing these challenges is crucial for advancing the state of \ac{RL} and in
 of \ac{RL} agents, making \ac{RL}-based applications more reliable and interpretable. This is 
 currently a gap in the literature, which we address as the focus of this work.
 
-To address the aforementioned problems, this work develops a back-in-time debugger for the 
-identification of errors or undesired behavior of \ac{RL} agents. The proposed debugger, \flik, is a 
-console-based debugger with features to: 
+%what
+To address the aforementioned problems, this work develops a back-in-time 
+debugger for the identification of errors or undesired behavior of \ac{RL} agents. The proposed 
+debugger, \flik, is a console-based debugger with features to: 
 \begin{enumerate*}[label=(\arabic*)]
 \item record the history of the execution (both values and execution context) as it steps through the 
 code,
@@ -67,12 +68,18 @@ recorded history, and
 \item observe and change the state of the program to generate new execution traces from a particular 
 point in time.
 \end{enumerate*}
-Given these features, developers can analyze \ac{RL} programs while they execute, enabling the 
-experimentation of different state values or instruction sequences, without having to incur in long 
-train-test processes for each possible configuration. With \flik, developers can try a particular agent 
-configuration, go back in the execution, try another configuration and observe if the observed 
-behavior is more appropriate or as expected. Such capabilities are useful in pinpointing the root 
-cause of undesired behavior. 
+Given these features, developers can analyze the behavior of \ac{RL} programs while they execute. 
+
+%how
+\sidemargin{par:requirements}{{\fref{rem:requirements}}}
+To debug \ac{RL} programs, developers start from their source code declaring breakpoints to pause 
+execution/resume execution, enabling an analysis of the different state values or instruction 
+sequences. Furthermore, as \flik's runtime stores the values of states and learning parameters 
+throughout the execution, developers can modify said values and observe the changes in agent 
+behavior directly, without having to incur in long train-test processes for each possible configuration. 
+With \flik, developers can try a particular agent configuration, go back in the execution, try another 
+configuration and observe if the behavior is appropriate. Such capabilities are useful in pinpointing 
+the root cause of undesired behavior. 
 
 To validate the usefulness in detecting bugs, and the usability of the tool itself, we conduct a user 
 study with a focused group of 27 participants, all having previous Python experience and having 
