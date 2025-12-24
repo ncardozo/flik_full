@@ -7,13 +7,18 @@
 The black box behavior of \ac{ML} and \ac{RL} agents posit a problem to understand agents and 
 their behavior, especially if unexpected behavior is observed. We posit debuggers as an appropriate 
 tool to understand agents' behavior. Moreover, we posit debuggers with the possibility to modify 
-programs' state and continue execution using new execution paths are even more appropriate and 
+programs' state and continue execution in new execution paths exploiting the modified values are 
+even more appropriate and 
 suitable to understand \ac{RL} agents, given their intrinsic nature of continuous interaction with the 
 environment. However, currently, there is no debugger for \ac{RL} programs with the desired 
 features. The reason for this is that most of the debuggers are postmortem, or do not allow developers
 to go back in time to replay and analyze the program state. Additionally, most of the debuggers do not 
 allow developers to modify variables. In order to contribute to the development of \ac{RL} programs, 
 debugging tools should exhibit the following features:
+
+
+%%
+\subsection{\flik in a nutshell}
 
 \begin{description}
     \item[Stepping back:] Due to the execution loop of \ac{RL} programs, we 
@@ -191,6 +196,13 @@ corresponding commands.
   \input{tables/flik-commands}
   \label{tab:flik-commands}
 \end{table}
+
+
+%%
+\subsection{\flik internals}
+\label{sec:flik-internals}
+
+\sidemargin{par:requirements2}{{\fref{rem:requirements}}}
 
 
 \endinput

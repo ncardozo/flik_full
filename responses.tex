@@ -53,9 +53,12 @@ The introduction is overly technical.
 We rewrote the whole introduction to have a more abstract presentation of the motivation, and reduce its technicality (\fref[vario]{par:intro}). All the technical details have been moved to a new sections providing the background on \ac{RL} (\fref{sec:background} - \fref[vario]{par:background})  
 \end{solved}
 
-\begin{remark}
+\begin{remark} \label{rem:requirements}
 Some ideas are repeated a lot, while other (relevant) ones are not mentioned at all. For example, it should be made clear from the beginning that Flik requires source programs and that it includes an instrumented interpreter to run programs, save states, recover a previous state, etc. (if this is the case).
 \end{remark}
+\begin{solved}
+We present the requirements and execution characteristics in the introduction (\fref[vario]{par:requirements}), and then elaborate on the details of the requirements and inner working in the new  \fref{sec:flik-internals} (\fref[vario]{par:requirements2})
+\end{solved}
 
 \begin{remark}
 the paper doesn't clarify how Flik was implemented. At the beginning, I thought it was a tool for runtime monitoring, since the authors mention in several places the idea of observing and, if needed, modifying a program execution. However, judging by the commands in the interface of the debugger, I assume it actually includes an instrumented interpreter to simulate the actual execution of Python code, or it makes calls to a Python interpreter, or... In any case, it's essential to describe how Flik is implemented in the paper.
@@ -86,9 +89,12 @@ Does it accept 100\% of Python?
 what if there are calls to libraries whose source code isn't available?
 \end{remark}
 
-\begin{remark}
+\begin{remark} \label{rem:scalability}
 The experimental evaluation is interesting, but it doesn't say anything about the execution cost. If, as I mentioned earlier, Flik is defined as an instrumented interpreter, it is likely to have scalability issues, especially if it must save all the states of an execution (which can potentially be very long). It would be good to show execution times (e.g., of the complete execution of the program in Flik assuming there are no breakpoints) and compare it with a standard interpreter for the language. This way, the overhead introduced by the debugger could be analyzed.
 \end{remark}
+\begin{solved}
+We added a discussion about the performance, overhead and scalability of using \flik according to the evaluation use cases in \fref{sec:scalability} (\fref[vario]{par:scalability})
+\end{solved}
 
 
 %%%%
@@ -381,9 +387,15 @@ The results section is short, and does not go into details in analyzing the perc
 The discussion section has the same weaknesses: very short, not reflecting on the results, not discussing similar experiments (if any), not building over results (the analysis of open questions could have been interesting to discuss).
 \end{remark}
 
-\begin{remark}
+
+\begin{remark}\label{rem:threads}
 The paper does not have a threats to validity section, even though it is easy to identify numerous potential biases. Since the authors never discuss them, it is impossible to evaluate if the results are severely flawed or not.
 \end{remark}
+\begin{solved}
+We re-worked the presentation of the user study (taking into account the previous remarks about the evaluation of our work) to mitigate any doubts that may arise about the evaluation and the results (\fref{sec:evaluation}).
+
+Furthermore, we added a threads to validity section, \fref{sec:threads} (\fref[vario]{par:threads}), to discuss the generalization and possible bias that may arrive from our experiments in order to reduce any questions of doubts about the results.
+\end{solved}
 
 \begin{remark}
 It is not mentioned if the authors obtained an ethical approval to conduct their experiment, what ethical standards they follow and if consent from participants has been collected.

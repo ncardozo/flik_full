@@ -163,6 +163,14 @@ Likert score option, expressing whether the participants completely agree ($5$) 
 that reported each given scale.
 
 %%
+\subsection{Performance and scalability}
+\label{sec:scalability}
+
+\sidemargin{par:scalability}{{\fref{rem:scalability}}}
+
+
+
+%%
 \subsection{Discussion}
 \label{sec:discussion}
 
@@ -183,6 +191,52 @@ reaching a faster and more fluent code navigation to inspect the program, identi
 error, and fix the bug, as reported in the time taken to complete each task. Nonetheless, the 
 participants suggested that to increase the usability of \flik \textit{it is desirable to implement more GUI 
 features closer to common features used in other debuggers, as the Visual Studio Code debugger}.
+
+
+%%
+\subsection{Threads to validity}
+\label{sec:threads}
+
+\sidemargin{par:threads}{{\fref{rem:threads}}}
+To conclude the discussion of the results and the experiment we present the threads to validity to 
+our experimentation and the conclusions extracted from it.
+
+\begin{description}[leftmargin=0.1cm, labelindent=0.1cm]
+\item[Threats to external validity] refer to the generalization of the results from our evaluation. 
+\flik is designed as a debugger for \ac{RL} programs enabling developers to inspect the internal state 
+of their agents and the environment state while they execute. In doing so, developers can change the 
+values of variables, and observe agent behavior from any point in the execution. Our evaluation and 
+user study explores the usability of \flik in the case of discrete agents based on the Q-learning 
+algorithm. From the results, we confirm \flik's usability in such cases, and can generalize the results 
+to other discrete algorithms such as SARSA or Multi-armed-bandit~\cite{lattimore20}. However, 
+generalizing the usability to continuous \ac{RL} environments requires further evaluation in such 
+environments, in which the intervention of developers withe the variables and the possibility to 
+observe all environments variables and parameters may be limited due to the sheer volumen of 
+variables, and the use of external \acl{DNN} libraries \flik may not have access to.
+
+\item[Threats to construct validity] refer to the cases in which the evaluation is not exhaustive 
+or selective enough. Our validation is built on the user study of \flik. In the user study we strived to 
+gather users that have at least some basic experience with \ac{RL}. From the open call to the 
+evaluation, the user study had 27 participants. While the participants are all students, they do have
+diverse profiles, maturity level, and experience in working with \ac{RL}. Therefore, we can state that 
+there is no bias in the selection of the participants for the user study.
+
+In addition, the design of the user study was such that the first exercise is familiar to all developers 
+with \ac{RL} experience, used to help participants familiarize themselves with \flik (after the 
+presentation of \flik in a small example). The following tasks in the study are of less familiarity for 
+\ac{RL} developers, the last being a completely new application, to evaluate the effectiveness of \flik 
+in helping developers to understand \ac{RL} agents' behavior, mitigating any previous knowledge 
+developers may have about possible errors in the application. There is no bias about the 
+application selection favoring the usability of \flik over other applications. However, we highlight again 
+the need to evaluate \flik in continuous environments.
+
+\item[Threats to internal validity] refers to the conditions that may have an impact on the 
+phenomena under test. The user study was set so that all participants could execute under the 
+same conditions: characteristics of the machines in which the evaluation was executer, information 
+and documentation of \flik, access to \flik experts, and time constraints to work on the different 
+applications, reducing any bias that may have appear in the execution of the user study 
+compromising the results.
+\end{description}
 
 
 \endinput
