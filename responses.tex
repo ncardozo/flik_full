@@ -60,9 +60,12 @@ Some ideas are repeated a lot, while other (relevant) ones are not mentioned at 
 We present the requirements and execution characteristics in the introduction (\fref[vario]{par:requirements}), and then elaborate on the details of the requirements and inner working in the new  \fref{sec:flik-internals} (\fref[vario]{par:requirements2})
 \end{solved}
 
-\begin{remark}
+\begin{remark}\label{sec:implementation}
 the paper doesn't clarify how Flik was implemented. At the beginning, I thought it was a tool for runtime monitoring, since the authors mention in several places the idea of observing and, if needed, modifying a program execution. However, judging by the commands in the interface of the debugger, I assume it actually includes an instrumented interpreter to simulate the actual execution of Python code, or it makes calls to a Python interpreter, or... In any case, it's essential to describe how Flik is implemented in the paper.
 \end{remark}
+\begin{solved}
+Aligned with \fref{rem:requirements}, we added \fref{sec:flik-internals} describing the implementation of \flik, in particular we: Added a figure with the design and details off \flik to help carry out the explanations.
+\end{solved}
 
 \begin{remark} 
 - Page 2: mentioning that one disadvantage of debugging RL programs is that they're generally used as a black boxes made me think that Flik, in contrast, wouldn't need the source code. But I guess that's not the case. This argument is a bit confusing.
@@ -166,7 +169,7 @@ Rephrased sentence so the error disappeared
 what do you mean by "solving" three different RL programs?
 \end{remark}
 \begin{solved}
-We rephrased the sentence to a meaningful definition of defining an agent to reach a goal in an environmen
+We rephrased the sentence to a meaningful definition of defining an agent to reach a goal in an environment
 \end{solved}
 
 \begin{remark}
@@ -251,9 +254,12 @@ Updated as suggested by the reviewer
 I find the phrase "without having to stop the execution" confusing. Doesn't Flik stop execution when it reaches a breakpoint or advances step by step, etc?
 \end{remark}
 
-\begin{remark}
+\begin{remark}\label{rem:gridworld}
 It would probably be best not to describe the GridWorld example twice. Also, Figure 2 is far from this point in the paper, which can be confusing.
 \end{remark}
+\begin{solved}
+With the reorganization of \fref{sec:solution} we restructure the presentation of the example, leaving a minimal explanation of Gridworld and \fref{fig:gridworld} in that sections, pointing to the full presentation of thee Gridworld details in \fref{sec:evaluation}. This should make the explanations more straightforward. (\fref[vario]{par:gridworld})
+\end{solved}
 
 \begin{remark}
 Page 8. Since you mention debugger commands here, it would be nice to put a reference to Table 2.

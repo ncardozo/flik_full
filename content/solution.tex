@@ -4,22 +4,25 @@
 \section{Flik: A Bug's Life Debugger}
 \label{sec:solution}
 
-The black box behavior of \ac{ML} and \ac{RL} agents posit a problem to understand agents and 
-their behavior, especially if unexpected behavior is observed. We posit debuggers as an appropriate 
-tool to understand agents' behavior. Moreover, we posit debuggers with the possibility to modify 
+The black box behavior of \ac{ML} and \ac{RL} agents posits a problem to understand agents and 
+their behavior, especially if unexpected behavior is observed. We put forward debuggers as an 
+appropriate tool to understand agents' behavior. Moreover, debuggers with the possibility to modify 
 programs' state and continue execution in new execution paths exploiting the modified values are 
-even more appropriate and 
-suitable to understand \ac{RL} agents, given their intrinsic nature of continuous interaction with the 
-environment. However, currently, there is no debugger for \ac{RL} programs with the desired 
-features. The reason for this is that most of the debuggers are postmortem, or do not allow developers
-to go back in time to replay and analyze the program state. Additionally, most of the debuggers do not 
-allow developers to modify variables. In order to contribute to the development of \ac{RL} programs, 
-debugging tools should exhibit the following features:
+even more appropriate to understand \ac{RL} agents, given their intrinsic nature of continuous 
+interaction with the environment. Such property enables developers with the possibility to experiment 
+over the behavior of agents without having to go over the extensive process of stopping agents and 
+going through the complete exploration with the new values.
+
+Currently, most of the debuggers are postmortem, or do not allow developers to go back in time to 
+replay and analyze the program state. Additionally, most debuggers do not allow developers to 
+modify variables. In order to contribute to the development of \ac{RL} programs, 
+debugging tools should exhibit the aforementioned features, which we introduce in the following.
 
 
 %%
 \subsection{\flik in a nutshell}
 
+The \flik back-in-time debugger is based on two main features:
 \begin{description}
     \item[Stepping back:] Due to the execution loop of \ac{RL} programs, we 
     want to have a functionality that will allow us to step back the execution to observe the change 
@@ -34,22 +37,148 @@ debugging tools should exhibit the following features:
     continuously stop and retrain the agent, which can be very costly and time-consuming. 
 \end{description}
 
-These features aim at tackling the problem of interaction with the program, as it allows 
-to inspect the behavior of a program with respect to different variable values. Additionally, 
-developers may interact with the program execution by going forward and backward, observing the 
-effects of specific interactions between the agent and the environment. The capacity to explore the 
-execution (backward and forward) would allow for the evaluation of the behavior and quality of 
-\ac{RL} programs, helping to improve the development of these programs.
+These features aim at tackling the problem of interaction with the program, as it allows to inspect 
+the behavior of a program with respect to different variable values. Additionally, developers may 
+interact with the program by stepping through the execution, both forward and backward, observing 
+the effects of specific interactions between the agent and the environment. The capacity to explore 
+the execution allows developers to evaluate agents' behavior and the quality of the \ac{RL} programs, 
+helping to improve the development of these programs.
 
 With these features in mind, we present \flik: \textsc{A bugs life}, a back-in-time debugger with the 
 possibility to step back in the execution, change values for different variables, and resume execution 
-on different execution paths. \flik is not a traditional debugger; it is valuable to debug \ac{RL} 
-programs, allowing to evaluate the internal state of the agent, the decisions it makes, and the rewards 
-it receives, through the observation of its variables over time. Using the debugger, developers can 
-better understand the execution context of \ac{RL} agents in terms of variables, values, environment, 
-states and the rewards. 
+on different execution paths. Specifically, for the case of \ac{RL} agents this means that using \flik it is 
+possible to: evaluate the internal state of the agent, the decisions it makes, and the rewards 
+it receives, through the observation of agents' variables and hyperparameters over time. Using the 
+debugger, developers can better understand the execution context of \ac{RL} agents in terms of 
+variables, values, environment, states and the rewards. 
 
-\flik is a console-based debugger, constructed over the \ac{PDB} debugger. \flik adds features 
+\begin{figure}[hptb]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/flik_interface.png}
+    \caption{The \flik debugger interface with its main frames to observe the program execution and its internal state}
+    \label{fig:debugger}
+\end{figure}
+
+\fref{fig:debugger} shows \flik's interface working to debug a simple example of the \spy{bubble_sort} 
+function. From the top, the first frame (in the blue rectangle - Execution frame) we have the running 
+execution, in this case the print for the array to be sorted in Line 018 in the second frame. The second 
+frame (in the purple rectangle - Source code frame) shows the source code being debugged. The third 
+frame (in the red rectangle - Variables frame) shows the variables used in the program so far. Finally, 
+in the bottom of the interface we have the interactive console in which developers can send 
+commands to \flik to effectively debug the program.
+
+\sidemargin{par:gridworld}{{\fref{rem:gridworld}}}
+We now use a running example to present the features and commands of \flik. Four 
+our running example we use the Gridworld \ac{RL} benchmark, presented in detail in 
+\fref{sec:evaluation} and shown in \fref{fig:gridworld} as a $10 \times 10$ grid. 
+
+\begin{figure}[hptb]
+  \centering
+  \includegraphics[width=0.4\columnwidth]{figures/gridworld.png}
+  \caption{10x10 gridworld environment example}
+  \label{fig:gridworld}
+\end{figure}
+
+For the purpose of the running example, we will use the Q-learning implementation, shown in 
+\fref{lst:gridworld-learner}, for the agent to execute in the Gridworld environment, explaining the \flik 
+commands used to detect a bug in the code. Running the program, we pay special attention to the 
+\spy{run} function, which we can access using the \spy{n} command until we reach it. Alternatively, it 
+is possible to move directly to a specific execution point, by setting breakpoints in the program. For 
+example, when executing the program, we can use the \spy{c} command to execute until the 
+\spy{breakpoint} in \fref{ln:breakpoint} is reached. Once in the desired function, we use the \spy{n} 
+command to step through it. At particular points in the execution (\eg \fref{ln:stop1}), we can observe 
+variables' values by means of the \spy{p} o \spy{pp} commands. In our example, we use 
+\spy{p self.gamma} to see the value of the \spy{gamma} hyperparameter. 
+
+Continuing with the execution for a couple of episodes to let the agent train, we can use the 
+\spy{variables} command, in \fref{ln:stop2}, to observe the values of the different variables. Upon 
+inspection, we have the following observations. First, the historic value of the \spy{action} is $0$ 
+throughout the program execution. Second, all values in the \spy{qtable} are unchanged (all continue 
+as 0). Third, the value of the \spy{epsilon} hyperparameter is $0.1$. 
+Putting both values together, we note that from the condition in \fref{ln:stop1}, the agent has a 
+high probability of tacking the else branch exploiting the known values. However, as the agent has 
+not trained updating the values, the exploitation is equivalent to random action choosing, and 
+therefore leading to erroneous agent behavior.
+
+\begin{python}[numbers=left,
+	caption={\flik running example of the Gridworld environment},
+	label={lst:gridworld-learner}]
+class Agent:
+  def __init__(self, env, alpha=0.1, gamma=0.6, epsilon=0.1, episodes=10):
+    #hyperparameters
+    self.alpha = alpha
+    self.gamma = gamma
+    self.epsilon = epsilon
+    self.environment = env
+    self.qtable = self.__initdic__() #initialize q-table
+    self.episodes = episodes
+    
+  def run(self, ui_input):
+      done = False
+      counter = 0
+      breakpoint()  ` \label{ln:breakpoint} `
+      for i in range(self.episodes):
+        done = False
+        while not done:
+          current_state = copy.deepcopy(self.environment.state) `\label{ln:back1}`
+          if random.uniform(0,1) < self.epsilon:   ` \label{ln:stop1} `
+            action = self.random_action(current_state)
+          else:
+            action = np.argmax(self.qtable[current_state])  
+          next_state, reward, done, info = self.step(action) ` \label{ln:stop2} `
+          old_value = self.qtable[current_state][action]
+          next_max = np.max(self.qtable[next_state])
+          new_value = (1-self.alpha)*old_value + self.alpha*(reward+self.gamma*next_max)
+          self.qtable[current_state][action] = new_value
+          counter += 1
+        if ui_input == 1:
+          actions, values = self.actions_values()
+          self.environment.plot_action(actions, values)
+        self.environment.reset()
+    return self.qtable
+\end{python}
+
+During the execution we can use \flik to confirm that the root cause of the problem is the value of the 
+\spy{epsilon} hyperparameter. To do this, from \fref{ln:stop2} we can use the command 
+\spy{back_to 18} to go backward in the program execution to \fref{ln:back1}. Then, we can effectively 
+change the value of \spy{epsilon} using the \spy{setvar self.epsilon=0.9} command. Once the change 
+is made, if we continue execution (in a different \flik branch), after reaching \fref{ln:stop2}, we can print 
+the value of the \spy{action} variable (\spy{p action}), to observe now different actions are taken, 
+leading to proper agent training, taken from the different values across the q-table.\footnote{A video of 
+this example execution of \flik is available at \url{https://youtu.be/PkkhT76IYrU?si=vqBjUCSfwRUhEZnJ}}
+
+\fref{tab:flik-commands}, shows a summary of the commands implemented in \flik, where the 
+first six commands in the first block are specific to \flik, and the following 12 commands in the second 
+block are provided with \ac{PDB}. Note from the implementation that, variable evaluation (\spy{p}) and 
+variable value updates (\spy{setvar}) can alternatively be executed directly without using the 
+corresponding commands.
+
+\begin{table}
+  \centering
+  \caption{Description of \flik commands}
+  \input{tables/flik-commands}
+  \label{tab:flik-commands}
+\end{table}
+
+
+%%
+\subsection{\flik internals}
+\label{sec:flik-internals}
+
+\sidemargin{par:requirements2}{{\fref{rem:requirements}}}
+We now turn our attention to the implementation of \flik and its inner workings. \flik is a console-based 
+debugger, constructed over the \ac{PDB} debugger, as shown in the general \flik architecture in 
+\fref{fig:flik-architecture}. 
+
+\begin{figure}[hptb]
+  \centering
+%  \includegraphics[width=1\columnwidth]{figures/flik-architecture}
+  \caption{\flik's architecture and internal details}
+  \label{fig:flik-architecture}
+\end{figure}
+
+\flik reuses many of the functionality available in PDB to instrument and execute Python programs, 
+and adds features 
 such as colored syntax highlighting, tracking of variables' state, and capturing stdout output 
 from executed lines of code. The following are the three major features of \flik:
 \begin{itemize}
@@ -90,120 +219,6 @@ back and a custom interface which allows the user to interact with the debugger.
 displays the code, variables, and execution point, and allows the user (to use the \ac{PDB} 
 functions) to pause, step forward, step back, continue or restart the program, as well as to 
 modify and inspect variables. 
-
-\fref{fig:debugger} shows \flik's interface on a simple example of the \spy{bubble_sort} function. From 
-the top, the first frame (in the blue rectangle Execution frame) we have the running execution, in this 
-case the print for the array to be sorted in Line 18 in the second frame. The second frame (in the 
-purple rectangle Source code frame) shows the source code that is being debugged. The third frame 
-(in the red rectangle Variables frame) shows the variables used in the program so far. Finally, in the 
-bottom of the interface we have the interactive console in which developers can send commands to 
-\flik to effectively debug the program.
-
-\begin{figure}[hptb]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/flik_interface.png}
-    \caption{Debugger tool}
-    \label{fig:debugger}
-\end{figure}
-
-We now use a running example to present the features, commands and inner work of \flik. Four 
-our running example we use the GridWorld \ac{RL} benchmark. The environment consists of a 
-$10 \times 10$ grid, shown in \fref{fig:gridworld}. The agent can move in four directions: up, down, 
-left, and right at every GridWorld cell. However, the movement is not successful in bordering cells 
-or cells adjacent to walls (\ie gray-out cells), as it collides with the walls and bounces back to the 
-starting position.
-The agent's reward is defined obtaining a reward of 1 when the agent gets to the goal state, and a 
-reward of -1 when the agent visits trap states, terminating the execution in both cases. The agent 
-starts in a fixed position, the top left corner of the grid (the blue state in \fref{fig:gridworld}). 
-
-For the purpose of the running example, we will use the Q-learning implementation of the GridWorld 
-agent as shown in \fref{lst:gridworld-learner}, explaining the \flik commands used to detect a bug in 
-the code. Running the program, we pay special attention to the \spy{run} function, which we can 
-access using the \spy{n} command until we reach it. Alternatively, it is possible to move directly to a 
-specific execution point, by setting breakpoints in the program. For example, when executing the 
-program, we can use the \spy{c} command to execute until the \spy{breakpoint} in \fref{ln:breakpoint} 
-is reached. Once in the function, we use the \spy{n} command to step through the function. 
-At particular points in the execution (\eg \fref{ln:stop1}), we can observe variables' values by means 
-of the \spy{p} o \spy{pp} commands. In our example, we could use \spy{p self.gamma} to see the 
-value of the \spy{gamma} hyperparameter. 
-
-After continuing the execution for a couple of episodes to let the agent train, we can use the 
-command \spy{variables}, in \fref{ln:stop2}, to observe the values of the different variables. Upon 
-inspection, we have the following observations. First, the historic value of the \spy{action} is $0$ 
-throughout the program execution. Second, all values in the \spy{qtable} are unchanged (all continue 
-as 0). Third, the value of the \spy{epsilon} hyperparameter is $0.1$. 
-Putting both values together, we note that the from the condition in \fref{ln:stop1}, the agent has a 
-high probability of tacking the else branch exploiting the known values. However, as the agent has 
-not trained updating the values, the exploitation equals to random action choosing and therefore 
-leading to erroneous agent behavior.
-
-\begin{python}[numbers=left,
-	caption={\flik running example of the GridWorld environment},
-	label={lst:gridworld-learner}]
-class Agent:
-  def __init__(self, env, alpha=0.1, gamma=0.6, epsilon=0.1, episodes=10):
-    #hyperparameters
-    self.alpha = alpha
-    self.gamma = gamma
-    self.epsilon = epsilon
-    self.environment = env
-    self.qtable = self.__initdic__() #initialize q-table
-    self.episodes = episodes
-    
-  def run(self, ui_input):
-      done = False
-      counter = 0
-      breakpoint()  ` \label{ln:breakpoint} `
-      for i in range(self.episodes):
-        done = False
-        while not done:
-          current_state = copy.deepcopy(self.environment.state) `\label{ln:back1}`
-          if random.uniform(0,1) < self.epsilon:   ` \label{ln:stop1} `
-            action = self.random_action(current_state)
-          else:
-            action = np.argmax(self.qtable[current_state])  
-          next_state, reward, done, info = self.step(action) ` \label{ln:stop2} `
-          old_value = self.qtable[current_state][action]
-          next_max = np.max(self.qtable[next_state])
-          new_value = (1-self.alpha)*old_value + self.alpha*(reward+self.gamma*next_max)
-          self.qtable[current_state][action] = new_value
-          counter += 1
-        if ui_input == 1:
-          actions, values = self.actions_values()
-          self.environment.plot_action(actions, values)
-        self.environment.reset()
-    return self.qtable
-\end{python}
-
-During the execution we can use \flik to confirm that the root cause of the problem is the \spy{epsilon} 
-hyperparameter. To do this, from \fref{ln:stop2} we can use the command \spy{back_to 18} to go 
-backward in the program execution to \fref{ln:back1}. Then, we can effectively change the value of 
-\spy{epsilon} using the \spy{setvar self.epsilon=0.9} command. Once the change is made, if we 
-continue execution, after reaching \fref{ln:stop2}, we can print the value of \spy{action} (\spy{p action}), 
-to observe now different actions are taken, and the agent can train properly, observing changes for 
-values across the q-table. Video examples of the \flik execution within the GridWorld example are 
-available at \url{https://shorturl.at/rD343}.
-
-\fref{tab:flik-commands}, shows a summary of the commands implemented in \flik, where the 
-first six commands in the first block are specific to \flik, and the following 12 commands in the second 
-block are provided with \ac{PDB}. Note from the implementation that, variable evaluation (\spy{p}) and 
-variable value updates (\spy{setvar}) can alternatively be executed directly without using the 
-corresponding commands.
-
-\begin{table}
-  \centering
-  \caption{Description of \flik commands}
-  \input{tables/flik-commands}
-  \label{tab:flik-commands}
-\end{table}
-
-
-%%
-\subsection{\flik internals}
-\label{sec:flik-internals}
-
-\sidemargin{par:requirements2}{{\fref{rem:requirements}}}
-
 
 \endinput
 
