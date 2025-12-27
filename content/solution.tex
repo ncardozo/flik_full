@@ -27,9 +27,9 @@ The \flik back-in-time debugger is based on two main features:
     \item[Stepping back:] Due to the execution loop of \ac{RL} programs, we 
     want to have a functionality that will allow us to step back the execution to observe the change 
     in state between iterations of the loop. This will let developers interacting directly with the program, 
-    without having to stop the execution,  lose the program state, or the training data already 
-    accumulated. Such feature will help in identifying the root cause of erroneous agent behavior, 
-    whether that is an error in the program's design for particular interactions, or an ill-defined 
+    avoiding the stop-modify-re-run loop which causes to lose the program state, or the training data 
+    already accumulated. Such feature will help in identifying the root cause of erroneous agent 
+    behavior, whether that is an error in the program's design for particular interactions, or an ill-defined 
     hyperparameter. 
     \item [Modifying variables:] While stepping back into the program's execution, we would want to be 
     able to modify variables' values during the execution. Such feature would help to test out the 
