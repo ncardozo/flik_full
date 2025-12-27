@@ -10,8 +10,8 @@ In particular, the participants were provided with three different \ac{RL} progr
 \ac{RL} problems. The problems were chosen according to their familiarity and an increasing 
 environment complexity. 
 \begin{enumerate*}[label=(\arabic*)]
-\item GridWorld, is a standard benchmark for \ac{RL} based on episodic learning.
-\item Rooms, is a common \ac{RL} problem with a similar structure to GridWorld, but with a higher 
+\item Gridworld, is a standard benchmark for \ac{RL} based on episodic learning.
+\item Rooms, is a common \ac{RL} problem with a similar structure to Gridworld, but with a higher 
 complexity, used as an example of the possibility for agents to abstract their knowledge about the 
 environment in hierarchical learning~\cite{pateria21} structures. 
 \item Finally, Driving Assistant is a more recent \ac{RL} environment~\cite{cardozo18ml4pl,cardozo23}, 
@@ -32,25 +32,18 @@ use \flik, documentation of the tool, and an small worked-out example. The probl
 the study are described in the following:\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://github.com/larodriguez22/Flik_Experiments}} 
 
 %%%%
-\paragraph{\textbf{GridWorld.}}
-In its original presentation, the GridWorld environment is a standard benchmark for Q-learning, 
-familiar to most \ac{RL} developers. For the study we use a larger GridWorld environment consisting 
+\paragraph{\textbf{Gridworld.}}
+In its original presentation, the Gridworld environment is a standard benchmark for Q-learning, 
+familiar to most \ac{RL} developers. For the study we use a larger Gridworld environment consisting 
 of a $n \times m$ rectangular  board/grid ($10\times 10$ in our implementation), in which each tile 
-$(i,j)$ represents a specific state of the board. Tiles in the board may be  walls, which agents cannot 
-cross, or have a special exit status for agents to exit the board and terminate the episode. Exit tiles 
-give a reward (positive of $1$ or negative of $-1$) to agents, as shown in \fref{fig:gridworld}. All tile 
-types are unknown to the agent. The agent moves from a fixed starting point in the board, the top left 
-corner at position $(0,0)$, searching for the goal state (\ie exit states with positive reward of $1$). The 
-agent moves from state to state, avoiding  obstacles and undesired exit states (with a reward of $-1$). 
+$(i,j)$ represents a specific state of the board. Tiles in the board may be walls (\ie gray-out cells), 
+which agents cannot cross, or have a special exit status for agents to exit the board and terminate the 
+episode. Exit tiles give a reward (positive of $1$ or negative of $-1$) to agents, as shown in 
+\fref{fig:gridworld}. All tile types are unknown to the agent. The agent moves from a fixed starting point 
+in the board, the top left corner at position $(0,0)$, searching for the goal state (\ie exit states with positive reward of $1$). The agent moves in four directions: up, down, 
+left, and right, from state to state, avoiding obstacles and undesired exit states (with a reward of $-1$). 
 
-\begin{figure}[hptb]
-  \centering
-  \includegraphics[width=0.5\columnwidth]{figures/gridworld.png}
-  \caption{10x10 gridworld environment example}
-  \label{fig:gridworld}
-\end{figure}
-
-The implementation of GridWorld introduces a bug in the definition of the $\epsilon$ hyperparameter, 
+The implementation of Gridworld introduces a bug in the definition of the $\epsilon$ hyperparameter, 
 which leads to undesired behavior in the probability with which actions are taken by the agent, 
 promoting exploitation without learning. The undesired behavior is given as the $\epsilon$ value is too 
 small (\eg $0.1$) so that no or seldom exploration (taking a random action at each state) of the agent 
@@ -65,7 +58,7 @@ solution of increasing the value of $\epsilon$.
 
 %%%%
 \paragraph{\textbf{Rooms.}} 
-The four rooms maze environment has a similar composition to GridWorld, consisting of a 
+The four rooms maze environment has a similar composition to Gridworld, consisting of a 
 $13\times 13$ board/grid divided in $4$ sections (\ie rooms), with walls between them, and a door 
 opening to go from one room to another, as shown in \fref{fig:rooms}. The agent's objective in this 
 environment is to exit through the upper-left room (the green square door in tile $(0,3)$) in the fewest 
@@ -127,7 +120,7 @@ $-500$ for driving on the wrong lane (the driving lane is the right lane of the 
 Additionally, the agent receives a reward of $50$ whenever there is no car in front.
 
 Unlike the previous environment, study participants have not interacted with similar environments, 
-not being a grid-based environment like GridWorld. Additionally, this environment is not episodic, as 
+not being a grid-based environment like Gridworld. Additionally, this environment is not episodic, as 
 the vehicles can continuously drive. Nonetheless, the execution finishes and is immediately restarted 
 upon a crash. \fref{fig:cars-code-example} shows the visual interface of this environment, where the 
 agent's vehicle corresponds to the blue rectangle on top, and driving traffic is represented by red 
@@ -152,7 +145,7 @@ This is the largest task for the participants to analyze with \flik.
 %%%%%%
 \paragraph{\textbf{Study conditions.}}
 For the empirical study we had a session with 27 participants (\ie graduate students). 
-The participants were asked to complete the three tasks (\ie GridWorld, Rooms, Driving Assistant)\footnote{The experiment environment, \flik, and the problems to solve are all available in a Docker distribution available through the Docker command \spy{docker pull lrodriguez22/py-flik-debugger:latest}} 
+The participants were asked to complete the three tasks (\ie Gridworld, Rooms, Driving Assistant)\footnote{The experiment environment, \flik, and the problems to solve are all available in a Docker distribution available through the Docker command \spy{docker pull lrodriguez22/py-flik-debugger:latest}} 
 described previously. The full evaluation session used a time-slot of 1h30 split as follows: 
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item During the first 20 minutes the participants received a tutorial introduction to \flik and its 
