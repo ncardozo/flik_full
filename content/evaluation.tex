@@ -4,17 +4,19 @@
 \section{User Study}
 \label{sec:evaluation}
 
-This section presents the empirical study for \flik. The purpose of the empirical study assessing the 
-user experience and usefulness of \flik, when used to identify and locate bugs in  \ac{RL} programs. 
-In particular, the participants were provided with three different \ac{RL} programs that implement three 
-\ac{RL} problems. The problems were chosen according to their familiarity and an increasing 
-environment complexity. 
+The usability of \flik is evaluated through a user study with a focused group of participants, all having 
+taken a graduate course in \ac{RL}. The purpose of the user study is to assess the user experience 
+and usefulness of \flik, when used to locate bugs in \ac{RL} programs. 
+The evaluation of \flik consists of three tasks representing different types of errors that may arise when 
+developing \ac{RL} programs, Each task concerns a different \ac{RL} environment, increasing and 
+complexity and less familiar to participants as the tasks progress. The tasks to develop by the 
+participants are:
 \begin{enumerate*}[label=(\arabic*)]
 \item Gridworld, is a standard benchmark for \ac{RL} based on episodic learning.
 \item Rooms, is a common \ac{RL} problem with a similar structure to Gridworld, but with a higher 
 complexity, used as an example of the possibility for agents to abstract their knowledge about the 
 environment in hierarchical learning~\cite{pateria21} structures. 
-\item Finally, Driving Assistant is a more recent \ac{RL} environment~\cite{cardozo18ml4pl,cardozo23}, 
+\item Driving Assistant is an \ac{RL} environment~\cite{cardozo18ml4pl,cardozo23} 
 uncommon to most developers, used to learn different tasks for autonomous driving in a continuous 
 environment with more complex interaction between states, actions, and rewards. 
 \end{enumerate*}
