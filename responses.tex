@@ -50,7 +50,7 @@ We did a full revision over the paper and cleaned up the errors suggested by the
 The introduction is overly technical.
 \end{remark}
 \begin{solved}
-We rewrote the whole introduction to have a more abstract presentation of the motivation, and reduce its technicality (\fref[vario]{par:intro}). All the technical details have been moved to a new sections providing the background on \ac{RL} (\fref{sec:background} - \fref[vario]{par:background})  
+We rewrote the whole introduction to have a more abstract presentation of the motivation, and reduce its technicality (\fref[vario]{par:intro}). All the technical details have been moved to a new sections providing the background on \ac{RL} (\fref{sec:rl-background} - \fref[vario]{par:background})  
 \end{solved}
 
 \begin{remark} \label{rem:requirements}
@@ -282,6 +282,9 @@ and usefulness of \flik, when used to locate bugs in \ac{RL} programs"
 \begin{remark}
 Just consider adding a bug? In practice, I guess, programs can contain several bugs that often interact with each other.
 \end{remark}
+\begin{solved}
+
+\end{solved}
 
 \begin{remark}
 the the
@@ -314,17 +317,26 @@ I suggest the authors consider literature on empirical experiments and design, s
 The authors stress efficiently the difficulty and the importance of debugging RL agents, although they argue that "conventional systems typically have a linear and predictable flow [...] allowing developers to trace and debug step-by-step with ease". This is false: first even in linear and predictable systems, debugging through step-by-step can be an enormous pain, and second there are many systems that you can label as "conventional" (eg, web sites/servers, drones, iot/embedded systems, etc.) that either are not linear/predictable by nature (because, eg, of concurrency) or by context (eg, websites/iot/drones' behavior strongly depend on what happens in the uncontrolled external world).
 \end{remark}
 
-\begin{remark}
+\begin{remark}\label{rem:debuggers}
 There is a structure problem: subsection "2.1 what is a debugger" is mostly about what are bugs and what is debugging and then half the section concerns debuggers.
 \end{remark}
+\begin{solved}
+In line with \fref{rem:intro} we re-structured the section "what is a debugger" into \fref{sec:deb}, a section describing the background and offering definitions for bugs and debugging (\fref[vario]{par:debuggers}) also responding to \fref{rem:debugging-process}.
+\end{solved}
 
 \begin{remark}
 The debugging process is defined as "the activity that comes after testing" and seems to come from a paper. In both my experience and what I know from the literature, we debug to understand and therefore, that link with testing cannot be established like that without contextualizing.
 \end{remark}
+\begin{solved}
+We modified the sentence given the confusion caused. We modified the definition following the references suggested by the reviewer in \fref{rem:debugging-process}
+\end{solved}
 
-\begin{remark} 
+\begin{remark} \label{rem:debugging-process}
 The authors actually refer to the debugging process, and their statement (apparently coming from a book) refers to a specific debugging strategy known as "hypothesis testing", that is described, eg, in papers from Thomas D. Latoza (along with **other** debugging strategies such as forward reasoning and backward reasoning). Hypothesis testing is also described in books for practitioners such as "Why Programs Fail" (Zeller, 2009) or "Effective debugging: 66 specific ways to debug software and systems" (Spinellis, 2016). The "debugging process" definition, extracted from a single book, is also too restrictive: debugging "as a process" is described in broader perspectives in practitionners books such as "The science of debugging" (Telles, Hsieh, 2001), "Debugging: The 9 indispensable rules for finding even the most elusive software and hardware problems" (Agans, 2003)"Why Programs Fail" (Zeller, 2009), "Effective debugging: 66 specific ways to debug software and systems" (Spinellis, 2016).
 \end{remark}
+\begin{solved}
+We took into consideration the suggestions made by the reviewer and following the proposed related work expanded and improved our description of the debugging process in \fref{sec:deb} (\fref[vario]{par:debugging-process})
+\end{solved}
 
 \begin{remark}
 "Debuggers for other programming languages", but mainly (very shortly) describes GDB and omniscient debuggers and I cannot see the "other languages" aspect.

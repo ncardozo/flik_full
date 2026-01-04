@@ -1,8 +1,17 @@
 % $Id: problem.tex 
 % !TEX root = ../main.tex
 
-\section{\acl{RL} Basics}
+\section{Background}
 \label{sec:background}
+
+This section presents an introduction to \ac{RL}, covering the definition of the main four elements in 
+an \ac{RL} agent, and the main algorithm we focus on for this work, the Q-learning algorithm. 
+Following that we present the basic definitions of bugs and the debugging process, as background 
+information for the definition of \flik.
+
+%%
+\subsection{\acl{RL} Basics}
+\label{sec:rl-background}
 
 \sidemargin{par:background}{{\fref{rem:intro}}}
 \ac{RL}~\cite{sutton18} encompasses different artificial intelligence techniques and algorithms in 
@@ -54,7 +63,61 @@ to changing situations and eliminating the need for system redesign), and roboti
 providing frameworks and toolkits for designing sophisticated behavioral aspects). 
 
 
+%%
+\subsection{Bugs and Debugging}
+\label{sec:deb}
+
+\sidemargin{par:debuggers}{{\fref{rem:debuggers}}}
+A software bug is defined as erroneous behavior observed during a program's execution, which 
+causes the program to crash or produce incorrect results~\cite{zeller09}. Bugs are common in 
+software development, and can be caused by many factors, such as incorrect program logic, 
+incorrect syntax used, or incorrect data. 
+Bugs can be difficult to identify and fix, especially in large and complex programs. One particular 
+type of bugs, of interest for our work is run-time errors, in which programs compile, but present  
+abnormal behavior caused by incorrect program logic. 
+
+\sidemargin{par:debugging-process}{{\fref{rem:debugging -process}}}
+Debugging is the process of finding and reducing the number of bugs or defects detected in a 
+program~\cite{hindriks12}. The process of debugging involves identifying and isolating an 
+(execution/behavioral) error and modifying the program to fix the bug~\cite{mccauley08}. 
+There are several principles that guide the debugging 
+process~\cite{telles01,zeller09,spinellis16,agans23}, including phases to understand the code, 
+isolate the problem, identifying and reproducing errors, isolating the problem, and fixing the problem, 
+all usually supported by automated and tracking tools.
+
+In particular, in this work we will focus on the principle of confirmation~\cite{matloff08,alaboudi20}, 
+in which, based on a hypothesis, through debugging developers confirm that the expected behavior 
+of the system is actually true in the code. A consequence of this is that whenever the assumptions 
+about the program behavior are not true, developers must identify the bugs causing the problem, 
+and fix them. Moreover, we focus on the use of debuggers to support the process of identifying bugs.
+
+A classic debugging technique is adding traces in the code in terms of printing the values of several 
+variables as the program is executed. However, this is not an efficient or scalable way to debug a 
+program, reason why debuggers exist. A debugger is a tool that allows developers to inspect the 
+state of a program while it is running, and to control its execution. Debuggers are essential tools for 
+software development, as they help developers to identify and fix bugs in their programs. There are 
+many types of debuggers, each with its own set of features and capabilities, but usually the main 
+operations offered by debuggers~\cite{matloff08} are:
+
+\begin{itemize}
+    \item Stepping through code: where developers can run the program stepping at each of the 
+    instructions individually, or step through a number of instructions, stopping at a predefined program 
+    instruction or  \emph{breakpoint}. Additionally, it is possible to step into the execution of a particular 
+    instruction, to observe its behavior in detail. 
+    \item Inspecting variables: where developers can inspect the current values of variables in the 
+    program. This is helpful to understand the change in state, possibly giving clues on possible causes 
+    of the undesired behavior.
+    \item Changing the program state: developers can change the values of variables in the program. 
+    This is useful to test different scenarios during the program execution. However useful, this feature 
+    is seldomly available across debuggers.
+\end{itemize}
 
 
 \endinput
 
+In summary, a debugger is a tool that allows developers to inspect the state of a program, control 
+its execution, and possibly change its state. Driven by these operations, debuggers are essential 
+tools for software development, as they help developers to identify and fix bugs in their programs. 
+In this work, we want to understand \ac{RL} programs; to understand agents' behavior and 
+create higher quality code. Our solution proposes a debugger with all three features previously
+mentioned, to achieve the desired behavior.

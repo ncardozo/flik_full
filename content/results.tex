@@ -8,7 +8,8 @@ This section presents the analysis of the results of the empirical study present
 \fref{sec:evaluation}. The results are presented according to three sections in the survey: General 
 knowledge (\fref{sec:general-knowledge}), Task Effectiveness (\fref{sec:tasks-results}) and Usability 
 (\fref{sec:usability}). Finally, a discussion section has the analysis of the results form the survey. All 
-data obtained from the evaluation is available as part of the data and replication package.
+data obtained from the evaluation is available as part of the data and replication package and the 
+online appendix (\url{https://flaglab.github.io/Flik_Experiments/}).
 
 
 %%
@@ -77,7 +78,7 @@ was reported to be easy, it took participants a long time to complete, because t
 which participants had to get familiarized with the tool. 
 
 The second task was harder than the first one, as participants were not familiar with the problem 
-(\ie Rooms), and its complexity is higher (when compared to GridWorld). Most participants took 
+(\ie Rooms), and its complexity is higher (when compared to Gridworld). Most participants took 
 longer to finish task 2 (\fref{fig:task2}) and some struggled finding the root cause of the bug in the 
 program.  Such result is expected, as the bug introduced in task 2, does not exhibit a completely 
 wrong agent behavior, but a more subtle interaction with the environment and the obtained Q-values. 
@@ -167,6 +168,12 @@ that reported each given scale.
 \label{sec:scalability}
 
 \sidemargin{par:scalability}{{\fref{rem:scalability}}}
+This section presents the performance and scalability of running \flik on top of the \ac{RL} 
+application, versus the execution of just the \ac{RL} application in the case of the our three \ac{RL} 
+applications (Gridworld, Rooms, and Driving Assistant). The evaluation takes into account the 
+performance of the application in terms of required memory, and delay of executed \flik operations. 
+The scalability is considered with respect to the size of the state space of the applications evaluated. 
+
 
 
 

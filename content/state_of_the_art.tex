@@ -4,59 +4,8 @@
 \section{State of the Art}
 \label{sec:state_of_the_art}
 
-This section presents the state of the art with respect to four main dimensions, covering the definition 
-of debuggers, the main debuggers in other programming languages, existing Python debuggers, and, 
+This section presents the state of the art from three perspectives:, the main debuggers in other programming languages, existing Python debuggers, and, 
 finally, debuggers for \ac{AI} programs in general, and \ac{RL} specifically.
-
-
-%%
-\subsection{What is a Debugger?}
-\label{sec:deb}
-
-A software bug is defined as erroneous behavior observed during a program's execution, causes the 
-program to crash or produce incorrect results. Bugs are common in software development, and can 
-be caused by many factors, such as incorrect program logic, incorrect syntax used, or incorrect data. 
-Bugs can be difficult to identify and fix, especially in large and complex programs. In this work we 
-focus on run-time errors, in which programs compile, but present an abnormal behavior caused by 
-incorrect program logic. Debugging is the process of finding and reducing the number of 
-bugs or defects in a program~\cite{hindriks12}. In practical terms, debugging is defined as the 
-activity that comes after testing, when developers identify an (execution/behavioral) error and modify
-the program to fix the bug~\cite{mccauley08}. 
-
-There are several principles that guide the debugging process. These principles are explained in the 
-book the Art of debugging with \ac{GDB}, \ac{DDD}, and Eclipse~\cite{matloff08}. The fundamental 
-principle that drives the essence of debugging is the \emph{Principle of Confirmation}: fixing a 
-program with bugs is a process of confirming that the things one believes to be true are actually true in 
-the code~\cite{matloff08}. This means that whenever the assumptions about the program behavior 
-are not true, developers must identify the bug(s) causing the problem, and fix it(them).
-
-A classic debugging technique is adding traces in the code in terms of printing the values of several 
-variables as the program is executed. However, this is not an efficient or scalable way to debug a 
-program, reason why debuggers exist. A debugger is a tool that allows developers to inspect the 
-state of a program while it is running, and to control its execution. Debuggers are essential tools for 
-software development, as they help developers to identify and fix bugs in their programs. There are 
-many types of debuggers, each with its own set of features and capabilities, but usually the main 
-operations offered by debuggers~\cite{matloff08} are:
-
-\begin{itemize}
-    \item Stepping through code: where developers can run the program stepping at each of the 
-    instructions individually, or step through a number of instructions, stopping at a predefined program 
-    instruction or  \emph{breakpoint}. Additionally, it is possible to step into the execution of a particular 
-    instruction, to observe its behavior in detail. 
-    \item Inspecting variables: where developers can inspect the current values of variables in the 
-    program. This is helpful to understand the change in state, possibly giving clues on possible causes 
-    of the undesired behavior.
-    \item Changing the program state: developers can change the values of variables in the program. 
-    This is useful to test different scenarios during the program execution. However useful, this feature 
-    is seldomly available across debuggers.
-\end{itemize}
-
-In summary, a debugger is a tool that allows developers to inspect the state of a program, control 
-its execution, and possibly change its state. Driven by these operations, debuggers are essential 
-tools for software development, as they help developers to identify and fix bugs in their programs. 
-In this work, we want to understand \ac{RL} programs; to understand agents' behavior and 
-create higher quality code. Our solution proposes a debugger with all three features previously
-mentioned, to achieve the desired behavior.
 
 
 %%
