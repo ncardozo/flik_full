@@ -76,7 +76,7 @@ Bugs can be difficult to identify and fix, especially in large and complex progr
 type of bugs, of interest for our work is run-time errors, in which programs compile, but present  
 abnormal behavior caused by incorrect program logic. 
 
-\sidemargin{par:debugging-process}{{\fref{rem:debugging -process}}}
+\sidemargin{par:debugging-process}{{\fref{rem:debugging-process}}}
 Debugging is the process of finding and reducing the number of bugs or defects detected in a 
 program~\cite{hindriks12}. The process of debugging involves identifying and isolating an 
 (execution/behavioral) error and modifying the program to fix the bug~\cite{mccauley08}. 
@@ -86,18 +86,24 @@ isolate the problem, identifying and reproducing errors, isolating the problem, 
 all usually supported by automated and tracking tools.
 
 In particular, in this work we will focus on the principle of confirmation~\cite{matloff08,alaboudi20}, 
-in which, based on a hypothesis, through debugging developers confirm that the expected behavior 
-of the system is actually true in the code. A consequence of this is that whenever the assumptions 
-about the program behavior are not true, developers must identify the bugs causing the problem, 
+in which developers state a hypothesis about the expected behavior of the system, and then confirm 
+its veracity. A consequence of this is that whenever the hypothesis 
+about the program behavior is not true, developers must identify the bugs causing the problem, 
 and fix them. Moreover, we focus on the use of debuggers to support the process of identifying bugs.
 
-A classic debugging technique is adding traces in the code in terms of printing the values of several 
+A classic debugging technique is the use of traces in the code through printing the values of several 
 variables as the program is executed. However, this is not an efficient or scalable way to debug a 
-program, reason why debuggers exist. A debugger is a tool that allows developers to inspect the 
-state of a program while it is running, and to control its execution. Debuggers are essential tools for 
-software development, as they help developers to identify and fix bugs in their programs. There are 
-many types of debuggers, each with its own set of features and capabilities, but usually the main 
-operations offered by debuggers~\cite{matloff08} are:
+program. 
+\sidemargin{par:logs}{{\fref{rem:logs}}}
+An improvement over the use of traces is the use of logs~\cite{yin20}, in which variables values and 
+specific events are recorded into an external log, to then be analyzed after the program execution. 
+The use of however useful, requires the complete execution of the system (or until a crashing event 
+occurs), to then analyze  variables and their values for correctness.
+An alternative to post-mortem analysis is the use of debuggers, which allow developers to inspect the 
+state of programs while they execute, offering control over the execution. Debuggers are essential 
+tools for software development, as they help developers to identify and fix bugs in their programs. 
+There are many types of debuggers, each with its own set of features and capabilities, but usually 
+the main operations offered by debuggers~\cite{matloff08} are:
 
 \begin{itemize}
     \item Stepping through code: where developers can run the program stepping at each of the 
