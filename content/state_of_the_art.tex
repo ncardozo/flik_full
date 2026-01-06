@@ -4,15 +4,16 @@
 \section{State of the Art}
 \label{sec:state_of_the_art}
 
-This section presents the state of the art from three perspectives:, the main debuggers in other programming languages, existing Python debuggers, and, 
-finally, debuggers for \ac{AI} programs in general, and \ac{RL} specifically.
+This section presents the state of the art from three perspectives:, the main debuggers in other 
+programming languages, existing Python debuggers, debuggers for \ac{AI} programs in general, 
+including debuggers for \ac{RL} programs specifically.
 
 
 %%
 \subsection{Debuggers for other programming languages}
 \label{sec:other}
 
-We now turn our attention to the state of the art in debugging tools available for different 
+We first turn our attention to the state of the art in debugging tools available for different 
 programming languages. There are many debugging tools available for different programming 
 languages, each with its own set of features and capabilities, most of them integrated with IDEs as
 built-in debugging tools that allow developers to inspect programs' behavior during their execution. 
@@ -126,25 +127,44 @@ features they offer.
 \subsection{Debuggers for \ac{AI} programs}
 \label{sec:ai}
 
-Finally, we discuss the debuggers or debugger-like tools available for \ac{AI} and \ac{ML} programs. 
-\ac{ML} programs are often debugged using visualization tools that allow developers to observe the 
-program's behavior and analyze their internal state. In supervised learning, which involves the use of  
-static datasets, which are not applicable to the case of \ac{RL} programs. Nonetheless, the work on 
-\ac{ML} debugging tools represent an important step in the state-of-the-art for the creation of 
-visualization and debugging tools for \ac{RL} programs.
-However, most of the existing tools are postmortem, not allowing developers to interact with the 
+We now discuss the debuggers or debugger-like tools available for \ac{AI} and \ac{ML} programs. 
+Identifying the root causes of bugs in machine learning systems is a complex task. Some bugs may 
+originate within the models themselves, and their black-box nature makes pinpointing faults especially 
+difficult. Additionally, the code used to train or run these models might be flawed, adding another layer 
+of complexity. In systems that rely on \ac{ML} pipelines, bugs may not reside in the individual 
+components but rather in how these components interact. Hardware miss-configurations are also a 
+potential source of faults. Unfortunately, traditional debuggers embedded in IDEs are limited when 
+detecting \ac{ML}-specific bugs. Therefore, there is an increasing interest on techniques and tools for 
+debugging and testing \ac{ML} models.  
+
+\ac{ML} programs are often debugged using visualization tools that allow developers to observe 
+the program's behavior and analyze their internal state. The advance on \ac{ML} debugging tools 
+represent an important step in towards  visualization and debugging tools for \ac{RL} programs.
+Most of the existing tools are postmortem, not allowing developers to interact with the 
 program during execution; therefore, making the tools unsuitable to analyze \ac{RL} programs and 
 the continuous interaction between the environment and the agent.
 
-TensorBoard~\cite{tensorboard} is a 
-visualization tool for TensorFlow, one of the most popular machine learning libraries. 
-TensorBoard allows developers to visualize the behavior of their machine learning models, 
-including training graphs, variable distributions, and model structure visualizations. However, 
-TensorBoard does not allow developers to interact with the model during execution, which is 
-essential for debugging \ac{RL}.
+CockPit~\cite{schneider21} is an open source debugging tool designed for deep neural network 
+training, enabling practitioners to observe internal training dynamics in real time —much like 
+traditional debuggers, it provides insights into program execution. Rather than relying solely on loss 
+and accuracy curves, Cockpit offers a suite of instruments that monitor higher-order metrics such as 
+gradient statistics, curvature, and sharpness, which are now efficiently computable during training. 
+These insights help identify algorithmic failure modes—like unsuitable learning rates or optimization 
+plateaus—and support more informed adjustments. Available as an open-source PyTorch package, 
+Cockpit enhances both the interpretability and explainability of deep learning processes by revealing 
+previously opaque aspects of training behavior.
 
-Another implementation for debugging \ac{RL} programs is \ac{Vizarel} ~\cite{deshpande20}.
-\ac{Vizarel} implements an interactive visualization tool for debugging and interpreting \ac{RL} 
+TensorFlow offers several tools for debugging tensorFlow programs such as TensorFlow Debugger 
+and TensorBoard Debugger~\cite{tensorboard}. The former allows for interactive execution of 
+TensorFlow graphs, setting breakpoints, and inspecting tensor values in real-time.  The debugger 
+can also be used in monitoring mode to  logs various aspects (at runtime) of a tensor flow program 
+by instrumenting it with API calls.  The debugger can be combined with the TensorBoard to have 
+visualizations/inspectors of the program state such as alerts, python execution timeline, graph 
+executions, stack trace, and a source code viewers. However, TensorBoard does not allow 
+developers to interact with the model during execution, which is essential for debugging \ac{RL}.
+
+\ac{Vizarel}~\cite{deshpande20} is a debugger for \ac{RL}. \ac{Vizarel} implements an interactive 
+visualization tool for debugging and interpreting \ac{RL} 
 programs. The system offers different views that encapsulate the spatial and temporal dimensions 
 of agent policies. The tool consists of a set of \emph{viewport modules}, each of which is an 
 abstract entity that can be backed by different specs, conditioned on the underlying 
@@ -178,7 +198,14 @@ are actual debuggers, leaving a gap in the current literature, which is addresse
 our work. Our work proposes a debugger that allows the user to navigate through the execution 
 history, modify the values of variables, and resume the execution from a specific point in time, 
 performs into creating better \ac{RL} programs.
+Open source and commercial tools like CockPit, DeepKit, TensorFlow Debugger, Amazon SageMaker 
+Debugger,  TensorWatch, and Neptune.ai offer different features to debug/monitor ML systems. 
+However, to the best of our knowledge, there is no open source option to debug  
+\ac{RL} programs. 
 
 
 \endinput
+
+ 
+
 
