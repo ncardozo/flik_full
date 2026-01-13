@@ -85,13 +85,13 @@ and in particular DeloreanJS, as a reference to create our debugger for \ac{RL} 
 Given that  most \ac{RL} programs are written in Python, we pay special attention to existing 
 debuggers for Python. There are several Python debuggers available. We focus on those debuggers
 that have support for the features required to debug \ac{RL} programs, such as the ability to navigate 
-through an execution history (like a time travel debugger), and the ability to modify the values
+through the execution history (like a time travel debugger), and the ability to modify the values
 of variables and resume the execution from a specific point in time.
 
 % PDB
 The \ac{PDB}~\cite{python-pdb} debugger is the built-in Python Debugger in CPython~\cite{shaw21} 
-(the standard Python bytecode interpreter), implemented by several IDEs that provide a missing 
-visual interface. \ac{PDB} is a powerful interactive source code debugger for Python programs, 
+(the standard Python bytecode interpreter), implemented by several IDEs that provide a \ac{GUI} for 
+the debugger. \ac{PDB} is a powerful interactive source code debugger for Python programs, 
 implemented as a module that can be used in Python scripts. \ac{PDB} provides a command-line 
 interface for debugging Python programs, allows developers to define breakpoints, step through 
 program instructions, inspect variables, and evaluate expressions. Additionally, \ac{PDB} provides 
@@ -108,11 +108,11 @@ debug a program after it has crashed. However, PuDB does not have the ability to
 a program's execution history, modify values of variables, or resume execution from a specific point 
 in time. Nevertheless, the history navigation feature can be simulated placing breakpoints in the 
 code and restarting the execution until the breakpoint is reached. The UI makes it possible to go 
-through the code and see the variables and the stack trace in a user-friendly fashoin.
+through the code and see the variables and the stack trace in a user-friendly fashion.
 
 % PyTrace
 PyTrace~\cite{pytrace} is a time travel recorder/analyzer for Python. PyTrace records code execution, 
-variables and stack frames. It has a UI that allows developers to navigate through the code, 
+variables and stack frames. It has a \ac{GUI} that allows developers to navigate through the code, 
 see the variables and the stack trace, and it is very user-friendly. However, PyTrace is not 
 a full-featured debugger, as it does not allow you to change the values of variables, or do 
 any other operation available to debuggers. PyTrace works as a tool to understand the behavior of 
@@ -121,15 +121,14 @@ path),  with different  graphs to see the state of your variables at a moment in
 
 % RevPDB
 \ac{RevPDB}~\cite{revdeb} is a reverse debugger for Python programs, RevPDB is an extension of 
-\ac{PDB} built on top of the PyPy interpreter, allowing developers to go forward and backward in time. 
-However, RevPDB is not a full-featured debugger, nor it has a user-friendly UI, as it is a proof of 
-concept of the time traveling features, and it is not currently maintained.
-
+\ac{PDB} built on top of the PyPy interpreter, allowing developers to step forward and backward in 
+the execution. However, RevPDB is not a full-featured debugger, nor it has a user-friendly GUI, as it 
+is a proof of concept of the time traveling features, and it is not currently maintained.
 
 % UDB
 \ac{UDB}~\cite{udb} is a proprietary debugger, developed by the Company Undo, for Python 
-programs that allows developers to navigate through time and inspect the state of the program at a 
-previous moment in time. \ac{UDB} works on the principle of first recording 
+programs that allows developers to navigate through time and inspect the state of the program at  
+previous execution steps. \ac{UDB} works on the principle of first recording 
 a program while it is running normally and then replaying the execution while allowing the 
 developer to navigate and inspect the program's state at different points in time. \ac{UDB} works at 
 the process level, rewinding and replaying the state of the entire process. Technically, 
