@@ -10,48 +10,72 @@ including debuggers for \ac{RL} programs specifically.
 
 
 %%
-\subsection{Debuggers for other programming languages}
+\subsection{Debugging Approaches and Debuggers}
 \label{sec:other}
 
-We first turn our attention to the state of the art in debugging tools available for different 
+\sidemargin{par:other-langs}{{\fref{rem:other-langs}}}
+We first present the state of the art in debugging approaches and representative tools in different 
 programming languages. There are many debugging tools available for different programming 
 languages, each with its own set of features and capabilities, most of them integrated with IDEs as
 built-in debugging tools that allow developers to inspect programs' behavior during their execution. 
 However, there are also standalone debugging tools that can be used with different 
 programming languages, and that offer more advanced features and capabilities than the 
-built-in debugging tools of IDEs. 
+built-in debugging tools of IDEs. Here we present debugger representatives according to the 
+debugging approach taken.
 
-Some of the most popular debugging tools include \ac{GDB}~\cite{stallman11}, 
-which stands for GNU Project Debugger and is a powerful 
-debugging tool for C and C++ (although it also supports other programming languages,
-like Ada, Go, or Rust). GDB helps developers to inspect the internals of C programs while 
-they are executing. \ac{GDB} works on binary executable files produced during compilation. During 
-execution, \ac{GDB} allows developers to observe exactly what happens when a program 
-crashes. \ac{GDB} consists of three major subsystems~\cite{stallman11}. 
-\begin{enumerate*}[label=(\arabic*)] 
-\item The user interface subsystems, consists of several actual interfaces, plus their supporting code. 
-\item The symbol handling subsystem, consists of object file readers, debugging info interpreters, 
-symbol table management, source language expression parsing, and type and value printing. 
-\item The target system handling consists of execution control, stack frame analysis, and 
-physical target manipulation.
-\end{enumerate*}
+\begin{description}
+\item[Breakpoint debuggers.] Breakpoint debugging lets developers to define breakpoints in which 
+a debugger program can stop during the execution of the program to debug. At each breakpoint it is 
+possible to inspect the state of the program and its memory, and then resume the program execution 
+(either stepping into/through the instructions, or in a continuous execution).
 
-DeloreanJs~\cite{leger23} is a back-in-time debugger for JavaScript programs. The value of 
-back-in-time debuggers is the possibility to rewinding execution to a specific point, allowing the 
-possibility for developers to, for instance, test different variable values within the same execution 
-context, to better understand errors or explore hypothetical scenarios in the program's execution 
-evolution~\cite{hofer06,lienhard09}. DeloreanJs has three main features: the ability to navigate 
+\ac{GDB}~\cite{stallman11} is a breakpoint-based source-code compiler, mainly used C and C++ 
+(although it also supports other programming languages, like Ada, Go, or Rust). GDB helps 
+developers to inspect the internals of their (C/C++) programs while they are executing. The Eclipse
+debugger~\cite{matloff08} also supports breakpoint debugging through a GUI for Java and Scala 
+programs. Similarly, the Dr Racket debugger for Racket\footnote{\url{https://racket-lang.org}} enables 
+execution to step both forward and back from a breakpoint.
+
+\item[Omniscient debuggers.] Omniscient debugging (also back-in-time or reversible debuggers) 
+records the execution history of a program and let developers to explore the execution stepping 
+forward and back from any given execution point (\ie breakpoint or program state)~\cite{hofer06}. 
+
+The omniscient debugger for Java~\cite{pothier07} records all events that take place during the 
+execution creating a trace history. JARDIS~\cite{barr16} is an omniscient debugger for JavaScript 
+tracing web application events. JARDIS offers a GUI to navigate the recorded trace. Other JavaScript 
+debuggers offer omniscient features together with the possibility of monitor recorded traces remotely, 
+from running applications~\cite{trackjs, raygun}. Flow-centric back-in-time debugger~\cite{lienhard09} 
+is a SmallTalk debugger that that on top of enabling step-backs, it also enables the possibility to 
+explore additional execution contexts.
+
+\item[Replay-based debuggers.] Replay-based debuggers let developers to re-execute programs 
+with the exact same behavior they originally executed from given checkpoints in the program.
+
+Jokey~\cite{saito05} enables replay-based debugging for C. With Jockey developers can replay 
+program executions to analyze program behavior from specific checkpoints. 
+QueryPoint~\cite{mirghasemi11} is a Javascript replay-based debugger let developers to go back to 
+the last changes of a variable (\ie a checkpoint) and observe the execution from that point on, with 
+the possibility of changing the variable's value.
+
+\item[Timepoint debuggers.] Timepoint debugging constitute a combination of the previously 
+described approaches. In timepoint debuggers execution can step back to a timepoint (similar to a 
+breakpoint), in which variables' values can be changed to re-execute (\ie replay the execution) in a 
+new timeline. To enable re-execution, the debugger records the state and behavior of the program, 
+similar to omniscient and repay-based debuggers.
+
+DeloreanJs~\cite{leger23} is novel debugger implementing the ideas of timepoint debuggers for 
+JavaScript programs. DeloreanJs has three main features: the ability to navigate 
 through an execution history, modify values of a variable, and resume execution from a timepoint (at 
 specific execution points in the past)~\cite{leger23}. DeloreanJS extends continuations with static 
 analysis functionalities to capture the current program state and store the (history of) variable's 
-values. There are several other debuggers for Javascript, most of them based on the use of 
-breakpoints, in which variables cannot be modified to resume current execution with the new values, 
-similar to the behavior offered in \ac{GDB}.
+values. 
+\end{description}
 
 We note the functionality to go back in time, observe the program's state at a previous moment and 
-execute a new timeline with the new values, offered by DeloreanJS, and in general back-in-time 
-debuggers, is desirable in the context of \ac{RL} programs. Therefore, we use  back-in-time 
-debuggers, and DeloreanJS, as a reference to create our debugger for \ac{RL} programs.
+execute a new timeline with the new values, available in timepoint debuggers as DeloreanJS, 
+is desirable in the context of \ac{RL} programs due to the possibility of exploring different 
+configurations as part of the same execution session. We take inspiration from such features,
+and in particular DeloreanJS, as a reference to create our debugger for \ac{RL} programs.
 
 
 %%
