@@ -128,7 +128,7 @@ is a proof of concept of the time traveling features, and it is not currently ma
 % UDB
 \ac{UDB}~\cite{udb} is a proprietary debugger, developed by the Company Undo, for Python 
 programs that allows developers to navigate through time and inspect the state of the program at  
-previous execution steps. \ac{UDB} works on the principle of first recording 
+previous execution steps. \ac{UDB} works on the priciple of first recording 
 a program while it is running normally and then replaying the execution while allowing the 
 developer to navigate and inspect the program's state at different points in time. \ac{UDB} works at 
 the process level, rewinding and replaying the state of the entire process. Technically, 
@@ -151,6 +151,7 @@ features they offer.
 \label{sec:ai}
 
 We now discuss the debuggers or debugger-like tools available for \ac{AI} and \ac{ML} programs. 
+
 Identifying the root causes of bugs in machine learning systems is a complex task. Some bugs may 
 originate within the models themselves, and their black-box nature makes pinpointing faults especially 
 difficult. Additionally, the code used to train or run these models might be flawed, adding another layer 
@@ -162,7 +163,7 @@ debugging and testing \ac{ML} models.
 
 \ac{ML} programs are often debugged using visualization tools that allow developers to observe 
 the program's behavior and analyze their internal state. The advance on \ac{ML} debugging tools 
-represent an important step in towards  visualization and debugging tools for \ac{RL} programs.
+represent an important step towards visualization and debugging tools for \ac{RL} programs.
 Most of the existing tools are postmortem, not allowing developers to interact with the 
 program during execution; therefore, making the tools unsuitable to analyze \ac{RL} programs and 
 the continuous interaction between the environment and the agent.
@@ -177,11 +178,11 @@ plateaus—and support more informed adjustments. Available as an open-source Py
 Cockpit enhances both the interpretability and explainability of deep learning processes by revealing 
 previously opaque aspects of training behavior.
 
-TensorFlow offers several tools for debugging tensorFlow programs such as TensorFlow Debugger 
+TensorFlow offers several tools for debugging \ac{ML} programs such as TensorFlow Debugger 
 and TensorBoard Debugger~\cite{tensorboard}. The former allows for interactive execution of 
-TensorFlow graphs, setting breakpoints, and inspecting tensor values in real-time.  The debugger 
-can also be used in monitoring mode to  logs various aspects (at runtime) of a tensor flow program 
-by instrumenting it with API calls.  The debugger can be combined with the TensorBoard to have 
+TensorFlow graphs, setting breakpoints, and inspecting tensor values in real-time. The debugger 
+can also be used in monitoring mode, to log various aspects (at runtime) of a tensor flow program 
+by instrumenting it with API calls. The debugger can be combined with TensorBoard to have 
 visualizations/inspectors of the program state such as alerts, python execution timeline, graph 
 executions, stack trace, and a source code viewers. However, TensorBoard does not allow 
 developers to interact with the model during execution, which is essential for debugging \ac{RL}.
@@ -196,25 +197,30 @@ does not allow the user to interact with the variables during execution, which l
 process, having to wait until the end of the training run to know whether the agent is learning correctly 
 or not.
 
-\citet{rajan23} present a tool called \ac{MDP} Playground. This platform is intended to help 
+The \ac{MDP} Playground~\cite{rajan23} is a platform intended to help 
 developers and researchers to understand \ac{RL} agents better on toy complex environments, and 
 to create unit tests characterizing agents' behavior  on toy \ac{MDP} examples, based on the 
 OpenGym library. The problem addressed by \ac{MDP} Playground is the fragility of \ac{RL} 
-programs, especially with the growth of deep \ac{RL} research growing. The complexity of the 
+programs, especially with the growth of deep \ac{RL} research. The complexity of the 
 dynamics of \ac{RL} programs increases, leading to difficulties in identifying states or rewards 
 distribution; if the agent's policy is not as expected, debugging \ac{RL} programs becomes 
-hard~\cite{rajan23}. The idea with \ac{MDP} Playground is to open the programs, making their 
-internal state available, to understand the behavior of the agent. Based only on toy examples, 
+hard~\cite{rajan23}. The idea with the \ac{MDP} Playground is to open programs, making their 
+internal state available, to understand the behavior of the agent. Based only on toy examples, the
 \ac{MDP} Playground is not scalable, nor it is suitable for real-world applications, but a 
-proof-of-concept good to understand the behavior of \ac{RL} agents. While the \ac{MDP} Playground 
-is not a debugger, it can help to debug the program by understanding the behavior of the agent in a 
-controlled environment.
+proof-of-concept suitable to understand the behavior of \ac{RL} agents. While the \ac{MDP} 
+Playground is not a debugger, it can help to debug the program by understanding the behavior of 
+the agent in a controlled environment.
 
 Finally, another recent work to debug \ac{RL} programs, sets as its purpose to gain trust in \ac{AI} 
 programs using systematic testing~\cite{steinmetz21}. Erroneous program behavior (\ie bugs) lead to 
 a bad agent policy, for example, not reaching the goal, or not learning the correct policy. The purpose 
 of the work is to provide a systematic testing approach to find bugs. As part of the process, the tool 
-offers a methodology to find potential bugs, or confirm a bug exists, using the Framework Fuzzing.
+offers a methodology to find potential bugs, or confirm a bug exists, using the fuzzing within the 
+framework. 
+\sidemargin{par:fuzzing}{{\fref{rem:fuzzing}}}
+The idea is to modify a given program state $s_0$, through random walks to state $s$, to fin a if the 
+value function on state $s$ dominates that of state $s_0$, yielding to an improved policy an avoiding 
+the bug state $s_0$. 
 
 While the approaches presented are interesting to help understand \ac{RL} programs, none of them 
 are actual debuggers, leaving a gap in the current literature, which is addressed as the main focus of 
