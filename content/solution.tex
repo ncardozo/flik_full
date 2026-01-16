@@ -4,12 +4,14 @@
 \section{Flik: A Bug's Life Debugger}
 \label{sec:solution}
 
-The black box behavior of \ac{ML} and \ac{RL} agents posits a problem to understand agents and 
-their behavior, especially if unexpected behavior is observed. We put forward debuggers as an 
-appropriate tool to understand agents' behavior. Moreover, debuggers with the possibility to modify 
-programs' state and continue execution in new execution paths exploiting the modified values are 
-even more appropriate to understand \ac{RL} agents, given their intrinsic nature of continuous 
-interaction with the environment. Such property enables developers with the possibility to experiment 
+\ac{ML} and \ac{RL} agents are normally built from off-the-shelf libraries and algorithms which posits 
+a problem to understand abnormalities in agents' behavior. This problem is increased when libraries 
+are black-box, as it is not possible to have fine-grained observations about the behavior of the 
+libraries. In cases in which developers do have access to the learning behavior of \ac{RL} agents, 
+debugger are an appropriate tool to understand their behavior. Moreover, if the debugging process 
+enables developers to modify programs' state without having to stop and re-start execution, the 
+evaluation of the agents' behavior is enhanced, given their intrinsic nature of continuous 
+interaction with the environment. Such property allows developers to experiment 
 over the behavior of agents without having to go over the extensive process of stopping agents and 
 going through the complete exploration with the new values.
 

@@ -70,6 +70,11 @@ Aligned with \fref{rem:requirements}, we added \fref{sec:flik-internals} describ
 \begin{remark} 
 - Page 2: mentioning that one disadvantage of debugging RL programs is that they're generally used as a black boxes made me think that Flik, in contrast, wouldn't need the source code. But I guess that's not the case. This argument is a bit confusing.
 \end{remark}
+\begin{solved}
+We modified the argument to remove the confusion, stating that such libraries are used off-the-shelf plugged into an application, usually leaving that part of the agent's behavior overlooked, specially in the case those modules are black-boxes developers do not have access to. Without access it is not possible to observe the fine-grained behavior of such libraries.
+
+We also clarified this point in \fref{sec:solution} where a similar argument was present
+\end{solved}
 
 \begin{remark}\label{rem:logs}
 section 2.1: I missed some text about the use of logs in program debugging.
@@ -91,7 +96,7 @@ What happens if there are I/O operations?
 Does it accept 100\% of Python? 
 \end{remark}
 \begin{solved}
-\flik accepts all of Python being built on top of PDB, which already accepts all of Python
+\flik accepts all of Python being built on top of PDB, which already accepts all of Python. This is clarified in \fref{sec:flik-internals}
 \end{solved}
 
 \begin{remark}
