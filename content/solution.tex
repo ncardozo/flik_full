@@ -25,31 +25,36 @@ debugging tools should exhibit the aforementioned features, which we introduce i
 %%
 \subsection{\flik in a nutshell}
 
-The \flik back-in-time debugger is based on two main features:
+To manage the complexity of \ac{RL} systems, and to mitigate the time consuming process of 
+stopping-modifying-starting-training \ac{RL} agents to evaluate different learning parameters o 
+algorithm values, the \flik back-in-time debugger is based on two main features:
 \begin{description}
-    \item[Stepping back:] Due to the execution loop of \ac{RL} programs, we 
-    want to have a functionality that will allow us to step back the execution to observe the change 
-    in state between iterations of the loop. This will let developers interacting directly with the program, 
-    avoiding the stop-modify-re-run loop which causes to lose the program state, or the training data 
-    already accumulated. Such feature will help in identifying the root cause of erroneous agent 
+    \item[Stepping back:] Due to the extend of the execution loop in \ac{RL} programs, we 
+    want to have a functionality that will allow developers to step back the execution to observe the 
+    changes in the state between loop iterations, without having to re-start the complete execution.  
+    This feature is adopted from omniscient debuggers.
+    Stepping back will let developers interacting directly with the program, 
+    avoiding the stop-modify-re-start process which causes to lose the program state, or the training 
+    data already accumulated. Such feature will help in identifying the root cause of erroneous agent 
     behavior, whether that is an error in the program's design for particular interactions, or an ill-defined 
     hyperparameter. 
-    \item [Modifying variables:] While stepping back into the program's execution, we would want to be 
-    able to modify variables' values during the execution. Such feature would help to test out the 
-    behavior of an agent with different state-values, or hyperparameters, without having to 
-    continuously stop and retrain the agent, which can be very costly and time-consuming. 
+    \item [Modifying variables:] While stepping back into the program's execution, it should be possible 
+    to modify variables' values to generate new traces of execution using the modified values. 
+    Such feature would help developers to test out the behavior of an agent with different state-values, 
+    or hyperparameters, without having to continuously stop and retrain the agent, which can be very 
+    costly and time-consuming. This feature is adapted from timepoint debuggers.
 \end{description}
 
-These features aim at tackling the problem of interaction with the program, as it allows to inspect 
-the behavior of a program with respect to different variable values. Additionally, developers may 
-interact with the program by stepping through the execution, both forward and backward, observing 
-the effects of specific interactions between the agent and the environment. The capacity to explore 
-the execution allows developers to evaluate agents' behavior and the quality of the \ac{RL} programs, 
-helping to improve the development of these programs.
+These features aim at tackling the problem of interaction with the program, by stepping through the 
+execution, both forward and backward, observing the effects of specific interactions between the agent 
+and the environment under different conditions from states' and hyperparameters' values. The capacity 
+to explore the execution allows developers to evaluate agents' behavior and the quality of the \ac{RL} 
+programs, without having to retrain every time, and therefore helping to improve the development of 
+these programs.
 
-With these features in mind, we present \flik: \textsc{A bugs life}, a back-in-time debugger with the 
-possibility to step back in the execution, change values for different variables, and resume execution 
-on different execution paths. Specifically, for the case of \ac{RL} agents this means that using \flik it is 
+Anchored in these features, \flik: \textsc{A bug's life}, is a back-in-time debugger with timepoints 
+to modify variables' values, and resume execution on a different execution path using the new values. 
+Specifically, for the case of \ac{RL} agents this means that using \flik it is 
 possible to: evaluate the internal state of the agent, the decisions it makes, and the rewards 
 it receives, through the observation of agents' variables and hyperparameters over time. Using the 
 debugger, developers can better understand the execution context of \ac{RL} agents in terms of 
@@ -168,7 +173,7 @@ corresponding commands.
 \subsection{\flik internals}
 \label{sec:flik-internals}
 
-\sidemargin{par:requirements2}{{\fref{rem:requirements}}}
+\sidemargin{par:requirements2}{{\fref{rem:requirements}, \ref{rem:implementation}\ref{rem:implementation2}}}
 We now turn our attention to the implementation of \flik and its inner workings. \flik is a console-based 
 debugger, built on top of \ac{PDB}, as shown in the general \flik model in 
 \fref{fig:flik-architecture}. 
