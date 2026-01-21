@@ -74,19 +74,19 @@
 % \colorlet{unsolved}{red!90!black}
 \definecolor{solved}{hsb}    { .35, 1, .7}
 \definecolor{future}{hsb}    { .50, 1, .7}
-\definecolor{incorrect}{hsb} { .65, 1, .7}
-\definecolor{disagree}{hsb}  { .80, 1, .9}
-\definecolor{unsolved}{hsb}  { .95, 1, .7}
-\definecolor{unspecific}{hsb}{ .10, 1, .8}
+\definecolor{clarify}{hsb} { .65, 1, .7}
+\definecolor{reconsider}{hsb}  { .80, 1, .9}
+\definecolor{blocked}{hsb}  { .95, 1, .7}
+\definecolor{feedback}{hsb}{ .10, 1, .8}
 
 
 \newcommand{\status}[2]{\textsf{[\,\textcolor{#1}{#2}\,]}}
-\newcommand{\statussolved}{\status{solved}{OK}}
+\newcommand{\statussolved}{\status{solved}{Solved}}
 \newcommand{\statusfuture}{\status{future}{Future work}}
-\newcommand{\statusincorrect}{\status{incorrect}{Clarification}}
-\newcommand{\statusdisagree}{\status{disagree}{Reconsider}}
-\newcommand{\statusunsolved}{\status{unsolved}{Blocked}}
-\newcommand{\statusunspecific}{\status{unspecific}{Feedback}}
+\newcommand{\statusclarify}{\status{clarify}{Clarification}}
+\newcommand{\statusreconsider}{\status{reconsider}{Reconsider}}
+\newcommand{\statusblocked}{\status{blocked}{Blocked}}
+\newcommand{\statusfeedback}{\status{feedback}{Feedback}}
 
 
 %\makeatletter
@@ -103,14 +103,14 @@
 %   \endgroup\ignorespacesafterend\aftergroup\@doendeq}
 %\makeatother
 
-\newenvironment{incorrect}{\addtocounter{incorrect}{1}\statusincorrect}{}
-\newenvironment{unsolved}{\addtocounter{unsolved}{1}\statusunsolved}{}
-\newenvironment{disagree}{\addtocounter{disagree}{1}\statusdisagree}{}
-\newenvironment{unspecific}{\addtocounter{unspecific}{1}\statusunspecific}{}
+\newenvironment{reconsider}{\addtocounter{reconsider}{1}\statusreconsider}{}
+\newenvironment{blocked}{\addtocounter{blocked}{1}\statublocked}{}
+\newenvironment{clarify}{\addtocounter{clarify}{1}\statusclarify}{}
+\newenvironment{feedback}{\addtocounter{feedback}{1}\statusfeedback}{}
 \newenvironment{future}{\addtocounter{future}{1}\statusfuture}{}
 \newenvironment{solved}{\addtocounter{solved}{1}\statussolved}{}
 
-\def\flags{remarks,solved,unsolved,incorrect,disagree,unspecific,future}
+\def\flags{remarks,solved,blocked,reconsider,clarify,feedback,future}
 
 \foreach \flag in \flags
   {\expandafter\newcounter{\flag}
@@ -120,10 +120,10 @@
 
 \newcounter{totalresponses}
 \defcounter{totalresponses}%
-  {\value{totalincorrect}  +
-   \value{totalunsolved} +
-   \value{totaldisagree} +
-   \value{totalunspecific} +
+  {\value{totalreconsider}  +
+   \value{totalblocked} +
+   \value{totalclarify} +
+   \value{totalfeedback} +
    \value{totalfuture} +
    \value{totalsolved} }
 
