@@ -23,10 +23,10 @@ is followed by our response and an explicit status indication:
 \begin{itemize}[nosep,label=--] 
 	\item \revtotal{solved} \statussolved 
 	\item \revtotal{future} \statusfuture
-	\item \revtotal{incorrect} \statusincorrect \footnote{We clarify the question made by the reviewer} 
-	\item \revtotal{disagree} \statusdisagree\footnote{We ask the reviewer to reconsider the remark in the light of arguments and clarifications we provide in the response.} 
-	\item \revtotal{unsolved} \statusunsolved  \footnote{We could not accommodate the remark in the text due to blocking constraints.} 
-	\item \revtotal{unspecific} \statusunspecific\footnote{We answered the remark to our best interpretation. We are unsure about what the reviewer meant.} 	
+	\item \revtotal{clarify} \statusclarify\footnote{We clarify the question made by the reviewer} 
+	\item \revtotal{reconsider} \statusreconsider\footnote{We ask the reviewer to reconsider the remark in the light of arguments and clarifications we provide in the response.} 
+	\item \revtotal{blocked} \statusblocked\footnote{We could not accommodate the remark in the text due to blocking constraints.} 
+	\item \revtotal{feedback} \statusfeedback\footnote{We answered the remark to our best interpretation. We are unsure about what the reviewer meant.} 	
 \end{itemize}
 
 The remarks with specific changes in the paper have a reference to the location in the paper 
@@ -60,7 +60,7 @@ Some ideas are repeated a lot, while other (relevant) ones are not mentioned at 
 We present the requirements and execution characteristics in the introduction (\fref[vario]{par:requirements}), and then elaborate on the details of the requirements and inner working in the new  \fref{sec:flik-internals} (\fref[vario]{par:requirements2})
 \end{solved}
 
-\begin{remark}\label{sec:implementation}
+\begin{remark}\label{rem:implementation}
 the paper doesn't clarify how Flik was implemented. At the beginning, I thought it was a tool for runtime monitoring, since the authors mention in several places the idea of observing and, if needed, modifying a program execution. However, judging by the commands in the interface of the debugger, I assume it actually includes an instrumented interpreter to simulate the actual execution of Python code, or it makes calls to a Python interpreter, or... In any case, it's essential to describe how Flik is implemented in the paper.
 \end{remark}
 \begin{solved}
@@ -228,9 +228,9 @@ Updated as suggested by the reviewer
 \begin{remark}
 section 2.2, second paragraph, an itemize would improve readability.
 \end{remark}
-\begin{disagree}
+\begin{reconsider}
 We opted to leave the description of each of the python approaches as their single paragraph, in correspondence with the Sections 3.1 and 3.3
-\end{disagree}
+\end{reconsider}
 
 \begin{remark}
 must of them -> most of them
@@ -386,20 +386,32 @@ Our phrasing about the debuggers was incorrect causing confusion. We rephrase th
 \begin{remark}
 The biggest problem is that the design of Flik and the rationale behind it are not presented. There is also no explicit and logical connection with the presented state of the art, or, perhaps, it mostly remain shallow and remote.
 \end{remark}
+\begin{solved}
+We related \flik with the state of the art in the restructuring of \fref{sec:solution} in response to the following Remarks: \ref{rem:implementation}, \ref{rem:features}, \ref{rem:features2}, \ref{rem:implementation2}, \ref{rem:delorean}
+\end{solved}
 
-\begin{remark} 
+\begin{remark} \label{rem:features}
 Flik should expose two features (stepping back and modifying variables) that are very common, ie, stepping back is expected from any omniscient debugger. Next, the authors presents three "main features" of Flik: storing program states and metadata, restoring program states and stepping back. These features are again standard in omniscient debuggers.
 \end{remark}
+\begin{solved}
 
-\begin{remark}
+\end{solved}
+
+\begin{remark}\label{rem:features2}
 Somewhere in the text pops another feature, that is live-modification of recorded execution paths, which is the only feature, as far as I know (but I don't know everything), that only exists in another debugger (namely DeloranJS). This feature should be more highlighted to distinguish Flik from others, as Flik just seems to be yet another omniscient debugger.
 \end{remark}
+\begin{clarify}
 
-\begin{remark}
+\end{clarify}
+
+\begin{remark} \label{rem:implementation2}
 Then some implementation details are briefly presented, not enough the grasp the originality of Flik or its potential.
 \end{remark}
+\begin{solved}
+In accordance to the response to \fref{rem:implementation}, we introduce the new \fref{sec:flik-internals} to explain the implementation details and design of \flik (\fref[vario]{par:requirements2})
+\end{solved}
 
-\begin{remark} 
+\begin{remark} \label{rem:delorean}
 My feeling is that we actually learn too few about Flik, its design and its choices/rationale, and what are the important differences with, eg, deloreanJS.
 It just, as described, looks like yet another back in time debugger. Features are standard except one. The authors should stress much more what's the challenges there for RL programs, how did they approach these challenges and what are the design and implementation implications that emerged and how Flik solves these problems.
 \end{remark}
