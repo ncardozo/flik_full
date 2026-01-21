@@ -8,15 +8,16 @@
 a problem to understand abnormalities in agents' behavior. This problem is increased when libraries 
 are black-box, as it is not possible to have fine-grained observations about the behavior of the 
 libraries. In cases in which developers do have access to the learning behavior of \ac{RL} agents, 
-debugger are an appropriate tool to understand their behavior. Moreover, if the debugging process 
-enables developers to modify programs' state without having to stop and re-start execution, the 
-evaluation of the agents' behavior is enhanced, given their intrinsic nature of continuous 
-interaction with the environment. Such property allows developers to experiment 
-over the behavior of agents without having to go over the extensive process of stopping agents and 
-going through the complete exploration with the new values.
+debuggers emerge as an appropriate tool to understand said behavior. Moreover, given the intrinsic 
+nature of continuous interaction between the agent and the environment, if the debugging 
+process enables developers to modify programs' state, the evaluation of the agent's behavior is 
+enhanced, as it is no longer required to stop-start-train the agent. Such property allows developers 
+to experiment over the behavior of agents without having to go over the extensive process of 
+stopping agents and going through the complete exploration with the new values.
 
-Currently, most of the debuggers are postmortem, or do not allow developers to go back in time to 
-replay and analyze the program state. Additionally, most debuggers do not allow developers to 
+\sidemargin{par:postmortem}{{\fref{rem:postmortem}}}
+Seldomly, debuggers allow developers to go back in time to replay and analyze the program. 
+Additionally, it is even rarer for debuggers to allow developers to 
 modify variables. In order to contribute to the development of \ac{RL} programs, 
 debugging tools should exhibit the aforementioned features, which we introduce in the following.
 
@@ -169,12 +170,12 @@ corresponding commands.
 
 \sidemargin{par:requirements2}{{\fref{rem:requirements}}}
 We now turn our attention to the implementation of \flik and its inner workings. \flik is a console-based 
-debugger, constructed over the \ac{PDB} debugger, as shown in the general \flik architecture in 
+debugger, built on top of \ac{PDB}, as shown in the general \flik model in 
 \fref{fig:flik-architecture}. 
 
 \begin{figure}[hptb]
   \centering
-%  \includegraphics[width=1\columnwidth]{figures/flik-architecture}
+  \includegraphics[width=1\columnwidth]{figures/flik-architecture}
   \caption{\flik's architecture and internal details}
   \label{fig:flik-architecture}
 \end{figure}
