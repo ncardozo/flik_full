@@ -176,9 +176,10 @@ bottom of the table) are provided by the \ac{PDB} debugger.
 \sidemargin{par:requirements2}{{Remarks \ref{rem:requirements}, \ref{rem:implementation}, \ref{rem:implementation2}}}
 Having introduced the features of \flik and their use debug \ac{RL} programs using the different 
 commands, we now turn our attention to \flik's implementation and its inner workings. 
-\flik is a console-based debugger built on top of \ac{PDB}, which in turn is built on top of the Python 
-run-time as provided by the Python interpreter. A diagram of \flik's architecture is shown in 
-\fref{fig:flik-architecture}. 
+\flik is a console-based debugger built on top of \ac{PDB}, adding features such as colored syntax 
+highlighting and tracking of variables' state. \ac{PDB}, in turn, is built on top of the Python 
+runtime enabling access to run-time variables and state as provided by the Python interpreter. A 
+diagram of \flik's architecture is shown in \fref{fig:flik-architecture}. 
 
 \begin{figure}[hptb]
   \centering
@@ -201,22 +202,34 @@ the source code and setting breakpoints or timepoints for code within the librar
 Therefore, in the latter case stepping back into the libraries' code is not possible, nor is it possible to 
 modify library variables' values.
 
-and adds features 
-such as colored syntax highlighting, tracking of variables' state, . The following are the three major features of \flik:
-\begin{itemize}
-    \item Stores the state in each execution step (\ie action taken by the agent). \flik saves the local 
-    and global variables, in a history variable. Additionally, other metadata like the information of the 
-    line being executed is saved. This allows us to later step back into specific states in the stored 
-    history, and their corresponding location in the code. 
-    \item Restores a previous program state as, from the previously stored information, from the 
+To support the two features put forward for \flik, we implement the functionality to: 
+\begin{enumerate*}[label=(\arabic*)]
+\item capture the system state, 
+\item step-back in the execution, 
+\item restore a given state, and 
+\item update the values of the program state.
+\end{enumerate*}
+These functions work with the internal representation of state in \flik. State is represented by means 
+of a buffer of fixed size (XXXMB in our current setting) as shown in \fref{fig:flik-architecture}
+\sidemargin{par:state}{{\fref{rem:state}}}
+
+\paragraph{Capture system state.}
+Stores the state in each execution step (\ie action taken by the agent). \flik saves the local 
+and global variables, in a history variable. Additionally, other metadata like the information of the 
+line being executed is saved. This allows us to later step back into specific states in the stored 
+history, and their corresponding location in the code. 
+    
+     Restores a previous program state as, from the previously stored information, from the 
     stack and heap variables to precisely restore the program's state and its execution context, in 
     order to re-create an alternative execution path. 
-    \item Finally, connecting the previous two features, is the action of stepping back. This feature is 
+
+     Finally, connecting the previous two features, is the action of stepping back. This feature is 
     created as a custom \ac{PDB} command, using the same syntax and form of the native \ac{PDB} 
     commands (\fref{tab:flik-commands}). The stepping back command takes the state saved at a specific point in the history 
     and restores the state according to the information at that point --that is, program's state, stack 
     information, and code line. 
-\end{itemize}
+
+
 
 In Python, the internal state of a program during execution is primarily encapsulated in 
 stack frames. Each stack frame contains information about the execution state of a function 
