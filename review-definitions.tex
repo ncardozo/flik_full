@@ -121,11 +121,16 @@
 \newcounter{totalresponses}
 \defcounter{totalresponses}%
   {\value{totalreconsider}  +
-   \value{totalblocked} +
    \value{totalclarify} +
    \value{totalfeedback} +
-   \value{totalfuture} +
    \value{totalsolved} }
+
+\newcounter{totalunsolved}
+\defcounter{totalunsolved}%
+  {\value{totalblocked} +
+   \value{totalfeedback}}
+   
+   
 
 \newcommand{\revtotal}[1] {
 	\makebox[3ex][r]{\arabic{total#1}}

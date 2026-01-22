@@ -17,7 +17,10 @@ We would like to thank our anonymous reviewers for their efforts in reviewing ou
 for their useful and detailed suggestions to improve it. We have considered all remarks carefully, and 
 addressed them to the best of our possibilities.
 
-There are \thetotalremarks~ different remarks for this iteration of the paper. Each remark 
+There are \thetotalremarks~ different remarks for this iteration of the paper, for which we have 
+effectively answered \thetotalresponses, 
+while \thetotalunsolved ~are blocked or require further feedback from the reviewers. 
+Each remark 
 is followed by our response and an explicit status indication:
 
 \begin{itemize}[nosep,label=--] 
@@ -383,7 +386,7 @@ Indeed we meant the use of a GUI, and fixed the table accordingly
 Our phrasing about the debuggers was incorrect causing confusion. We rephrase the sentence to express that many debuggers allow only to observe the behavior based on the state of variables once a statement executes. In contrast to the back-in-time features of \flik (\fref[vario]{par:postmortem})
 \end{solved}
 
-\begin{remark}
+\begin{remark}\label{rem:implementation2}
 The biggest problem is that the design of Flik and the rationale behind it are not presented. There is also no explicit and logical connection with the presented state of the art, or, perhaps, it mostly remain shallow and remote.
 \end{remark}
 \begin{solved}
@@ -394,7 +397,7 @@ We related \flik with the state of the art in the restructuring of \fref{sec:sol
 Flik should expose two features (stepping back and modifying variables) that are very common, ie, stepping back is expected from any omniscient debugger. Next, the authors presents three "main features" of Flik: storing program states and metadata, restoring program states and stepping back. These features are again standard in omniscient debuggers.
 \end{remark}
 \begin{solved}
-
+We rephrased the statement of the features available in \flik as following. First, we make it clear that \flik is the combination of the two features described in \fref{sec:flik-nutshell} (\ie stepping back, and timepoints). In the description of each of the features we explicitly mention where the features are adopted from. Second, we changed the description of the main features to \flik's functionality, to avoid confusion about the existence of features. Just the two features realized through the functionality to store program's data, stepping back, and restoring saved data. The functionality is described in detail in the new \fref{sec:flik-internals}. 
 \end{solved}
 
 \begin{remark}\label{rem:features2}
