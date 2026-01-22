@@ -24,6 +24,7 @@ debugging tools should exhibit the aforementioned features, which we introduce i
 
 %%
 \subsection{\flik in a nutshell}
+\label{sec:flik-nutshell}
 
 To manage the complexity of \ac{RL} systems, and to mitigate the time consuming process of 
 stopping-modifying-starting-training \ac{RL} agents to evaluate different learning parameters o 
@@ -69,14 +70,14 @@ variables, values, environment, states and the rewards.
 
 \fref{fig:debugger} shows \flik's interface working to debug a simple example of the \spy{bubble_sort} 
 function. From the top, the first frame (in the blue rectangle - Execution frame) we have the running 
-execution, in this case the print for the array to be sorted in Line 018 in the second frame. The second 
-frame (in the purple rectangle - Source code frame) shows the source code being debugged. The third 
-frame (in the red rectangle - Variables frame) shows the variables used in the program so far. Finally, 
-in the bottom of the interface we have the interactive console in which developers can send 
-commands to \flik to effectively debug the program.
+execution, in this case the print for the array to be sorted in Line 018 in the second frame (the current 
+execution frame). The second frame (in the purple rectangle - Source code frame) shows the source 
+code being debugged. The third frame (in the red rectangle - Variables frame) shows the variables 
+used in the program so far. Finally, in the bottom of the interface we have the interactive console in 
+which developers can send commands to \flik to effectively debug the program.
 
 \sidemargin{par:gridworld}{{\fref{rem:gridworld}}}
-We now use a running example to present the features and commands of \flik. Four 
+We now use a running example to present the features and functionality/commands of \flik. Four 
 our running example we use the Gridworld \ac{RL} benchmark, presented in detail in 
 \fref{sec:evaluation} and shown in \fref{fig:gridworld} as a $10 \times 10$ grid. 
 
@@ -95,18 +96,18 @@ is possible to move directly to a specific execution point, by setting breakpoin
 example, when executing the program, we can use the \spy{c} command to execute until the 
 \spy{breakpoint} in \fref{ln:breakpoint} is reached. Once in the desired function, we use the \spy{n} 
 command to step through it. At particular points in the execution (\eg \fref{ln:stop1}), we can observe 
-variables' values by means of the \spy{p} o \spy{pp} commands. In our example, we use 
+variables' values by means of the \spy{p} or \spy{pp} commands. In our example, we use 
 \spy{p self.gamma} to see the value of the \spy{gamma} hyperparameter. 
 
 Continuing with the execution for a couple of episodes to let the agent train, we can use the 
-\spy{variables} command, in \fref{ln:stop2}, to observe the values of the different variables. Upon 
-inspection, we have the following observations. First, the historic value of the \spy{action} is $0$ 
-throughout the program execution. Second, all values in the \spy{qtable} are unchanged (all continue 
-as 0). Third, the value of the \spy{epsilon} hyperparameter is $0.1$. 
-Putting both values together, we note that from the condition in \fref{ln:stop1}, the agent has a 
-high probability of tacking the else branch exploiting the known values. However, as the agent has 
-not trained updating the values, the exploitation is equivalent to random action choosing, and 
-therefore leading to erroneous agent behavior.
+\spy{variables} command, at \fref{ln:stop2} of the program, to observe the values of the different 
+variables. Upon inspection through multiple iterations, we have the following observations. First, the 
+value of the \spy{action} variable is $0$ throughout the program execution. Second, all values in the 
+\spy{qtable} are unchanged (all continue as 0). Third, the value of the \spy{epsilon} hyperparameter is 
+$0.1$. Putting all these values together, we note that from the condition in \fref{ln:stop1}, the agent 
+has a high probability of taking the else branch exploiting the known values by the agent. However, 
+as the agent has not trained updating the values, the action taken by the agent is random,
+leading to erroneous agent behavior (\ie not learning a proper policy).
 
 \begin{python}[numbers=left,
 	caption={\flik running example of the Gridworld environment},
@@ -148,7 +149,7 @@ class Agent:
 
 During the execution we can use \flik to confirm that the root cause of the problem is the value of the 
 \spy{epsilon} hyperparameter. To do this, from \fref{ln:stop2} we can use the command 
-\spy{back_to 18} to go backward in the program execution to \fref{ln:back1}. Then, we can effectively 
+\spy{back_to 18} to go backward in the program execution to \fref{ln:back1}. Then, we can  
 change the value of \spy{epsilon} using the \spy{setvar self.epsilon=0.9} command. Once the change 
 is made, if we continue execution (in a different \flik branch), after reaching \fref{ln:stop2}, we can print 
 the value of the \spy{action} variable (\spy{p action}), to observe now different actions are taken, 
@@ -156,10 +157,9 @@ leading to proper agent training, taken from the different values across the q-t
 this example execution of \flik is available at \url{https://youtu.be/PkkhT76IYrU?si=vqBjUCSfwRUhEZnJ}}
 
 \fref{tab:flik-commands}, shows a summary of the commands implemented in \flik, where the 
-first six commands in the first block are specific to \flik, and the following 12 commands in the second 
-block are provided with \ac{PDB}. Note from the implementation that, variable evaluation (\spy{p}) and 
-variable value updates (\spy{setvar}) can alternatively be executed directly without using the 
-corresponding commands.
+first six commands (on the top of the table) are specific to \flik, and the following 12 commands (at the 
+bottom of the table) are provided by the \ac{PDB} debugger. 
+%Note from the implementation that, variable evaluation (\spy{p}) and variable value updates (\spy{setvar}) can alternatively be executed directly without using the corresponding commands.
 
 \begin{table}
   \centering
@@ -173,9 +173,11 @@ corresponding commands.
 \subsection{\flik internals}
 \label{sec:flik-internals}
 
-\sidemargin{par:requirements2}{{\fref{rem:requirements}, \ref{rem:implementation}\ref{rem:implementation2}}}
-We now turn our attention to the implementation of \flik and its inner workings. \flik is a console-based 
-debugger, built on top of \ac{PDB}, as shown in the general \flik model in 
+\sidemargin{par:requirements2}{{Remarks \ref{rem:requirements}, \ref{rem:implementation}, \ref{rem:implementation2}}}
+Having introduced the features of \flik and their use debug \ac{RL} programs using the different 
+commands, we now turn our attention to \flik's implementation and its inner workings. 
+\flik is a console-based debugger built on top of \ac{PDB}, which in turn is built on top of the Python 
+run-time as provided by the Python interpreter. A diagram of \flik's architecture is shown in 
 \fref{fig:flik-architecture}. 
 
 \begin{figure}[hptb]
@@ -185,10 +187,22 @@ debugger, built on top of \ac{PDB}, as shown in the general \flik model in
   \label{fig:flik-architecture}
 \end{figure}
 
-\flik reuses many of the functionality available in PDB to instrument and execute Python programs, 
+To debug a Python program with \flik, we reuse the functionality already available in \ac{PDB} to 
+instrument the code of a running interpreted program. Using the instrumentation available for Python 
+programs lets \flik work with the full Python specification without having to build an interpretar and 
+program instrumentation from scratch. 
+\sidemargin{par:python}{{Remarks \ref{rem:python-io}, \ref{rem:python-full}, \ref{rem:python-lib}}}
+As such \flik work with external libraries and capture stdout 
+output I/O operations from the execution. The access to external libraries when running \flik is divided 
+in two groups, depending on the nature of the libraries. For libraries available locally in the system, 
+\flik has full access to the code, and therefore all of \flik's capabilities are available, as with any other 
+regular Python file from the program. For libraries remote to the system, \flik does not have access to 
+the source code and setting breakpoints or timepoints for code within the library is not possible. 
+Therefore, in the latter case stepping back into the libraries' code is not possible, nor is it possible to 
+modify library variables' values.
+
 and adds features 
-such as colored syntax highlighting, tracking of variables' state, and capturing stdout output 
-from executed lines of code. The following are the three major features of \flik:
+such as colored syntax highlighting, tracking of variables' state, . The following are the three major features of \flik:
 \begin{itemize}
     \item Stores the state in each execution step (\ie action taken by the agent). \flik saves the local 
     and global variables, in a history variable. Additionally, other metadata like the information of the 

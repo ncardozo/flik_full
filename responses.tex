@@ -91,20 +91,26 @@ there's also little mention of the techniques used in the debugger.
 How exactly is the program state defined?
 \end{remark}
 
-\begin{remark}
+\begin{remark} \label{rem:python-io}
 What happens if there are I/O operations?
 \end{remark}
+\begin{solved}
+We clarified that \flik can work as the normal \ac{PDB} debugger when using standard I/O operations in \fref{sec:flik-internals} (\fref[vario]{par:python})
+\end{solved}
 
-\begin{remark}
+\begin{remark} \label{rem:python-full}
 Does it accept 100\% of Python? 
 \end{remark}
 \begin{solved}
-\flik accepts all of Python being built on top of PDB, which already accepts all of Python. This is clarified in \fref{sec:flik-internals}
+\flik accepts all of Python being built on top of PDB, which already accepts all of Python. This is clarified in \fref{sec:flik-internals} (\fref[vario]{par:python})
 \end{solved}
 
-\begin{remark}
+\begin{remark} \label{rem:python-lib}
 what if there are calls to libraries whose source code isn't available?
 \end{remark}
+\begin{solved}
+We added the text explaining what happens when external libraries are used, either with available code, or unavailable code.
+\end{solved}
 
 \begin{remark} \label{rem:scalability}
 The experimental evaluation is interesting, but it doesn't say anything about the execution cost. If, as I mentioned earlier, Flik is defined as an instrumented interpreter, it is likely to have scalability issues, especially if it must save all the states of an execution (which can potentially be very long). It would be good to show execution times (e.g., of the complete execution of the program in Flik assuming there are no breakpoints) and compare it with a standard interpreter for the language. This way, the overhead introduced by the debugger could be analyzed.
