@@ -204,56 +204,80 @@ modify library variables' values.
 
 To support the two features put forward for \flik, we implement the functionality to: 
 \begin{enumerate*}[label=(\arabic*)]
-\item capture the system state, 
+\item capture the program state, 
 \item step-back in the execution, 
 \item restore a given state, and 
 \item update the values of the program state.
 \end{enumerate*}
 These functions work with the internal representation of state in \flik. State is represented by means 
-of a buffer of fixed size (XXXMB in our current setting) as shown in \fref{fig:flik-architecture}
+of a buffer as shown in \fref{fig:flik-architecture}
 \sidemargin{par:state}{{\fref{rem:state}}}
 
-\paragraph{Capture system state.}
-Stores the state in each execution step (\ie action taken by the agent). \flik saves the local 
-and global variables, in a history variable. Additionally, other metadata like the information of the 
-line being executed is saved. This allows us to later step back into specific states in the stored 
-history, and their corresponding location in the code. 
-    
-     Restores a previous program state as, from the previously stored information, from the 
-    stack and heap variables to precisely restore the program's state and its execution context, in 
-    order to re-create an alternative execution path. 
-
-     Finally, connecting the previous two features, is the action of stepping back. This feature is 
-    created as a custom \ac{PDB} command, using the same syntax and form of the native \ac{PDB} 
-    commands (\fref{tab:flik-commands}). The stepping back command takes the state saved at a specific point in the history 
-    and restores the state according to the information at that point --that is, program's state, stack 
-    information, and code line. 
-
-
-
-In Python, the internal state of a program during execution is primarily encapsulated in 
-stack frames. Each stack frame contains information about the execution state of a function 
-call, including the current line number, local and global variables, and other metadata, as follows:
-\begin{itemize}
-    \item \spy{f_lineno}: The current line number being executed.
-    \item \spy{f_locals}: A dictionary of local variables within the frame.
-    \item \spy{f_globals}: A dictionary of global variables accessible within the frame.
-    \item \spy{f_code}: A code object representing the function's bytecode and source code metadata.
-\end{itemize}
-
-The state is saved in a list that stores snapshots of the frame's state (line and variables) at each 
-execution step, which allows stepping back into any state we would want to restore. We use the  
-\spy{exec} function that receives the stored \spy{f_globals} and \spy{f_locals} variables as 
-parameters. \spy{exec} then executes a list of stored state snapshots (line number 
-and local variables) at each step in a specified frame's context (given by the function parameters). 
-This allows \flik to simulate running a specific line in the context of a previous frame, maintaining 
-both local and global variable references, essentially restoring the saved execution state.
-
-This all done by extending the \ac{PDB} class and adding custom commands to support stepping 
-back and a custom interface which allows the user to interact with the debugger. The interface 
+The functionality of \flik extends the \ac{PDB} class by adding the required custom commands to 
+step back, and customizing the interface to interact with the debugger. The interface 
 displays the code, variables, and execution point, and allows the user (to use the \ac{PDB} 
 functions) to pause, step forward, step back, continue or restart the program, as well as to 
 modify and inspect variables. 
+
+\paragraph{Capture program state.}
+Storing the program state is a key functionality to realize the two features. As mentioned previously, 
+\flik stores the system state for each execution step (\ie action taken by the agent) in a history buffer. 
+The information saved in the history buffer includes all global and local variables' values after the 
+execution of a step, together with metadata related to the executed expression, as for example its 
+line number. System state is encapsulated in stack frames in Python, which can be captured using 
+the \spy{inspect.stack()} function. Each stack frame contains different information related to the 
+execution state of a function call, for which we save:
+\begin{itemize}
+    \item \spy{f_locals}: A dictionary of local variables within the frame.
+    \item \spy{f_globals}: A dictionary of global variables accessible within the frame.
+    \item \spy{f_code}: A code object representing the function's bytecode and source code metadata.
+    \item \spy{f_lineno}: The current line number being executed metadata.
+\end{itemize}
+
+Upon a function execution, we put the frame containing all state values and metadata into the history 
+buffer. To mitigate the impact on the memory overhead of storing the information of all executed 
+functions we restrict the history buffer to have a fixed size (XXXMB in our current setting). As a 
+consequence, the buffer keeps the YYY most recent history frames, removing the oldest frame in the 
+history when the buffer is full.
+
+\paragraph{Step-back.}    
+The history buffer is used to enable stepping back. In an execution function, the step back commands 
+(\spy{step_back} or \spy{back_to}) take the history buffer and search the corresponding saved state. 
+Stepping to the previous saved state (when \spy{step_back} is used), or searching through the buffer 
+for a specific execution line within the saved metals (when \spy{back_to} is used).
+
+\paragraph{Restore program state.}    
+Once the program execution is at a specific frame in the history buffer, to resume the execution from 
+the given point, \flik must restore the saved state. Restoring a program state sets back all local and 
+global variables' values, and their associated execution context, to the values stored at the current 
+frame in the history buffer.
+
+A direct consequence of restoring a previous program state is that the execution resumes is a new 
+execution path. Note that currently \flik does not keep track of the different execution path, as there is 
+no clear way to navigate them without the use of a GUI. To restore the sate, we use the \spy{exec} 
+Python function that receives the stored \spy{f_globals} and \spy{f_locals} variables as 
+parameters. \spy{exec} then executes a list of stored state snapshots (line number 
+and local variables) at each step in a specified frame's context (given by the function parameters). 
+This allows \flik to simulate running a specific line in the context of a previous frame. Additionally, 
+restoring a given state, clears the more recent frames from the history buffer to start the new 
+execution path.
+
+\paragraph{Update state values.}
+Finally, in stepping back and restoring a program state, \flik makes it possible to modify the value of 
+any of the stored variables (using the \spy{set vat} command). At a given execution point, updating 
+the value of a variable restores the program state, creating a new execution path with the new 
+values. 
+
+\flik creates a casual connection between the Python variables stored in memory and the variables 
+stored in the history buffer, so that the changes to variables in \flik percolate down to the variables 
+stored in Python's memory.
+
+Updating state values is a key feature of \flik to manage \ac{RL} programs as it enables developers 
+to explore different execution paths to observe the behavior of the agent under multiple 
+circumstances. Using this feature it is possible to modify learn values or learning parameters in 
+specific environment states to assess the behavior of the agent, without having to retrain the agent 
+every time. 
+
 
 \endinput
 
