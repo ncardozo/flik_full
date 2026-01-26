@@ -30,7 +30,7 @@ To manage the complexity of \ac{RL} systems, and to mitigate the time consuming 
 stopping-modifying-starting-training \ac{RL} agents to evaluate different learning parameters o 
 algorithm values, the \flik back-in-time debugger is based on two main features:
 \begin{description}
-    \item[Stepping back:] Due to the extend of the execution loop in \ac{RL} programs, we 
+    \item[Stepping back:] Due to the lengthly execution loop in \ac{RL} programs, we 
     want to have a functionality that will allow developers to step back the execution to observe the 
     changes in the state between loop iterations, without having to re-start the complete execution.  
     This feature is adopted from omniscient debuggers.
@@ -244,7 +244,7 @@ history when the buffer is full.
 The history buffer is used to enable stepping back. In an execution function, the step back commands 
 (\spy{step_back} or \spy{back_to}) take the history buffer and search the corresponding saved state. 
 Stepping to the previous saved state (when \spy{step_back} is used), or searching through the buffer 
-for a specific execution line within the saved metals (when \spy{back_to} is used).
+for a specific execution line within the saved metadata (when \spy{back_to} is used).
 
 \paragraph{Restore program state.}    
 Once the program execution is at a specific frame in the history buffer, to resume the execution from 
@@ -252,7 +252,7 @@ the given point, \flik must restore the saved state. Restoring a program state s
 global variables' values, and their associated execution context, to the values stored at the current 
 frame in the history buffer.
 
-A direct consequence of restoring a previous program state is that the execution resumes is a new 
+A direct consequence of restoring a previous program state is that the execution resumes in a new 
 execution path. Note that currently \flik does not keep track of the different execution path, as there is 
 no clear way to navigate them without the use of a GUI. To restore the sate, we use the \spy{exec} 
 Python function that receives the stored \spy{f_globals} and \spy{f_locals} variables as 
@@ -264,7 +264,7 @@ execution path.
 
 \paragraph{Update state values.}
 Finally, in stepping back and restoring a program state, \flik makes it possible to modify the value of 
-any of the stored variables (using the \spy{set vat} command). At a given execution point, updating 
+any of the stored variables (using the \spy{setvar} command). At a given execution point, updating 
 the value of a variable restores the program state, creating a new execution path with the new 
 values. 
 
@@ -274,7 +274,7 @@ stored in Python's memory.
 
 Updating state values is a key feature of \flik to manage \ac{RL} programs as it enables developers 
 to explore different execution paths to observe the behavior of the agent under multiple 
-circumstances. Using this feature it is possible to modify learn values or learning parameters in 
+circumstances. Using this feature it is possible to modify learned values or learning parameters in 
 specific environment states to assess the behavior of the agent, without having to retrain the agent 
 every time. 
 
