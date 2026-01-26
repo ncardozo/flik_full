@@ -7,13 +7,13 @@
 The usability of \flik is evaluated through a user study with a focused group of participants, all having 
 taken a graduate course in \ac{RL}. The purpose of the user study is to assess the user experience 
 and usefulness of \flik, when used to locate bugs in \ac{RL} programs. 
-The evaluation of \flik consists of three tasks representing different types of errors that may arise when 
-developing \ac{RL} programs, Each task concerns a different \ac{RL} environment, increasing and 
-complexity and less familiar to participants as the tasks progress. The tasks to develop by the 
+The evaluation of \flik consists of three tasks representing different types of errors that may arise 
+when developing \ac{RL} programs. Each task concerns a different \ac{RL} environment, increasing 
+in complexity and less familiar to participants as the tasks progress. The tasks to solve by the 
 participants are:
 \begin{enumerate*}[label=(\arabic*)]
-\item Gridworld, is a standard benchmark for \ac{RL} based on episodic learning.
-\item Rooms, is a common \ac{RL} problem with a similar structure to Gridworld, but with a higher 
+\item Gridworld, a standard benchmark for \ac{RL} based on episodic learning over a rectangular grid.
+\item Rooms, a common \ac{RL} problem with a similar structure to Gridworld, but with a higher 
 complexity, used as an example of the possibility for agents to abstract their knowledge about the 
 environment in hierarchical learning~\cite{pateria21} structures. 
 \item Driving Assistant is an \ac{RL} environment~\cite{cardozo18ml4pl,cardozo23} 
@@ -21,17 +21,19 @@ uncommon to most developers, used to learn different tasks for autonomous drivin
 environment with more complex interaction between states, actions, and rewards. 
 \end{enumerate*}
 
-For the evaluation, a fault was manually injected in each program. The task assigned to the 
-participants is to improve the functional quality of the three programs by removing the fault. Note that 
-the injected bugs did not lead the program to exceptions or crashes, \ie each program run to 
-completion, with no evident bug or strange behavior. The injected bugs caused the programs to 
-produce outputs or agent behavior inconsistent with the expected outputs. 
+\sidemargin{par:one-bug}{{\fref{rem:one-bug}}}
+To keep the evaluation focused, a single bug was introduced to each task in the evaluation, however, 
+in general programs contain multiple bugs that could be detected using \flik. The task assigned to the 
+participants is to improve the functional quality of the three tasks by removing the fault. Note that 
+the injected bugs do not lead to any program exceptions or crashes, \ie the programs for each task 
+run to completion, with no evident bug or strange behavior. The injected bugs caused the agent to 
+behave inconsistently with the expected outputs (\eg not learn properly). 
 
 For the empirical study the participants recruited are master and Ph.D. students that have taken the 
 Reinforcement Learning course at Universidad de los Andes.  The participants are given a guide that 
 describes the purpose of the tool, the task and steps, instructions on how to run and 
 use \flik, documentation of the tool, and an small worked-out example. The problems implemented for 
-the study are described in the following:\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://github.com/larodriguez22/Flik_Experiments}} 
+the study are described in the following:\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} 
 
 %%%%
 \paragraph{\textbf{Gridworld.}}

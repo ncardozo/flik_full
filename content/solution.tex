@@ -175,11 +175,11 @@ bottom of the table) are provided by the \ac{PDB} debugger.
 
 \sidemargin{par:requirements2}{{Remarks \ref{rem:requirements}, \ref{rem:implementation}, \ref{rem:implementation2}}}
 Having introduced the features of \flik and their use debug \ac{RL} programs using the different 
-commands, we now turn our attention to \flik's implementation and its inner workings. 
+commands, we now turn our attention to \flik's implementation and its inner workings.\footnote{\flik is available for download at: \url{https://github.com/FLAGlab/flik} and distributed as a Docker image at: \url{https://hub.docker.com/r/lrodriguez22/py-flik-debugger}.}  
 \flik is a console-based debugger built on top of \ac{PDB}, adding features such as colored syntax 
 highlighting and tracking of variables' state. \ac{PDB}, in turn, is built on top of the Python 
 runtime enabling access to run-time variables and state as provided by the Python interpreter. A 
-diagram of \flik's architecture is shown in \fref{fig:flik-architecture}. 
+diagram of \flik's architecture is shown in \fref{fig:flik-architecture}.
 
 \begin{figure}[hptb]
   \centering
@@ -237,7 +237,7 @@ execution state of a function call, for which we save:
 Upon a function execution, we put the frame containing all state values and metadata into the history 
 buffer. To mitigate the impact on the memory overhead of storing the information of all executed 
 functions we restrict the history buffer to have a fixed size (XXXMB in our current setting). As a 
-consequence, the buffer keeps the YYY most recent history frames, removing the oldest frame in the 
+consequence, the buffer keeps the 100 most recent history frames, removing the oldest frame in the 
 history when the buffer is full.
 
 \paragraph{Step-back.}    
