@@ -29,13 +29,28 @@ the injected bugs do not lead to any program exceptions or crashes, \ie the prog
 run to completion, with no evident bug or strange behavior. The injected bugs caused the agent to 
 behave inconsistently with the expected outputs (\eg not learn properly). 
 
+%%
+\subsection{Study design}
+\label{sec:design}
+
 For the empirical study the participants recruited are master and Ph.D. students that have taken the 
 Reinforcement Learning course at Universidad de los Andes.  The participants are given a guide that 
 describes the purpose of the tool, the task and steps, instructions on how to run and 
 use \flik, documentation of the tool, and an small worked-out example. The problems implemented for 
 the study are described in the following:\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} 
 
-%%%%
+\begin{enumerate}[label==\textbf{RQ.\arabic*}]
+  \item \label{enum:debugger-use} 
+  Is using a dedicated debugger useful for detecting errors in \ac{RL} programs
+  \item \label{enum:back-in-time}
+  Stepping back into the execution is a key feature to better understand the behavior of \ac{RL} agents
+\end{enumerate}
+
+
+%%
+\subsection{Environments and study tasks}
+\label{see:tasks}
+
 \paragraph{\textbf{Gridworld.}}
 In its original presentation, the Gridworld environment is a standard benchmark for Q-learning, 
 familiar to most \ac{RL} developers. For the study we use a larger Gridworld environment consisting 
