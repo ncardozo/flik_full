@@ -29,17 +29,7 @@ the injected bugs do not lead to any program exceptions or crashes, \ie the prog
 run to completion, with no evident bug or strange behavior. The injected bugs caused the agent to 
 behave inconsistently with the expected outputs (\eg not learn properly). 
 
-%%
-\subsection{Study design}
-\label{sec:design}
-
-For the empirical study the participants recruited are master and Ph.D. students that have taken the 
-Reinforcement Learning course at Universidad de los Andes.  The participants are given a guide that 
-describes the purpose of the tool, the task and steps, instructions on how to run and 
-use \flik, documentation of the tool, and an small worked-out example. The problems implemented for 
-the study are described in the following:\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} 
-
-\begin{enumerate}[label==\textbf{RQ.\arabic*}]
+\begin{enumerate}[label=\textbf{RQ.\arabic*}]
   \item \label{enum:debugger-use} 
   Is using a dedicated debugger useful for detecting errors in \ac{RL} programs
   \item \label{enum:back-in-time}
@@ -48,8 +38,45 @@ the study are described in the following:\footnote{The evaluation guides and the
 
 
 %%
+\subsection{Study design}
+\label{sec:design}
+
+The user study is design so that participants are asked to solve three tasks, each task in a different 
+\ac{RL} environment. For each of the tasks the participants are given a full \ac{RL} agent and the 
+environment implementation. In each task a bug is introduced manually, affecting the learning 
+process of the agent, although in all tasks the agents can be trained without abrupt termination. 
+Finally, the tasks increase the difficulty in the subtle interaction between the agent and the 
+environment (causing the bug) and the complexity of the environment.
+
+Upon completing the tasks, the participants are given a questionnaire consisting of 22 multiple choice 
+questions with a 5-points Likert scale (in which 5 means completely agree, and 1 means completely 
+disagree) and one yes or no question. All the questions are inspired by similar user studies for 
+debuggers, as for example the user evaluation for DeloreanJS~\cite{leger23}. 
+The questionnaire is split in three parts:
+\begin{enumerate*}[label=(\arabic*)]
+\item general knowledge questions, 
+\item specific task results questions, and 
+\item usability questions for the tool. 
+\end{enumerate*}
+
+The general knowledge questions are concerned with the participants' development experience 
+(\ie using Python, debuggers and the terminal), used to characterize participants. The task results 
+questions are concerned with the bug identified in each of the tasks, and the actions taken to fix it (if 
+fixed). The usability questions are concerned with the participants' experience with the debugger, and 
+additional feedback they could provide for improving \flik. The survey is anonymized. 
+
+, 
+to identify if the participants were willing to use the tool in the future. Finally, there were 10 open-answer 
+questions, to dive deeper into feedback for the tool, and the tasks' complexity.
+
+
+
+%%
 \subsection{Environments and study tasks}
 \label{see:tasks}
+
+The problems implemented for 
+the study are described in the following:\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} 
 
 \paragraph{\textbf{Gridworld.}}
 In its original presentation, the Gridworld environment is a standard benchmark for Q-learning, 
@@ -175,25 +202,6 @@ described previously. The full evaluation session used a time-slot of 1h30 split
   remaining 20 minutes. 
 \end{enumerate}
 
-The evaluation survey, defined as a google form, is divided in three sections: 
-\begin{enumerate*}[label=(\arabic*)]
-\item general knowledge questions, 
-\item task questions, and 
-\item usability of the tool questions.
-\end{enumerate*}
-The general knowledge questions are concerned with the participants' development experience 
-(\ie using Python, debuggers and the terminal) to characterize participants. The task questions are 
-concerned with the bug identified in each of the tasks, and the actions taken to fix it (if fixed). The 
-usability questions are concerned with the participants' experience with the debugger, and additional 
-feedback they could provide for improving \flik. The survey was anonymized. All the questions of the 
-survey are inspired by similar empirical studies for debuggers, as for example the DeloreanJS 
-back-in-time debugger for JavaScript~\cite{leger23}. All responses are available 
-at \url{https://shorturl.at/DhN56}. 
-
-The survey consisted of 23 multiple choice questions with a 5-points Likert scale, in which 5 means 
-completely agree, and 1 means completely disagree. One of the questions was a yes or no question, 
-to identify if the participants were willing to use the tool in the future. Finally, there were 10 open-answer 
-questions, to dive deeper into feedback for the tool, and the tasks' complexity.
 
 
 \endinput
