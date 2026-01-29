@@ -81,8 +81,7 @@ Debugging is the process of finding and reducing the number of bugs or defects d
 program~\cite{hindriks12}. The process of debugging involves identifying and isolating an 
 (execution/behavioral) error and modifying the program to fix the bug~\cite{mccauley08}. 
 There are several principles that guide the debugging 
-process~\cite{telles01,zeller09,spinellis16,agans23}, including phases to understand the code, 
-isolate the problem, identifying and reproducing errors, isolating the problem, and fixing the problem, 
+process~\cite{telles01,zeller09,spinellis16,agans23}, including tasks to understand the code, identify and reproduce errors, isolate the problem, and fixe the problem, 
 all usually supported by automated and tracking tools.
 
 In particular, in this work we will focus on the principle of confirmation~\cite{matloff08,alaboudi20}, 
@@ -96,8 +95,7 @@ variables as the program is executed. However, this is not an efficient or scala
 program. 
 \sidemargin{par:logs}{{\fref{rem:logs}}}
 An improvement over the use of traces is the use of logs~\cite{yin20}, in which variables values and 
-specific events are recorded into an external log, to then be analyzed after the program execution. 
-The use of however useful, requires the complete execution of the system (or until a crashing event 
+specific events are recorded into an external log, to then be analyzed after the program execution; however, it requires the complete execution of the system (or until a crashing event 
 occurs), to then analyze  variables and their values for correctness.
 An alternative to post-mortem analysis is the use of debuggers, which allow developers to inspect the 
 state of programs while they execute, offering control over the execution. Debuggers are essential 
