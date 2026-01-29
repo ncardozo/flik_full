@@ -29,11 +29,16 @@ the injected bugs do not lead to any program exceptions or crashes, \ie the prog
 run to completion, with no evident bug or strange behavior. The injected bugs caused the agent to 
 behave inconsistently with the expected outputs (\eg not learn properly). 
 
+\sidemargin{par:rqs}{{\fref{rem:rqs}}}
+As is, this evaluation sets three research questions, concerning the usefulness and usability of \flik, and more generally the features it provides, to debug \ac{RL} programs.
 \begin{enumerate}[label=\textbf{RQ.\arabic*}]
   \item \label{enum:debugger-use} 
-  Is using a dedicated debugger useful for detecting errors in \ac{RL} programs
-  \item \label{enum:back-in-time}
-  Stepping back into the execution is a key feature to better understand the behavior of \ac{RL} agents
+  Is using a dedicated debugger useful for detecting errors in \ac{RL} programs?
+  \item \label{enum:features}
+  Stepping back and updating variables values during the execution are desired feature to better 
+  understand the behavior of \ac{RL} agents?
+  \item \label{enum:usefulness}
+  \flik can be effectively used to debug \ac{RL} programs with its current features?
 \end{enumerate}
 
 
