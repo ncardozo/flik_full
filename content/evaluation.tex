@@ -16,7 +16,7 @@ participants are:
 \item Rooms, a common \ac{RL} problem with a similar structure to Gridworld, but with a higher 
 complexity, used as an example of the possibility for agents to abstract their knowledge about the 
 environment in hierarchical learning~\cite{pateria21} structures. 
-\item Driving Assistant is an \ac{RL} environment~\cite{cardozo18ml4pl,cardozo23} 
+\item Driving Assistant is an \ac{RL} environment
 uncommon to most developers, used to learn different tasks for autonomous driving in a continuous 
 environment with more complex interaction between states, actions, and rewards. 
 \end{enumerate*}
@@ -189,7 +189,7 @@ $
 In the original equation, $(1-\alpha) Q(s, a)$ is the current value and $\gamma \max_{a'} Q(s', a')$ 
 is the maximum reward that can be obtained from state $s'$. This means that if the learning rate is 
 very small the calculation of the current value will give a larger importance to the previously observed 
-Q-values, leading to very little to no changes of the calculated Q-value. The effect of this behavior is 
+Q-values, leading to very little or no changes in the calculated Q-value. The effect of this behavior is 
 that the agent learns short steps towards the optimal policy. In the Q-learning formula, the learning rate 
 $\alpha$ defines how much old $Q(s,a)$ estimates are revised based on the new information. The 
 learning rate ensures that, over time, the algorithm balances past knowledge with current learning, 
@@ -205,7 +205,7 @@ the reason why the agent is not learning properly, afterwards we expected the pa
 
 %%%%%%%
 \paragraph{\textbf{Driving Assistant.}} 
-The Driving Assistant environment focuses on an agent that must learn to drive, in a two lane road, by 
+The Driving Assistant environment~\cite{cardozo18ml4pl, cardozo23} focuses on an agent that must learn to drive, in a two lane road, by 
 a given set of road rules. In this case, the agent is expected to learn to drive on the correct lane 
 (determined by the reward), at the allowed speed, taking over slow traffic, and not crashing. 
 The state of the environment is defines as a three tuple determined by the current speed of the vehicle, 
@@ -217,13 +217,12 @@ driving too fast (over the $60Km/h$ speed limit), $-600$ for driving too slow (u
 $-500$ for driving on the wrong lane (the driving lane is the right lane of the road in our example). 
 Additionally, the agent receives a reward of $50$ whenever there is no car in front.
 
-Unlike the previous environment, study participants have not interacted with similar environments, 
-not being a grid-based environment like Gridworld. Additionally, this environment is not episodic, as 
-the vehicles can continuously drive. Nonetheless, the execution finishes and is immediately restarted 
-upon a crash. \fref{fig:cars-code-example} shows the visual interface of this environment, where the 
-agent's vehicle corresponds to the blue rectangle on top, and driving traffic is represented by red 
-rectangles appearing either at the right lane (the driving lane at bottom of the interface), or the left lane 
-(top of the interface).
+Unlike the previous environments, study participants have not interacted with this or similar 
+environments, not being a grid-based environment like Gridworld. Additionally, this environment is not 
+episodic, as the vehicles can continuously drive. Nonetheless, the execution finishes and is 
+immediately restarted upon a crash. \fref{fig:cars-code-example} shows the visual interface of this 
+environment, where the agent's vehicle corresponds to the blue rectangle on top, and driving traffic is 
+represented by red rectangles appearing either at the right lane (the driving lane at the bottom of the interface), or the left lane (at the top of the interface).
 
 \begin{figure}[hptb]
     \centering
