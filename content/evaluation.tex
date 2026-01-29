@@ -40,7 +40,9 @@ behave inconsistently with the expected outputs (\eg not learn properly).
 %%
 \subsection{Study design}
 \label{sec:design}
-
+\sidemargin{par:experimental-design}{{\fref{rem:experimental-design}}}
+To evaluate \flik we design a quantitative user study, as an empirical user-centered design research 
+method~\cite{creswell17}.
 The user study is design so that participants are asked to solve three tasks, each task in a different 
 \ac{RL} environment. For each of the tasks the participants are given a full \ac{RL} agent and the 
 environment implementation. In each task a bug is introduced manually, affecting the learning 
@@ -50,8 +52,11 @@ environment (causing the bug) and the complexity of the environment.
 
 Upon completing the tasks, the participants are given a questionnaire consisting of 22 multiple choice 
 questions with a 5-points Likert scale (in which 5 means completely agree, and 1 means completely 
-disagree) and one yes or no question. All the questions are inspired by similar user studies for 
-debuggers, as for example the user evaluation for DeloreanJS~\cite{leger23}. 
+disagree), one yes or no question, and 10 open spaces for comments used to receive feedback 
+from users related to their experience with debuggers, the bugs detected in the tasks and their 
+willingness to use \flik in the future for their \ac{RL} development. All the questions are inspired 
+by similar user studies for debuggers, as for example the user evaluation for 
+DeloreanJS~\cite{leger23}. 
 The questionnaire is split in three parts:
 \begin{enumerate*}[label=(\arabic*)]
 \item general knowledge questions, 
@@ -59,24 +64,39 @@ The questionnaire is split in three parts:
 \item usability questions for the tool. 
 \end{enumerate*}
 
-The general knowledge questions (XX) are concerned with the participants' development experience 
-(\ie using Python, debuggers and the terminal), used to characterize participants. The task results 
-questions (XX) are concerned with the bug identified in each of the tasks, and the actions taken to 
-fix it (if fixed). The usability questions (XX) are concerned with the participants' experience with 
-the debugger, and additional feedback they could provide for improving \flik. The survey is anonymized. 
+The general knowledge questions (4 questions and 2 open comments) are concerned with the 
+participants' development experience (\ie using Python, debuggers and the terminal), used to 
+characterize participants. The task results questions (9 questions plus 6 open comments) are 
+concerned with the bug identified in each of the tasks, and the actions taken to fix it (if fixed). The 
+usability questions (11 questions and 1 open comment) are concerned with the participants' 
+experience with the debugger, and additional feedback they could provide for improving \flik. The 
+survey is anonymized. 
 
-, 
-to identify if the participants were willing to use the tool in the future. Finally, there were 10 open-answer 
-questions, to dive deeper into feedback for the tool, and the tasks' complexity.
+%%%%%%
+\paragraph{\textbf{Study conditions.}}
 
+At the beginning of the user study each participant received an evaluation guide\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} with the instructions to set-up the \flik environment, which includes the tasks to solve.\footnote{The experiment environment, \flik, and the problems to solve are all available in a Docker distribution available through the Docker command \spy{docker pull lrodriguez22/py-flik-debugger:latest}}
+The user study session is designed to take place in a time-slot of 1h30 organized as follows. 
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item During the first 20 minutes the participants received a tutorial introduction to \flik and its 
+  usage (including setting up the Docker environment with \flik and the tasks). In the tutorial the 
+  instructors go through an example (\ie the long division example at the introduction of the guide) 
+  showing the usage of \flik, its commands, and solving any questions related to the use participants 
+  may have.
+  \item The following 50 minutes are used to complete the three tasks, split into three blocks. 15 
+  minutes to finish the first task, 15 minutes to finish the second task, and 20 minutes to finish the 
+  third task. After each time-slot finishes, the instructors direct users to move on to the following task.
+  \item At the end of the session, the participants are asked to fill an evaluation questionnaire, as 
+  described previously, for the remaining 20 minutes. 
+\end{enumerate}
 
 
 %%
 \subsection{Environments and study tasks}
 \label{see:tasks}
 
-The problems implemented for 
-the study are described in the following:\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} 
+During the user evaluation, participants are asked to complete three specific tasks, namely Gridworld, 
+Rooms, Driving Assistant, described in the following.
 
 \paragraph{\textbf{Gridworld.}}
 In its original presentation, the Gridworld environment is a standard benchmark for Q-learning, 
@@ -187,20 +207,6 @@ to avoid crashes, which is not the expected behavior.
 The objective of this task is that participants explore the program using \flik and observe the behavior 
 of the reward and update it so that the agent can learn to drive appropriately as expected.
 This is the largest task for the participants to analyze with \flik. 
-
-%%%%%%
-\paragraph{\textbf{Study conditions.}}
-For the empirical study we had a session with 27 participants (\ie graduate students). 
-The participants were asked to complete the three tasks (\ie Gridworld, Rooms, Driving Assistant)\footnote{The experiment environment, \flik, and the problems to solve are all available in a Docker distribution available through the Docker command \spy{docker pull lrodriguez22/py-flik-debugger:latest}} 
-described previously. The full evaluation session used a time-slot of 1h30 split as follows: 
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item During the first 20 minutes the participants received a tutorial introduction to \flik and its 
-  usage through a first example (long division) described in the evaluation guide.
-  \item The following 50 minutes were used complete the three tasks, split into three blocks. 15 minutes 
-  to finish the first task, 15 minutes to finish the second task, and  20 minutes to finish the third task. 
-  \item At the end of the session, the participants were asked to fill an evaluation survey, for the 
-  remaining 20 minutes. 
-\end{enumerate}
 
 
 
