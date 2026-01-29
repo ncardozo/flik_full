@@ -474,19 +474,19 @@ Why are the perceptions about time and success not contrasted with actual measur
 The survey contains 23 questions, which might be a risk considering the large number of open questions (10) at the end of the questionnaire and participants may be too tired after more than 1h of work and 13 likert-scale questions to actually provide valuable answers. This risk is never mentioned, nor how it is compensated.
 \end{remark}
 
-\begin{remark}
+\begin{remark} \label{rem:characterization}
 It is unclear about the population that the participants represent. First they are claimed to be "very experienced" but later we learn they are master and PhD students but we do not know from where they were recruited nor the means used to recruit them. In the results their experience is presented as a self-reported measure that goes from "very experienced" to "no experience", which is insufficient to characterize the population. What "very experienced" means should be characterized in terms of years and in terms of context of practice, in addition to the self-reported measure. Such precision help in understanding what population is being evaluated and thus to contextualize the results.
 \end{remark}
 
-\begin{remark}
+\begin{remark} \label{rem:characterization2}
 participants mostly report a lot of experience in using Python, but not in debugging in general. This could be explained (but it is not in the paper) by the fact that RL programmers are not "standard" programmers and may come from other backgrounds, and therefore have less habits to debug. But is that on purpose? Is that because the population was drawn from RL students and therefore exposes this bias? These questions should be explained and justified in the experimental design. In addition, such information are usually collected from a demographic survey, which it seems has not been done and is not present in the design.
 \end{remark}
 
-\begin{remark} 
+\begin{remark} \label{rem:results}
 The results section is short, and does not go into details in analyzing the perception of participants. It reports only few information, and the open questions are not presented nor analyzed. Observations and conclusion concern only likert-scaled questions. In my opinion, open questions yield a lot of qualitative information, and, despite the weaknesses of the design, could still provide valuable insights into the usefulness of Flik.
 \end{remark}
 
-\begin{remark}
+\begin{remark} \label{rem:discussion}
 The discussion section has the same weaknesses: very short, not reflecting on the results, not discussing similar experiments (if any), not building over results (the analysis of open questions could have been interesting to discuss).
 \end{remark}
 
@@ -510,6 +510,9 @@ We added a paragraph describing there has been an evaluation and approval from t
 \begin{remark}
 From the discussion, and implicitly in the conclusion, the authors conclude that Flik is/proved to be useful. I object that this conclusion cannot be drawn from the work presented in the paper, as it does not provide a solid experimental design, does not discuss threats to validity, and does not report enough empirical observations to arrive to that conclusion.
 \end{remark}
+\begin{solved}
+The conclusion about the usability of \flik has been addressed as part of the answer to Remarks \ref{rem:experimental-design} and \ref{rem:characterization} - \ref{rem:threats}.
+\end{solved}
 
 \begin{remark}
 the authors state as future work to optimize memory consumption. That's great, although 1) you never mentioned that aspect anywhere in the paper and it is the first time that it comes into consideration (why not in the design of Flik?) and 2) work on optimizing omniscient debuggers are numerous (eg, the work of G. Pothier), and it is not clear how you would tackle this problem under a novel perspective.
