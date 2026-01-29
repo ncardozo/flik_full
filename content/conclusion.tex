@@ -35,9 +35,11 @@ console-based debugger, it allows developers to interact with a program during i
 the internal state of the agent, and modify its state and behavior in real-time. 
 
 There are three important avenues of future work to improve the usability of \flik, as gathered from the 
-empirical study and the development process. 
+open question comments obtained in the user study and the development process. 
 
-First, we want to optimize memory consumption by using layer cashing using a similar strategy to that 
+First, we want to optimize memory consumption. One possible approximation would be to follow the 
+path of known optimizations for omniscient debuggers~\cite{pothier07}. Alternatively, it is possible to 
+explore the layer cashing using a similar strategy to that 
 used in git or docker, as a means to save states. Instead of saving the entire history of all variables 
 (global and local), and all the metadata of the program for each execution point, we could 
 save the changes made on the program since the last recorded history. This would optimize the 
