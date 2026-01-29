@@ -5,7 +5,9 @@
 \label{sec:results}
 
 This section presents the analysis of the results of the empirical study presented in 
-\fref{sec:evaluation}. The results are presented according to three sections in the survey: General 
+\fref{sec:evaluation}. 
+The user study was conducted on a single session with 27 participants.
+The results are presented according to three sections in the survey: General 
 knowledge (\fref{sec:general-knowledge}), Task Effectiveness (\fref{sec:tasks-results}) and Usability 
 (\fref{sec:usability}). Finally, a discussion section has the analysis of the results form the survey. All 
 data obtained from the evaluation is available as part of the data and replication package and the 
@@ -203,9 +205,9 @@ features closer to common features used in other debuggers, as the Visual Studio
 
 %%
 \subsection{Threats to validity}
-\label{sec:threads}
+\label{sec:threats}
 
-\sidemargin{par:threads}{{\fref{rem:threads}}}
+\sidemargin{par:threats}{{\fref{rem:threats}}}
 To conclude the discussion of the results and the experiment we present the threads to validity to 
 our experimentation and the conclusions extracted from it.
 
@@ -219,7 +221,7 @@ algorithm. From the results, we confirm \flik's usability in such cases, and can
 to other discrete algorithms such as SARSA or Multi-armed-bandit~\cite{lattimore20}. However, 
 generalizing the usability to continuous \ac{RL} environments requires further evaluation in such 
 environments, in which the intervention of developers withe the variables and the possibility to 
-observe all environments variables and parameters may be limited due to the sheer volumen of 
+observe all environments variables and parameters may be limited due to the sheer volume of 
 variables, and the use of external \acl{DNN} libraries \flik may not have access to.
 
 \item[Threats to construct validity] refer to the cases in which the evaluation is not exhaustive 
@@ -232,7 +234,7 @@ there is no bias in the selection of the participants for the user study.
 In addition, the design of the user study was such that the first exercise is familiar to all developers 
 with \ac{RL} experience, used to help participants familiarize themselves with \flik (after the 
 presentation of \flik in a small example). The following tasks in the study are of less familiarity for 
-\ac{RL} developers, the last being a completely new application, to evaluate the effectiveness of \flik 
+\ac{RL} developers, and the last is a completely new application, to evaluate the effectiveness of \flik 
 in helping developers to understand \ac{RL} agents' behavior, mitigating any previous knowledge 
 developers may have about possible errors in the application. There is no bias about the 
 application selection favoring the usability of \flik over other applications. However, we highlight again 

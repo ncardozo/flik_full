@@ -80,7 +80,8 @@ survey is anonymized.
 %%%%%%
 \paragraph{\textbf{Study conditions.}}
 
-At the beginning of the user study each participant received an evaluation guide\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} with the instructions to set-up the \flik environment, which includes the tasks to solve.\footnote{The experiment environment, \flik, and the problems to solve are all available in a Docker distribution available through the Docker command \spy{docker pull lrodriguez22/py-flik-debugger:latest}}
+At the beginning of the user study each participant received an evaluation guide\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} with the instructions to set-up the \flik environment, which 
+includes the tasks to solve, and the order in which these should be solved (equal for all participants).\footnote{The experiment environment, \flik, and the problems to solve are all available in a Docker distribution available through the Docker command \spy{docker pull lrodriguez22/py-flik-debugger:latest}}
 The user study session is designed to take place in a time-slot of 1h30 organized as follows. 
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item During the first 20 minutes the participants received a tutorial introduction to \flik and its 
@@ -94,6 +95,20 @@ The user study session is designed to take place in a time-slot of 1h30 organize
   \item At the end of the session, the participants are asked to fill an evaluation questionnaire, as 
   described previously, for the remaining 20 minutes. 
 \end{enumerate}
+
+\sidemargin{par:study-conditions}{{\fref{rem:study-conditions}}}
+As mentioned previously, the three tasks to solve in the study are organized in increasing complexity 
+and decreasing familiarity to users. The first task uses the common \ac{RL} benchmark Gridworld 
+program, all \ac{RL} developers are familiar with. In particular the study participants are familiar and 
+have previous experience using the Gridworld environment. Additionally, the environment is the 
+smallest environment of the three tasks in terms of states to explore by the agent, and a straight 
+forward reward function. The second tasks uses a known but less common \ac{RL} benchmark, the 
+Rooms environment. While some participants may have used the environment, there is no assurance 
+that all of them have used it. The Rooms environment is a larger environment than that of Gridworld, 
+while keeping the same complexity level for the reward function. Finally, the third environment is new 
+environment participants have had no contact with. The driving assistant \ac{RL} program is a 
+research environment used to evaluate \ac{RL} agents. This is the largest environment in the study 
+with a more involved reward function.
 
 
 %%
