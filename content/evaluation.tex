@@ -130,23 +130,25 @@ Rooms, Driving Assistant, described in the following.
 
 \paragraph{\textbf{Gridworld.}}
 In its original presentation, the Gridworld environment is a standard benchmark for Q-learning, 
-familiar to most \ac{RL} developers. For the study we use a larger Gridworld environment consisting 
-of a $n \times m$ rectangular  board/grid ($10\times 10$ in our implementation), in which each tile 
-$(i,j)$ represents a specific state of the board. Tiles in the board may be walls (\ie gray-out cells), 
-which agents cannot cross, or have a special exit status for agents to exit the board and terminate the 
-episode. Exit tiles give a reward (positive of $1$ or negative of $-1$) to agents, as shown in 
-\fref{fig:gridworld}. All tile types are unknown to the agent. The agent moves from a fixed starting point 
-in the board, the top left corner at position $(0,0)$, searching for the goal state (\ie exit states with positive reward of $1$). The agent moves in four directions: up, down, 
-left, and right, from state to state, avoiding obstacles and undesired exit states (with a reward of $-1$). 
+familiar to all \ac{RL} developers. For the study we use a larger Gridworld environment (shown in 
+\fref{fig:gridworld}) consisting of a $n \times m$ rectangular  board/grid ($10\times 10$ in our 
+implementation), in which each tile $(i,j)$ represents a specific state of the board. Tiles in the board 
+may be walls (\ie gray-out cells), which agents cannot cross, or have a special exit status for agents 
+to exit the board and terminate the episode. Exit tiles give a reward (positive of $1$ in green, or 
+negative of $-1$ in red) to agents. All tile types are unknown to the agent. The agent moves from a 
+fixed starting point in the board, the top left corner at position $(0,0)$, searching for the goal state (\ie 
+exit state with positive reward of $1$). The agent moves in four directions relative to the board: up, 
+down, left, and right, from state to state, avoiding obstacles and undesired exit states (with a reward 
+of $-1$). 
 
 The implementation of Gridworld introduces a bug in the definition of the $\epsilon$ hyperparameter, 
 which leads to undesired behavior in the probability with which actions are taken by the agent, 
 promoting exploitation without learning. The undesired behavior is given as the $\epsilon$ value is too 
 small (\eg $0.1$) so that no or seldom exploration (taking a random action at each state) of the agent 
-is allowed for the first couple of iterations. Afterwards, suing the epsilon decay strategy, the agent will 
+is allowed for the first couple of iterations. Afterwards, using the epsilon decay strategy, the agent will 
 consistently exploit the best action, which will be suboptimal if not wrong, to define its policy. This is 
 an undesired behavior specially for training purposes as an agent should have a large probability to 
-choose other actions and explore the grid. 
+choose different actions and explore the grid. 
 
 The objective of this task is that the study participants use \flik to navigate through the code and find 
 out why the agent is not learning properly. Eventually, the participants should come out with the 
