@@ -4,54 +4,64 @@
 \section{User Study}
 \label{sec:evaluation}
 
-The usability of \flik was evaluated through a user study with a focused group of participants, all having 
+The usability of \flik is evaluated through a user study with a focused group of participants, all having 
 taken a graduate course in \ac{RL}. The purpose of the user study is to assess the user experience 
 and usefulness of \flik, when used to locate bugs in \ac{RL} programs. 
-The evaluation of \flik consisted of three tasks representing different types of errors that may arise 
+The evaluation of \flik consists of three tasks representing different types of errors that may arise 
 when developing \ac{RL} programs. Each task concerns a different \ac{RL} environment, increasing 
 in complexity and less familiar to participants as the tasks progress. The tasks to solve by the 
-participants were:
+participants are:
 \begin{enumerate*}[label=(\arabic*)]
-\item Gridworld, a standard benchmark for \ac{RL} based on episodic learning over a rectangular grid;
+\item Gridworld, a standard benchmark for \ac{RL} based on episodic learning over a rectangular grid.
 \item Rooms, a common \ac{RL} problem with a similar structure to Gridworld, but with a higher 
 complexity, used as an example of the possibility for agents to abstract their knowledge about the 
-environment in hierarchical learning~\cite{pateria21} structures; 
-\item Driving Assistant is an \ac{RL} environment~\cite{cardozo18ml4pl,cardozo23} 
+environment in hierarchical learning~\cite{pateria21} structures. 
+\item Driving Assistant is an \ac{RL} environment
 uncommon to most developers, used to learn different tasks for autonomous driving in a continuous 
 environment with more complex interaction between states, actions, and rewards. 
 \end{enumerate*}
 
-\sidemargin{par:one-bug}{{\fref{rem:one-bug}}}General programs contain multiple bugs that could be detected using \flik, however to keep the evaluation focused, a single bug was introduced to each task. The task assigned to the 
-participants was to improve the functional quality of the three tasks by removing the fault. Note that 
+\sidemargin{par:one-bug}{{\fref{rem:one-bug}}}
+To keep the evaluation focused, a single bug was introduced to each task in the evaluation, however, 
+in general programs contain multiple bugs that could be detected using \flik. The task assigned to the 
+participants is to improve the functional quality of the three tasks by removing the fault. Note that 
 the injected bugs do not lead to any program exceptions or crashes, \ie the programs for each task 
 run to completion, with no evident bug or strange behavior. The injected bugs caused the agent to 
-behave inconsistently with the expected outputs (\eg not learn properly).  
+behave inconsistently with the expected outputs (\eg not learn properly). 
 
-In this study, we investigated the following research questions:
-
+\sidemargin{par:rqs}{{\fref{rem:rqs}}}
+As is, this evaluation sets three research questions, concerning the usefulness and usability of \flik, and more generally the features it provides, to debug \ac{RL} programs.
 \begin{enumerate}[label=\textbf{RQ.\arabic*}]
   \item \label{enum:debugger-use} 
-  Is using a dedicated debugger useful for detecting errors in \ac{RL} programs
-  \item \label{enum:back-in-time}
-  Stepping back into the execution is a key feature to better understand the behavior of \ac{RL} agents
+  Is using a dedicated debugger useful for detecting errors in \ac{RL} programs?
+  \item \label{enum:features}
+  Stepping back and updating variables values during the execution are relevant features to better 
+  understand the behavior of \ac{RL} agents?
+  \item \label{enum:usefulness}
+  \flik can be effectively, and efficient in time used to debug \ac{RL} programs with its current features?
 \end{enumerate}
 
 
 %%
 \subsection{Study design}
 \label{sec:design}
-
-Participants were asked to solve three tasks, each task in a different 
-\ac{RL} environment. For each of the tasks the participants were given a full \ac{RL} agent and the 
-environment implementation. In each task a bug was introduced manually, affecting the learning 
+\sidemargin{par:experimental-design}{{\fref{rem:experimental-design}}}
+To evaluate \flik we design a quantitative user study, as an empirical user-centered design research 
+method~\cite{creswell17}.
+The user study is design so that participants are asked to solve three tasks, each task in a different 
+\ac{RL} environment. For each of the tasks the participants are given a full \ac{RL} agent and the 
+environment implementation. In each task a bug is introduced manually, affecting the learning 
 process of the agent, although in all tasks the agents can be trained without abrupt termination. 
-Finally, the tasks increased the difficulty in the subtle interaction between the agent and the 
+Finally, the tasks increase the difficulty in the subtle interaction between the agent and the 
 environment (causing the bug) and the complexity of the environment.
 
-Upon completing the tasks, the participants were given a questionnaire consisting of 22 multiple choice 
+Upon completing the tasks, the participants are given a questionnaire consisting of 22 multiple choice 
 questions with a 5-points Likert scale (in which 5 means completely agree, and 1 means completely 
-disagree) and one yes or no question. All the questions are inspired by similar user studies for 
-debuggers, as for example the user evaluation for DeloreanJS~\cite{leger23}. 
+disagree), one yes or no question, and 10 open spaces for comments used to receive feedback 
+from users related to their experience with debuggers, the bugs detected in the tasks and their 
+willingness to use \flik in the future for their \ac{RL} development. All the questions are inspired 
+by similar user studies for debuggers, as for example the user evaluation for 
+DeloreanJS~\cite{leger23}. 
 The questionnaire is split in three parts:
 \begin{enumerate*}[label=(\arabic*)]
 \item general knowledge questions, 
@@ -59,42 +69,94 @@ The questionnaire is split in three parts:
 \item usability questions for the tool. 
 \end{enumerate*}
 
-The general knowledge questions (XX) are concerned with the participants' development experience 
-(\ie using Python, debuggers and the terminal), used to characterize participants. The task results 
-questions (XX) are concerned with the bug identified in each of the tasks, and the actions taken to 
-fix it (if fixed). The usability questions (XX) are concerned with the participants' experience with 
-the debugger, and additional feedback they could provide for improving \flik. %to identify if the participants were willing to use the tool in the future. 
-Finally, there were 10 open-answer 
-questions, to dive deeper into feedback for the tool, and the tasks' complexity.The survey was anonymized. 
+The general knowledge questions (4 questions and 2 open comments) are concerned with the 
+participants' development experience (\ie using Python, debuggers and the terminal), used to 
+characterize participants. The task results questions (9 questions plus 6 open comments) are 
+concerned with the bug identified in each of the tasks, and the actions taken to fix it (if fixed). The 
+usability questions (11 questions and 1 open comment) are concerned with the participants' 
+experience with the debugger, and additional feedback they could provide for improving \flik. The 
+survey is anonymized. 
 
+\sidemargin{par:study-variables}{{\fref{rem:study-variables}}}
+The question associated with the usability of the tool introduce a variable to measure usability, in 
+answering \ref{enum:debugger-use}. The open questions about the recommendations and comments 
+about \flik are introduced as variables to measure the relevance of the debugging features in \flik, 
+answering to \ref{enum:features}. 
+Finally, the questions associated to the task results introduce two dependent variables, which we use 
+to answer \ref{enum:usefulness}. The variables are, the time taken to solve the task, used to measure 
+the efficiency in solving the task using \flik, and the description of the detected bug, used to measure 
+the effectiveness of detecting the bug using \flik.
+
+%%%%%%
+\paragraph{\textbf{Study conditions.}}
+
+At the beginning of the user study each participant received an evaluation guide\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} with the instructions to set-up the \flik environment, which 
+includes the tasks to solve, and the order in which these should be solved (equal for all participants).\footnote{The experiment environment, \flik, and the problems to solve are all available in a Docker distribution available through the Docker command \spy{docker pull lrodriguez22/py-flik-debugger:latest}}
+The user study session is designed to take place in a time-slot of 1h30 organized as follows. 
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item During the first 20 minutes the participants received a tutorial introduction to \flik and its 
+  usage (including setting up the Docker environment with \flik and the tasks). In the tutorial the 
+  instructors go through an example (\ie the long division example at the introduction of the guide) 
+  showing the usage of \flik, its commands, and solving any questions related to the use participants 
+  may have.
+  \item The following 50 minutes are used to complete the three tasks, split into three blocks. 15 
+  minutes to finish the first task, 15 minutes to finish the second task, and 20 minutes to finish the 
+  third task. After each time-slot finishes, the instructors direct users to move on to the following task.
+  \item At the end of the session, the participants are asked to fill an evaluation questionnaire, as 
+  described previously, for the remaining 20 minutes. 
+\end{enumerate}
+
+\sidemargin{par:ethics}{{\fref{rem:ethics}}}
+The study was submitted and approved by the ethics board at Universidad de los Andes, the entity 
+executing the study. The submission of the study included a description of the study and the activity, 
+the questionnaire, the description of the process, and the consent form to be filled by each participant.
+As part of the process in the study we assured the responses by users to be anonymized. Content 
+from all participants (\ie the sign consent form) was collected before before the start of the study. 
+
+
+\sidemargin{par:study-conditions}{{\fref{rem:study-conditions}}}
+As mentioned previously, the three tasks to solve in the study are organized in increasing complexity 
+and decreasing familiarity to users. The first task uses the common \ac{RL} benchmark Gridworld 
+program, all \ac{RL} developers are familiar with. In particular the study participants are familiar and 
+have previous experience using the Gridworld environment. Additionally, the environment is the 
+smallest environment of the three tasks in terms of states to explore by the agent, and a straight 
+forward reward function. The second tasks uses a known but less common \ac{RL} benchmark, the 
+Rooms environment. While some participants may have used the environment, there is no assurance 
+that all of them have used it. The Rooms environment is a larger environment than that of Gridworld, 
+while keeping the same complexity level for the reward function. Finally, the third environment is new 
+environment participants have had no contact with. The driving assistant \ac{RL} program is a 
+research environment used to evaluate \ac{RL} agents. This is the largest environment in the study 
+with a more involved reward function.
 
 
 %%
 \subsection{Environments and study tasks}
 \label{see:tasks}
 
-The problems implemented for 
-the study are described in the following:\footnote{The evaluation guides and the information for the replication of the study are available at: \url{https://flaglab.github.io/Flik_Experiments/}} 
+During the user evaluation, participants are asked to complete three specific tasks, namely Gridworld, 
+Rooms, Driving Assistant, described in the following.
 
 \paragraph{\textbf{Gridworld.}}
 In its original presentation, the Gridworld environment is a standard benchmark for Q-learning, 
-familiar to most \ac{RL} developers. For the study we used a larger Gridworld environment consisting 
-of a $n \times m$ rectangular  board/grid ($10\times 10$ in our implementation), in which each tile 
-$(i,j)$ represents a specific state of the board. Tiles in the board may be walls (\ie gray-out cells), 
-which agents cannot cross, or have a special exit status for agents to exit the board and terminate the 
-episode. Exit tiles give a reward (positive of $1$ or negative of $-1$) to agents, as shown in 
-\fref{fig:gridworld}. All tile types are unknown to the agent. The agent moves from a fixed starting point 
-in the board, the top left corner at position $(0,0)$, searching for the goal state (\ie exit states with positive reward of $1$). The agent moves in four directions: up, down, 
-left, and right, from state to state, avoiding obstacles and undesired exit states (with a reward of $-1$). 
+familiar to all \ac{RL} developers. For the study we use a larger Gridworld environment (shown in 
+\fref{fig:gridworld}) consisting of a $n \times m$ rectangular  board/grid ($10\times 10$ in our 
+implementation), in which each tile $(i,j)$ represents a specific state of the board. Tiles in the board 
+may be walls (\ie gray-out cells), which agents cannot cross, or have a special exit status for agents 
+to exit the board and terminate the episode. Exit tiles give a reward (positive of $1$ in green, or 
+negative of $-1$ in red) to agents. All tile types are unknown to the agent. The agent moves from a 
+fixed starting point in the board, the top left corner at position $(0,0)$, searching for the goal state (\ie 
+exit state with positive reward of $1$). The agent moves in four directions relative to the board: up, 
+down, left, and right, from state to state, avoiding obstacles and undesired exit states (with a reward 
+of $-1$). 
 
 The implementation of Gridworld introduces a bug in the definition of the $\epsilon$ hyperparameter, 
 which leads to undesired behavior in the probability with which actions are taken by the agent, 
 promoting exploitation without learning. The undesired behavior is given as the $\epsilon$ value is too 
 small (\eg $0.1$) so that no or seldom exploration (taking a random action at each state) of the agent 
-is allowed for the first couple of iterations. Afterwards, suing the epsilon decay strategy, the agent will 
+is allowed for the first couple of iterations. Afterwards, using the epsilon decay strategy, the agent will 
 consistently exploit the best action, which will be suboptimal if not wrong, to define its policy. This is 
 an undesired behavior specially for training purposes as an agent should have a large probability to 
-choose other actions and explore the grid. 
+choose different actions and explore the grid. 
 
 The objective of this task is that the study participants use \flik to navigate through the code and find 
 out why the agent is not learning properly. Eventually, the participants should come out with the 
@@ -135,7 +197,7 @@ $
 In the original equation, $(1-\alpha) Q(s, a)$ is the current value and $\gamma \max_{a'} Q(s', a')$ 
 is the maximum reward that can be obtained from state $s'$. This means that if the learning rate is 
 very small the calculation of the current value will give a larger importance to the previously observed 
-Q-values, leading to very little to no changes of the calculated Q-value. The effect of this behavior is 
+Q-values, leading to very little or no changes in the calculated Q-value. The effect of this behavior is 
 that the agent learns short steps towards the optimal policy. In the Q-learning formula, the learning rate 
 $\alpha$ defines how much old $Q(s,a)$ estimates are revised based on the new information. The 
 learning rate ensures that, over time, the algorithm balances past knowledge with current learning, 
@@ -151,7 +213,7 @@ the reason why the agent is not learning properly, afterwards we expected the pa
 
 %%%%%%%
 \paragraph{\textbf{Driving Assistant.}} 
-The Driving Assistant environment focuses on an agent that must learn to drive, in a two lane road, by 
+The Driving Assistant environment~\cite{cardozo18ml4pl, cardozo23} focuses on an agent that must learn to drive, in a two lane road, by 
 a given set of road rules. In this case, the agent is expected to learn to drive on the correct lane 
 (determined by the reward), at the allowed speed, taking over slow traffic, and not crashing. 
 The state of the environment is defines as a three tuple determined by the current speed of the vehicle, 
@@ -163,13 +225,12 @@ driving too fast (over the $60Km/h$ speed limit), $-600$ for driving too slow (u
 $-500$ for driving on the wrong lane (the driving lane is the right lane of the road in our example). 
 Additionally, the agent receives a reward of $50$ whenever there is no car in front.
 
-Unlike the previous environment, study participants have not interacted with similar environments, 
-not being a grid-based environment like Gridworld. Additionally, this environment is not episodic, as 
-the vehicles can continuously drive. Nonetheless, the execution finishes and is immediately restarted 
-upon a crash. \fref{fig:cars-code-example} shows the visual interface of this environment, where the 
-agent's vehicle corresponds to the blue rectangle on top, and driving traffic is represented by red 
-rectangles appearing either at the right lane (the driving lane at bottom of the interface), or the left lane 
-(top of the interface).
+Unlike the previous environments, study participants have not interacted with this or similar 
+environments, not being a grid-based environment like Gridworld. Additionally, this environment is not 
+episodic, as the vehicles can continuously drive. Nonetheless, the execution finishes and is 
+immediately restarted upon a crash. \fref{fig:cars-code-example} shows the visual interface of this 
+environment, where the agent's vehicle corresponds to the blue rectangle on top, and driving traffic is 
+represented by red rectangles appearing either at the right lane (the driving lane at the bottom of the interface), or the left lane (at the top of the interface).
 
 \begin{figure}[hptb]
     \centering
@@ -185,20 +246,6 @@ to avoid crashes, which is not the expected behavior.
 The objective of this task is that participants explore the program using \flik and observe the behavior 
 of the reward and update it so that the agent can learn to drive appropriately as expected.
 This is the largest task for the participants to analyze with \flik. 
-
-%%%%%%
-\paragraph{\textbf{Study conditions.}}
-For the empirical study we had a session with 27 participants (\ie graduate students). 
-The participants were asked to complete the three tasks (\ie Gridworld, Rooms, Driving Assistant)\footnote{The experiment environment, \flik, and the problems to solve are all available in a Docker distribution available through the Docker command \spy{docker pull lrodriguez22/py-flik-debugger:latest}} 
-described previously. The full evaluation session used a time-slot of 1h30 split as follows: 
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item During the first 20 minutes the participants received a tutorial introduction to \flik and its 
-  usage through a first example (long division) described in the evaluation guide.
-  \item The following 50 minutes were used complete the three tasks, split into three blocks. 15 minutes 
-  to finish the first task, 15 minutes to finish the second task, and  20 minutes to finish the third task. 
-  \item At the end of the session, the participants were asked to fill an evaluation survey, for the 
-  remaining 20 minutes. 
-\end{enumerate}
 
 
 
