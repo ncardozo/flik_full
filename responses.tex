@@ -492,6 +492,11 @@ The expertise level is self-reported taken the characterization of the questionn
 \begin{remark} \label{rem:characterization2}
 participants mostly report a lot of experience in using Python, but not in debugging in general. This could be explained (but it is not in the paper) by the fact that RL programmers are not "standard" programmers and may come from other backgrounds, and therefore have less habits to debug. But is that on purpose? Is that because the population was drawn from RL students and therefore exposes this bias? These questions should be explained and justified in the experimental design. In addition, such information are usually collected from a demographic survey, which it seems has not been done and is not present in the design.
 \end{remark}
+\begin{clarify}
+While we clarify the experience of participants in using debuggers in \fref{sec:general-knowledge}, we have no evidence that can confirm a reason of the self reported inexperience. 
+
+One possible explanation is, as the reviewer correctly identifies, that the background of participants is not specifically in software engineering or computer science. Some of the participants indeed come from different backgrounds within engineering or even business school, but even then they have had programming experience and taken the basic cs programming in Python course. However another explanation for this is that the practice of debugging is not as well spread now a days, due to proliferation of scripting languages (as Python or JavaScript) in which log-based debugging is a common practice. Moreover, the use of alternative tools like LLMs for automatic completion and programming shepherding may also have an impact in the current use of debuggers
+\end{clarify}
 
 \begin{remark} \label{rem:results}
 The results section is short, and does not go into details in analyzing the perception of participants. It reports only few information, and the open questions are not presented nor analyzed. Observations and conclusion concern only likert-scaled questions. In my opinion, open questions yield a lot of qualitative information, and, despite the weaknesses of the design, could still provide valuable insights into the usefulness of Flik.
