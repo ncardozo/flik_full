@@ -51,18 +51,16 @@ the possibility of changing the variable's value.
 described approaches. In timepoint debuggers execution can step back to a timepoint (similar to a 
 breakpoint), in which variables' values can be changed to re-execute (\ie replay the execution) in a 
 new timeline. To enable re-execution, the debugger records the state and behavior of the program, 
-similar to omniscient and repay-based debuggers. A novel case of this type of debuggers, for JavaScript programs, is DeloreanJs~\cite{leger23}. It has three main features: the ability to navigate 
+similar to omniscient and repay-based debuggers. A novel case of this type of debuggers, for JavaScript programs, is DeloreanJs~\cite{leger23}. It has three main features:  navigate 
 through an execution history, modify values of a variable, and resume execution from a timepoint (at 
 specific execution points in the past)~\cite{leger23}. DeloreanJS extends continuations with static 
 analysis functionalities to capture the current program state and store the (history of) variable's 
 values. 
 \end{description}
 
-We note the functionality to go back in time, observe the program's state at a previous moment and 
-execute a new timeline with the new values, available in timepoint debuggers as DeloreanJS, 
-is desirable in the context of \ac{RL} programs due to the possibility of exploring different 
+Going back in time,  as well as observing the program's state at a previous moment, and executing a new timeline with the new values, are desirable features in the context of \ac{RL} programs due to the possibility of exploring different 
 configurations as part of the same execution session. We take inspiration from such features,
-and in particular DeloreanJS, as a reference to create our debugger for \ac{RL} programs.
+and in particular from DeloreanJS, as a reference to create our debugger for \ac{RL} programs.
 
 
 %%
@@ -70,21 +68,24 @@ and in particular DeloreanJS, as a reference to create our debugger for \ac{RL} 
 \label{sec:py}
 
 Given that  most \ac{RL} programs are written in Python, we pay special attention to existing 
-debuggers for Python. There are several Python debuggers available. We focus on those debuggers
+debuggers for Python.  We focus on those debuggers
 that have support for the features required to debug \ac{RL} programs, such as the ability to navigate 
 through the execution history (like a time travel debugger), and the ability to modify the values
-of variables and resume the execution from a specific point in time.
+of variables and resume the execution from a specific point in time. As a summary, \fref{tab:python-debuggers} shows a comparative summary of existing Python debuggers, and the 
+features they offer. 
+
+
 
 % PDB
-The \ac{PDB}~\cite{python-pdb} debugger is the built-in Python Debugger in CPython~\cite{shaw21} 
-(the standard Python bytecode interpreter), implemented by several IDEs that provide a \ac{GUI} for 
-the debugger. \ac{PDB} is a powerful interactive source code debugger for Python programs, 
+The \ac{PDB}~\cite{python-pdb}  is within the CPython
+ standard  bytecode interpreter~\cite{shaw21}; it is available in several IDEs that provide a \ac{GUI} for 
+the debugger. \ac{PDB} is a powerful interactive source code debugger, 
 implemented as a module that can be used in Python scripts. \ac{PDB} provides a command-line 
-interface for debugging Python programs, allows developers to define breakpoints, step through 
+interface for debugging Python programs; with \ac{PDB} developers can define breakpoints, step through 
 program instructions, inspect variables, and evaluate expressions. Additionally, \ac{PDB} provides 
 a post-mortem debugging feature that allows developers to debug a program after it has crashed. 
-However, \ac{PDB} does not have the ability to navigate through the execution history of a program, 
-modify values of variables, or resume execution from a specific point in time, which are the features 
+However, \ac{PDB} does not have the ability to navigate through the execution history of a program, nor
+modify values of variables, nor resume execution from a specific point in time, which are the features 
 we are looking for in our solution. 
 
 % PuDB
@@ -92,7 +93,7 @@ PuDB~\cite{pudb} is a full-screen, console-based visual debugger for Python. PuD
 developers to set breakpoints, step through code, inspect variables, and evaluate expressions. 
 Similar to \ac{PDB}, PuDB also provides a post-mortem debugging feature that allows developers to 
 debug a program after it has crashed. However, PuDB does not have the ability to navigate through 
-a program's execution history, modify values of variables, or resume execution from a specific point 
+a program's execution history, nor modify values of variables, nor resume execution from a specific point 
 in time. Nevertheless, the history navigation feature can be simulated placing breakpoints in the 
 code and restarting the execution until the breakpoint is reached. The UI makes it possible to go 
 through the code and see the variables and the stack trace in a user-friendly fashion.
@@ -101,14 +102,14 @@ through the code and see the variables and the stack trace in a user-friendly fa
 PyTrace~\cite{pytrace} is a time travel recorder/analyzer for Python. PyTrace records code execution, 
 variables and stack frames. It has a \ac{GUI} that allows developers to navigate through the code, 
 see the variables and the stack trace, and it is very user-friendly. However, PyTrace is not 
-a full-featured debugger, as it does not allow you to change the values of variables, or do 
+a full-featured debugger, as it does not allow you to change the values of variables, nor execute 
 any other operation available to debuggers. PyTrace works as a tool to understand the behavior of 
 a program, moving backward and forward through a recorded execution (again in a single execution 
 path),  with different  graphs to see the state of your variables at a moment in time.
 
 % RevPDB
-\ac{RevPDB}~\cite{revdeb} is a reverse debugger for Python programs, RevPDB is an extension of 
-\ac{PDB} built on top of the PyPy interpreter, allowing developers to step forward and backward in 
+\ac{RevPDB}~\cite{revdeb} is an extension of 
+\ac{PDB} built on top of the PyPy interpreter, which allow developers to step forward and backward in 
 the execution. However, RevPDB is not a full-featured debugger, nor it has a user-friendly GUI, as it 
 is a proof of concept of the time traveling features, and it is not currently maintained.
 
@@ -122,22 +123,21 @@ the process level, rewinding and replaying the state of the entire process. Tech
 \ac{UDB} does allow new code paths to be executed at replay-time, but all execution replays are 
 isolated.
 
-\fref{tab:python-debuggers} shows a comparative summary of existing Python debuggers, and the 
-features they offer. 
 
-\begin{table}[hptb]
-  \centering
-  \caption{Comparative summary of existing Python debuggers.}
-  \input{tables/python-debuggers}
-  \label{tab:python-debuggers}
+\begin{table}[ht]
+	\centering
+	\caption{Comparative summary of existing Python debuggers.}
+	\input{tables/python-debuggers}
+	\label{tab:python-debuggers}
 \end{table}
+
 
 
 %%
 \subsection{Debuggers for \ac{AI} programs}
 \label{sec:ai}
 
-We now discuss the debuggers or debugger-like tools available for \ac{AI} and \ac{ML} programs. 
+%We now discuss the debuggers or debugger-like tools available for \ac{AI} and \ac{ML} programs. 
 
 Identifying the root causes of bugs in machine learning systems is a complex task. Some bugs may 
 originate within the models themselves, and their black-box nature makes pinpointing faults especially 
@@ -156,8 +156,8 @@ program during execution; therefore, making the tools unsuitable to analyze \ac{
 the continuous interaction between the environment and the agent.
 
 CockPit~\cite{schneider21} is an open source debugging tool designed for deep neural network 
-training, enabling practitioners to observe internal training dynamics in real time —much like 
-traditional debuggers, it provides insights into program execution. Rather than relying solely on loss 
+training, enabling practitioners to observe internal training dynamics in real time (much like 
+traditional debuggers), which provides insights into program execution. Rather than relying solely on loss 
 and accuracy curves, Cockpit offers a suite of instruments that monitor higher-order metrics such as 
 gradient statistics, curvature, and sharpness, which are now efficiently computable during training. 
 These insights help identify algorithmic failure modes—like unsuitable learning rates or optimization 
