@@ -30,8 +30,8 @@ To manage the complexity of \ac{RL} systems, and to mitigate the time consuming 
 stopping-modifying-starting-training \ac{RL} agents to evaluate different learning parameters o 
 algorithm values, the \flik back-in-time debugger is based on two main features:
 \begin{description}
-    \item[Stepping back:] Due to the lengthly execution loop in \ac{RL} programs, we 
-    want to have a functionality that will allow developers to step back the execution to observe the 
+    \item[Stepping back:] Due to the lengthy execution loop in \ac{RL} programs, we 
+    wanted to have a functionality that will allow developers to step back the execution to observe the 
     changes in the state between loop iterations, without having to re-start the complete execution.  
     This feature is adopted from omniscient debuggers.
     Stepping back will let developers interacting directly with the program, 
@@ -69,11 +69,9 @@ variables, values, environment, states and the rewards.
 \end{figure}
 
 \fref{fig:debugger} shows \flik's interface working to debug a simple example of the \spy{bubble_sort} 
-function. From the top, the first frame (in the blue rectangle - Execution frame) we have the running 
-execution, in this case the print for the array to be sorted in Line 018 in the second frame (the current 
-execution frame). The second frame (in the purple rectangle - Source code frame) shows the source 
-code being debugged. The third frame (in the red rectangle - Variables frame) shows the variables 
-used in the program so far. Finally, in the bottom of the interface we have the interactive console in 
+function. From the top, in the first frame in the blue rectangle (Execution frame) there is the running 
+execution.  The second frame (in the purple rectangle - Source code frame) shows the source code being debugged; note that the result of executing Line 018 (a print statement for the array to be sorted) is displayed in the Execution Frame. The third frame (in the red rectangle - Variables frame) shows the variables 
+used in the program so far. Finally, at the bottom of the interface we have the interactive console in 
 which developers can send commands to \flik to effectively debug the program.
 
 \sidemargin{par:gridworld}{{\fref{rem:gridworld}}}
@@ -174,9 +172,9 @@ bottom of the table) are provided by the \ac{PDB} debugger.
 \label{sec:flik-internals}
 
 \sidemargin{par:requirements2}{{Remarks \ref{rem:requirements}, \ref{rem:implementation}, \ref{rem:implementation2}}}
-Having introduced the features of \flik and their use debug \ac{RL} programs using the different 
+Having introduced the features of \flik and their use to debug \ac{RL} programs using the different 
 commands, we now turn our attention to \flik's implementation and its inner workings.\footnote{\flik is available for download at: \url{https://github.com/FLAGlab/flik} and distributed as a Docker image at: \url{https://hub.docker.com/r/lrodriguez22/py-flik-debugger}.}  
-\flik is a console-based debugger built on top of \ac{PDB}, adding features such as colored syntax 
+\flik is a console-based debugger built on top of \ac{PDB}, by adding features such as colored syntax 
 highlighting and tracking of variables' state. \ac{PDB}, in turn, is built on top of the Python 
 runtime enabling access to run-time variables and state as provided by the Python interpreter. A 
 diagram of \flik's architecture is shown in \fref{fig:flik-architecture}.
@@ -190,10 +188,10 @@ diagram of \flik's architecture is shown in \fref{fig:flik-architecture}.
 
 To debug a Python program with \flik, we reuse the functionality already available in \ac{PDB} to 
 instrument the code of a running interpreted program. Using the instrumentation available for Python 
-programs lets \flik work with the full Python specification without having to build an interpretar and 
+programs makes \flik work with the full Python specification without having to build an interpreter and 
 program instrumentation from scratch. 
 \sidemargin{par:python}{{Remarks \ref{rem:python-io}, \ref{rem:python-full}, \ref{rem:python-lib}}}
-As such \flik work with external libraries and capture stdout 
+Thus, \flik works with external libraries and capture stdout 
 output I/O operations from the execution. The access to external libraries when running \flik is divided 
 in two groups, depending on the nature of the libraries. For libraries available locally in the system, 
 \flik has full access to the code, and therefore all of \flik's capabilities are available, as with any other 
