@@ -80,37 +80,50 @@ expected from participants with reported debugger experience.
 %%%%
 \subsubsection{Tasks questions results}
 \label{sec:tasks-results}
-In \fref{fig:general-know} the y-axis represents the number of participants registering 
-answers to the question at the given Likert score. The x-axis corresponds to the score, with
-values in the range from 5 to 1 (from completely agree, to completely disagree). In the last 
-question (the third bar in green for all graphs), 5 represents taking a lot of time, and 1 represents 
-taking very little time.
 
-Taking the results reported from the three tasks, most of the participants completed the first task successfully (\fref{fig:task1}). Participants reported the task was easy to solve. Even though the task 
+\fref{fig:solved-tasks} summarizes the results of the information reported by the participants in 
+solving the tasks. The y-axis represents the number of participants for each answer category at the  
+given Likert score. The x-axis corresponds to the score, with values in the range from 5 to 1 (from 
+completely agree, to completely disagree). Each of the bars in the graph represents a question for 
+the tasks (three in total). For the last question (the third bar in green for all graphs), 5 represents 
+taking a lot of time in completing the task (or not completing the task), and 1 represents taking very 
+little time.
+
+Taking the results reported from the three tasks, most of the participants completed the first task 
+successfully (\fref{fig:task1}). Participants reported the task was easy to solve. Even though the task 
 was reported to be easy, it took participants a long time to complete, because this was the task in 
 which participants had to get familiarized with the tool. 
 
-The second task was harder than the first one, as participants were not familiar with the problem 
-(\ie Rooms), and its complexity is higher (when compared to Gridworld). Most participants took 
-longer to finish task 2 (\fref{fig:task2}) and some struggled finding the root cause of the bug in the 
-program.  Such result is expected, as the bug introduced in task 2, does not exhibit a completely 
-wrong agent behavior, but a more subtle interaction with the environment and the obtained Q-values. 
-Moreover, the fix required more than updating a value, but actually modifying the learning function. 
-Such required change confused to some participants. 
+The second task was harder than the first one, as participants were not familiar with the task to 
+solve, the Rooms environment, and it is of a higher complexity than the first environment. Most of 
+the participant took over half the time given to solve task (\fref{fig:task2}). Examining the 
+participants that took the longest to solve the task, we observe that they did not find the bug 
+successfully (2 out of 4). In contrast from the participants taking the list amount of time (1 and 2 in 
+the Likert scale) very few (only 2 out of 9) did not successfully find the bug. Such correlation between 
+the increase in time to solve the task and the decrease in the correct solutions to the task can be 
+explained from two perspectives. First, the bug introduced in task 2, does not exhibit a completely 
+erroneous agent behavior, but a more subtle interaction with the environment and the obtained 
+Q-values. Second, fixing the bug involves modifying the learning function, which, based on the 
+comments about the task confused some of the participants. 
 
-Finally, the third task (\fref{fig:task3}) was the hardest one, most participants had trouble finding the 
-bug. The general comment about the task is that it was not easy to solve. Nevertheless, the 
-participants managed to finish the task in less time than in the other tasks. 
+Finally, the third task (\fref{fig:task3}) was the most challenging task. This is confirmed by the amount 
+of participants who completed the task effectively, only 6 of 8 participants that reported solving the 
+task (5 Likert score) effectively solved it based on their answer to the bug identification. Moreover, 
+from those participants we observe that the time taken to solve the task was significant (Likert score 
+of 4) for 5 of the participants.  most participants had trouble finding the bug. In contrast, out of the 10 
+participants that reported completing the task promptly (Likert scores of 1 and 2), 8 effectively solved 
+it. 6 participants did not detect the bug.
 
-From the results it is expected that identifying and fixing the bug in the first task took longer than for 
-other tasks, even though this is the easiest task, participants were still getting familiarized with the 
-tool, and the learning curve for debugging the programs is steep. In the following tasks, while the 
-nature of the introduced bugs is different, there is a learning curve  with using the tool. For the second 
-task, given the nature of the bug and the fact that the bug was introduced in the Q-learning algorithm's 
-logic, it was harder to identify. Hence, this task was harder to solve, even though it was completed by 
-most participants. Finally, for the third task, the introduced bug had yet a different nature, in the reward 
-function. For these task the learning curve in using the tool was more developed, and it took 
-participants less time than expected for this reason.
+While the third task was not easy to solve according to participants' comments, they were effective in 
+solving it. From the results it is expected that identifying and fixing the bug in the first task took longer 
+than for other tasks, even though this is the easiest task, as participants were still getting familiarized 
+with \flik, and therefore explored the capabilities of \flik more, while detecting the bug. Such behavior 
+points to a steeper learning curve for debugging the programs \flik. In the following tasks, while the 
+nature of the introduced bugs is different, the expertise gained using the tool was beneficial in 
+detecting the bugs. For the second task, given the nature of the bug and the fact that the bug was 
+introduced in the Q-learning algorithm's logic, made it a harder bug to identify; even though it was 
+completed by most participants. For the third task, we observe that the time to solve the task starts 
+to decrease with reported times taking less than half the allocated time to complete the task.
 
 
 \begin{figure}[hptb]
@@ -144,13 +157,10 @@ participants less time than expected for this reason.
 \subsubsection{Debugger Usability Results}
 \label{sec:usability}
 
-The results for  the debugger's usability, shown in \fref{tab:general1-debuggers} and 
-\fref{tab:general2-debuggers}, exhibit a sense that the tool is useful. The comments, in general,  
-express that \flik would be useful, especially if given more time to study it, and gain practice with the 
-tool before using it in real tasks. The tool was easy to use, once familiarized with the commands and 
-their use. Additionally, there are several comments about providing a GUI or improving the current UI,
-to help understanding how the tool works, and how to navigate the code with it, as at it differs from 
-more mainstream debuggers like the one available with Visual Studio Code and its interface.
+In Tables \ref{tab:general1-debuggers} and \ref{tab:general2-debuggers} the scale represents the 
+Likert score option, expressing whether the participants completely agree ($5$) or completely disagree 
+($1$) with the question at hand. The values inside the tables correspond to the number of participants 
+that reported each given scale.
 
 \begin{table}[H]
   \centering
@@ -166,15 +176,13 @@ more mainstream debuggers like the one available with Visual Studio Code and its
   \label{tab:general2-debuggers}
 \end{table}
 
-% \begin{table}[]
-% \centering
-% \input{tables/usability3}
-% \end{table}
-
-In Tables \ref{tab:general1-debuggers} and \ref{tab:general2-debuggers} the scale represents the 
-Likert score option, expressing whether the participants completely agree ($5$) or completely disagree 
-($1$) with the question at hand. The values inside the tables correspond to the number of participants 
-that reported each given scale.
+The results for  the debugger's usability, shown in Tables \ref{tab:general1-debuggers} and 
+\ref{tab:general2-debuggers}, exhibit a useful valuation towards the tool. The comments, in general,  
+express that \flik would be useful, especially if given more time to study it, and gain practice with the 
+tool before using it in real tasks. The tool was easy to use, once familiarized with the commands and 
+their use. Additionally, there are several comments about providing a GUI or improving the current UI,
+to help understanding how the tool works, and how to navigate the code with it, as at it differs from 
+more mainstream debuggers like the one available with Visual Studio Code.
 
 
 %%
