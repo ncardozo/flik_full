@@ -41,14 +41,14 @@ In this study, we investigated the following research questions:
 \subsection{Study design}
 \label{sec:design}
 
-The user study is design so that participants are asked to solve three tasks, each task in a different 
-\ac{RL} environment. For each of the tasks the participants are given a full \ac{RL} agent and the 
-environment implementation. In each task a bug is introduced manually, affecting the learning 
+Participants were asked to solve three tasks, each task in a different 
+\ac{RL} environment. For each of the tasks the participants were given a full \ac{RL} agent and the 
+environment implementation. In each task a bug was introduced manually, affecting the learning 
 process of the agent, although in all tasks the agents can be trained without abrupt termination. 
-Finally, the tasks increase the difficulty in the subtle interaction between the agent and the 
+Finally, the tasks increased the difficulty in the subtle interaction between the agent and the 
 environment (causing the bug) and the complexity of the environment.
 
-Upon completing the tasks, the participants are given a questionnaire consisting of 22 multiple choice 
+Upon completing the tasks, the participants were given a questionnaire consisting of 22 multiple choice 
 questions with a 5-points Likert scale (in which 5 means completely agree, and 1 means completely 
 disagree) and one yes or no question. All the questions are inspired by similar user studies for 
 debuggers, as for example the user evaluation for DeloreanJS~\cite{leger23}. 
@@ -63,11 +63,9 @@ The general knowledge questions (XX) are concerned with the participants' develo
 (\ie using Python, debuggers and the terminal), used to characterize participants. The task results 
 questions (XX) are concerned with the bug identified in each of the tasks, and the actions taken to 
 fix it (if fixed). The usability questions (XX) are concerned with the participants' experience with 
-the debugger, and additional feedback they could provide for improving \flik. The survey is anonymized. 
-
-, 
-to identify if the participants were willing to use the tool in the future. Finally, there were 10 open-answer 
-questions, to dive deeper into feedback for the tool, and the tasks' complexity.
+the debugger, and additional feedback they could provide for improving \flik. %to identify if the participants were willing to use the tool in the future. 
+Finally, there were 10 open-answer 
+questions, to dive deeper into feedback for the tool, and the tasks' complexity.The survey was anonymized. 
 
 
 
@@ -80,7 +78,7 @@ the study are described in the following:\footnote{The evaluation guides and the
 
 \paragraph{\textbf{Gridworld.}}
 In its original presentation, the Gridworld environment is a standard benchmark for Q-learning, 
-familiar to most \ac{RL} developers. For the study we use a larger Gridworld environment consisting 
+familiar to most \ac{RL} developers. For the study we used a larger Gridworld environment consisting 
 of a $n \times m$ rectangular  board/grid ($10\times 10$ in our implementation), in which each tile 
 $(i,j)$ represents a specific state of the board. Tiles in the board may be walls (\ie gray-out cells), 
 which agents cannot cross, or have a special exit status for agents to exit the board and terminate the 
