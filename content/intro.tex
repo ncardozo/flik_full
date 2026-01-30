@@ -35,12 +35,13 @@ complexity makes it incredibly challenging to locate errors, even when using sta
 debugging tools. 
 
 Traditional debugging tools are often inadequate for tracing issues in \ac{RL} due to the intricate 
-and prolonged nature of the training processes. In conventional software systems, the execution flow 
-is typically deterministic, allowing developers to trace and debug step-by-step with relative ease. However, 
-\ac{RL} programs involve a continuous loop of learning and adaptation, where an agent 
+and prolonged nature of the training processes. Execution of \ac{RL} programs involves a 
+continuous loop of learning and adaptation, where an agent 
 interacts with an environment stochastically, receives feedback from the interaction (in the form of 
-scalar rewards), and adjusts its actions accordingly. The cyclical and stochastic nature of \ac{RL} 
-programs, makes the process of identifying errors much more complex and less transparent.
+scalar rewards), and adjusts its actions accordingly to build the agent's behavior. In \ac{RL} systems, 
+the behavior of an agent only emerges after several execution steps. The cyclical and stochastic 
+nature of \ac{RL} programs, makes the process of identifying errors much more complex and less 
+transparent.
 
 As a result, understanding and debugging \ac{RL} programs requires tracking individual 
 decisions, and understanding the long-term effects and patterns that emerge over many iterations.

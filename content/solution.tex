@@ -232,11 +232,15 @@ execution state of a function call, for which we save:
     \item \spy{f_lineno}: The current line number being executed metadata.
 \end{itemize}
 
+\sidemargin{par:scalability}{{\fref{rem:scalability}}}
 Upon a function execution, we put the frame containing all state values and metadata into the history 
 buffer. To mitigate the impact on the memory overhead of storing the information of all executed 
-functions we restrict the history buffer to have a fixed size (XXXMB in our current setting). As a 
-consequence, the buffer keeps the 100 most recent history frames, removing the oldest frame in the 
-history when the buffer is full.
+functions we restrict the history buffer to have a fixed size of 100 frames (in our current setting, 
+although this parameter is configurable). As a consequence, the buffer keeps the 100 most recent 
+history frames, removing the oldest frame in the history when the buffer is full.
+The use of the history buffer has an impact on the memory usage of \flik, increasing the overall 
+memory used by the program. However, the memory increase is constant and will not go over 100 
+frames more than the memory of an \ac{RL} program not using \flik.
 
 \paragraph{Step-back.}    
 The history buffer is used to enable stepping back. In an execution function, the step back commands 

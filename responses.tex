@@ -25,11 +25,11 @@ is followed by our response and an explicit status indication:
 
 \begin{itemize}[nosep,label=--] 
 	\item \revtotal{solved} \statussolved 
-	\item \revtotal{future} \statusfuture
+%	\item \revtotal{future} \statusfuture
 	\item \revtotal{clarify} \statusclarify\footnote{We clarify the question made by the reviewer} 
 	\item \revtotal{reconsider} \statusreconsider\footnote{We ask the reviewer to reconsider the remark in the light of arguments and clarifications we provide in the response.} 
-	\item \revtotal{blocked} \statusblocked\footnote{We could not accommodate the remark in the text due to blocking constraints.} 
-	\item \revtotal{feedback} \statusfeedback\footnote{We answered the remark to our best interpretation. We are unsure about what the reviewer meant.} 	
+%	\item \revtotal{blocked} \statusblocked\footnote{We could not accommodate the remark in the text due to blocking constraints.} 
+%	\item \revtotal{feedback} \statusfeedback\footnote{We answered the remark to our best interpretation. We are unsure about what the reviewer meant.} 	
 \end{itemize}
 
 The remarks with specific changes in the paper have a reference to the location in the paper 
@@ -119,7 +119,7 @@ We added the text explaining what happens when external libraries are used, eith
 The experimental evaluation is interesting, but it doesn't say anything about the execution cost. If, as I mentioned earlier, Flik is defined as an instrumented interpreter, it is likely to have scalability issues, especially if it must save all the states of an execution (which can potentially be very long). It would be good to show execution times (e.g., of the complete execution of the program in Flik assuming there are no breakpoints) and compare it with a standard interpreter for the language. This way, the overhead introduced by the debugger could be analyzed.
 \end{remark}
 \begin{solved}
-We added a discussion about the performance, overhead and scalability of using \flik according to the evaluation use cases in \fref{sec:scalability} (\fref[vario]{par:scalability})
+We added a discussion about memory overhead and scalability of using \flik according to the tool's its design as described in the new section discussing how to capture the state (\fref[vario]{par:scalability}).
 \end{solved}
 
 
@@ -348,6 +348,9 @@ We used the research design book as a guide to describe the evaluation study as 
 \begin{remark} 
 The authors stress efficiently the difficulty and the importance of debugging RL agents, although they argue that "conventional systems typically have a linear and predictable flow [...] allowing developers to trace and debug step-by-step with ease". This is false: first even in linear and predictable systems, debugging through step-by-step can be an enormous pain, and second there are many systems that you can label as "conventional" (eg, web sites/servers, drones, iot/embedded systems, etc.) that either are not linear/predictable by nature (because, eg, of concurrency) or by context (eg, websites/iot/drones' behavior strongly depend on what happens in the uncontrolled external world).
 \end{remark}
+\begin{solved}
+We removed this erroneous argument of the paper, and leave in the argument about the cost of training an agent until its behavior emerges. evaluating different parameters an values becomes very costly  due to the training execution steps of the agent. A debugger that let's developers try out different values while running, is more appropriate for such cases.
+\end{solved}
 
 \begin{remark}\label{rem:debuggers}
 There is a structure problem: subsection "2.1 what is a debugger" is mostly about what are bugs and what is debugging and then half the section concerns debuggers.
