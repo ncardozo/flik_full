@@ -8,28 +8,34 @@ This section presents the analysis of the results of the user study presented in
 \fref{sec:evaluation}. The user study was conducted on a single session with 27 participants.
 The results are presented according to the three sections in the survey: General 
 knowledge (\fref{sec:general-knowledge}), Task Effectiveness (\fref{sec:tasks-results}) and Usability 
-(\fref{sec:usability}). Finally, a discussion section has the analysis of the results form the survey. All 
-data obtained from the questionnaire is available in our 
+(\fref{sec:usability}). Afterwards, we use the information extracted from the responses analysis to 
+answer our three research questions. Finally, this section closes with a discussion of the main take 
+aways that can be taken from the user study in perspective of the research questions, to then discuss 
+the threats to validity of the study. 
+
+All data obtained from the questionnaire is available in our 
 online appendix (\url{https://flaglab.github.io/Flik_Experiments/}).
 
 
 %%
-\subsection{General Knowledge Results}
+\subsection{Data analysis}
+
+%%%%
+\subsubsection{General knowledge questions results}
 \label{sec:general-knowledge}
 
-Most of the participants were very experienced with programming in Python as it can be seen in 
-(\fref{fig:python-experience}). The experience level of 5 is selected as participants use Python very 
-often in their work and university courses. Similarly, most participants are well familiarized with 
-\ac{RL} (\fref{fig:rl-experience}), as they were taking a course on the topic. Note that locating the 
-bugs in the programs required familiarity with \ac{RL} and Python knowledge. Furthermore, the 
-participants reported being familiar  with using the terminal, and therefore, interacting with \flik, using 
-the commands and the interface would neither pose a problem nor require a learning curve 
-(\fref{fig:terminal-experience}). Nevertheless, in average, the participants were not familiarized with 
-debuggers, and only used them  rarely, normally using Visual Studio Code interface's simple 
-features, like graphical breakpoint functionality. This leads to misunderstandings and some difficulties 
-in completing the tasks, as the  tool is based on command line interaction to stop and step through 
-the code (\fref{fig:debugging-experience}). This characteristic from the participants caused a steeper 
-learning curve to use the tool, than expected from participants with previous debugger experience.
+The demographic questions of the questionnaire are used to assess the population of participants, 
+shown in \fref{fig:general-know}. Most participants report to be very experienced with Python  
+(\fref{fig:python-experience}) and using the terminal (\fref{fig:terminal-experience}). In both categories 
+the participants report to have used Python often in their work and/or university courses. 
+The reported experience is \ac{RL} is more spread out, with a tendency towards familiarity with
+\ac{RL} (\fref{fig:rl-experience}). The spread in the experience level about using \ac{RL} may be due 
+to the lack of confidence about the expertise, as many of the participants have taken a course in 
+\ac{RL} but may feel that they may need further experience.
+However, the familiarity reported about the experience in using debuggers is less prominent with an 
+average lack of familiarity in debugger use. Upon revision of the comments about using debuggers, 
+participants reported rare usage, in most cases using Visual Studio Code interface's simple 
+features, like graphical breakpoint functionality.  
 
 \begin{figure}[hptb]
     \centering
@@ -64,9 +70,15 @@ learning curve to use the tool, than expected from participants with previous de
     \label{fig:general-know}
 \end{figure}
 
+The tasks in the study require participants to actively use a console based debugger for Python 
+\ac{RL} programs. Successfully detecting the bugs requires familiarity with \ac{RL} and Python 
+interaction with \flik. However the inexperience in using debuggers may lead to difficulties in 
+completing the tasks, as the interaction with breakpoints and timepoints to step through the code 
+back and forth. Such characteristic may cause a steeper learning curve to use the tool than that 
+expected from participants with reported debugger experience.
 
-%%
-\subsection{Tasks Results}
+%%%%
+\subsubsection{Tasks questions results}
 \label{sec:tasks-results}
 In \fref{fig:general-know} the y-axis represents the number of participants registering 
 answers to the question at the given Likert score. The x-axis corresponds to the score, with
@@ -128,8 +140,8 @@ participants less time than expected for this reason.
 \end{figure}
 
 
-%%
-\subsection{Debugger Usability Results}
+%%%%
+\subsubsection{Debugger Usability Results}
 \label{sec:usability}
 
 The results for  the debugger's usability, shown in \fref{tab:general1-debuggers} and 
@@ -164,18 +176,15 @@ Likert score option, expressing whether the participants completely agree ($5$) 
 ($1$) with the question at hand. The values inside the tables correspond to the number of participants 
 that reported each given scale.
 
+
 %%
-\subsection{Performance and scalability}
-\label{sec:scalability}
+\subsection{Answers to the research questions}
 
-\sidemargin{par:scalability}{{\fref{rem:scalability}}}
-This section presents the performance and scalability of running \flik on top of the \ac{RL} 
-application, versus the execution of just the \ac{RL} application in the case of the three \ac{RL} 
-applications (Gridworld, Rooms, and Driving Assistant). The evaluation takes into account the 
-performance of the application in terms of required memory, and delay of executed \flik operations. 
-The scalability is considered with respect to the size of the state space of the applications evaluated. 
-
-
+\begin{enumerate}[label=\textbf{RQ.\arabic*}]
+  \item A
+  \item A 
+  \item A
+\end{enumerate}
 
 
 %%
