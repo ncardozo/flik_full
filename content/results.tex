@@ -200,7 +200,7 @@ questions.
 
 \begin{enumerate}[label=\textbf{RQ.\arabic*}]
   \item Refers to the appropriateness of a dedicated debugger for developing and debugging \ac{RL} 
-  programs. To answer this question we use the experience in using debuggers, reported by 
+  programs. To answer this \textbf{RQ} we use the experience in using debuggers, reported by 
   participants, and the comments provided at the end of the questionnaire. 
   
   From the answers, 59\% of the participants found the tool useful and would recommend it use for 
@@ -212,11 +212,28 @@ questions.
   the development of their \ac{RL} course, a great majority (89\%) found it would have helped their 
   experience. 
   
-  Given the comments from the participants, we can state \flik is useful for debugging \ac{RL} programs. 
+  Given the answers collected from the participants, we can state \flik is useful for debugging \ac{RL} 
+  programs. 
   
-  \item A 
+  \item Refers specifically to the features developed in \flik and their usefulness to detect bugs. To 
+  answer this question \textbf{RQ} we use answers given by the participants about the strategy to 
+  solve the bug, and the comments given at the end of the questionnaire.
   
-  \item Refers to the effectiveness and efficiency of using \flik. With respect to the effectiveness, we 
+  The answers given by the users for each task do not evidence any relevance or pertinence with 
+  respect to the use or usefulness of the features developed in \flik for detecting bug. The comments 
+  present seldom information about the pertinence of the features. Only two comments from 
+  participants hint to the usefulness of the features, stating that the navigation provided by \flik is 
+  useful, but it would be more useful if the navigations would be supported by a GUI or if the traces of 
+  execution would be recorded.
+  
+  Given the answers collected from the participants we cannot assert the usefulness of the features 
+  presented in \flik to develop \ac{RL} programs.
+  
+  \item Refers to the effectiveness and efficiency of using \flik. To answer this \textbf{RQ} we use the 
+  time to complete each task, the completion of the task, the detected bug, and the explanation about 
+  the fix questions in the questionnaire.
+  
+  With respect to the effectiveness, we 
   can see observe that study participants, for the most part, were successful in using \flik to detect the 
   bug in each of the tasks, with a success rate of 88\%, 85\%, and 55\% for each of the tasks 
   respectively.
@@ -227,7 +244,7 @@ questions.
   that, once participants are used to using \flik, they can more effectively identify more involved bugs 
   within the code.
   
-  Taking into account the results and reported comments from participants, we can state that \flik is 
+  Taking into account the results and answers given by the participants, we can state that \flik is 
   indeed effective in helping developers detect bugs in a timely manner.
 \end{enumerate}
 
@@ -236,15 +253,34 @@ questions.
 \subsection{Discussion}
 \label{sec:discussion}
 
-In general, the results of the empirical evaluation are very positive. Most of the participants have a 
+In general, the results of the user study evaluation are very positive. Most of the participants have a 
 good impression of \flik, finding it to be useful, especially for the kind of challenges presented in 
-\ac{RL} programs. While participants found it hard to familiarize themselves with the tool, especially 
-for the participants with little experience with debuggers, at the beginning of the evaluation session, 
-most of the participants found the tool easy to use (after some initial use). Additionally, participants 
-mentioned the tool be of use in general for the development of \ac{RL} programs in general, for example 
-to develop course work, identifying the errors in the study as recurrent during development. The 
-participants to the empirical study  also highlighted \textbf{\flik is useful in detecting common and hard to identify errors and misbehavior in \ac{RL} programs}.
+\ac{RL} programs. The participants found it hard get to familiarize with the tool, especially 
+for the participants with little experience with debuggers, which would deter the use of the debugger. 
+Nonetheless, participants found the tool useful in over 88\% of the cases. At the beginning of the 
+evaluation session, most of the participants found the tool easy to use (after some initial use). 
+Additionally, participants mentioned the tool be of use in general for the development of \ac{RL} 
+programs, for example, to develop course work, identifying the errors in the study as recurrent 
+during development. The participants to the user study also highlight that \textbf{\flik is useful in 
+detecting common and hard to identify errors and misbehavior in \ac{RL} programs}; reinforcing the 
+usefulness of an \ac{RL} specific debugger.
 
+Thile there is no evidence about the usefulness of the features developed specifically for \flik, these 
+features are used in detecting the bugs by most participants. Additionally, the mastery of the tool as 
+tasks progress, can co-relate to the decrease in the time to solve the tasks. Detecting the bugs faster 
+hints to a better use of the tool, and in particular, a better use of its features. Nonetheless, given that 
+there was no control group to detect bugs in the programs using a standard Python debugger or no 
+debugger at all, at this time we cannot assure the usefulness of the features on their own. This work 
+is left as future work for the evaluation with larger groups of participants.
+
+The effectiveness and efficiency of using \flik is demonstrated by the relation between the tasks 
+effectively solved, and the time taken to solve the tasks. These two variables highlight an 
+improvement in solving the tasks more efficiently as user gain more experience with the tool. While 
+the number of effective detections to the bug decrease as the tasks progress, which in the latter 
+cases can be attributed to the increased complexity and environment space of the tasks, the 
+resolution rate is over 50\% in all cases. Such results make a case for further development of 
+specialized tools, and in particular \flik, to support the development of \ac{RL} programs.
+ 
 With respect to the usability dimension the participants reported that, with some difficulties at the 
 beginning, again for the participants without previous experience with debuggers, 
 \textbf{\flik is usable}. The usability of the tool is confirmed by the completion of the three tasks by a 
