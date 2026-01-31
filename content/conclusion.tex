@@ -34,10 +34,16 @@ Additionally, in the study we evaluated the usability of \flik as a debugging. E
 console-based debugger, it allows developers to interact with a program during its execution, inspect 
 the internal state of the agent, and modify its state and behavior in real-time. 
 
-There are three important avenues of future work to improve the usability of \flik, as gathered from the 
+There are four important avenues of future work to improve the usability of \flik, as gathered from the 
 open question comments obtained in the user study and the development process. 
 
-First, we want to optimize memory consumption. One possible approximation would be to follow the 
+First, to strengthen the validation and the usefulness of \flik, it is important to extend the user study to 
+more participants with a wider range of backgrounds to cover more accurately the space of \ac{RL} 
+developers. Furthermore, in following sessions it is important to evaluate different scenarios with 
+control groups using standard debuggers or no debuggers at all. Such evaluation would strengthen the 
+results and confirm the usefulness of \flik and its features. 
+
+Second, we want to optimize memory consumption. One possible approximation would be to follow the 
 path of known optimizations for omniscient debuggers~\cite{pothier07}. Alternatively, it is possible to 
 explore the layer cashing using a similar strategy to that 
 used in git or docker, as a means to save states. Instead of saving the entire history of all variables 
@@ -46,7 +52,7 @@ save the changes made on the program since the last recorded history. This would
 memory usage of \flik. We envision such a change to require a more complex logic and evolving the 
 design of \flik to an architecture to support the new features. 
 
-Second, we can develop a full visual interface for \flik, following similar debugger interfaces (\eg 
+Third, we can develop a full visual interface for \flik, following similar debugger interfaces (\eg 
 VSCode or Eclipse) as plugins to an IDE. In this way developers could easier interact with the features 
 (commands) of the debugger in a more friendly way. This for example, would also open the opportunity 
 to generate visualization for the different execution traces from the re-execution of parts of the program.
