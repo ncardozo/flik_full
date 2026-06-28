@@ -13,7 +13,6 @@ information for the definition of \flik.
 \subsection{\acl{RL} Basics}
 \label{sec:rl-background}
 
-\sidemargin{par:background}{{\fref{rem:intro}}}
 \ac{RL}~\cite{sutton18} encompasses different artificial intelligence techniques and algorithms in 
 which an agent learns the behavior to reach a goal by specializing its interaction with the 
 environment in which it is deployed.
@@ -67,7 +66,6 @@ providing frameworks and toolkits for designing sophisticated behavioral aspects
 \subsection{Bugs and Debugging}
 \label{sec:deb}
 
-\sidemargin{par:debuggers}{{\fref{rem:debuggers}}}
 A software bug is defined as erroneous behavior observed during a program's execution, which 
 causes the program to crash or produce incorrect results~\cite{zeller09}. Bugs are common in 
 software development, and can be caused by many factors, such as incorrect program logic, 
@@ -76,7 +74,6 @@ Bugs can be difficult to identify and fix, especially in large and complex progr
 type of bugs, of interest for our work is run-time errors, in which programs compile, but present  
 abnormal behavior caused by incorrect program logic. 
 
-\sidemargin{par:debugging-process}{{\fref{rem:debugging-process}}}
 Debugging is the process of finding and reducing the number of bugs or defects detected in a 
 program~\cite{hindriks12}. The process of debugging involves identifying and isolating an 
 (execution/behavioral) error and modifying the program to fix the bug~\cite{mccauley08}. 
@@ -90,10 +87,9 @@ its veracity. A consequence of this is that whenever the hypothesis
 about the program behavior is not true, developers must identify the bugs causing the problem, 
 and fix them. Moreover, we focus on the use of debuggers to support the process of identifying bugs.
 
-A classic manual debugging technique is the use of traces in the code through printing the values of several 
-variables as the program is executed. However, this is not an efficient or scalable way to debug a 
-program. 
-\sidemargin{par:logs}{{\fref{rem:logs}}}
+A classic manual debugging technique is the use of traces in the code through printing the values of 
+several variables as the program is executed. However, this is not an efficient or scalable way to 
+debug a program. 
 An improvement over the use of traces is the use of logs~\cite{yin20}, in which variables values and 
 specific events are recorded into an external log, to then be analyzed after the program execution; however, it requires the complete execution of the system (or until a crashing event 
 occurs), to then analyze  variables and their values for correctness.

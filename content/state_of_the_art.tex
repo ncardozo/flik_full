@@ -13,7 +13,6 @@ including debuggers for \ac{RL} programs specifically.
 \subsection{Debugging Approaches and Debuggers}
 \label{sec:other}
 
-\sidemargin{par:other-langs}{{\fref{rem:other-langs}}}
 %We first present the state of the art in debugging approaches and representative tools in different  programming languages. 
 There are many debugging tools available for different programming 
 languages, each with its own set of features and capabilities, most of them integrated with IDEs as
@@ -204,7 +203,6 @@ a bad agent policy, for example, not reaching the goal, or not learning the corr
 of the work is to provide a systematic testing approach to find bugs. As part of the process, the tool 
 offers a methodology to find potential bugs, or confirm a bug exists, using the fuzzing within the 
 framework. 
-\sidemargin{par:fuzzing}{{\fref{rem:fuzzing}}}
 The idea is to modify a given program state $s_0$, through random walks to state $s$, to fin a if the 
 value function on state $s$ dominates that of state $s_0$, yielding to an improved policy an avoiding 
 the bug state $s_0$. 

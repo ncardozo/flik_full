@@ -15,7 +15,6 @@ enhanced, as it is no longer required to stop-start-train the agent. Such proper
 to experiment over the behavior of agents without having to go over the extensive process of 
 stopping agents and going through the complete exploration with the new values.
 
-\sidemargin{par:postmortem}{{\fref{rem:postmortem}}}
 Seldomly, debuggers allow developers to go back in time to replay and analyze the program. 
 Additionally, it is even rarer for debuggers to allow developers to 
 modify variables. In order to contribute to the development of \ac{RL} programs, 
@@ -74,7 +73,6 @@ execution.  The second frame (in the purple rectangle - Source code frame) shows
 used in the program so far. Finally, at the bottom of the interface we have the interactive console in 
 which developers can send commands to \flik to effectively debug the program.
 
-\sidemargin{par:gridworld}{{\fref{rem:gridworld}}}
 We now use a running example to present the features and functionality/commands of \flik. Four 
 our running example we use the Gridworld \ac{RL} benchmark, presented in detail in 
 \fref{sec:evaluation} and shown in \fref{fig:gridworld} as a $10 \times 10$ grid. 
@@ -171,7 +169,6 @@ bottom of the table) are provided by the \ac{PDB} debugger.
 \subsection{\flik internals}
 \label{sec:flik-internals}
 
-\sidemargin{par:requirements2}{{Remarks \ref{rem:requirements}, \ref{rem:implementation}, \ref{rem:implementation2}}}
 Having introduced the features of \flik and their use to debug \ac{RL} programs using the different 
 commands, we now turn our attention to \flik's implementation and its inner workings.\footnote{\flik is available for download at: \url{https://github.com/FLAGlab/flik} and distributed as a Docker image at: \url{https://hub.docker.com/r/lrodriguez22/py-flik-debugger}.}  
 \flik is a console-based debugger built on top of \ac{PDB}, by adding features such as colored syntax 
@@ -190,7 +187,6 @@ To debug a Python program with \flik, we reuse the functionality already availab
 instrument the code of a running interpreted program. Using the instrumentation available for Python 
 programs makes \flik work with the full Python specification without having to build an interpreter and 
 program instrumentation from scratch. 
-\sidemargin{par:python}{{Remarks \ref{rem:python-io}, \ref{rem:python-full}, \ref{rem:python-lib}}}
 Thus, \flik works with external libraries and capture stdout 
 output I/O operations from the execution. The access to external libraries when running \flik is divided 
 in two groups, depending on the nature of the libraries. For libraries available locally in the system, 
@@ -209,7 +205,6 @@ To support the two features put forward for \flik, we implement the functionalit
 \end{enumerate*}
 These functions work with the internal representation of state in \flik. State is represented by means 
 of a buffer as shown in \fref{fig:flik-architecture}
-\sidemargin{par:state}{{\fref{rem:state}}}
 
 The functionality of \flik extends the \ac{PDB} class by adding the required custom commands to 
 step back, and customizing the interface to interact with the debugger. The interface 
@@ -232,7 +227,6 @@ execution state of a function call, for which we save:
     \item \spy{f_lineno}: The current line number being executed metadata.
 \end{itemize}
 
-\sidemargin{par:scalability}{{\fref{rem:scalability}}}
 Upon a function execution, we put the frame containing all state values and metadata into the history 
 buffer. To mitigate the impact on the memory overhead of storing the information of all executed 
 functions we restrict the history buffer to have a fixed size of 100 frames (in our current setting, 

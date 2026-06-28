@@ -21,7 +21,6 @@ uncommon to most developers, used to learn different tasks for autonomous drivin
 environment with more complex interaction between states, actions, and rewards. 
 \end{enumerate*}
 
-\sidemargin{par:one-bug}{{\fref{rem:one-bug}}}
 To keep the evaluation focused, a single bug was introduced to each task in the evaluation, however, 
 in general programs contain multiple bugs that could be detected using \flik. The task assigned to the 
 participants is to improve the functional quality of the three tasks by removing the fault. Note that 
@@ -29,7 +28,6 @@ the injected bugs do not lead to any program exceptions or crashes, \ie the prog
 run to completion, with no evident bug or strange behavior. The injected bugs caused the agent to 
 behave inconsistently with the expected outputs (\eg not learn properly). 
 
-\sidemargin{par:rqs}{{\fref{rem:rqs}}}
 As is, this evaluation sets three research questions, concerning the usefulness and usability of \flik, and more generally the features it provides, to debug \ac{RL} programs.
 \begin{enumerate}[label=\textbf{RQ.\arabic*}]
   \item \label{enum:debugger-use} 
@@ -45,7 +43,7 @@ As is, this evaluation sets three research questions, concerning the usefulness 
 %%
 \subsection{Study design}
 \label{sec:design}
-\sidemargin{par:experimental-design}{{\fref{rem:experimental-design}}}
+
 To evaluate \flik we design a quantitative user study, as an empirical user-centered design research 
 method~\cite{creswell17}.
 The user study is design so that participants are asked to solve three tasks, each task in a different 
@@ -77,7 +75,6 @@ usability questions (11 questions and 1 open comment) are concerned with the par
 experience with the debugger, and additional feedback they could provide for improving \flik. The 
 survey is anonymized. 
 
-\sidemargin{par:study-variables}{{\fref{rem:study-variables}}}
 The question associated with the usability of the tool introduce a variable to measure usability, in 
 answering \ref{enum:debugger-use}. The open questions about the recommendations and comments 
 about \flik are introduced as variables to measure the relevance of the debugging features in \flik, 
@@ -106,15 +103,12 @@ The user study session is designed to take place in a time-slot of 1h30 organize
   described previously, for the remaining 20 minutes. 
 \end{enumerate}
 
-\sidemargin{par:ethics}{{\fref{rem:ethics}}}
 The study was submitted and approved by the ethics board at Universidad de los Andes, the entity 
 executing the study. The submission of the study included a description of the study and the activity, 
 the questionnaire, the description of the process, and the consent form to be filled by each participant.
 As part of the process in the study we assured the responses by users to be anonymized. Content 
 from all participants (\ie the sign consent form) was collected before before the start of the study. 
 
-
-\sidemargin{par:study-conditions}{{\fref{rem:study-conditions}}}
 As mentioned previously, the three tasks to solve in the study are organized in increasing complexity 
 and decreasing familiarity to users. The first task uses the common \ac{RL} benchmark Gridworld 
 program, all \ac{RL} developers are familiar with. In particular the study participants are familiar and 
