@@ -4,9 +4,13 @@
 \section{State of the Art}
 \label{sec:state_of_the_art}
 
-This section presents the state of the art from three perspectives: (1) the main debuggers in other 
-programming languages, (2) existing Python debuggers, and (3) debuggers for \ac{AI} programs in general, 
-including debuggers for \ac{RL} programs specifically.
+This section presents the state of the art from three perspectives: 
+\begin{enumerate*}[label=(\arabic*)]
+\item the main debuggers in other 
+programming languages, 
+\item existing Python debuggers, and 
+\item debuggers for \ac{AI} programs in general, including debuggers for \ac{RL} programs specifically.
+\end{enumerate*}
 
 
 %%
@@ -17,45 +21,56 @@ including debuggers for \ac{RL} programs specifically.
 There are many debugging tools available for different programming 
 languages, each with its own set of features and capabilities, most of them integrated with IDEs as
 built-in debugging tools that allow developers to inspect programs' behavior during their execution. 
-However, there are also standalone debugging tools that offer more advanced features and capabilities than the 
-built-in debugging tools of IDEs. Here we present debugger representatives according to the 
+However, there are also standalone debugging tools that offer more advanced features and capabilities 
+than the built-in debugging tools of IDEs. Here we present debugger representatives according to the 
 debugging approach taken.
 
 \begin{description}
 \item[Breakpoint debuggers.] Breakpoint debugging lets developers to define breakpoints in which 
 a debugger program can stop during the execution of the program to debug. At each breakpoint it is 
 possible to inspect the state of the program and its memory, and then resume the program execution 
-(either stepping into/through the instructions, or in a continuous execution). For instance, \ac{GDB}~\cite{stallman11} is a breakpoint-based source-code compiler, mainly used for C and C++ programs (although it also supports other programming languages, like Ada, Go, or Rust). GDB helps 
+(either stepping into/through the instructions, or in a continuous execution). For instance, 
+\ac{GDB}~\cite{stallman11} is a breakpoint-based source-code compiler, mainly used for C and C++ 
+programs (although it also supports other programming languages, like Ada, Go, or Rust). GDB helps 
 developers to inspect the internals of their (C/C++) programs while they are executing. The Eclipse
 debugger~\cite{matloff08} also supports breakpoint debugging through a GUI for Java and Scala 
 programs. Similarly, the Dr Racket debugger for Racket\footnote{\url{https://racket-lang.org}} enables 
-execution to step both forward and back from a breakpoint.
+execution to step both forward and back from a breakpoint. The use of breakpoints is common in most 
+mainstream debuggers.
 
-\item[Omniscient debuggers.] Omniscient debugging (also back-in-time or reversible debuggers) 
+\item[Omniscient debuggers.] Omniscient debugging~\cite{lienhard08,pothier09} (also known as 
+back-in-time or reversible debuggers) 
 records the execution history of a program and let developers to explore the execution stepping 
-forward and back from any given execution point (\ie breakpoint or program state)~\cite{hofer06}.  A representative example is the omniscient debugger for Java~\cite{pothier07}, which records all events that take place during a program execution and then creates  a trace history. JARDIS~\cite{barr16} is an omniscient debugger for JavaScript 
+forward and back from any given execution point (\ie breakpoint or program state)~\cite{hofer06}.  
+Different omnisciente debuggers exist for Java~\cite{lewis03}. One particular example is the work 
+by~\citet{pothier07}, which records all events that take place during a program execution and then 
+creates a trace history. JARDIS~\cite{barr16} is an omniscient debugger for JavaScript 
 tracing web application events; it offers a GUI to navigate the recorded trace. Other JavaScript 
 debuggers offer omniscient features together with the possibility of monitor recorded traces remotely, 
 from running applications, like track.js\footnote{\url{https://trackjs.com}} or 
 raygun\footnote{\url{https://raygun.com}}. Flow-centric back-in-time debugger~\cite{lienhard09} 
-is a SmallTalk debugger that that on top of enabling step-backs, it also enables the possibility to 
-explore additional execution contexts.
+is a SmallTalk debugger that on top of enabling step-backs, it also enables the possibility to 
+explore additional execution contexts, that is, explore different execution paths.
 
-\item[Replay-based debuggers.] Replay-based debuggers let developers to re-execute programs 
-with the exact same behavior they originally executed from given checkpoints in the program. For example,  with Jokey~\cite{saito05} C developers can replay program executions to analyze program behavior from specific checkpoints. Another example is
+\item[Replay-based debuggers.] Replay-based debuggers~\cite{burg13,honarmand14} let developers 
+to re-execute programs 
+with the exact same behavior they originally executed from given checkpoints in the program. For 
+example,  with Jokey~\cite{saito05} C developers can replay program executions to analyze program 
+behavior from specific checkpoints. Another example is
 QueryPoint~\cite{mirghasemi11}, a Javascript replay-based debugger that let developers go back to 
 the last changes of a variable (\ie a checkpoint) and observe the execution from that point on, with 
 the possibility of changing the variable's value.
 
-\item[Timepoint debuggers.] Timepoint debugging constitute a combination of the previously 
+\item[Timepoint debuggers.] Timepoint debugging constitutes a combination of the previously 
 described approaches. In timepoint debuggers execution can step back to a timepoint (similar to a 
 breakpoint), in which variables' values can be changed to re-execute (\ie replay the execution) in a 
 new timeline. To enable re-execution, the debugger records the state and behavior of the program, 
-similar to omniscient and repay-based debuggers. A novel case of this type of debuggers, for JavaScript programs, is DeloreanJs~\cite{leger23}. It has three main features:  navigate 
+similar to omniscient and repay-based debuggers. A novel case of this type of debuggers, for 
+JavaScript programs, is DeloreanJs~\cite{leger23}. It has three main features:  navigate 
 through an execution history, modify values of a variable, and resume execution from a timepoint (at 
 specific execution points in the past)~\cite{leger23}. DeloreanJS extends continuations with static 
 analysis functionalities to capture the current program state and store the (history of) variable's 
-values. 
+values. The work presented hereinafter is largely based on the ideas proposed by DeloreanJS.
 \end{description}
 
 Going back in time,  as well as observing the program's state at a previous moment, and executing a new timeline with the new values, are desirable features in the context of \ac{RL} programs due to the possibility of exploring different 
@@ -101,9 +116,9 @@ through the code and see the variables and the stack trace in a user-friendly fa
 % PyTrace
 PyTrace~\cite{pytrace} is a time travel recorder/analyzer for Python. PyTrace records code execution, 
 variables and stack frames. It has a \ac{GUI} that allows developers to navigate through the code, 
-see the variables and the stack trace, and it is very user-friendly. However, PyTrace is not 
-a full-featured debugger, as it does not allow you to change the values of variables, nor execute 
-any other operation available to debuggers. PyTrace works as a tool to understand the behavior of 
+see the variables and the stack trace, making it user-friendly. However, PyTrace is not 
+a full-featured debugger, as it does not allow developers to change the values of variables, nor to 
+execute other operations available to debuggers. PyTrace is useful to understand the behavior of 
 a program, moving backward and forward through a recorded execution (again in a single execution 
 path),  with different  graphs to see the state of your variables at a moment in time.
 
