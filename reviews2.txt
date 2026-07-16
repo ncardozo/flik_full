@@ -1,0 +1,116 @@
+Reviewer 1: The authors have clearly put effort into improving the manuscript, which is appreciated. However, the presentation still requires further refinement. The prose is occasionally verbose, certain ideas are repeated unnecessarily, and several passages remain difficult to decipher. I strongly recommend thorough English proofreading to ensure the text meets the standards of a journal publication.
+
+Regarding the technical content, while the implementation and functionality of the debugger are clearer in this version, several relevant questions remain:
+
+* First, reverse debuggers typically struggle with concurrent execution. Does your implementation backtrack in the exact reverse order of forward execution, or do you consider a specific strategy (e.g., causal-consistent reversible debugging)? Please clarify if/how Flik handles multi-threaded Python agents.
+
+* Second, reverse debuggers often face issues with I/O operations. Unless the input stream is stored and replayed, reversing execution can lead to inconsistent states. How does Flik manage this?
+
+* [DONE] Third, the fact that Flik is built on top of PDB is a significant structural detail that should be disclosed earlier (e.g., in the Introduction) rather than waiting until Section 4. 
+
+Additionally, the paper mentions (Line 379) that "we reuse the functionality already available in PDB to instrument the code of a running interpreted program." However, the process itself is not described. This instrumentation seems relevant and deserves an explanation.
+
+* Finally, the experimental evaluation does not address scalability, which is a major concern. With a history buffer limited to 100 frames, the debugger's "look-back" range seems quite narrow. What is the practical impact of this limitation on realistic, long-running programs that may involve millions of steps?
+
+In summary, the paper has improved, but significant presentation issues should be addressed before publication.
+
+# Minor comments:
+
+Line 46: Is Q-learning considered state-of-the-art? Actually, is this relevant for the design of Flik? Please clarify.
+
+Line 54: Please explain what is meant by "RL algorithms are usually used as a black box". Does this imply the user has no access to the source code, or something else?
+
+Line 121: states S AND a set...
+
+Line 123: Snippet 1 -> Algorithm 1
+
+Algorithm 1: If this algorithm is central to the work, briefly explain its function. Otherwise, it should be removed.
+
+Line 139: "fixe" -> "fix". Also, please clarify what is meant by "supported by automated and tracking tools".
+
+Line 145: This is often referred to as "print debugging".
+
+Line 179: "forward and back" -> "forward and backward" (occurs in several places).
+
+Line 181: Note that "reverse debugger" is usually a generic term. A "back-in-time" or "time-travel" debugger typically offers a trace representation (in contrast to simpler step-by-step backward execution), while an "omniscient" debugger additionally stores information regarding execution states to enable queries like "go back to when variable X was assigned".
+
+Line 188: "that that" -> "that".
+
+Line 199: "repay-based" -> "replay-based".
+
+Line 211: The term "time-travel debugger" is used here without prior introduction.
+
+Line 243: Clarify the meaning of "all execution replays are isolated".
+
+Line 254: Ensure uniform usage of the word "post-mortem" (vs. "postmortem") throughout.
+
+Line 269: "python" -> "Python".
+
+Line 293: The phrasing at the end of this line is unclear.
+
+Line 294: "an" -> "and"
+.
+Line 299: Several debuggers are mentioned without references or prior discussion.
+
+Line 304: Clarify "black-box" libraries (e.g., closed-source?).
+
+Line 316: "o" -> "or".
+
+Section 4: Presenting the debugger commands before the example might be clearer than the current order.
+
+Line 421: "path" -> "paths".
+
+Line 460: "design" -> "designed".
+
+Line 501: "before before" -> "before".
+
+Line 594: "is" -> "in".
+
+Line 628: "most" -> "Most".
+
+Line 693: "Thile" -> "While".
+
+Line 722: "withe the" -> "with the".
+
+Section 6.4: Regarding threats to validity, please address the potential for positive bias, as the student participants likely knew the experimenter.
+
+Line 777: Please provide at least an intuitive indication of which "known optimizations" are being referenced.
+
+References: The first two entries have incorrect formatting. Consider replacing them with footnotes with the corresponding URLs.
+
+
+
+Reviewer 2:
+I thanks very much the authors for the improved version of their manuscript. In particular, I appreciated the revised format with annotations to find answers to comments, that is pleasant to read, the effort put in the study design and Flik's implementation detail.
+
+There are still however some major pain points that require the authors' attention:
+
+- A lot of typos all over the paper
+
+- In sec. 2.2, I am globally confused about why there are such strong emphases on things that can be assimilated for the sake of clarity, for example:
+- Logs are traces... and vice-versa...?
+- Why are debuggers considered as "alternatives" to post-mortem techniques? A debugger can be post-mortem, eg, I can open a core dump (ie, an execution trace) with gdb (in text or gui mode)
+- L.159 I do not remember my comment in the first reviewing phase, but I am uneasy with that statement: although changing the state is difficult to find in mainstream IDEs, it is specified nowadays in the DAP (see SetVariableRequest https://github.com/microsoft/debug-adapter-protocol/blob/main/specification.md#leftwards_arrow_with_hook-setvariable-request) this means it only depend on the back-end, and for example the python DAP server provided by Microsoft do implement this feature.
+
+- I still find the state of the art to be largely perfectible. First, the most relevant part concerns RL debugging (sec. 3.3) and is only 1/3d of the whole section. Second, there are still weak points such as:
+- L.172-180 it is unclear why "Breakpoint Debugger" is classified as a specific part of debuggers, as most (if not all) mainstream debuggers provide breakpoints.
+- L.184 I do not understand why Pothier's work is referred to as "the omniscient debugger for Java".
+- L.189 The flow-centric debugger gives means to explore additional execution contexts: but which ones? why are those interesting in the context of the paper?
+- L.231 what "very" user friendly means? Are you referring to a specific evaluation?
+- L. 232 PyTrace "works as a tool to udnerstand the behavior of a program" but that would be the case for any debugger
+- In general: there are very few references, 2-3 per case, only one for TimepointDebuggers, which makes me question the interest of mentioning TimePointDebuggers as a specific debugger approach/type.
+
+- Section 4 starts by mentioning (l.312) that modifying variables is rare. That seem rather inconsistent with table 1 in which 4 out of the 5 presented python debuggers are able to modify variables. This has been an easy thing to do too in Smalltalk debuggers since the 80'. I may be wrong but I think in web debugging it is not uncommon to lively change variables (css values, variables values, etc.) in the web browser's inspector.
+
+- When you restore state, how do you set back a previous frame in memory, in particular, how do you control (if you do) the program counter so that you ensure that you restart execution from a clean interpreter state? What happens if you go back to a frame but in the top one there was an open pipe, a process, a connection to the outside or whatever? How do you ensure proper closing of these external connections?
+
+- In the study design, experimental variables are insufficiently discussed: you expect that somehow FLIK (the independent variable) will influence time and efficiency (the dependent variables). Yet, there is no discussion about potential confounding variables that may influence what you observe in the experiment, and you actually do not measure theses variables as the questionnaires are mostly about the user experience of using Flik. Another question: how do the time limit may influence the observed time (eg due to stress, etc.), and what measures are put in place to control that factor?
+
+- In the results, I am still missing a more-in-depth analysis of what participants actually commented. Many lines refer to "participants commented that" (ll. 631, 644, 647, 745...) but we do not know actually which participant said those things (is this the same participant? a more experienced one than others? etc.) nor what was said exactly. Furthermore, the paper mentions many "open questions" that are absent from the given reproduction package (https://flaglab.github.io/Flik_Experiments/, consulted april 1st 2026, "task questions" have only 5 instead of 9 questions in the paper). So it remains impossible to even know what were the open questions themselves.
+
+- I find it surprising that "time" seems to be a self-reported measure and that is not at all discussed in the threats to validity.
+
+- I do have strong remarks about the threats to validity section:
+- First, instead of explaining how threats are mitigated, paragraphs switfly conclude that there is no biases (ie. the threat does not exist).
+- Second, the threats are superficially covered, and potential biases are not really discussed. E.g., the authors mention that they strived to find participants: ok but what are the potential implications on the study? Does that mean you had to select "by-default-participants" or to recourse to convenience sampling?
+- The authors do not discuss if the used empirical method was appropriate or not. This seems important since the usefulness is claimed to be evaluated but what's measured is rather its perception. So is this because of a design choice? Because of a limit of the design/method? Does that yield sufficiently informative results for what the authors aimed to observe/study?
