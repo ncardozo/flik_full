@@ -87,13 +87,14 @@ its veracity. A consequence of this is that whenever the hypothesis
 about the program behavior is not true, developers must identify the bugs causing the problem, 
 and fix them. Moreover, we focus on the use of debuggers to support the process of identifying bugs.
 
-A classic manual debugging technique is the use of traces in the code through printing the values of 
-several variables as the program is executed. However, this is not an efficient or scalable way to 
+A classic manual debugging technique is the use of code check-points through printing the values of 
+several variables as the program executes. However, this is not an efficient or scalable way to 
 debug a program. 
-An improvement over the use of traces is the use of logs~\cite{yin20}, in which variables values and 
-specific events are recorded into an external log, to then be analyzed after the program execution; however, it requires the complete execution of the system (or until a crashing event 
+An improvement constitutes the use of traces or logs~\cite{yin20}, in which variables values and 
+specific events are recorded into an external log, to then be analyzed after the program execution; 
+however, it requires the complete execution of the system (or until a crashing event 
 occurs), to then analyze  variables and their values for correctness.
-An alternative to post-mortem analysis is the use of debuggers, which allow developers to inspect the 
+Debuggers can be used as an alternative to post-mortem analysis, allowing developers to inspect the 
 state of programs while they execute, offering control over the execution. Debuggers are essential 
 tools for software development, as they help developers to identify and fix bugs in their programs. 
 There are many types of debuggers, each with its own set of features and capabilities, but usually 

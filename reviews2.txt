@@ -87,9 +87,9 @@ There are still however some major pain points that require the authors' attenti
 
 - A lot of typos all over the paper
 
-- In sec. 2.2, I am globally confused about why there are such strong emphases on things that can be assimilated for the sake of clarity, for example:
+[DONE]- In sec. 2.2, I am globally confused about why there are such strong emphases on things that can be assimilated for the sake of clarity, for example:
 - Logs are traces... and vice-versa...?
-- Why are debuggers considered as "alternatives" to post-mortem techniques? A debugger can be post-mortem, eg, I can open a core dump (ie, an execution trace) with gdb (in text or gui mode)
+[DONE]- Why are debuggers considered as "alternatives" to post-mortem techniques? A debugger can be post-mortem, eg, I can open a core dump (ie, an execution trace) with gdb (in text or gui mode)
 - L.159 I do not remember my comment in the first reviewing phase, but I am uneasy with that statement: although changing the state is difficult to find in mainstream IDEs, it is specified nowadays in the DAP (see SetVariableRequest https://github.com/microsoft/debug-adapter-protocol/blob/main/specification.md#leftwards_arrow_with_hook-setvariable-request) this means it only depend on the back-end, and for example the python DAP server provided by Microsoft do implement this feature.
 
 - I still find the state of the art to be largely perfectible. First, the most relevant part concerns RL debugging (sec. 3.3) and is only 1/3d of the whole section. Second, there are still weak points such as:
