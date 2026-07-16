@@ -1,4 +1,4 @@
-%%
+%% !BIB TS-program = bibtex
 % !TEX root = main.tex
 
 \RequirePackage[final]{graphicx}
@@ -82,22 +82,25 @@
 % Here goes the abstract
 \begin{abstract}
 %Why
-\textbf{Purpose:} \ac{RL}-based programs' have a high-level of complexity due to the size and 
+%\textbf{Purpose:} 
+\ac{RL}-based programs' have a high-level of complexity due to the size and 
 conditions of the environment, and agents' interaction with it. Developers face challenges  
 understanding the behavior of \ac{RL} agents and identifying bugs, and their cause, within the 
 program execution. This problem is particularly challenging for bugs in which the program runs 
 without errors, but the execution does not present an appropriate agent behavior.
 %What
-\textbf{Method:} To address this problem, we propose \flik, a back-in-time debugger for \ac{RL} 
+%\textbf{Method:} 
+To address this problem, we propose \flik, a back-in-time debugger for \ac{RL} 
 programs. \flik is a console-based debugger that allows developers to interact with 
 the program during execution, inspect the internal state of the agent, and modify 
 its behavior in real-time. Changes to the agent generate alternative execution paths. Based on such 
 execution path, developers can more easily identify bugs in their programs.
-\textbf{Results:} We evaluate the usability and usefulness of \flik in identifying and helping to solve 
+%\textbf{Results:} 
+We evaluate the usability and usefulness of \flik in identifying and helping to solve 
 bugs by means of a user evaluation in which 27 developers interacted and solve bugs in three 
 different \ac{RL}  programs. Our results show a positive response to \flik, highlighting that the 
 debugger is useful in identifying the kinds of bugs that commonly arise in \ac{RL} programs. 
-\textbf{Conclusion:} 
+%\textbf{Conclusion:} 
 With the advent of \ac{RL} programs, software engineering and analysis tools are need to help 
 assure their correct execution. This work presents a back-in-time debugger with functionality to 
 update agents' state during their execution to be able to observe behavioral changes immediately, 
@@ -111,11 +114,11 @@ confirming the importance of such tools.
 %\end{graphicalabstract}
 
 % Research highlights
-\begin{highlights}
-\item Presentation of a first debugger for Reinforcement learning programs, based on back-in-time debugging capabilities.
-\item Full implementation of a text/console-based debugger with the capability to: step through the code; observe variables' state; modify variables' state during execution to branch different execution paths; and step back in the execution restoring the state and execution context (stack instructions), again enabling the possibility to branch execution with different contexts.
-\item Empirical study with 27 participants, developed to evaluate the usefulness and usability of the debugger in identifying bugs in three different Q-learning programs.
-\end{highlights}
+%\begin{highlights}
+%\item Presentation of a first debugger for Reinforcement learning programs, based on back-in-time debugging capabilities.
+%\item Full implementation of a text/console-based debugger with the capability to: step through the code; observe variables' state; modify variables' state during execution to branch different execution paths; and step back in the execution restoring the state and execution context (stack instructions), again enabling the possibility to branch execution with different contexts.
+%\item Empirical study with 27 participants, developed to evaluate the usefulness and usability of the debugger in identifying bugs in three different Q-learning programs.
+%\end{highlights}
 
 
 % Keywords
