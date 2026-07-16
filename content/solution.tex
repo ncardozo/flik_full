@@ -55,29 +55,32 @@ these programs.
 Anchored in these features, \flik: \textsc{A bug's life}, is a back-in-time debugger with timepoints 
 to modify variables' values, and resume execution on a different execution path using the new values. 
 Specifically, for the case of \ac{RL} agents this means that using \flik it is 
-possible to: evaluate the internal state of the agent, the decisions it makes, and the rewards 
+possible to evaluate the internal state of the agent, the decisions it makes, and the rewards 
 it receives, through the observation of agents' variables and hyperparameters over time. Using the 
 debugger, developers can better understand the execution context of \ac{RL} agents in terms of 
-variables, values, environment, states and the rewards. 
+variables, values, environment, states, and rewards. 
 
-\begin{figure}[hptb]
+\begin{figure}[pos=hptb]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/flik_interface.png}
     \caption{The \flik debugger interface with its main frames to observe the program execution and its internal state}
     \label{fig:debugger}
 \end{figure}
 
-\fref{fig:debugger} shows \flik's interface working to debug a simple example of the \spy{bubble_sort} 
-function. From the top, in the first frame in the blue rectangle (Execution frame) there is the running 
-execution.  The second frame (in the purple rectangle - Source code frame) shows the source code being debugged; note that the result of executing Line 018 (a print statement for the array to be sorted) is displayed in the Execution Frame. The third frame (in the red rectangle - Variables frame) shows the variables 
-used in the program so far. Finally, at the bottom of the interface we have the interactive console in 
-which developers can send commands to \flik to effectively debug the program.
+\fref{fig:debugger} shows \flik's interface working to debug an example program for the 
+\spy{bubble_sort} function. From the top, in the first frame in the blue rectangle (Execution frame) 
+there is the running execution.  The second frame (in the purple rectangle - Source code frame) 
+shows the source code being debugged; note that the result of executing Line 018 (a print statement 
+for the array to be sorted) is displayed in the Execution Frame. The third frame (in the red rectangle - 
+Variables frame) shows the variables used in the program so far. Finally, at the bottom of the interface 
+we have the interactive console in which developers can send commands to \flik to effectively debug 
+the program.
 
 We now use a running example to present the features and functionality/commands of \flik. Four 
 our running example we use the Gridworld \ac{RL} benchmark, presented in detail in 
 \fref{sec:evaluation} and shown in \fref{fig:gridworld} as a $10 \times 10$ grid. 
 
-\begin{figure}[hptb]
+\begin{figure}[pos=hptb]
   \centering
   \includegraphics[width=0.4\columnwidth]{figures/gridworld.png}
   \caption{10x10 gridworld environment example}
@@ -169,14 +172,14 @@ bottom of the table) are provided by the \ac{PDB} debugger.
 \subsection{\flik internals}
 \label{sec:flik-internals}
 
-Having introduced the features of \flik and their use to debug \ac{RL} programs using the different 
-commands, we now turn our attention to \flik's implementation and its inner workings.\footnote{\flik is available for download at: \url{https://github.com/FLAGlab/flik} and distributed as a Docker image at: \url{https://hub.docker.com/r/lrodriguez22/py-flik-debugger}.}  
-\flik is a console-based debugger built on top of \ac{PDB}, by adding features such as colored syntax 
+Having introduced the features of \flik and their use to debug \ac{RL} programs through the different 
+commands, we now turn our attention to \flik's implementation and its inner workings.\footnote{\flik's distribution is available as a Docker image at: \url{https://hub.docker.com/r/lrodriguez22/py-flik-debugger}.}  
+\flik is a console-based debugger built on top of \ac{PDB}, adding features such as colored syntax 
 highlighting and tracking of variables' state. \ac{PDB}, in turn, is built on top of the Python 
 runtime enabling access to run-time variables and state as provided by the Python interpreter. A 
 diagram of \flik's architecture is shown in \fref{fig:flik-architecture}.
 
-\begin{figure}[hptb]
+\begin{figure}[pos=hptb]
   \centering
   \includegraphics[width=1\columnwidth]{figures/flik-architecture}
   \caption{\flik's architecture and internal details}
@@ -187,7 +190,7 @@ To debug a Python program with \flik, we reuse the functionality already availab
 instrument the code of a running interpreted program. Using the instrumentation available for Python 
 programs makes \flik work with the full Python specification without having to build an interpreter and 
 program instrumentation from scratch. 
-Thus, \flik works with external libraries and capture stdout 
+Thus, \flik works with external libraries and capture \spy{stdout}
 output I/O operations from the execution. The access to external libraries when running \flik is divided 
 in two groups, depending on the nature of the libraries. For libraries available locally in the system, 
 \flik has full access to the code, and therefore all of \flik's capabilities are available, as with any other 
@@ -204,7 +207,7 @@ To support the two features put forward for \flik, we implement the functionalit
 \item update the values of the program state.
 \end{enumerate*}
 These functions work with the internal representation of state in \flik. State is represented by means 
-of a buffer as shown in \fref{fig:flik-architecture}
+of a buffer as shown in \fref{fig:flik-architecture}.
 
 The functionality of \flik extends the \ac{PDB} class by adding the required custom commands to 
 step back, and customizing the interface to interact with the debugger. The interface 
@@ -213,18 +216,19 @@ functions) to pause, step forward, step back, continue or restart the program, a
 modify and inspect variables. 
 
 \paragraph{Capture program state.}
-Storing the program state is a key functionality to realize the two features. As mentioned previously, 
-\flik stores the system state for each execution step (\ie action taken by the agent) in a history buffer. 
+Storing the program state is a key functionality to realize \flik's main two features. As mentioned 
+previously, \flik sequentially stores the system state for each execution step (\ie action taken by the 
+agent) in a history buffer. 
 The information saved in the history buffer includes all global and local variables' values after the 
-execution of a step, together with metadata related to the executed expression, as for example its 
-line number. System state is encapsulated in stack frames in Python, which can be captured using 
-the \spy{inspect.stack()} function. Each stack frame contains different information related to the 
-execution state of a function call, for which we save:
+execution of the instruction, together with metadata related to the executed expression, as for 
+example its line number. System state is encapsulated in stack frames in Python, which can be 
+captured using the \spy{inspect.stack()} function. Each stack frame contains different information 
+related to the execution state of a function call, for which we save:
 \begin{itemize}
-    \item \spy{f_locals}: A dictionary of local variables within the frame.
-    \item \spy{f_globals}: A dictionary of global variables accessible within the frame.
-    \item \spy{f_code}: A code object representing the function's bytecode and source code metadata.
-    \item \spy{f_lineno}: The current line number being executed metadata.
+    \item \spy{f_locals}: A dictionary of local variables within the current execution frame.
+    \item \spy{f_globals}: A dictionary of global variables accessible within the current execution frame.
+    \item \spy{f_code}: A code object representing the executing function's bytecode and source code metadata.
+    \item \spy{f_lineno}: The current line number of the function being executed.
 \end{itemize}
 
 Upon a function execution, we put the frame containing all state values and metadata into the history 
@@ -237,26 +241,40 @@ memory used by the program. However, the memory increase is constant and will no
 frames more than the memory of an \ac{RL} program not using \flik.
 
 \paragraph{Step-back.}    
-The history buffer is used to enable stepping back. In an execution function, the step back commands 
-(\spy{step_back} or \spy{back_to}) take the history buffer and search the corresponding saved state. 
-Stepping to the previous saved state (when \spy{step_back} is used), or searching through the buffer 
-for a specific execution line within the saved metadata (when \spy{back_to} is used).
+The history buffer is used to enable stepping back in the program execution. In an execution function, 
+the step back commands (\spy{step_back} or \spy{back_to}) pauses the current execution an moves 
+the execution to a previous frame saved in the buffer. 
+When \spy{step_back} is used, the execution moves the program to the previous saved state (\ie the 
+last executed command in the program).  When \spy{back_to} is used, \flik searches through the 
+buffer for the first instance of the specific execution line within the saved metadata.
 
 \paragraph{Restore program state.}    
-Once the program execution is at a specific frame in the history buffer, to resume the execution from 
-the given point, \flik must restore the saved state. Restoring a program state sets back all local and 
-global variables' values, and their associated execution context, to the values stored at the current 
-frame in the history buffer.
+Once the program execution is at a specific previous frame in the history buffer, to resume the 
+execution from that given point, \flik restores the saved state as the new program state. Restoring a 
+program state sets back all local and global variables' values, and their associated execution context, 
+to the values stored at the current frame in the history buffer.
 
 A direct consequence of restoring a previous program state is that the execution resumes in a new 
-execution path. Note that currently \flik does not keep track of the different execution path, as there is 
-no clear way to navigate them without the use of a GUI. To restore the sate, we use the \spy{exec} 
-Python function that receives the stored \spy{f_globals} and \spy{f_locals} variables as 
-parameters. \spy{exec} then executes a list of stored state snapshots (line number 
+execution path, and the execution path before the step-back is lost. That is, All state changes and 
+side-effects observed are ``lost'', and the new execution path creates its own new state and 
+side-effects using the new program state. Currently \flik does not keep track of the different 
+execution paths, as there is no clear way to navigate them without the use of a GUI. To restore the 
+sate, we use the \spy{exec} Python function that receives the stored \spy{f_globals} and \spy{f_locals} 
+variables as parameters. \spy{exec} then executes a list of stored state snapshots (line number 
 and local variables) at each step in a specified frame's context (given by the function parameters). 
 This allows \flik to simulate running a specific line in the context of a previous frame. Additionally, 
 restoring a given state, clears the more recent frames from the history buffer to start the new 
 execution path.
+
+Note that the use of the history buffer lets \flik manage concurrent execution or reversible operations 
+without any additional process. While \flik directly does not deal with concurrent execution, as this is 
+not used in \ac{RL}, it does not pose a problem. Executed functions are recorded sequentially in the 
+order they occur in the history buffer, stepping back to a function just reverts the state to the point 
+before the function execution and resumes execution from that point on, therefore there is no need to 
+keep track of concurrent executions. Second, \flik is not a reverse debugger, as it does not roll-back 
+on previously executed function. Rather the saved frame in the history buffer records all variables' 
+values, function, and line metadata, so that when execution can resume from exactly the same state 
+when first executed, even in the face of I/O operations.
 
 \paragraph{Update state values.}
 Finally, in stepping back and restoring a program state, \flik makes it possible to modify the value of 

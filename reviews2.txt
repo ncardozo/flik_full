@@ -2,11 +2,11 @@ Reviewer 1: The authors have clearly put effort into improving the manuscript, w
 
 Regarding the technical content, while the implementation and functionality of the debugger are clearer in this version, several relevant questions remain:
 
-* First, reverse debuggers typically struggle with concurrent execution. Does your implementation backtrack in the exact reverse order of forward execution, or do you consider a specific strategy (e.g., causal-consistent reversible debugging)? Please clarify if/how Flik handles multi-threaded Python agents.
+[DONE]* First, reverse debuggers typically struggle with concurrent execution. Does your implementation backtrack in the exact reverse order of forward execution, or do you consider a specific strategy (e.g., causal-consistent reversible debugging)? Please clarify if/how Flik handles multi-threaded Python agents.
 
-* Second, reverse debuggers often face issues with I/O operations. Unless the input stream is stored and replayed, reversing execution can lead to inconsistent states. How does Flik manage this?
+[DONE]* Second, reverse debuggers often face issues with I/O operations. Unless the input stream is stored and replayed, reversing execution can lead to inconsistent states. How does Flik manage this?
 
-* [DONE] Third, the fact that Flik is built on top of PDB is a significant structural detail that should be disclosed earlier (e.g., in the Introduction) rather than waiting until Section 4. 
+[DONE]* Third, the fact that Flik is built on top of PDB is a significant structural detail that should be disclosed earlier (e.g., in the Introduction) rather than waiting until Section 4. 
 
 Additionally, the paper mentions (Line 379) that "we reuse the functionality already available in PDB to instrument the code of a running interpreted program." However, the process itself is not described. This instrumentation seems relevant and deserves an explanation.
 
