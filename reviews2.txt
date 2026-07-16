@@ -8,7 +8,7 @@ Regarding the technical content, while the implementation and functionality of t
 
 [DONE]* Third, the fact that Flik is built on top of PDB is a significant structural detail that should be disclosed earlier (e.g., in the Introduction) rather than waiting until Section 4. 
 
-Additionally, the paper mentions (Line 379) that "we reuse the functionality already available in PDB to instrument the code of a running interpreted program." However, the process itself is not described. This instrumentation seems relevant and deserves an explanation.
+[DONE] Additionally, the paper mentions (Line 379) that "we reuse the functionality already available in PDB to instrument the code of a running interpreted program." However, the process itself is not described. This instrumentation seems relevant and deserves an explanation.
 
 * Finally, the experimental evaluation does not address scalability, which is a major concern. With a history buffer limited to 100 frames, the debugger's "look-back" range seems quite narrow. What is the practical impact of this limitation on realistic, long-running programs that may involve millions of steps?
 

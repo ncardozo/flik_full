@@ -187,9 +187,13 @@ diagram of \flik's architecture is shown in \fref{fig:flik-architecture}.
 \end{figure}
 
 To debug a Python program with \flik, we reuse the functionality already available in \ac{PDB} to 
-instrument the code of a running interpreted program. Using the instrumentation available for Python 
-programs makes \flik work with the full Python specification without having to build an interpreter and 
-program instrumentation from scratch. 
+instrument the code of a running interpreted program by means of the \spy{breakpoint()} \ac{PDB} 
+command. The instrumentation hooks directly to the evaluation loop of the Python VM using the 
+CPython interpreter's tracing architecture. Once stopped, \ac{PDB} has access to the execution 
+frame, the VM event (with the information of the line to execute, the function to call, the value to 
+return or an exception to throw), and the \spy{arg} context variable. Using the instrumentation 
+available for Python programs makes \flik work with the full Python specification without having to 
+build an interpreter and program instrumentation from scratch. 
 Thus, \flik works with external libraries and capture \spy{stdout}
 output I/O operations from the execution. The access to external libraries when running \flik is divided 
 in two groups, depending on the nature of the libraries. For libraries available locally in the system, 
