@@ -36,7 +36,7 @@ As is, this evaluation sets three research questions, concerning the usefulness 
   Stepping back and updating variables values during the execution are relevant features to better 
   understand the behavior of \ac{RL} agents?
   \item \label{enum:usefulness}
-  \flik can be effectively, and efficient in time used to debug \ac{RL} programs with its current features?
+  \flik is effective to debug \ac{RL} programs with its current features?
 \end{enumerate}
 
 
@@ -69,20 +69,20 @@ The questionnaire is split in three parts:
 
 The general knowledge questions (4 questions and 2 open comments) are concerned with the 
 participants' development experience (\ie using Python, debuggers and the terminal), used to 
-characterize participants. The task results questions (9 questions plus 6 open comments) are 
+characterize participants. The task results questions (9 questions plus 6 open comments, we reuse 
+the same 3 questions and 2 open comments for each of the three tasks) are 
 concerned with the bug identified in each of the tasks, and the actions taken to fix it (if fixed). The 
 usability questions (11 questions and 1 open comment) are concerned with the participants' 
 experience with the debugger, and additional feedback they could provide for improving \flik. The 
 survey is anonymized. 
 
-The question associated with the usability of the tool introduce a variable to measure usability, in 
-answering \ref{enum:debugger-use}. The open questions about the recommendations and comments 
+The question associated with the usability of the tool introduce a variable to measure usability, to 
+answer \ref{enum:debugger-use}. The open questions about the recommendations and comments 
 about \flik are introduced as variables to measure the relevance of the debugging features in \flik, 
 answering to \ref{enum:features}. 
-Finally, the questions associated to the task results introduce two dependent variables, which we use 
-to answer \ref{enum:usefulness}. The variables are, the time taken to solve the task, used to measure 
-the efficiency in solving the task using \flik, and the description of the detected bug, used to measure 
-the effectiveness of detecting the bug using \flik.
+Finally, the questions associated to the task results are used to answer \ref{enum:usefulness}. The variables are, the time taken to solve the task, used as a 
+information for the efficiency in solving the task using \flik, and the description of the detected bug, 
+used to measure the effectiveness of detecting the bug using \flik.
 
 %%%%%%
 \paragraph{\textbf{Study conditions.}}
@@ -166,7 +166,7 @@ possible number of steps. Reaching the exit state gives a reward of $1$ to the a
 other action gives a reward to the agent. In each episode the agent starts from any valid position in the 
 grid, \eg the yellow square in the bottom-right room in the figure. 
 
-\begin{figure}[hptb]
+\begin{figure}[pos=hptb]
   \centering
   \includegraphics[width=0.5\columnwidth]{figures/rooms.png}
   \caption{Rooms environment example with associated rewards in each state}
@@ -226,7 +226,7 @@ immediately restarted upon a crash. \fref{fig:cars-code-example} shows the visua
 environment, where the agent's vehicle corresponds to the blue rectangle on top, and driving traffic is 
 represented by red rectangles appearing either at the right lane (the driving lane at the bottom of the interface), or the left lane (at the top of the interface).
 
-\begin{figure}[hptb]
+\begin{figure}[pos=hptb]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/cars_example.png}
     \caption{Cars code example}
