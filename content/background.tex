@@ -6,7 +6,7 @@
 
 This section presents an introduction to \ac{RL}, covering the definition of the main four elements in 
 an \ac{RL} agent, and the main algorithm we focus on for this work, the Q-learning algorithm. 
-Following that we present the basic definitions of bugs and the debugging process, as background 
+Following that, we present the basic definitions of bugs and the debugging process, as background 
 information for the definition of \flik.
 
 %%
@@ -24,11 +24,11 @@ uses an off-policy control that separates the deferral policy from the learning 
 action selection using the Bellman optimal equation, and the $\epsilon$-greed policy.  In the definition 
 of the Q-learning algorithm, the environment is composed of a set of states $S$, and a set of actions 
 $A$ the agent can execute. By executing an action $a\in A$ at state $s \in S$, the agent transitions 
-from $s$ to a new state $new\_s \in S$. Additionally, associated to the execution of the action $a$ at 
-state $s$, the agent receives a reward $R(s,a)$. The agent's learning, is driven by the choosing of the 
+from $s$ to a new state $new\_s \in S$. Additionally, associated with the execution of the action $a$ at 
+state $s$, the agent receives a reward $R(s,a)$. The agent's learning is driven by the choosing of the 
 action to execute, which corresponds to the action that maximizes its total reward. The goal of the 
-agent is to maximize its total reward, achieve by iteratively updating the reward function associated 
-with with every state-action pair until converging to the maximum values. \fref{lst:qlearning} presents 
+agent is to maximize its total reward, achieved by iteratively updating the reward function associated 
+with every state-action pair until converging to the maximum values. \fref{lst:qlearning} presents 
 the base algorithm for Q-learning~\cite{sutton18} in pseudo-code.
 
 \begin{python}[
@@ -55,11 +55,12 @@ endfor
 \end{python}
 
 \ac{RL} has gained wide popularity in the last couple of years, finding applications in a wide range of 
-domains~\cite{beakcheol19}, particularly in control of industrial process~\cite{kiumarsi18} (improving 
-the performance of the on-line learning control system or optimizing temperature control and power 
-consumption), computer networks~\cite{alrawi13} (improving adaptability of Wireless Sensor Networks 
-to changing situations and eliminating the need for system redesign), and robotics~\cite{zhang15} (by 
-providing frameworks and toolkits for designing sophisticated behavioral aspects). 
+domains~\cite{beakcheol19}, particularly in the control of industrial process~\cite{kiumarsi18} 
+(improving the performance of the on-line learning control system or optimizing temperature control 
+and power consumption), computer networks~\cite{alrawi13} (improving adaptability of Wireless 
+Sensor Networks to changing situations and eliminating the need for system redesign), and 
+robotics~\cite{zhang15} (by providing frameworks and toolkits for designing sophisticated behavioral 
+aspects). 
 
 
 %%
@@ -71,7 +72,7 @@ causes the program to crash or produce incorrect results~\cite{zeller09}. Bugs a
 software development, and can be caused by many factors, such as incorrect program logic, 
 incorrect syntax used, or incorrect data. 
 Bugs can be difficult to identify and fix, especially in large and complex programs. One particular 
-type of bugs, of interest for our work is run-time errors, in which programs compile, but present  
+type of bug of interest for our work is runtime errors, in which programs compile, but present  
 abnormal behavior caused by incorrect program logic. 
 
 Debugging is the process of finding and reducing the number of bugs or defects detected in a 
@@ -90,7 +91,7 @@ and fix them. Moreover, we focus on the use of debuggers to support the process 
 A classic manual debugging technique is the use of code check-points through printing the values of 
 several variables as the program executes. However, this is not an efficient or scalable way to 
 debug a program. 
-An improvement constitutes the use of traces or logs~\cite{yin20}, in which variables values and 
+An improvement is the use of traces or logs~\cite{yin20}, in which variables values and 
 specific events are recorded into an external log, to then be analyzed after the program execution; 
 however, it requires the complete execution of the system (or until a crashing event 
 occurs), to then analyze  variables and their values for correctness.
