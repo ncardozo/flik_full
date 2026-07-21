@@ -65,7 +65,7 @@ the possibility of changing the variable's value.
 described approaches. In timepoint debuggers execution can step back to a timepoint (similar to a 
 breakpoint), in which variables' values can be changed to re-execute (\ie replay the execution) in a 
 new timeline. To enable re-execution, the debugger records the state and behavior of the program, 
-similar to omniscient and repay-based debuggers. A novel case of this type of debuggers, for 
+similar to omniscient and replay-based debuggers. A novel case of this type of debuggers, for 
 JavaScript programs, is DeloreanJs~\cite{leger23}. It has three main features:  navigate 
 through an execution history, modify values of a variable, and resume execution from a timepoint (at 
 specific execution points in the past)~\cite{leger23}. DeloreanJS extends continuations with static 
@@ -131,13 +131,12 @@ is a proof of concept of the time traveling features, and it is not currently ma
 % UDB
 \ac{UDB}~\cite{udb} is a proprietary debugger, developed by the Company Undo, for Python 
 programs that allows developers to navigate through time and inspect the state of the program at  
-previous execution steps. \ac{UDB} works on the priciple of first recording 
+previous execution steps. \ac{UDB} works on the principle of first recording 
 a program while it is running normally and then replaying the execution while allowing the 
 developer to navigate and inspect the program's state at different points in time. \ac{UDB} works at 
 the process level, rewinding and replaying the state of the entire process. Technically, 
 \ac{UDB} does allow new code paths to be executed at replay-time, but all execution replays are 
-isolated.
-
+isolated (\ie independent execution environments with their own variables/values space).
 
 \begin{table}[ht]
 	\centering
@@ -147,7 +146,6 @@ isolated.
 \end{table}
 
 
-
 %%
 \subsection{Debuggers for \ac{AI} programs}
 \label{sec:ai}
@@ -155,7 +153,8 @@ isolated.
 %We now discuss the debuggers or debugger-like tools available for \ac{AI} and \ac{ML} programs. 
 
 Identifying the root causes of bugs in machine learning systems is a complex task. Some bugs may 
-originate within the models themselves, and their black-box nature makes pinpointing faults especially 
+originate within the models themselves, and their black-box nature (\ie source code is not available to 
+developers) makes pinpointing faults especially 
 difficult. Additionally, the code used to train or run these models might be flawed, adding another layer 
 of complexity. In systems that rely on \ac{ML} pipelines, bugs may not reside in the individual 
 components but rather in how these components interact. Hardware miss-configurations are also a 
@@ -166,15 +165,15 @@ debugging and testing \ac{ML} models.
 \ac{ML} programs are often debugged using visualization tools that allow developers to observe 
 the program's behavior and analyze their internal state. The advance on \ac{ML} debugging tools 
 represent an important step towards visualization and debugging tools for \ac{RL} programs.
-Most of the existing tools are postmortem, not allowing developers to interact with the 
+Most of the existing tools are post-mortem, not allowing developers to interact with the 
 program during execution; therefore, making the tools unsuitable to analyze \ac{RL} programs and 
 the continuous interaction between the environment and the agent.
 
-CockPit~\cite{schneider21} is an open source debugging tool designed for deep neural network 
+CockPit~\cite{schneider21} is and open source debugging tool designed for deep neural network 
 training, enabling practitioners to observe internal training dynamics in real time (much like 
-traditional debuggers), which provides insights into program execution. Rather than relying solely on loss 
-and accuracy curves, Cockpit offers a suite of instruments that monitor higher-order metrics such as 
-gradient statistics, curvature, and sharpness, which are now efficiently computable during training. 
+traditional debuggers), which provides insights into program execution. Rather than relying solely on 
+loss and accuracy curves, Cockpit offers a suite of instruments that monitor higher-order metrics such 
+as gradient statistics, curvature, and sharpness, which are now efficiently computable during training. 
 These insights help identify algorithmic failure modes—like unsuitable learning rates or optimization 
 plateaus—and support more informed adjustments. Available as an open-source PyTorch package, 
 Cockpit enhances both the interpretability and explainability of deep learning processes by revealing 
@@ -185,7 +184,7 @@ and TensorBoard Debugger~\cite{tensorboard}. The former allows for interactive e
 TensorFlow graphs, setting breakpoints, and inspecting tensor values in real-time. The debugger 
 can also be used in monitoring mode, to log various aspects (at runtime) of a tensor flow program 
 by instrumenting it with API calls. The debugger can be combined with TensorBoard to have 
-visualizations/inspectors of the program state such as alerts, python execution timeline, graph 
+visualizations/inspectors of the program state such as alerts, Python execution timeline, graph 
 executions, stack trace, and a source code viewers. However, TensorBoard does not allow 
 developers to interact with the model during execution, which is essential for debugging \ac{RL}.
 
@@ -230,7 +229,7 @@ history, modify the values of variables, and resume the execution from a specifi
 performs into creating better \ac{RL} programs.
 Open source and commercial tools like CockPit, DeepKit, TensorFlow Debugger, Amazon SageMaker 
 Debugger,  TensorWatch, and Neptune.ai offer different features to debug/monitor ML systems. 
-However, to the best of our knowledge, there is no open source option to debug  
+However, to the best of our knowledge, there is no open source debugger for
 \ac{RL} programs. 
 
 

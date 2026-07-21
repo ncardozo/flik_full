@@ -34,27 +34,27 @@ Line 179: "forward and back" -> "forward and backward" (occurs in several places
 
 Line 181: Note that "reverse debugger" is usually a generic term. A "back-in-time" or "time-travel" debugger typically offers a trace representation (in contrast to simpler step-by-step backward execution), while an "omniscient" debugger additionally stores information regarding execution states to enable queries like "go back to when variable X was assigned".
 
-Line 188: "that that" -> "that".
+[DONE] Line 188: "that that" -> "that".
 
 [DONE] Line 199: "repay-based" -> "replay-based".
 
-Line 211: The term "time-travel debugger" is used here without prior introduction.
+[DONE] Line 211: The term "time-travel debugger" is used here without prior introduction.
 
-Line 243: Clarify the meaning of "all execution replays are isolated".
+[DONE] Line 243: Clarify the meaning of "all execution replays are isolated".
 
-Line 254: Ensure uniform usage of the word "post-mortem" (vs. "postmortem") throughout.
+[DONE] Line 254: Ensure uniform usage of the word "post-mortem" (vs. "postmortem") throughout.
 
-Line 269: "python" -> "Python".
+[DONE] Line 269: "python" -> "Python".
 
-Line 293: The phrasing at the end of this line is unclear.
+[DONE] Line 293: The phrasing at the end of this line is unclear.
 
-Line 294: "an" -> "and"
+[DONE] Line 294: "an" -> "and"
 .
-Line 299: Several debuggers are mentioned without references or prior discussion.
+[DONE] Line 299: Several debuggers are mentioned without references or prior discussion.
 
-Line 304: Clarify "black-box" libraries (e.g., closed-source?).
+[DONE] Line 304: Clarify "black-box" libraries (e.g., closed-source?).
 
-Line 316: "o" -> "or".
+[DONE] Line 316: "o" -> "or".
 
 Section 4: Presenting the debugger commands before the example might be clearer than the current order.
 
