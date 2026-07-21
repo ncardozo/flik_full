@@ -22,37 +22,37 @@ of actions to execute at each system state) gathered from the interaction of the
 environment. One of the most common algorithms in \ac{RL} is Q-learning~\cite{beakcheol19}, which 
 uses an off-policy control that separates the deferral policy from the learning policy and updates the 
 action selection using the Bellman optimal equation, and the $\epsilon$-greed policy.  In the definition 
-of \ac{RL} algorithms, the environment is composed of a set of states $S$, a set of actions $A$ the agent can execute. By performing an action $a\in A$ at state $s \in S$, the agent transitions from $s$
-to a new state $s' \in S$. Additionally, associated to the execution of the action $a$ at state $s$, the 
-agent receives a reward $r$. The goal of the agent is to maximize its total reward. \fref{lst:qlearning} 
-presents the base (pseudo) algorithm for Q-learning~\cite{sutton18}.
+of the Q-learning algorithm, the environment is composed of a set of states $S$, and a set of actions 
+$A$ the agent can execute. By executing an action $a\in A$ at state $s \in S$, the agent transitions 
+from $s$ to a new state $new\_s \in S$. Additionally, associated to the execution of the action $a$ at 
+state $s$, the agent receives a reward $R(s,a)$. The agent's learning, is driven by the choosing of the 
+action to execute, which corresponds to the action that maximizes its total reward. The goal of the 
+agent is to maximize its total reward, achieve by iteratively updating the reward function associated 
+with with every state-action pair until converging to the maximum values. \fref{lst:qlearning} presents 
+the base algorithm for Q-learning~\cite{sutton18} in pseudo-code.
 
-\begin{algorithm}
-\caption{Q-Learning Algorithm}\label{lst:qlearning}
-\begin{algorithmic}
-\Require An environment with states $S$, actions $A$, and reward function $R(s, a)$
-\Require A learning rate $\alpha \in [0, 1]$
-\Require A discount factor $\gamma \in [0, 1]$
-\Require Exploration strategy (\eg $\epsilon$-greedy)
-\State Initialize Q-table $Q(s, a) \gets 0$ for all $s \in S$, $a \in A$
-\For{each episode}
-    \State Initialize the starting state $s_0$
-    \For{each time step in the episode}
-        \If{exploration step}
-            \State Choose an action $a$ using the exploration strategy (e.g., $\epsilon$-greedy)
-        \Else
-            \State Choose an action $a$ based on the current Q-values: $a = \arg\max_a Q(s, a)$
-        \EndIf
-        \State Take action $a$, observe reward $R(s,a)$ and next state $s'$
-        \State Update Q-value: 
-        \[
-  \qquad  Q(s, a) \gets Q(s, a) + \alpha \left( R(s,a) + \gamma \max_{a'} Q(s', a')\right)
-        \]
-        \State Set $s \gets s'$
-    \EndFor
-\EndFor
-\end{algorithmic}
-\end{algorithm}
+\begin{python}[
+  caption={Pseudo code for the Q-Learning algorithm.}, label={lst:qlearning}]
+ `\textbf{Require:} An environment with states $S$, actions $A$, and reward function $R(s, a)$`
+ `\textbf{Require:} A learning rate $\alpha \in [0, 1]$`
+ `\textbf{Require:} A discount factor $\gamma \in [0, 1]$`
+ `\textbf{Require:} Exploration strategy (\eg $\epsilon$-greedy)`
+# Initialize Q-table `$Q(s, a) \gets 0$` for all `$s \in S$, $a \in A$`
+foreach episode:
+   `$s_0$` # Initialize the starting state 
+   foreach time_step in episode:
+      if exploration_step:
+         a = random(`$\epsilon$`) # Choose an action `$a$` using the exploration strategy (e.g., `$\epsilon$`-greedy)
+      else
+         a = `$\arg\max_a Q(s, a)$`  # Choose an action `$a$` based on the current Q-values
+      endif
+        R(s,a), new_s = action(a) # Take action `$a$`, observe reward `$R(s,a)$` and next state new_s
+        #Update Q-value: 
+        `$Q(s, a) \gets Q(s, a) + \alpha \left( R(s,a) + \gamma \max_{a'} Q(s', a')\right)$`
+        s = new_s # Set s `$\leftarrow$` new_s
+    endfor
+endfor
+\end{python}
 
 \ac{RL} has gained wide popularity in the last couple of years, finding applications in a wide range of 
 domains~\cite{beakcheol19}, particularly in control of industrial process~\cite{kiumarsi18} (improving 
@@ -78,7 +78,7 @@ Debugging is the process of finding and reducing the number of bugs or defects d
 program~\cite{hindriks12}. The process of debugging involves identifying and isolating an 
 (execution/behavioral) error and modifying the program to fix the bug~\cite{mccauley08}. 
 There are several principles that guide the debugging 
-process~\cite{telles01,zeller09,spinellis16,agans23}, including tasks to understand the code, identify and reproduce errors, isolate the problem, and fixe the problem, 
+process~\cite{telles01,zeller09,spinellis16,agans23}, including tasks to understand the code, identify and reproduce errors, isolate the problem, and fix the problem, 
 all usually supported by automated and tracking tools.
 
 In particular, in this work we will focus on the principle of confirmation~\cite{matloff08,alaboudi20}, 

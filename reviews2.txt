@@ -18,13 +18,13 @@ In summary, the paper has improved, but significant presentation issues should b
 
 Line 46: Is Q-learning considered state-of-the-art? Actually, is this relevant for the design of Flik? Please clarify.
 
-Line 54: Please explain what is meant by "RL algorithms are usually used as a black box". Does this imply the user has no access to the source code, or something else?
+[DONE] Line 54: Please explain what is meant by "RL algorithms are usually used as a black box". Does this imply the user has no access to the source code, or something else?
 
-Line 121: states S AND a set...
+[DONE] Line 121: states S AND a set...
 
-Line 123: Snippet 1 -> Algorithm 1
+[DONE] Line 123: Snippet 1 -> Algorithm 1
 
-Algorithm 1: If this algorithm is central to the work, briefly explain its function. Otherwise, it should be removed.
+[DONE] Algorithm 1: If this algorithm is central to the work, briefly explain its function. Otherwise, it should be removed.
 
 Line 139: "fixe" -> "fix". Also, please clarify what is meant by "supported by automated and tracking tools".
 
@@ -36,7 +36,7 @@ Line 181: Note that "reverse debugger" is usually a generic term. A "back-in-tim
 
 Line 188: "that that" -> "that".
 
-Line 199: "repay-based" -> "replay-based".
+[DONE] Line 199: "repay-based" -> "replay-based".
 
 Line 211: The term "time-travel debugger" is used here without prior introduction.
 
