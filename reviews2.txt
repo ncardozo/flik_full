@@ -109,9 +109,9 @@ There are still however some major pain points that require the authors' attenti
 [DONE] - In the results, I am still missing a more-in-depth analysis of what participants actually commented. Many lines refer to "participants commented that" (ll. 631, 644, 647, 745...) but we do not know actually which participant said those things (is this the same participant? a more experienced one than others? etc.) nor what was said exactly. 
 [DONE] Furthermore, the paper mentions many "open questions" that are absent from the given reproduction package (https://flaglab.github.io/Flik_Experiments/, consulted april 1st 2026, "task questions" have only 5 instead of 9 questions in the paper). So it remains impossible to even know what were the open questions themselves.
 
-- I find it surprising that "time" seems to be a self-reported measure and that is not at all discussed in the threats to validity.
+[DONE] - I find it surprising that "time" seems to be a self-reported measure and that is not at all discussed in the threats to validity.
 
 - I do have strong remarks about the threats to validity section:
 - First, instead of explaining how threats are mitigated, paragraphs switfly conclude that there is no biases (ie. the threat does not exist).
-- Second, the threats are superficially covered, and potential biases are not really discussed. E.g., the authors mention that they strived to find participants: ok but what are the potential implications on the study? Does that mean you had to select "by-default-participants" or to recourse to convenience sampling?
+[DONE] - Second, the threats are superficially covered, and potential biases are not really discussed. E.g., the authors mention that they strived to find participants: ok but what are the potential implications on the study? Does that mean you had to select "by-default-participants" or to recourse to convenience sampling?
 - The authors do not discuss if the used empirical method was appropriate or not. This seems important since the usefulness is claimed to be evaluated but what's measured is rather its perception. So is this because of a design choice? Because of a limit of the design/method? Does that yield sufficiently informative results for what the authors aimed to observe/study?
