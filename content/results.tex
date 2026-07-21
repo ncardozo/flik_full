@@ -7,7 +7,7 @@
 This section presents the analysis of the results of the user study presented in 
 \fref{sec:evaluation}. The user study was conducted on a single session with 27 participants.
 The results are presented according to the three sections in the survey: General 
-knowledge (\fref{sec:general-knowledge}), Task Effectiveness (\fref{sec:tasks-results}) and Usability 
+knowledge (\fref{sec:general-knowledge}), Task Effectiveness (\fref{sec:tasks-results}), and Usability 
 (\fref{sec:usability}). Afterwards, we use the information extracted from the responses analysis to 
 answer our three research questions. Finally, this section closes with a discussion of the main take 
 aways that can be taken from the user study in perspective of the research questions, to then discuss 
@@ -27,23 +27,27 @@ online appendix (\url{https://flaglab.github.io/Flik_Experiments/}).
 
 The demographic questions of the questionnaire are used to assess the population of participants, 
 shown in \fref{fig:general-know}. Participants are graduate students, from the engineering school, 
-with at least one year of experience, having taken the mandatory courses for the master 
-program, as the \ac{RL} they have taken is an advanced course in the program. 
+with at least one year of experience in programming, having taken the mandatory courses for the 
+master program, given that the \ac{RL} course they have taken is an advanced course in the program. 
 
 Most participants report to be very experienced with Python 
 (\fref{fig:python-experience}) and using the terminal (\fref{fig:terminal-experience}). In both categories 
 the participants report to have used Python often in their work and/or university courses (for at least 
 4 years during the bachelor). 
-The reported experience is \ac{RL} is more spread out, with a tendency towards familiarity with
+The reported experience in \ac{RL} is more spread out, with a tendency towards familiarity with
 \ac{RL} (\fref{fig:rl-experience}). The spread in the experience level about using \ac{RL} may be due 
 to the lack of confidence about the expertise, as many of the participants have taken a course in 
 \ac{RL} but may feel that they may need further experience.
 However, the familiarity reported about the experience in using debuggers is less prominent with an 
-average lack of familiarity in debugger use. Upon revision of the comments about using debuggers, 
-participants reported rare usage, in most cases using Visual Studio Code interface's simple 
-features, like graphical breakpoint functionality.  
+average lack of familiarity in debugger use. Upon revision of the comments about the experience 
+using debuggers, many (14) participants (all reporting a level of experience with Python between 4 
+and 5) reported rare to no usage of debuggers. While some of the answers (4 participants) hint at the 
+use of the debugger incorporated with \acp{IDE} like PyCharm and VSCode, in most cases the 
+participants (10) report not to use debugging facilities at all, and prefer the use of print statements.  
+The participants that do report experience using debuggers (14), use a variety of debuggers like 
+PyCharm, PDB, or VSCode in their daily work activities.
 
-\begin{figure}[hptb]
+\begin{figure}[pos=hptb]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
@@ -91,9 +95,9 @@ expected from participants with reported debugger experience.
 solving the tasks. The y-axis represents the number of participants for each answer category at the  
 given Likert score. The x-axis corresponds to the score, with values in the range from 5 to 1 (from 
 completely agree, to completely disagree). Each of the bars in the graph represents a question for 
-the tasks (three in total). For the last question (the third bar in green for all graphs), 5 represents 
-taking a lot of time in completing the task (or not completing the task), and 1 represents taking very 
-little time.
+the tasks (three in total). The third question (the third bar in green for all graphs), is used as additional 
+information to check the coherence of time completion, given an impression of the time taken to solve 
+each of the tasks, where 5 represents taking a lot of time in completing the task (taking the full 30 minutes or not completing the task), and 1 represents taking little time (under 6 minutes).
 
 Taking the results reported from the three tasks, most of the participants completed the first task 
 successfully (\fref{fig:task1}). Participants reported the task was easy to solve. Even though the task 
@@ -124,15 +128,15 @@ While the third task was not easy to solve according to participants' comments, 
 solving it. From the results it is expected that identifying and fixing the bug in the first task took longer 
 than for other tasks, even though this is the easiest task, as participants were still getting familiarized 
 with \flik, and therefore explored the capabilities of \flik more, while detecting the bug. Such behavior 
-points to a steeper learning curve for debugging the programs \flik. In the following tasks, while the 
+points to a steeper learning curve for debugging the programs with \flik. In the following tasks, while the 
 nature of the introduced bugs is different, the expertise gained using the tool was beneficial in 
 detecting the bugs. For the second task, given the nature of the bug and the fact that the bug was 
 introduced in the Q-learning algorithm's logic, made it a harder bug to identify; even though it was 
 completed by most participants. For the third task, we observe that the time to solve the task starts 
-to decrease with reported times taking less than half the allocated time to complete the task.
+to decrease with reported times leaning towards shorter times to solve the task.
 
 
-\begin{figure}[hptb]
+\begin{figure}[pos=hptb]
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
@@ -203,14 +207,14 @@ questions.
   programs. To answer this \textbf{RQ} we use the experience in using debuggers, reported by 
   participants, and the comments provided at the end of the questionnaire. 
   
-  From the answers, 59\% of the participants found the tool useful and would recommend it use for 
+  From the answers, 59\% of the participants found the tool useful and would recommend its use for 
   the case of \ac{RL}. 
   In the cases in which they would not recommend it, some clarify that they would not recommend it 
-  as is, pointing to improvement in the interaction with the tool and the lack of a GUI. Given that 51\% 
-  of the users report not having experience with debuggers, they still found the use of \flik for \ac{RL} 
-  programs useful. Furthermore, when asked participants if they think \flik would have been useful for 
-  the development of their \ac{RL} course, a great majority (89\%) found it would have helped their 
-  experience. 
+  as is, pointing to improvements in the interaction with the tool and the lack of a GUI. Taking into 
+  account that 51\% of the users report not having experience with debuggers or not using them 
+  regularly, they still found \flik to be of use to debug \ac{RL} programs. Furthermore, when asked 
+  participants if they think \flik would have been useful for the development of their \ac{RL} course, a 
+  great majority (89\%) found it would have helped their experience. 
   
   Given the answers collected from the participants, we can state \flik is useful for debugging \ac{RL} 
   programs. 
@@ -222,27 +226,28 @@ questions.
   The answers given by the users for each task do not evidence any relevance or pertinence with 
   respect to the use or usefulness of the features developed in \flik for detecting bug. The comments 
   present seldom information about the pertinence of the features. Only two comments from 
-  participants hint to the usefulness of the features, stating that the navigation provided by \flik is 
-  useful, but it would be more useful if the navigations would be supported by a GUI or if the traces of 
-  execution would be recorded.
+  participants hint to the usefulness of the features, stating that the forward and backward navigation 
+  provided by \flik is useful, but it would be more useful if the navigations would be supported by a GUI 
+  or if the traces of execution would be recorded.
   
   Given the answers collected from the participants we cannot assert the usefulness of the features 
-  presented in \flik to develop \ac{RL} programs.
+  presented in \flik to debug \ac{RL} programs, but some of the users identify their potential.
   
-  \item Refers to the effectiveness and efficiency of using \flik. To answer this \textbf{RQ} we use the 
-  time to complete each task, the completion of the task, the detected bug, and the explanation about 
-  the fix questions in the questionnaire.
+  \item Refers to the effectiveness of using \flik to debug \ac{RL} programs. To answer this \textbf{RQ} 
+  we use the questions of time completeness and the easiness to complete the task, cross-checked 
+  with the perception of the time to complete each task, and the answers to the questions about the 
+  detected bug, and the explanation about the fix of the bug.
   
   With respect to the effectiveness, we 
   can see observe that study participants, for the most part, were successful in using \flik to detect the 
   bug in each of the tasks, with a success rate of 88\%, 85\%, and 55\% for each of the tasks 
   respectively.
   
-  With respect to the efficiency, we observe a tendency for the participants who effectively solved the 
-  tasks to take less time in detecting the bug. In average, the time taken to solve a task moves from a 
-  Likert score of 4 and 5 in the first task, to a score of 2 and 3 in the last task. Such tendency suggests 
-  that, once participants are used to using \flik, they can more effectively identify more involved bugs 
-  within the code.
+  Together with the effectiveness to solve the bugs, we observe a tendency from the participants who 
+  to take a short time in detecting the bug. In average, the perception of the time taken to solve a task 
+  moves from a Likert score of 4 and 5 in the first task, to a score of 2 and 3 in the last task. Such 
+  tendency suggests that, once participants are used to using \flik, they can more effectively identify 
+  more involved bugs within the code.
   
   Taking into account the results and answers given by the participants, we can state that \flik is 
   indeed effective in helping developers detect bugs in a timely manner.
@@ -295,7 +300,6 @@ features closer to common features used in other debuggers, as the Visual Studio
 \subsection{Threats to validity}
 \label{sec:threats}
 
-\sidemargin{par:threats}{{\fref{rem:threats}}}
 To conclude the discussion of the results and the experiment we present the threads to validity to 
 our experimentation and the conclusions extracted from it.
 
@@ -308,39 +312,50 @@ user study explores the usability of \flik in the case of discrete agents based 
 algorithm. From the results, we confirm \flik's usability in such cases, and can generalize the results 
 to other discrete algorithms such as SARSA or Multi-armed-bandit~\cite{lattimore20}. However, 
 generalizing the usability to continuous \ac{RL} environments requires further evaluation in such 
-environments, in which the intervention of developers withe the variables and the possibility to 
+environments, in which the intervention of developers withe the system and the possibility to 
 observe all environments variables and parameters may be limited due to the sheer volume of 
 variables, and the use of external \acl{DNN} libraries \flik may not have access to.
 
 \item[Threats to construct validity] refer to the cases in which the evaluation is not exhaustive 
-or selective enough. Our validation is built on the user study of \flik. In the user study we strived to 
-gather users that have at least some basic experience with \ac{RL}. From the open call to the 
+or selective enough. Our validation is built on the user study of \flik. In the user study we worked
+with users that had at least some basic experience with \ac{RL}. From the open call to the 
 evaluation, the user study had 27 participants. While the participants are all students, they do have
 diverse profiles, maturity level, and experience in working with \ac{RL}. Therefore, we can state that 
-there is no bias in the selection of the participants for the user study.
+there is no bias in the selection of the participants for the user study. Some of participants were 
+familiar with the authors, either by taking courses with them or as colleagues during courses. We 
+note there could be a bias to favor the outcome of the evaluation of the tool given the familiar 
+relation. Nonetheless, not all the participants had the bias, balancing out its effect. Moreover, this 
+activity was independent from any academic activity, striving to the mitigate the bias.
 
-In addition, the design of the user study was such that the first exercise is familiar to all developers 
-with \ac{RL} experience, used to help participants familiarize themselves with \flik (after the 
-presentation of \flik in a small example). The following tasks in the study are of less familiarity for 
-\ac{RL} developers, and the last is a completely new application, to evaluate the effectiveness of \flik 
-in helping developers to understand \ac{RL} agents' behavior, mitigating any previous knowledge 
-developers may have about possible errors in the application. There is no bias about the 
-application selection favoring the usability of \flik over other applications. However, we highlight again 
-the need to evaluate \flik in continuous environments.
+A learning bias could affect the results of the tasks as the user study progressed. To this effect, the  
+user study was design such that the first exercise is familiar to all developers 
+with \ac{RL} experience, looking to help participants familiarize themselves with \flik (after the 
+presentation of \flik in a small example). The following task in the study are of less familiarity for 
+\ac{RL} developers, and the last is a completely new application, mitigating the effects of any 
+previous knowledge developers may have about possible errors in the application. 
+
+There is no bias about the application selection favoring the usability of \flik over other applications. 
+Neither there is a bias in the bugs inserted in each of the applications, as the nature of the bugs 
+changes for each of the applications, covering common cases of bugs in \ac{RL} programs. We 
+highlight again the need to evaluate \flik in continuous environments.
 
 \item[Threats to internal validity] refers to the conditions that may have an impact on the 
 phenomena under test. The user study was set so that all participants could execute under the 
-same conditions: characteristics of the machines in which the evaluation was executer, information 
+same conditions: characteristics of the machines in which the evaluation was executed, information 
 and documentation of \flik, access to \flik experts, and time constraints to work on the different 
 applications, reducing any bias that may have appear in the execution of the user study 
 compromising the results.
 
-Regarding the extend of the user study, which may affect the usefulness of feedback given by the 
+Regarding the length of the user study, which may affect the usefulness of feedback given by the 
 participants at the end of the questionnaire. The session was dynamic and the users demonstrated 
-active interest on the tool and solving the tasks, so that tiredness was not a factor. While the risk was 
+active interest about the tool and solving the tasks, so that tiredness was not a factor. While the risk was 
 not foreseen, it was self-mitigated, which can be confirmed by the amount of comments received (all 
 participants added comments), many of which were on point, and serve as a guide for future 
-improvements about the tool.
+improvements about the tool. Related to this risk we identified the time constrains to complete tasks 
+may affect the completion of task by different users. However, as efficiency or productivity are not 
+variables of interest to this study, participants that did not complete a task were told to leave the task 
+behind and continue into the next one, mitigating the effect of completing the task on a given time may 
+cause.
 \end{description}
 
 
