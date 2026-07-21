@@ -56,27 +56,27 @@ Line 181: Note that "reverse debugger" is usually a generic term. A "back-in-tim
 
 [DONE] Line 316: "o" -> "or".
 
-Section 4: Presenting the debugger commands before the example might be clearer than the current order.
+[DONE] Section 4: Presenting the debugger commands before the example might be clearer than the current order.
 
-Line 421: "path" -> "paths".
+[NO] Line 421: "path" -> "paths".
 
-Line 460: "design" -> "designed".
+[NO] Line 460: "design" -> "designed".
 
-Line 501: "before before" -> "before".
+[DONE] Line 501: "before before" -> "before".
 
 Line 594: "is" -> "in".
 
 Line 628: "most" -> "Most".
 
-Line 693: "Thile" -> "While".
+[DONE] Line 693: "Thile" -> "While".
 
-Line 722: "withe the" -> "with the".
+[DONE] Line 722: "withe the" -> "with the".
 
-Section 6.4: Regarding threats to validity, please address the potential for positive bias, as the student participants likely knew the experimenter.
+[DONE] Section 6.4: Regarding threats to validity, please address the potential for positive bias, as the student participants likely knew the experimenter.
 
 Line 777: Please provide at least an intuitive indication of which "known optimizations" are being referenced.
 
-References: The first two entries have incorrect formatting. Consider replacing them with footnotes with the corresponding URLs.
+[DONE] References: The first two entries have incorrect formatting. Consider replacing them with footnotes with the corresponding URLs.
 
 
 
