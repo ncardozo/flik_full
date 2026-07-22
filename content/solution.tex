@@ -31,7 +31,7 @@ algorithm values, the \flik back-in-time debugger is based on two main features:
     wanted to have a functionality that will allow developers to step back the execution to observe the 
     changes in the state between loop iterations, without having to re-start the complete execution.  
     This feature is adopted from omniscient debuggers.
-    Stepping back will let developers interacting directly with the program, 
+    Stepping back will let developers interact directly with the program, 
     avoiding the stop-modify-re-start process which causes to lose the program state, or the training 
     data already accumulated. Such feature will help in identifying the root cause of erroneous agent 
     behavior, whether that is an error in the program's design for particular interactions, or an ill-defined 
@@ -74,7 +74,7 @@ Variables frame) shows the variables used in the program so far. Finally, at the
 we have the interactive console in which developers can send commands to \flik to effectively debug 
 the program.
 
-We now use a running example to present the features and functionality/commands of \flik. Four 
+We now use a running example to present the features and functionality/commands of \flik. For 
 our running example we use the Gridworld \ac{RL} benchmark, presented in detail in 
 \fref{sec:evaluation} and shown in \fref{fig:gridworld} as a $10 \times 10$ grid. 
 
@@ -147,14 +147,14 @@ class Agent:
 
 During the execution we can use \flik to confirm that the root cause of the problem is the value of the 
 \spy{epsilon} hyperparameter. To do this, from \fref{ln:stop2} we can use the command 
-\spy{back_to 18} to go backward in the program execution to \fref{ln:back1}. Then, we can  
+\spy{back_to 18} to go backward in the program execution, to \fref{ln:back1}. Then, we can  
 change the value of \spy{epsilon} using the \spy{setvar self.epsilon=0.9} command. Once the change 
 is made, if we continue execution (in a different \flik branch), after reaching \fref{ln:stop2}, we can print 
-the value of the \spy{action} variable (\spy{p action}), to observe now different actions are taken, 
+the value of the \spy{action} variable (\spy{p action}), to observe how different actions are taken, 
 leading to proper agent training, taken from the different values across the q-table.\footnote{A video of 
 this example execution of \flik is available at \url{https://youtu.be/PkkhT76IYrU?si=vqBjUCSfwRUhEZnJ}}
 
-\fref{tab:flik-commands}, shows a summary of the commands implemented in \flik, where the 
+\fref{tab:flik-commands} shows a summary of the commands implemented in \flik, where the 
 first six commands (on the top of the table) are specific to \flik, and the following 12 commands (at the 
 bottom of the table) are provided by the \ac{PDB} debugger. 
 %Note from the implementation that, variable evaluation (\spy{p}) and variable value updates (\spy{setvar}) can alternatively be executed directly without using the corresponding commands.
@@ -174,7 +174,7 @@ bottom of the table) are provided by the \ac{PDB} debugger.
 Having introduced the features of \flik and their use to debug \ac{RL} programs through the different 
 commands, we now turn our attention to \flik's implementation and its inner workings.\footnote{\flik's distribution is available as a Docker image at: \url{https://hub.docker.com/r/lrodriguez22/py-flik-debugger}.}  
 \flik is a console-based debugger built on top of \ac{PDB}, adding features such as colored syntax 
-highlighting and tracking of variables' state. \ac{PDB}, in turn, is built on top of the Python 
+highlighting, and tracking of variables' state. \ac{PDB}, in turn, is built on top of the Python 
 runtime enabling access to run-time variables and state as provided by the Python interpreter. A 
 diagram of \flik's architecture is shown in \fref{fig:flik-architecture}.
 
@@ -188,7 +188,7 @@ diagram of \flik's architecture is shown in \fref{fig:flik-architecture}.
 To debug a Python program with \flik, we reuse the functionality already available in \ac{PDB} to 
 instrument the code of a running interpreted program by means of the \spy{breakpoint()} \ac{PDB} 
 command. The instrumentation hooks directly to the evaluation loop of the Python VM using the 
-CPython interpreter's tracing architecture. Once stopped, \ac{PDB} has access to the execution 
+CPython interpreter's tracing architecture. Once stopped, \ac{PDB} has access to the execution stack 
 frame, the VM event (with the information of the line to execute, the function to call, the value to 
 return or an exception to throw), and the \spy{arg} context variable. Using the instrumentation 
 available for Python programs makes \flik work with the full Python specification without having to 
@@ -246,7 +246,7 @@ frames more than the memory of an \ac{RL} program not using \flik.
 
 \paragraph{Step-back.}    
 The history buffer is used to enable stepping back in the program execution. In an execution function, 
-the step back commands (\spy{step_back} or \spy{back_to}) stops the current execution an moves 
+the step back commands (\spy{step_back} or \spy{back_to}) stop the current execution and move 
 the execution to a previous frame saved in the buffer. 
 When \spy{step_back} is used, the execution moves the program to the previous saved state (\ie the 
 last executed command in the program).  When \spy{back_to} is used, \flik searches through the 
@@ -260,11 +260,11 @@ program state sets back all local and global variables' values, and their associ
 to the values stored at the current frame in the history buffer.
 
 A direct consequence of restoring a previous program state is that the execution resumes in a new 
-execution path, and the execution path before the step-back is lost. That is, All state changes and 
+execution path, and the execution path before the step-back is lost. That is, all state changes and 
 side-effects observed are ``lost'', and the new execution path creates its own new state and 
 side-effects using the new program state. Currently \flik does not keep track of the different 
 execution paths, as there is no clear way to navigate them without the use of a GUI. To restore the 
-sate, we use the \spy{exec} Python function that receives the stored \spy{f_globals} and \spy{f_locals} 
+state, we use the \spy{exec} Python function that receives the stored \spy{f_globals} and \spy{f_locals} 
 variables as parameters. \spy{exec} then executes a list of stored state snapshots (line number 
 and local variables) at each step in a specified frame's context (given by the function parameters). 
 This allows \flik to simulate running a specific line in the context of a previous frame. Additionally, 
@@ -287,7 +287,7 @@ any of the stored variables (using the \spy{setvar} command). At a given executi
 the value of a variable restores the program state, creating a new execution path with the new 
 values. 
 
-\flik creates a casual connection between the Python variables stored in memory and the variables 
+\flik creates a causual connection between the Python variables stored in memory and the variables 
 stored in the history buffer, so that the changes to variables in \flik percolate down to the variables 
 stored in Python's memory.
 
