@@ -46,7 +46,7 @@ As is, this evaluation sets three research questions, concerning the usefulness 
 
 To evaluate \flik we design a quantitative user study, as an empirical user-centered design research 
 method~\cite{creswell17}.
-The user study is design so that participants are asked to solve three tasks, each task in a different 
+The user study is designed so that participants are asked to solve three tasks, each task in a different 
 \ac{RL} environment. For each of the tasks the participants are given a full \ac{RL} agent and the 
 environment implementation. In each task a bug is introduced manually, affecting the learning 
 process of the agent, although in all tasks the agents can be trained without abrupt termination. 
@@ -80,9 +80,10 @@ The question associated with the usability of the tool introduce a variable to m
 answer \ref{enum:debugger-use}. The open questions about the recommendations and comments 
 about \flik are introduced as variables to measure the relevance of the debugging features in \flik, 
 answering to \ref{enum:features}. 
-Finally, the questions associated to the task results are used to answer \ref{enum:usefulness}. The variables are, the time taken to solve the task, used as a 
-information for the efficiency in solving the task using \flik, and the description of the detected bug, 
-used to measure the effectiveness of detecting the bug using \flik.
+Finally, the questions associated to the task results are used to answer \ref{enum:usefulness}. The 
+variables are the time taken to solve the task, used as an informative variable to inform the efficiency 
+in solving the task using \flik, and the description of the detected bug, used to inform the effectiveness 
+of detecting the bug using \flik.
 
 %%%%%%
 \paragraph{\textbf{Study conditions.}}
@@ -114,13 +115,13 @@ and decreasing familiarity to users. The first task uses the common \ac{RL} benc
 program, all \ac{RL} developers are familiar with. In particular the study participants are familiar and 
 have previous experience using the Gridworld environment. Additionally, the environment is the 
 smallest environment of the three tasks in terms of states to explore by the agent, and a straight 
-forward reward function. The second tasks uses a known but less common \ac{RL} benchmark, the 
+forward reward function. The second task uses a known but less common \ac{RL} benchmark, the 
 Rooms environment. While some participants may have used the environment, there is no assurance 
 that all of them have used it. The Rooms environment is a larger environment than that of Gridworld, 
-while keeping the same complexity level for the reward function. Finally, the third environment is new 
-environment participants have had no contact with. The driving assistant \ac{RL} program is a 
-research environment used to evaluate \ac{RL} agents. This is the largest environment in the study 
-with a more involved reward function.
+while keeping the same complexity level for the reward function. Finally, the third environment is a new 
+environment that participants have had no previous contact with. The driving assistant \ac{RL} 
+program is a research environment used to evaluate \ac{RL} agents. This is the largest environment 
+in the study with a more involved reward function.
 
 
 %%
@@ -210,7 +211,7 @@ the reason why the agent is not learning properly, afterwards we expected the pa
 The Driving Assistant environment~\cite{cardozo18ml4pl, cardozo23} focuses on an agent that must learn to drive, in a two lane road, by 
 a given set of road rules. In this case, the agent is expected to learn to drive on the correct lane 
 (determined by the reward), at the allowed speed, taking over slow traffic, and not crashing. 
-The state of the environment is defines as a three tuple determined by the current speed of the vehicle, 
+The state of the environment is defined as a three-tuple determined by the current speed of the vehicle, 
 the current lane, and the proximity to the vehicle in front. To move in the environment, the agent has 
 the following five possible actions to execute at every time-step: \spy{straight}, 
 \spy{slow_down}, \spy{speed_up}, \spy{steer_left}, \spy{steer_right}. Finally, the agent receives  
