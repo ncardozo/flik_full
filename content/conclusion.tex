@@ -17,7 +17,7 @@ which for small \ac{RL} programs can already have over thousands of iterations. 
 the agents for debugging can be very time-consuming and use significant computational resources.
 
 A back-in-time debugger strategy is beneficial for the scenario of \ac{RL} programs as it lets 
-developers to interact with their agents directly, not just as a postmortem activity, enabling the 
+developers interact with their agents directly, not just as a postmortem activity, enabling the 
 opportunity to go back in the execution of a program, recover all of its state and context of execution, 
 update the system's state, and observe the effect of the agent with respect to the changed state, 
 generating a new execution path, without the need to stop or completely retrain agents. These features 
@@ -31,8 +31,8 @@ programs. Most study participants managed to understand the behavior of the agen
 cause of the bug for the three programs. Specifically, \flik proved  to be useful to find general bugs that 
 an \ac{RL} program can present during development. 
 Additionally, in the study we evaluated the usability of \flik as a debugging. Even though \flik is a 
-console-based debugger, it allows developers to interact with a program during its execution, inspect 
-the internal state of the agent, and modify its state and behavior in real-time. 
+console-based debugger, it allows developers interact with a program during its execution, inspect 
+the internal state of the agent, and modify the program's state and behavior in real-time. 
 
 There are four important avenues of future work to improve the usability of \flik, as gathered from the 
 open question comments obtained in the user study and the development process. 
@@ -48,16 +48,16 @@ path of known optimizations for omniscient debuggers~\cite{pothier07}. Alternati
 explore the layer cashing using a similar strategy to that 
 used in git or docker, as a means to save states. Instead of saving the entire history of all variables 
 (global and local), and all the metadata of the program for each execution point, we could 
-save the changes made on the program since the last recorded history. This would optimize the 
+save the changes made to the program since the last recorded history. This would optimize the 
 memory usage of \flik. We envision such a change to require a more complex logic and evolving the 
 design of \flik to an architecture to support the new features. 
 
 Third, we can develop a full visual interface for \flik, following similar debugger interfaces (\eg 
-VSCode or Eclipse) as plugins to an IDE. In this way developers could easier interact with the features 
-(commands) of the debugger in a more friendly way. This for example, would also open the opportunity 
-to generate visualization for the different execution traces from the re-execution of parts of the program.
-Improving the interface of \flik could reduce the complexity of understanding \ac{RL} program,
-making it easier to navigate the code and jump back in time.
+VSCode or Eclipse) as plugins to an IDE. In this way developers could more easily interact with the 
+features (commands) of the debugger in a more friendly way. This for example, would also open the 
+opportunity to generate visualization for the different execution traces from the re-execution of parts of 
+the program. Improving the interface of \flik could reduce the complexity of understanding \ac{RL} 
+program, making it easier to navigate the code and jump back in time.
 
 Finally, \flik could be improved by integrating visualization environments and graphs, as created with 
 matplotlib or pygame, so the user could have a better understanding of the environment and the 
