@@ -26,7 +26,7 @@ than the built-in debugging tools of IDEs. Here we present debugger representati
 debugging approach taken.
 
 \begin{description}
-\item[Breakpoint debuggers.] Breakpoint debugging lets developers to define breakpoints in which 
+\item[Breakpoint debuggers.] Breakpoint debugging lets developers define breakpoints in which 
 a debugger program can stop during the execution of the program to debug. At each breakpoint it is 
 possible to inspect the state of the program and its memory, and then resume the program execution 
 (either stepping into/through the instructions, or in a continuous execution). For instance, 
@@ -40,9 +40,9 @@ mainstream debuggers.
 
 \item[Omniscient debuggers.] Omniscient debugging~\cite{lienhard08,pothier09} (also known as 
 back-in-time or reversible debuggers) 
-records the execution history of a program and let developers to explore the execution stepping 
+records the execution history of a program and lets developers explore the execution stepping 
 forward and back from any given execution point (\ie breakpoint or program state)~\cite{hofer06}.  
-Different omnisciente debuggers exist for Java~\cite{lewis03}. One particular example is the work 
+Different omniscient debuggers exist for Java~\cite{lewis03}. One particular example is the work 
 by~\citet{pothier07}, which records all events that take place during a program execution and then 
 creates a trace history. JARDIS~\cite{barr16} is an omniscient debugger for JavaScript 
 tracing web application events; it offers a GUI to navigate the recorded trace. Other JavaScript 
@@ -52,12 +52,11 @@ raygun\footnote{\url{https://raygun.com}}. Flow-centric back-in-time debugger~\c
 is a SmallTalk debugger that on top of enabling step-backs, it also enables the possibility to 
 explore additional execution contexts, that is, explore different execution paths.
 
-\item[Replay-based debuggers.] Replay-based debuggers~\cite{burg13,honarmand14} let developers 
-to re-execute programs 
-with the exact same behavior they originally executed from given checkpoints in the program. For 
-example,  with Jokey~\cite{saito05} C developers can replay program executions to analyze program 
-behavior from specific checkpoints. Another example is
-QueryPoint~\cite{mirghasemi11}, a Javascript replay-based debugger that let developers go back to 
+\item[Replay-based debuggers.] Replay-based debuggers~\cite{burg13,honarmand14} lets developers 
+re-execute programs with the exact same behavior they originally executed from given checkpoints 
+in the program. For example, with Jokey~\cite{saito05} C developers can replay program executions 
+to analyze program behavior from specific checkpoints. Another example is
+QueryPoint~\cite{mirghasemi11}, a Javascript replay-based debugger that lets developers go back to 
 the last changes of a variable (\ie a checkpoint) and observe the execution from that point on, with 
 the possibility of changing the variable's value.
 
@@ -124,9 +123,9 @@ path),  with different  graphs to see the state of your variables at a moment in
 
 % RevPDB
 \ac{RevPDB}~\cite{revdeb} is an extension of 
-\ac{PDB} built on top of the PyPy interpreter, which allow developers to step forward and backward in 
-the execution. However, RevPDB is not a full-featured debugger, nor it has a user-friendly GUI, as it 
-is a proof of concept of the time traveling features, and it is not currently maintained.
+\ac{PDB} built on top of the PyPy interpreter, which allows developers to step forward and backward in 
+the execution. However, RevPDB is not a full-featured debugger, nor does it has a user-friendly GUI, 
+as it is a proof of concept of the time traveling features, and it is not currently maintained.
 
 % UDB
 \ac{UDB}~\cite{udb} is a proprietary debugger, developed by the Company Undo, for Python 
@@ -157,9 +156,9 @@ originate within the models themselves, and their black-box nature (\ie source c
 developers) makes pinpointing faults especially 
 difficult. Additionally, the code used to train or run these models might be flawed, adding another layer 
 of complexity. In systems that rely on \ac{ML} pipelines, bugs may not reside in the individual 
-components but rather in how these components interact. Hardware miss-configurations are also a 
+components but rather in how these components interact. Hardware missconfigurations are also a 
 potential source of faults. Unfortunately, traditional debuggers embedded in IDEs are limited when 
-detecting \ac{ML}-specific bugs. Therefore, there is an increasing interest on techniques and tools for 
+detecting \ac{ML}-specific bugs. Therefore, there is an increasing interest in techniques and tools for 
 debugging and testing \ac{ML} models.  
 
 \ac{ML} programs are often debugged using visualization tools that allow developers to observe 
@@ -169,7 +168,7 @@ Most of the existing tools are post-mortem, not allowing developers to interact 
 program during execution; therefore, making the tools unsuitable to analyze \ac{RL} programs and 
 the continuous interaction between the environment and the agent.
 
-CockPit~\cite{schneider21} is and open source debugging tool designed for deep neural network 
+CockPit~\cite{schneider21} is an open source debugging tool designed for deep neural network 
 training, enabling practitioners to observe internal training dynamics in real time (much like 
 traditional debuggers), which provides insights into program execution. Rather than relying solely on 
 loss and accuracy curves, Cockpit offers a suite of instruments that monitor higher-order metrics such 
@@ -218,8 +217,8 @@ a bad agent policy, for example, not reaching the goal, or not learning the corr
 of the work is to provide a systematic testing approach to find bugs. As part of the process, the tool 
 offers a methodology to find potential bugs, or confirm a bug exists, using the fuzzing within the 
 framework. 
-The idea is to modify a given program state $s_0$, through random walks to state $s$, to fin a if the 
-value function on state $s$ dominates that of state $s_0$, yielding to an improved policy an avoiding 
+The idea is to modify a given program state $s_0$, through random walks to state $s$, to find a if the 
+value function on state $s$ dominates that of state $s_0$, yielding an improved policy an avoiding 
 the bug state $s_0$. 
 
 While the approaches presented are interesting to help understand \ac{RL} programs, none of them 
